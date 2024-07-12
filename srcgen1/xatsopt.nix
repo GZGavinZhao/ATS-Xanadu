@@ -1,14 +1,8 @@
-{ lib
-, ats2
-, xatshome
-, boehmgc
-, makeWrapper
-, stdenv
-}:
+{ lib, ats2, xatshome, boehmgc, makeWrapper, stdenv }:
 
 stdenv.mkDerivation rec {
   pname = "xatsopt";
-  version = (builtins.readFile ./VERSION);
+  version = (builtins.readFile ../VERSION);
 
   src = ./.;
 
@@ -17,11 +11,11 @@ stdenv.mkDerivation rec {
   buildInputs = [ boehmgc ];
 
   buildPhase = ''
-    make -C srcgen1 -j $NIX_BUILD_CORES xatsopt
+    make -j $NIX_BUILD_CORES xatsopt
   '';
 
   installPhase = ''
-    install -Dm00755 srcgen1/bin/xatsopt $out/bin/xatsopt
+    install -Dm00755 bin/xatsopt $out/bin/xatsopt
 
     wrapProgram $out/bin/xatsopt \
       --set-default XATSHOME "${xatshome}/share/xatshome"
@@ -30,7 +24,7 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     homepage = "https://github.com/githwxi/ATS-Xanadu";
     description = ''
-      xatsopt is the ATS3 to JavaScript compiler written in ATS2.
+      xatsopt is the ATS3 to C compiler written in ATS2.
     '';
     licenses = licenses.gpl3Plus;
   };
