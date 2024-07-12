@@ -28,7 +28,7 @@ all:: all_dats
 # srcgen1 is
 # implemented in ATS2
 #
-XATSOPT=\
+XATSOPT ?=\
 $(XATSHOME)/srcgen1/bin/xatsopt
 #
 ######

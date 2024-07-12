@@ -12,4 +12,9 @@ srcgen/xint/BUILD/*
 srcgen/xint/xinterp
 srcgen/xint/BUILD/*
 
+#
+# Nix related
+#
+result
+
 ###### end of [.gitignore] ######
