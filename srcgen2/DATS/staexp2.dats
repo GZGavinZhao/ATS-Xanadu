@@ -668,13 +668,13 @@ s2exp_apps
 //
 (*
 val () =
-prerrln
+prerrsln
 ("s2exp_apps: s2f0 = ", s2f0)
 val () =
-prerrln
+prerrsln
 ("s2exp_apps: s2es = ", s2es)
 val () =
-prerrln
+prerrsln
 ("s2exp_apps: s2f0.sort = ", s2f0.sort())
 *)
 //
@@ -820,12 +820,13 @@ fun
 isCBV0
 (s2f0: s2exp): bool =
 f1_test
-(s2f0, CBV0_VT_VT_symbl)
+(s2f0, CBV0_V0_VT_symbl)
 fun
 isCBV1
 (s2f0: s2exp): bool =
 f1_test
-(s2f0, CBV1_VT_VT_symbl)
+(s2f0, CBV1_V0_VT_symbl)
+//
 fun
 isCBRF
 (s2f0: s2exp): bool =
@@ -921,9 +922,9 @@ end (*let*) // end of [f0_cbrf(...)]
 //
 (*
 val () =
-prerrln("s2exp_apps_pq: s2f0 = ", s2f0)
+prerrsln("s2exp_apps_pq: s2f0 = ", s2f0)
 val () =
-prerrln("s2exp_apps_pq: s2es = ", s2es)
+prerrsln("s2exp_apps_pq: s2es = ", s2es)
 *)
 //
 } (*where*) // end of [s2exp_apps_pq(...)]
@@ -1102,14 +1103,14 @@ then
 (
 if
 prfq
-then the_sort2_view(* lin*)
-else the_sort2_vwtp(*~lin*))
+then the_sort2_view(* prf*)
+else the_sort2_vwtp(*~prf*))
 else
 (
 if
 prfq
-then the_sort2_prop(* lin*)
-else the_sort2_type(*~lin*))
+then the_sort2_prop(* prf*)
+else the_sort2_type(*~prf*))
 ) : sort2//end-of-[val(s2t0)]
 //
 val
@@ -1650,11 +1651,13 @@ let
   val s2t0 = sort2_none0() 
 //
 (*
-val (  ) = prerrln
-("s2exp_none1: s1e0 = ", s1e0)
+val (  ) =
+(
+  prerrsln
+  ("s2exp_none1: s1e0 = ", s1e0))
 *)
 in//let
-  s2exp(s2t0, S2Enone1(s1e0))
+s2exp_make_node(s2t0, S2Enone1(s1e0))
 end (*let*) // end of [s2exp_none1(s1e0)]
 //
 (* ****** ****** *)

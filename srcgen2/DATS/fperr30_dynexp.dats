@@ -119,11 +119,11 @@ let
   val loc = d3p.lctn((*void*))
   val t2p = d3p.styp((*void*))
 //
-  val ( ) = prerrln
+  val ( ) = prerrsln
   ("fperr30_d3pat: auxmain: loc = ", loc)
-  val ( ) = prerrln
+  val ( ) = prerrsln
   ("fperr30_d3pat: auxmain: t2p = ", t2p)
-  val ( ) = prerrln
+  val ( ) = prerrsln
   ("fperr30_d3pat: auxmain: d3p = ", d3p)
 endlet
 //
@@ -144,13 +144,13 @@ let
 val loc0 = d3p0.lctn()
 in//let
 (*
-prerrln
+prerrsln
 ("fperr30_d3pat: loc0 = ", loc0)
 *)
 end//let
 (*
 val () =
-prerrln
+prerrsln
 ("fperr30_d3pat: d3p0 = ", d3p0)
 *)
 //
@@ -167,12 +167,11 @@ if
 >FPERR30_ERRVL)
 then ((*void*)) else
 let
-val loc0 = d3p0.lctn((*0*))
+val
+loc0 = d3p0.lctn((*0*))
 in//let
-(*
-prerrln
-("FPERR30-ERROR:",loc0,":",d3p0)
-*)
+printsln("\
+FPERR30-ERROR:", loc0, ":", d3p0)
 end//let
 )
 | _(* otherwise *) => (  (* skipped *)  )
@@ -314,6 +313,22 @@ end(*let*)//end-of-[D3Eassgn]
 //
 (* ****** ****** *)
 //
+|
+D3Et2pck
+( d3e1, t2p2) =>
+let
+val () =
+(
+  fperr30_d3exp(out, d3e1) )
+(*
+val () =
+(
+  fperr30_s2typ(out, t2p2) )
+*)
+end(*let*)//end-of-[D3Et2pck]
+//
+(* ****** ****** *)
+//
 |D3Enone0 _ => (  (*void*)  )
 |D3Enone1 _ => () | D3Enone2 _ => ()
 |
@@ -323,15 +338,15 @@ D3Eerrck(_,_) => fperr30_d3exp(out, d3e)
 _(*otherwise*) =>
 let
 //
-  val loc = d3e.lctn((*void*))
-  val t2p = d3e.styp((*void*))
+val loc = d3e.lctn((*void*))
+val t2p = d3e.styp((*void*))
 //
-  val ( ) = prerrln
-  ("fperr30_d3exp: auxmain: loc = ", loc)
-  val ( ) = prerrln
-  ("fperr30_d3exp: auxmain: t2p = ", t2p)
-  val ( ) = prerrln
-  ("fperr30_d3exp: auxmain: d3e = ", d3e)
+val ( ) = prerrsln
+("fperr30_d3exp: auxmain: loc = ", loc)
+val ( ) = prerrsln
+("fperr30_d3exp: auxmain: t2p = ", t2p)
+val ( ) = prerrsln
+("fperr30_d3exp: auxmain: d3e = ", d3e)
 //
 endlet
 //
@@ -352,13 +367,13 @@ let
 val loc0 = d3e0.lctn()
 in//let
 (*
-prerrln
+prerrsln
 ("fperr30_d3exp: loc0 = ", loc0)
 *)
 end//let
 (*
 val () =
-prerrln
+prerrsln
 ("fperr30_d3exp: d3e0 = ", d3e0)
 *)
 //
@@ -375,12 +390,11 @@ if
 >FPERR30_ERRVL)
 then ((*void*)) else
 let
-val loc0 = d3e0.lctn((*0*))
+val
+loc0 = d3e0.lctn()
 in//let
-(*
-prerrln
-("FPERR30-ERROR:",loc0,":",d3e0)
-*)
+printsln("\
+FPERR30-ERROR:", loc0, ":", d3e0)
 end//let
 )
 | _(* otherwise *) => (  (* skipped *)  )

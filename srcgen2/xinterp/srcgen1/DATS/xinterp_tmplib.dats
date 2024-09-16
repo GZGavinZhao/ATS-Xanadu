@@ -59,7 +59,7 @@ in//let
 case+ lab of
 |
 IRLAB(l01, x02) =>
-print("IRLAB(",l01,";",x02,")")
+prints("IRLAB(",l01,";",x02,")")
 end(*let*)//end-of-[irlab_fprint]
 //
 #impltmp
@@ -137,7 +137,7 @@ in//let
 (
 case+ fia0 of
 |FIARG
-(irps) => print("FIARG(",irps,")"))
+(irps) => prints("FIARG(",irps,")"))
 endlet // end-of-[g_print<fiarg>(fia0)]
 //
 (* ****** ****** *)
@@ -155,10 +155,10 @@ in//let
 case+ tdxp of
 |
 TEQIREXPnone() =>
-print("TEQIREXPnone(", ")")
+prints("TEQIREXPnone(", ")")
 |
 TEQIREXPsome(tok0, ire1) =>
-print("TEQIREXPsome(",tok0,";",ire1,")"))
+prints("TEQIREXPsome(",tok0,";",ire1,")"))
 endlet // end-of-[g_print<teqirexp>(tdxp)]
 //
 (* ****** ****** *)

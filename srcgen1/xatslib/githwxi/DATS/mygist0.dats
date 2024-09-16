@@ -179,7 +179,7 @@ strm_vt_map0(xss)
 ) where
 {
 #impltmp
-map0$fopr
+map$fopr0
 <list(a)>
 <list(a)>(xs) = list_cons(x0, xs)
 }
@@ -437,7 +437,7 @@ auxmain(xs, m1, n1)
 ) where
 {
 #impltmp
-map0$fopr<res><res>(rr) =
+map$fopr0<res><res>(rr) =
   (list_cons(x0, rr.0), rr.1)
 }
 val
@@ -448,7 +448,7 @@ auxmain(xs, m1, n0)
 ) where
 {
 #impltmp
-map0$fopr<res><res>(rr) =
+map$fopr0<res><res>(rr) =
   (rr.0, list_cons(x0, rr.1))
 }
 in !
@@ -494,7 +494,7 @@ auxmain
 : strm_vt(sintgte(i)) =
 $llazy
 (
-strmcon_vt_cons(i0, auxmain(succ(i0)))
+strmcon_vt_cons(i0, auxmain(suc(i0)))
 )
 }
 //
@@ -512,7 +512,7 @@ auxmain
 : strm_vt(sintlte(i)) =
 $llazy
 (
-strmcon_vt_cons(i0, auxmain(pred(i0)))
+strmcon_vt_cons(i0, auxmain(pre(i0)))
 )
 }
 //
@@ -548,7 +548,7 @@ $llazy
 if
 (i0 >= j0)
 then strmcon_vt_nil()
-else strmcon_vt_cons(i0, auxmain(succ(i0)))
+else strmcon_vt_cons(i0, auxmain(suc(i0)))
 )
 }
 //
@@ -569,7 +569,7 @@ $llazy
 if
 (i0 <= j0)
 then strmcon_vt_nil()
-else strmcon_vt_cons(i0, auxmain(pred(i0)))
+else strmcon_vt_cons(i0, auxmain(pre(i0)))
 )
 }
 //
@@ -635,7 +635,7 @@ let
 #vwtpdef x0 = strn_vt
 //
 #impltmp
-map0$fopr<x0><y0> = strn_vt2t
+map$fopr0<x0><y0> = strn_vt2t
 in//let
 strm_vt_map0<x0><y0>
 (

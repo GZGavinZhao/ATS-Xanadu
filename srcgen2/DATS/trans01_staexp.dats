@@ -601,7 +601,7 @@ end//let//end-of-[f0(tenv,g0nm)]
 //
 (*
 val () =
-prerrln
+prerrsln
 ("trans01_g0nam: g0nm = ", g0nm)
 *)
 //
@@ -736,7 +736,7 @@ val sym1 = symbl(nam1)
 val g1e0 =
 g1exp(loc0, G1Eid0(sym1))
 val fopt =
-tr01env_search_opt(tenv, sym1)
+tr01env_search$opt(tenv, sym1)
 //
 in
 case+ fopt of
@@ -972,13 +972,13 @@ trans01_g0exp
 val loc0 = g0e0.lctn()
 //
 val (  ) =
-prerrln(
+prerrsln(
 "trans01_g0exp: loc0 = ", loc0
-)(*prerrln*)
+)(*prerrsln*)
 val (  ) =
-prerrln(
+prerrsln(
 "trans01_g0exp: g0e0 = ", g0e0
-)(*prerrln*)
+)(*prerrsln*)
 *)
 //
 in(*in-of-let*)
@@ -1046,7 +1046,7 @@ end (*let*) // end of [G0MAGdarg(...)]
 {
 (*
 val (  ) =
-prerrln("trans01_g0mag: g0ma = ", g0ma)
+prerrsln("trans01_g0mag: g0ma = ", g0ma)
 *)
 } (*where*) // end of [trans01_g0mag(tenv,g0ma)]
 
@@ -1061,13 +1061,13 @@ trans01_sort0
 val loc0 = s0e0.lctn()
 //
 val (  ) =
-prerrln(
+prerrsln(
 "trans01_sort0: loc0 = ", loc0
-)(*prerrln*)
+)(*prerrsln*)
 val () =
-prerrln(
+prerrsln(
 "trans01_sort0: s0t0 = ", s0t0
-)(*prerrln*)
+)(*prerrsln*)
 //
 *)
 (* ****** ****** *)
@@ -1168,7 +1168,7 @@ sym0=SUB_symbl)
 then
 optn_vt_cons
 (postmnus_fixty) else
-tr01env_search_opt(tenv, sym0))
+tr01env_search$opt(tenv, sym0))
 ) : fixtyopt_vt // end(val(opt))
 //
 val
@@ -1236,13 +1236,13 @@ trans01_s0exp
 val loc0 = s0e0.lctn()
 //
 val (  ) =
-prerrln(
+prerrsln(
 "trans01_s0exp: loc0 = ", loc0
-)(*prerrln*)
+)(*prerrsln*)
 val () =
-prerrln(
+prerrsln(
 "trans01_s0exp: s0e0 = ", s0e0
-)(*prerrln*)
+)(*prerrsln*)
 *)
 //
 (* ****** ****** *)
@@ -1560,7 +1560,7 @@ val sym1 = symbl(nam1)
 val s1e0 =
 s1exp(loc0, S1Eid0(sym1))
 val fopt =
-tr01env_search_opt(tenv, sym1)
+tr01env_search$opt(tenv, sym1)
 //
 in
 case+ fopt of
@@ -1793,7 +1793,7 @@ trans01_s0mag
 val loc0 = s0ma.lctn()
 //
 (*
-val (  ) = prerrln
+val (  ) = prerrsln
 ("trans01_s0mag: s0ma = ", s0ma)
 *)
 //
@@ -2230,5 +2230,9 @@ trans01_d0typlst
 list_trans01_fnp(tenv, d0ts, trans01_d0typ))
 
 (* ****** ****** *)
+(* ****** ****** *)
+//
+(* ****** ****** *)(* ****** ****** *)
+(* ****** ****** *)(* ****** ****** *)
 
 (* end of [ATS3/XATSOPT_srcgen2_DATS_trans01_staexp.dats] *)

@@ -262,10 +262,10 @@ my_d2pat_dapp
 let
 (*
 val () =
-prerrln
+prerrsln
 ("my_d2pat_dapp: d2f0 = ", d2f0)
 val () =
-prerrln
+prerrsln
 ("my_d2pat_dapp: d2as = ", d2as)
 *)
 in//let
@@ -519,7 +519,8 @@ in//let
 end (*let*) // end of [trans12_d1pid(env0,dpid)]
 //
 (* ****** ****** *)
-
+(* ****** ****** *)
+//
 local
 //
 (* ****** ****** *)
@@ -654,10 +655,10 @@ tr12env_find_d2itm(env0,sym1)
 //
 (*
 val () =
-prerrln(
+prerrsln(
 "f0_id0_d1pid: d1p0 = ", d1p0)
 val () =
-prerrln(
+prerrsln(
 "f0_id0_d1pid: dopt = ", dopt)
 *)
 //
@@ -815,10 +816,10 @@ let
 val
 loc0 = d1p0.lctn()
 val () =
-prerrln
+prerrsln
 ("f0_main: loc0 = ", loc0)
 val () =
-prerrln
+prerrsln
 ("f0_main: d1p0 = ", d1p0)
 *)
 //
@@ -1344,9 +1345,9 @@ D1Pqual0
 //
 (*
 val () =
-prerrln("f0_qual0: tok1 = ", tok1)
+prerrsln("f0_qual0: tok1 = ", tok1)
 val () =
-prerrln("f0_qual0: d1p2 = ", d1p2)
+prerrsln("f0_qual0: d1p2 = ", d1p2)
 *)
 //
 in//let
@@ -1363,7 +1364,7 @@ opt1 =
 tr12env_find_s2itm(env0, sym1)
 (*
 val () =
-prerrln("f0_qual0: opt1 = ", opt1)
+prerrsln("f0_qual0: opt1 = ", opt1)
 *)
 in//let
 case+ opt1 of
@@ -1432,10 +1433,10 @@ trans12_d1pat
 val
 loc0 = d1p0.lctn()
 val () =
-prerrln
+prerrsln
 ("trans12_d1pat: loc0 = ", loc0)
 val () =
-prerrln
+prerrsln
 ("trans12_d1pat: d1p0 = ", d1p0)
 *)
 //
@@ -1449,7 +1450,7 @@ d2p0 = f0_main(env0, d1p0)
 //
 (*
 val () =
-prerrln
+prerrsln
 ("trans12_d1pat: d2p0 = ", d2p0)
 *)
 //
@@ -1483,7 +1484,7 @@ end//let
 } (*where*)//end of [trans12_d1pat(env0,d1p0)
 //
 end (*local*)//end of [local( trans12_d1pat )]
-
+//
 (* ****** ****** *)
 //
 #implfun
@@ -1500,7 +1501,8 @@ D2LAB(lab0, trans12_d1pat(env0, d1p1))
 end (*let*)//end-of-[trans12_l1d1p(env0,ld1p)]
 //
 (* ****** ****** *)
-
+(* ****** ****** *)
+//
 #implfun
 trans12_d1exp
 ( env0,d1e0 ) = let
@@ -1508,7 +1510,7 @@ trans12_d1exp
 (*
 val loc0 =
 d1e0.lctn((*0*))
-val (  ) = prerrln
+val (  ) = prerrsln
 ("trans12_d1exp: d1e0 = ", d1e0)
 *)
 //
@@ -1611,11 +1613,20 @@ There is no D1Eassgn!
 //
 |D1Enone0 _ => f0_none0(env0, d1e0)
 //
+(* ****** ****** *)
+//
 |
 D1Eextnam _ => f0_extnam(env0, d1e0)
 //
 |
+D1Esynext _ => f0_synext(env0, d1e0)
+//
+(* ****** ****** *)
+//
+|
 _(*otherwise*) => (d2exp_none1(d1e0))
+//
+(* ****** ****** *)
 //
 end where // end-of-[trans12_d1exp(...)]
 {
@@ -1701,10 +1712,10 @@ tr12env_find_d2itm(env0,sym1)
 //
 (*
 val () =
-prerrln(
+prerrsln(
 "f0_id0_d1eid: d1e0 = ", d1e0)
 val () =
-prerrln(
+prerrsln(
 "f0_id0_d1eid: dopt = ", dopt)
 *)
 //
@@ -1761,7 +1772,7 @@ case+ d2i1 of
 {
 (*
 val () =
-prerrln("f0_id0_d2itm: d2i1 = ", d2i1)
+prerrsln("f0_id0_d2itm: d2i1 = ", d2i1)
 *)
 } (*where*) // end of [f0_id0_d2itm(...)]
 //
@@ -1836,9 +1847,9 @@ end where // end-of-let
 {
 (*
 val (  ) =
-prerrln("f0_id0_d2sym: d1e0 = ", d1e0)
+prerrsln("f0_id0_d2sym: d1e0 = ", d1e0)
 val (  ) =
-prerrln("f0_id0_d2sym: dpis = ", dpis)
+prerrsln("f0_id0_d2sym: dpis = ", dpis)
 *)
 } (*where*) // end of [f0_id0_d2sym(...)]
 //
@@ -2402,7 +2413,8 @@ else // if-else
 let
 //
 val d2es =
-  trans12_d1explst(env0, d1es)
+(
+  trans12_d1explst(env0, d1es))
 //
 in//let
 let
@@ -2756,9 +2768,11 @@ D1Et1up
 (tknd, d1es) = d1e0.node()
 //
 val d2es =
-  trans12_d1explst(env0, d1es)
+(
+  trans12_d1explst(env0, d1es))
 //
 in//let
+//
 let
 val npf1 = -1
 val loc0 = d1e0.lctn()
@@ -3027,9 +3041,9 @@ D1Equal0
 //
 (*
 val () =
-prerrln("f0_qual0: tok1 = ", tok1)
+prerrsln("f0_qual0: tok1 = ", tok1)
 val () =
-prerrln("f0_qual0: d1e2 = ", d1e2)
+prerrsln("f0_qual0: d1e2 = ", d1e2)
 *)
 //
 in//let
@@ -3046,7 +3060,7 @@ opt1 =
 tr12env_find_s2qua(env0, sym1)
 (*
 val () =
-prerrln("f0_qual0: opt1 = ", opt1)
+prerrsln("f0_qual0: opt1 = ", opt1)
 *)
 in//let
 case+ opt1 of
@@ -3140,7 +3154,7 @@ opt1 =
 f2envlst_find_s2itm(envs, sym1)
 (*
 val () =
-prerrln("f1_qual0: opt1 = ", opt1)
+prerrsln("f1_qual0: opt1 = ", opt1)
 *)
 in//let
 case+ opt1 of
@@ -3199,8 +3213,33 @@ in//let
 //
 (* ****** ****** *)
 //
+(*
+HX-2024-0719:
+Fri 19 Jul 2024 07:21:31 PM EDT
+*)
+//
+fun
+f0_synext
+( env0:
+! tr12env
+, d1e0: d1exp): d2exp =
+let
+//
+val loc0 = d1e0.lctn()
+//
+val-
+D1Esynext
+(tknd, gexp) = d1e0.node()
+//
+in//let
+( d2exp_make_node
+  (loc0, D2Esynext(tknd, gexp))) endlet//fun
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
 } (*where*)//end of [trans12_d1exp(env0,d1e0)]
-
+//
 (* ****** ****** *)
 //
 #implfun
@@ -3345,7 +3384,7 @@ loc0 = d1g0.lctn()
 (*
 val
 val () =
-prerrln
+prerrsln
 ("trans12_d1gua: d1g0 = ", d1g0)
 *)
 //
@@ -3388,7 +3427,7 @@ loc0 = dgpt.lctn()
 (*
 val
 val () =
-prerrln
+prerrsln
 ("trans12_d1gpt: dgpt = ", dgpt)
 *)
 //
@@ -3431,7 +3470,7 @@ loc0 = d1c0.lctn()
 (*
 val
 val () =
-prerrln
+prerrsln
 ("trans12_d1cls: d1c0 = ", d1c0)
 *)
 //
@@ -3624,10 +3663,10 @@ let
 //
 (*
 val () =
-prerrln
+prerrsln
 ("trans12_d1expseq: loc0 = ", loc0)
 val () =
-prerrln
+prerrsln
 ("trans12_d1expseq: d1es = ", d1es)
 *)
 //
@@ -3818,9 +3857,9 @@ _(*else*) => d2pat(loc0, D2Pg1mac(g1m0))
 {
 (*
   val () =
-  prerrln("trd2pat_g1mac: loc0 = ", loc0)
+  prerrsln("trd2pat_g1mac: loc0 = ", loc0)
   val () =
-  prerrln("trd2pat_g1mac: g1m0 = ", g1m0)
+  prerrsln("trd2pat_g1mac: g1m0 = ", g1m0)
 *)
 } (*where*) // end of [trd2pat_g1mac(...)]
 //
@@ -3941,9 +3980,9 @@ _(*else*) => d2exp(loc0, D2Eg1mac(g1m0))
 {
 (*
   val () =
-  prerrln("trd2exp_g1mac: loc0 = ", loc0)
+  prerrsln("trd2exp_g1mac: loc0 = ", loc0)
   val () =
-  prerrln("trd2exp_g1mac: g1m0 = ", g1m0)
+  prerrsln("trd2exp_g1mac: g1m0 = ", g1m0)
 *)
 } (*where*) // end of [trd2exp_g1mac(...)]
 //

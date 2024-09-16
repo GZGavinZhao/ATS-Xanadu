@@ -1,7 +1,9 @@
 ########################################################################
+########################################################################
 #
 # For typecking with xatsopt
 #
+########################################################################
 ########################################################################
 
 AR=ar
@@ -30,6 +32,14 @@ all:: all_dats
 #
 XATSOPT ?=\
 $(XATSHOME)/srcgen1/bin/xatsopt
+#
+# HX-2024-07-12: Kudos to Gavin!
+#
+# XATSOPT=\
+# nix run \
+# github:GZGavinZhao/ATS-Xanadu/nixify\#xatsopt \
+# --extra-experimental-features flakes \
+# --extra-experimental-features nix-command --
 #
 ######
 
@@ -916,4 +926,4 @@ clean:: ; rm -f */DATS/CATS/JS/*~
 cleanall:: clean
 ######
 
-######################## end of [Makefile] ##############################
+#################### end of [Makefile_xatsopt] ##########################

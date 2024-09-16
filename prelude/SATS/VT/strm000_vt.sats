@@ -38,6 +38,74 @@ Authoremail: gmhwxiATgmailDOTcom
 (* ****** ****** *)
 (* ****** ****** *)
 //
+fun<>
+strm_vt_nil_
+{a:vt}(): strm_vt(a)
+fun<>
+strq_vt_nil_
+{a:vt}(): strq_vt(a,0)
+//
+fun
+<a:vt>
+strm_vt_cons_
+(
+x0: (a),
+xs: strm_vt(a)): strm_vt(a)
+fun
+<a:vt>
+strq_vt_cons_
+{n:i0}
+(
+x0: (a),
+xs: strq_vt(a,n)): strq_vt(a,n+1)
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun
+<x0:vt>
+strm_vt_free
+(xs: strm_vt(x0)): ( void )
+fun
+<x0:vt>
+strm_vt_eval
+(xs: strm_vt(x0)): strmcon_vt(x0)
+//
+#symload free with strm_vt_free of 1000
+#symload eval with strm_vt_eval of 1000
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun
+<x0:vt>
+strm_vt_head0
+(xs: strm_vt(x0)): (x0)
+fun
+<x0:vt>
+strm_vt_tail0
+(xs: strm_vt(x0)): strm_vt(x0)
+//
+#symload head0 with strm_vt_head0
+#symload tail0 with strm_vt_tail0
+//
+(* ****** ****** *)
+//
+fun
+<x0:vt>
+strm_vt_head$opt0
+(xs: strm_vt(x0)): optn_vt(x0)
+fun
+<x0:vt>
+strm_vt_tail$opt0
+(xs: strm_vt(x0)): optn_vt(strm_vt(x0))
+//
+#symload head$opt0 with strm_vt_head$opt0
+#symload tail$opt0 with strm_vt_tail$opt0
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
 fun
 <x0:vt>
 strm_vt_length0
@@ -53,120 +121,19 @@ strq_vt_length0
 //
 fun
 <x0:vt>
-strm_vt_strqize0
-(xs: strm_vt(x0)): strq_vt(x0)
-//
-(* ****** ****** *)
-//
-fun
-<x0:vt>
-strm_vt_listize0
-(xs: strm_vt(x0)): list_vt(x0)
-fun
-<x0:vt>
-strm_vt_rlistize0
-(xs: strm_vt(x0)): list_vt(x0)
-//
-fun
-<x0:vt>
-strq_vt_listize0
-{n0:i0}
-(xs: strq_vt(x0,n0)): list_vt(x0,n0)
-fun
-<x0:vt>
-strq_vt_rlistize0
-{n0:i0}
-(xs: strq_vt(x0,n0)): list_vt(x0,n0)
+strm_vt_concat0
+( xss
+: strm_vt
+( strm_vt(x0) )): strm_vt(x0)
 //
 (* ****** ****** *)
 (* ****** ****** *)
 //
 fun
 <x0:vt>
-strm_vt_forall0
-(xs: strm_vt(x0)): bool
-//
-fun
-<x0:vt>
-strm_vt_foreach0
-(xs: strm_vt(x0)): void
-//
-fun
-<x0:vt>
-<r0:vt>
-strm_vt_foldlft0
-(xs: strm_vt(x0), r0: r0): (r0)
-//
-(* ****** ****** *)
-(* ****** ****** *)
-//
-fun
-<x0:vt>
-<y0:vt>
-strm_vt_map0
-(xs: strm_vt(x0)): strm_vt(y0)
-fun
-<x0:vt>
-<y0:vt>
-strq_vt_map0
-{n0:i0}
-(xs: strq_vt(x0,n0)): strq_vt(y0,n0)
-//
-(* ****** ****** *)
-//
-fun
-<x0:vt>
-strm_vt_filter0
-(xs: strm_vt(x0)): strm_vt(x0)
-fun
-<x0:vt>
-strq_vt_filter0
-{n0:i0}
-(xs: strq_vt(x0,n0)): strqlte_vt(x0,n0)
-//
-(* ****** ****** *)
-//
-fun
-<x0:vt>
-<y0:vt>
-strm_vt_mapoptn0
-(xs: strm_vt(x0)): strm_vt(y0)
-fun
-<x0:vt>
-<y0:vt>
-strq_vt_mapoptn0
-{n0:i0}
-(xs: strq_vt(x0,n0)): strqlte_vt(y0,n0)
-//
-fun
-<x0:vt>
-<y0:vt>
-strm_vt_maplist0
-(xs: strm_vt(x0)): strm_vt(y0)
-fun
-<x0:vt>
-<y0:vt>
-strq_vt_maplist0
-{n0:i0}
-(xs: strq_vt(x0,n0)): strqlte_vt(y0,n0)
-//
-(* ****** ****** *)
-//
-#symload map0 with strm_vt_map0
-#symload map0 with strq_vt_map0
-//
-#symload filter0 with strm_vt_filter0
-#symload filter0 with strq_vt_filter0
-//
-#symload mapoptn0 with strm_vt_mapoptn0
-#symload mapoptn0 with strq_vt_mapoptn0
-//
-#symload maplist0 with strm_vt_maplist0
-#symload maplist0 with strq_vt_maplist0
-//
-(* ****** ****** *)
-(* ****** ****** *)
-//
+strm_vt_append0
+( xs: strm_vt(x0)
+, ys: strm_vt(x0)): strm_vt(x0)
 fun
 <x0:vt>
 strm_vt_append00
@@ -190,6 +157,23 @@ strq_vt_append00
 //
 fun
 <x0:vt>
+strm_vt_prepend00
+( xs: strm_vt(x0)
+, ys: strm_vt(x0)): strm_vt(x0)
+fun
+<x0:vt>
+strq_vt_prepend00
+{n1,n2:i0}
+( xs: strq_vt(x0,n1)
+, ys: strq_vt(x0,n2)): strq_vt(x0,n1+n2)
+//
+#symload prepend00 with strm_vt_prepend00
+#symload prepend00 with strq_vt_prepend00
+//
+(* ****** ****** *)
+//
+fun
+<x0:vt>
 strm_vt_prepend0__llist0
 ( xs: strm_vt(x0)
 , ys: list_vt(x0)): strm_vt(x0)
@@ -207,20 +191,44 @@ strq_vt_prepend0__llist0
 {n1,n2:i0}
 ( xs: strq_vt(x0,n1)
 , ys: list_vt(x0,n2)): strq_vt(x0,n1+n2)
-fun
-<x0:vt>
-strq_vt_prepend0__lstrq0
-{n1,n2:i0}
-( xs: strq_vt(x0,n1)
-, ys: strq_vt(x0,n2)): strq_vt(x0,n1+n2)
 //
 (* ****** ****** *)
 //
-#symload prepend0 with strm_vt_prepend0__llist0
-#symload prepend0 with strm_vt_prepend0__lstrq0
+#symload prepend00 with strm_vt_prepend0__llist0
+#symload prepend00 with strm_vt_prepend0__lstrq0
+#symload prepend00 with strq_vt_prepend0__llist0
 //
-#symload prepend0 with strq_vt_prepend0__llist0
-#symload prepend0 with strq_vt_prepend0__lstrq0
+(* ****** ****** *)
+(* ****** ****** *)
+//
+(*
+HX-2024-07-24:
+Wed 24 Jul 2024 08:52:25 PM EDT
+*)
+//
+fun
+<x0:vt>
+<ys:vt>
+g_make0_lstrm(xs: strm_vt(x0)): (ys)
+fun
+<x0:vt>
+<ys:vt>
+g_make0_lstrq(xs: strq_vt(x0)): (ys)
+//
+(* ****** ****** *)
+//
+fun
+<x0:t0>
+list_make0_lstrm
+(xs: strm_vt(x0)): list(x0)
+fun
+<x0:t0>
+list_make0_lstrq
+{n0:i0}
+(xs: strq_vt(x0, n0)): list(x0, n0)
+//
+#symload list with list_make0_lstrm of 1000
+#symload list with list_make0_lstrq of 1000
 //
 (* ****** ****** *)
 (* ****** ****** *)

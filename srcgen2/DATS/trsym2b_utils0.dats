@@ -67,11 +67,11 @@ val
 t2p1 = d2var_get_styp(d2v1)
 (*
 val (  ) =
-prerrln("match2a_d2var: d2v1 = ", d2v1)
+prerrsln("match2a_d2var: d2v1 = ", d2v1)
 val (  ) =
-prerrln("match2a_d2var: t2p1 = ", t2p1)
+prerrsln("match2a_d2var: t2p1 = ", t2p1)
 val (  ) =
-prerrln("match2a_d2var: t2p2 = ", t2p2)
+prerrsln("match2a_d2var: t2p2 = ", t2p2)
 *)
 } (*where*) // end of [match2a_d2var(env0,...)]
 //
@@ -89,11 +89,11 @@ t2p1 = d2con_get_xtyp(d2c1)
 //
 (*
 val (  ) =
-prerrln("match2a_d2con: d2c1 = ", d2c1)
+prerrsln("match2a_d2con: d2c1 = ", d2c1)
 val (  ) =
-prerrln("match2a_d2con: t2p1 = ", t2p1)
+prerrsln("match2a_d2con: t2p1 = ", t2p1)
 val (  ) =
-prerrln("match2a_d2con: t2p2 = ", t2p2)
+prerrsln("match2a_d2con: t2p2 = ", t2p2)
 *)
 } (*where*) // end of [match2a_d2con(env0,...)]
 //
@@ -121,13 +121,13 @@ endlet // end of [ val(t2p1) ]
 //
 (*
 val (  ) =
-prerrln("match2a_d2ap1: d2c1 = ", d2c1)
+prerrsln("match2a_d2ap1: d2c1 = ", d2c1)
 val (  ) =
-prerrln("match2a_d2ap1: tfun = ", tfun)
+prerrsln("match2a_d2ap1: tfun = ", tfun)
 val (  ) =
-prerrln("match2a_d2ap1: t2p1 = ", t2p1)
+prerrsln("match2a_d2ap1: t2p1 = ", t2p1)
 val (  ) =
-prerrln("match2a_d2ap1: t2p2 = ", t2p2)
+prerrsln("match2a_d2ap1: t2p2 = ", t2p2)
 *)
 //
 } (*where*) // end of [match2a_d2ap1(env0,...)]
@@ -145,11 +145,11 @@ val t2p1 = d2cst_get_xtyp(d2c1)
 //
 (*
 val (  ) =
-prerrln("match2a_d2cst: d2c1 = ", d2c1)
+prerrsln("match2a_d2cst: d2c1 = ", d2c1)
 val (  ) =
-prerrln("match2a_d2cst: t2p1 = ", t2p1)
+prerrsln("match2a_d2cst: t2p1 = ", t2p1)
 val (  ) =
-prerrln("match2a_d2cst: t2p2 = ", t2p2)
+prerrsln("match2a_d2cst: t2p2 = ", t2p2)
 *)
 //
 } (*where*) // end of [match2a_d2cst(env0,...)]
@@ -232,9 +232,10 @@ list_nil()
 |
 list_cons(d2c1, d2cs) => 
 let
-val d2cs =
+val
+d2cs =
 f1_d2conlst(env0, d2cs, t2p0)
-in
+in//let
 if
 (
 test where
@@ -245,13 +246,13 @@ match2a_d2con
 //
 (*
 val (  ) =
-prerrln
+prerrsln
 ("f1_d2conlst(2b): d2c1 = ", d2c1)
 val (  ) =
-prerrln
+prerrsln
 ("f1_d2conlst(2b): t2p2 = ", t2p2)
 val (  ) =
-prerrln
+prerrsln
 ("f1_d2conlst(2b): test = ", test)
 *)
 //
@@ -271,10 +272,14 @@ f0_d2cst
 , d2i1: d2itm
 , t2p2: s2typ): d2itmopt =
 let
+//
 val-
 D2ITMcst(d2cs) = d2i1
-val d2cs =
+//
+val
+d2cs =
 f1_d2cstlst(env0, d2cs, t2p2)
+//
 in//let
 case+ d2cs of
 |
@@ -308,18 +313,17 @@ if // if
 test where
 {
 val test =
-match2a_d2cst
-(env0, d2c1, t2p2)
+match2a_d2cst(env0, d2c1, t2p2)
 //
 (*
 val (  ) =
-prerrln
+prerrsln
 ("f1_d2cstlst(2b): d2c1 = ", d2c1)
 val (  ) =
-prerrln
+prerrsln
 ("f1_d2cstlst(2b): t2p2 = ", t2p2)
 val (  ) =
-prerrln
+prerrsln
 ("f1_d2cstlst(2b): test = ", test)
 *)
 //
@@ -359,8 +363,11 @@ optn_nil()
 |
 list_cons(dpi1, dpis) =>
 let
-val opt1 =
+//
+val
+opt1 =
 match2a_d2ptm(env0, dpi1, t2p2)
+//
 in//let
 //
 case+ opt1 of
@@ -387,11 +394,11 @@ end(*let*) // end-of-[f0_d2sym(env0,d2i1,t2p2)]
 (*
 val () =
 (
-  prerrln("match2a_d2itm: d2i1 = ", d2i1))
+  prerrsln("match2a_d2itm: d2i1 = ", d2i1))
 //
 val () =
 (
-  prerrln("match2a_d2itm: t2p2 = ", t2p2))
+  prerrsln("match2a_d2itm: t2p2 = ", t2p2))
 *)
 //
 (* ****** ****** *)
@@ -427,11 +434,11 @@ end (*let*) // end of [D2PTMsome(...)]
 (*
 val () =
 (
-  prerrln("match2a_d2ptm: dptm = ", dptm))
+  prerrsln("match2a_d2ptm: dptm = ", dptm))
 //
 val () =
 (
-  prerrln("match2a_d2ptm: t2p2 = ", t2p2))
+  prerrsln("match2a_d2ptm: t2p2 = ", t2p2))
 *)
 //
 (* ****** ****** *)

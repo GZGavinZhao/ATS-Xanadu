@@ -85,7 +85,7 @@ t1rsz_length
 //
 fun
 <a:t0>
-t1rsz_get_at
+t1rsz_get$at
 {n:i0}
 (t1rsz(a,n), nintlt(n)): (a)
 //
@@ -149,11 +149,11 @@ t1rsz_forall1
 //
 fun
 <x0:t0>
-t1rsz_foreach
+t1rsz_foritm
 {n:i0}(A0: t1rsz(x0, n)): (void)
 fun
 <x0:vt>
-t1rsz_foreach1
+t1rsz_foritm1
 {n:i0}(A0: t1rsz(x0, n)): (void)
 //
 (* ****** ****** *)

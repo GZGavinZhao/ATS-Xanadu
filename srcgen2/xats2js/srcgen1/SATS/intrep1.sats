@@ -82,13 +82,21 @@ i1lab_fprint
 //
 (* ****** ****** *)
 (* ****** ****** *)
+//
+(*
 #abstype i1arg_tbox // p0tr
+*)
 #abstype i1opr_tbox // p0tr
 #abstype i1tnm_tbox // p0tr
+//
 (* ****** ****** *)
+//
+(*
 #typedef i1arg = i1arg_tbox
+*)
 #typedef i1opr = i1opr_tbox
 #typedef i1tnm = i1tnm_tbox
+//
 (* ****** ****** *)
 #abstype i1val_tbox // p0tr
 (* ****** ****** *)
@@ -133,7 +141,10 @@ i1lab_fprint
 (* ****** ****** *)
 (* ****** ****** *)
 //
+(*
 #typedef i1arglst = list(i1arg)
+*)
+//
 #typedef i1tnmlst = list(i1tnm)
 //
 (* ****** ****** *)
@@ -183,6 +194,14 @@ i1tnm_new0( (*void*) ): i1tnm
 //
 fun
 i1opr_fprint(FILR, i1opr): void
+//
+(* ****** ****** *)
+//
+(*
+fun
+i1arg_fprint(FILR, i1arg): void
+*)
+//
 fun
 i1tnm_fprint(FILR, i1tnm): void
 //
@@ -254,28 +273,42 @@ and i1ins =
 //
 (* ****** ****** *)
 //
+|I1INSlam0 of
+(token // kind
+,fjarglst(*args*),i1cmp(*body*))
+//
+(* ****** ****** *)
+//
 |I1INSflat of
-(i1val(*leftval*))//dereference
+(i1val(*leftval*)) // de-leftval
+//
+(* ****** ****** *)
+//
+|I1INSfold of
+(i1val(*datacon*)) // fold:no-op
 //
 |I1INSfree of
-(i1val(*datacon*))//malloc-free
+(i1val(*datacon*)) // malloc-free
 //
 (* ****** ****** *)
 //
-|I1INSdl0az of i1val//l0azy-fun
-|I1INSdl1az of i1val//l1azy-fun
+|I1INSdl0az of (i1val) // l0azy-fun
+|I1INSdl1az of (i1val) // l1azy-fun
 //
 (* ****** ****** *)
 //
-|I1INSl0azy of
-(d1exp,i1cmp(*lazy-thunk*))
+|I1INSl0azy of 
+(d1exp(*dknd*), i1cmp(*lazy-thunk*))
 |I1INSl1azy of
-(d1exp,i1cmp,i1cmplst(*frees*))
+(d1exp(*dknd*), i1cmp,i1cmplst(*frees*))
 //
 (* ****** ****** *)
 //
-|I1INSassgn of
-(i1val(*l-val*),i1val(*r-val*))
+|I1INSdp2tr of (i1val(*addof*)) // deref
+//
+(* ****** ****** *)
+//
+|I1INSassgn of (i1val(*l-val*),i1val(*r-val*))
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -292,7 +325,13 @@ i1val_node =
 |I1Vstr of token
 //
 (* ****** ****** *)
+//
+|I1Vtop of (sym_t)
+//
+(* ****** ****** *)
+(*
 |I1Varg of (i1arg)
+*)
 (* ****** ****** *)
 |I1Vtnm of (i1tnm)
 (* ****** ****** *)
@@ -337,12 +376,21 @@ For flat/boxed left-values
 |I1Vlpft of (label, i1val)//flat
 |I1Vlpbx of (label, i1val)//boxed
 //
+(*
+HX-2024-07-18:
+For consed left-values
+*)
+|I1Vlpcn of (label, i1val)//consd
+//
 (* ****** ****** *)
 (* ****** ****** *)
 //
+(*
 |I1Vlam0 of
 ( token(*knd*)
 , fjarglst(*args*), i1cmp(*body*))
+*)
+//
 |I1Vfix0 of
 ( token(*knd*)
 , d2var(*fid*)
@@ -433,8 +481,12 @@ i1val_var(dvar: d2var): ( i1val )
 //
 fun
 i1val_conq(ival: i1val): ( bool )
+//
 fun
 i1val_cstq(ival: i1val): ( bool )
+//
+fun
+i1val_cfnq(ival: i1val): ( bool )
 //
 fun
 i1val_varq(ival: i1val): ( bool )

@@ -48,12 +48,14 @@ Authoremail: gmhwxiATgmailDOTcom
 "./../HATS/mytmplib00.hats"
 (* ****** ****** *)
 (* ****** ****** *)
+//
 #staload // LOC =
 "./../../../SATS/locinfo.sats"
 #staload // FIL =
 "./../../../SATS/filpath.sats"
 #staload // D2E =
 "./../../../SATS/dynexp2.sats"
+//
 (* ****** ****** *)
 (* ****** ****** *)
 //
@@ -92,7 +94,7 @@ let
 (*
 //
 val () =
-prerrln
+prerrsln
 ("xats2js_i1dcl: dcl0 = ", dcl0))
 //
 *)
@@ -213,7 +215,7 @@ g_print$out<>() = filr
 in//local
 val (  ) =
 ( print("// I1Dextern(")
-; print(tknd, "...", ")\n"))
+; prints(tknd, "...", ")\n"))
 end//local
 //
 val (  ) =
@@ -228,7 +230,7 @@ end where
 val loc0 = dcl0.lctn((*void*))
 //
 val (  ) =
-prerrln("f0_extern(x2js): dcl0 = ", dcl0)
+prerrsln("f0_extern(x2js): dcl0 = ", dcl0)
 *)
 //
 }(*where*) // end of [f0_extern(env0,dcl0)]
@@ -259,7 +261,7 @@ g_print$out<>() = filr
 in//local
 val (  ) =
 ( print("// I1Dstatic(")
-; print(tknd, "...", ")\n"))
+; prints(tknd, "...", ")\n"))
 end//local
 //
 val (  ) =
@@ -274,7 +276,7 @@ end where
 val loc0 = dcl0.lctn((*void*))
 //
 val (  ) =
-prerrln("f0_static(x2js): dcl0 = ", dcl0)
+prerrsln("f0_static(x2js): dcl0 = ", dcl0)
 *)
 //
 }(*where*) // end of [f0_static(env0,dcl0)]
@@ -338,7 +340,7 @@ end where
 val loc0 = dcl0.lctn((*void*))
 //
 val (  ) =
-prerrln("f0_local0(x2js): dcl0 = ", dcl0)
+prerrsln("f0_local0(x2js): dcl0 = ", dcl0)
 *)
 //
 }(*where*) // end of [f0_local0(env0,dcl0)]
@@ -373,7 +375,7 @@ in//let
 (
 nindfpr
 (filr, nind); // indentation
-print
+prints
 ("// I1Dtmpsub(", svts, ")\n"))
 end//let
 //
@@ -387,7 +389,7 @@ end where
 val loc0 = dcl0.lctn((*void*))
 //
 val (  ) =
-prerrln("f0_tmpsub(x2js): dcl0 = ", dcl0)
+prerrsln("f0_tmpsub(x2js): dcl0 = ", dcl0)
 *)
 //
 }(*where*) // end of [f0_tmpsub(env0,dcl0)]
@@ -426,7 +428,7 @@ in//let
 (
 nindfpr
 (filr, nind); // indentation
-print
+prints
 ("// I1Dinclude(","...",")\n"))
 end//let
 //
@@ -445,7 +447,7 @@ end where
 val loc0 = dcl0.lctn((*void*))
 //
 val (  ) =
-prerrln("f0_include(x2js): dcl0 = ", dcl0)
+prerrsln("f0_include(x2js): dcl0 = ", dcl0)
 *)
 //
 }(*where*) // end of [f0_include(env0,dcl0)]
@@ -464,11 +466,15 @@ val-
 I1Dvaldclst
 ( tknd, i1vs) = dcl0.node()
 //
-val
-(  ) =
+val (  ) =
+if
+valtok_prvq(tknd)
+then
+xats2js_i1prvdclist(env0, i1vs)
+else
 xats2js_i1valdclist(env0, i1vs)
 //
-end where
+end where // end-of-[let]
 {
 //
 (*
@@ -476,7 +482,7 @@ end where
 val loc0 = dcl0.lctn((*void*))
 //
 val (  ) =
-prerrln("f0_valdclst(x2js): dcl0 = ", dcl0)
+prerrsln("f0_valdclst(x2js): dcl0 = ", dcl0)
 *)
 //
 }(*where*) // end of [f0_valdclst(env0,dcl0)]
@@ -506,7 +512,7 @@ end where
 val loc0 = dcl0.lctn((*void*))
 //
 val (  ) =
-prerrln("f0_vardclst(x2js): dcl0 = ", dcl0)
+prerrsln("f0_vardclst(x2js): dcl0 = ", dcl0)
 *)
 //
 }(*where*) // end of [f0_vardclst(env0,dcl0)]
@@ -525,11 +531,15 @@ I1Dfundclst
 ( tknd
 , d2cs, i1fs) = dcl0.node()
 //
-val
-(  ) =
+val (  ) =
+if
+funtok_prfq(tknd)
+then
+xats2js_i1prfdclist(env0, i1fs)
+else
 xats2js_i1fundclist(env0, i1fs)
 //
-end where
+end where // end-of-[let]
 {
 //
 (*
@@ -537,7 +547,7 @@ end where
 val loc0 = dcl0.lctn((*void*))
 //
 val (  ) =
-prerrln("f0_fundclst(x2js): dcl0 = ", dcl0)
+prerrsln("f0_fundclst(x2js): dcl0 = ", dcl0)
 *)
 //
 }(*where*) // end of [f0_fundclst(env0,dcl0)]
@@ -575,8 +585,8 @@ in//let
 (
 nindfpr
 (filr, nind); // indent
-print
-("// I1Dimplmnt0(...)\n"))
+prints
+("// I1Dimplmnt0(","...",")\n"))
 end//let
 //
 val (  ) =
@@ -616,7 +626,7 @@ end where
 val loc0 = dcl0.lctn((*void*))
 //
 val (  ) =
-prerrln("f0_implmnt0(x2js): dcl0 = ", dcl0)
+prerrsln("f0_implmnt0(x2js): dcl0 = ", dcl0)
 *)
 //
 }(*where*) // end of [f0_fundclst(env0,dcl0)]
@@ -647,7 +657,7 @@ val nind = envx2js_get_nind(env0)
 //
 val (  ) =
 (
-  prerrln("xats2js_dimp: dimp = ", dimp))
+  prerrsln("xats2js_dimp: dimp = ", dimp))
 }(*where*)//end-of-[xats2js_dimpl(env0,dimp)]
 //
 (* ****** ****** *)
@@ -702,7 +712,7 @@ val nind = envx2js_get_nind(env0)
 //
 val (  ) =
 (
-  prerrln("xats2js_t1imp: timp = ", timp))
+  prerrsln("xats2js_t1imp: timp = ", timp))
 //
 }(*where*)//end-of-[xats2js_t1imp(env0,timp)]
 //
@@ -728,9 +738,9 @@ xats2js_i1bnd(env0, dpat)
 (* ****** ****** *)
 //
 (*
-val (  ) = prerrln
+val (  ) = prerrsln
 ("xats2js_i1valdcl: dpat = ", dpat)
-val (  ) = prerrln
+val (  ) = prerrsln
 ("xats2js_i1valdcl: tdxp = ", tdxp)
 *)
 //
@@ -771,6 +781,26 @@ end//let
 }(*where*)//end-of-[xats2js_i1valdcl(env0,ival)]
 //
 (* ****** ****** *)
+//
+#implfun
+xats2js_i1prvdcl
+  (env0, iprv) = let
+//
+val filr =
+envx2js_get_filr(env0)
+val nind =
+envx2js_get_nind(env0)
+//
+val dpat =
+i1valdcl_get_dpat(iprv)
+//
+in//let
+nindstrnfpr
+(filr, nind, "// I1PRVDCL: ");
+i1bnd_fprint(filr, dpat); fprintln(filr)
+end(*let*)//end-of-[xats2js_i1prvdcl(env0,iprv)]
+//
+(* ****** ****** *)
 (* ****** ****** *)
 //
 #implfun
@@ -792,9 +822,9 @@ xats2js_i1bnd(env0, dpid)
 (* ****** ****** *)
 //
 (*
-val (  ) = prerrln
+val (  ) = prerrsln
 ("xats2js_i1vardcl: dvar = ", dvar)
-val (  ) = prerrln
+val (  ) = prerrsln
 ("xats2js_i1vardcl: dini = ", tdxp)
 *)
 //
@@ -867,11 +897,11 @@ end//let
 (* ****** ****** *)
 //
 (*
-val (  ) = prerrln
+val (  ) = prerrsln
 ("xats2js_i1fundcl: dvar = ", dvar)
-val (  ) = prerrln
+val (  ) = prerrsln
 ("xats2js_i1fundcl: fjas = ", fjas)
-val (  ) = prerrln
+val (  ) = prerrsln
 ("xats2js_i1fundcl: tdxp = ", tdxp)
 *)
 //
@@ -898,8 +928,8 @@ TEQI1CMPsome
 let
 val (  ) =
 (
-  xats2js_i1cmp(env0, icmp))
-end//let
+  xats2js_i1cmp(env0, icmp) )
+end // end-of-[let]
 ) (*case+*) // end-of-( teqi1exp )
 //
 val (  ) = envx2js_poplam0(env0)//leave
@@ -919,6 +949,26 @@ nindstrnfpr(filr, nind, "// I1FUNDCL\n"))
 end//let
 //
 }(*where*)//end-of-[xats2js_i1fundcl(env0,ifun)]
+//
+(* ****** ****** *)
+//
+#implfun
+xats2js_i1prfdcl
+  (env0, iprf) = let
+//
+val filr =
+envx2js_get_filr(env0)
+val nind =
+envx2js_get_nind(env0)
+//
+val dvar =
+i1fundcl_get_dpid(iprf)
+//
+in//let
+nindstrnfpr
+(filr, nind, "// I1PRFDCL: ");
+d2var_fprint(filr, dvar); fprintln(filr)
+end(*let*)//end-of-[xats2js_i1prfdcl(env0,iprf)]
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -954,6 +1004,23 @@ xats2js_i1fundclist
   (env0, i1fs) =
 (
   list_xats2js_fnp(env0, i1fs, xats2js_i1fundcl))
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+#implfun
+xats2js_i1prvdclist
+  (env0, i1vs) =
+(
+  list_xats2js_fnp(env0, i1vs, xats2js_i1prvdcl))
+//
+(* ****** ****** *)
+//
+#implfun
+xats2js_i1prfdclist
+  (env0, i1fs) =
+(
+  list_xats2js_fnp(env0, i1fs, xats2js_i1prfdcl))
 //
 (* ****** ****** *)
 (* ****** ****** *)

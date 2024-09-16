@@ -27,14 +27,22 @@
 
 (* ****** ****** *)
 //
-// For C-strings, that is,
-// char sequence ending with 0
+(*
+HX-2024-08-11:
+Note that [strn] should
+at least accomodate C-strings,
+that is, char sequences ending
+with the NULL char ('\000').
+Sun 11 Aug 2024 11:32:40 AM EDT
+*)
 //
 (* ****** ****** *)
 //
-// Author: Hongwei Xi
-// Start Time: March, 2020
-// Authoremail: gmhwxiATgmailDOTcom
+(*
+Author: Hongwei Xi
+Start Time: March, 2020
+Authoremail: gmhwxiATgmailDOTcom
+*)
 //
 (* ****** ****** *)
 (*
@@ -158,11 +166,9 @@ strn_head
 (cs: strn(n)): cgtz
 //
 fun<>
-strn_head_exn(strn): cgtz
+strn_head$exn(strn): cgtz
 fun<>
-strn_head_opt(strn): char
-fun<>
-strn_head_raw(strn): cgtz
+strn_head$opt(strn): char
 //
 (* ****** ****** *)
 //
@@ -172,14 +178,11 @@ strn_tail
 (cs: strn(n)): strn(n-1)
 //
 fun<>
-strn_tail_exn
+strn_tail$exn
 (cs: strn): strn
 fun<>
-strn_tail_opt
+strn_tail$opt
 (cs: strn): optn_vt(strn)
-//
-fun<>
-strn_tail_raw(strn): strn
 //
 (* ****** ****** *)
 
@@ -213,15 +216,21 @@ fun<>
 strn_neq
 (x1: strn, x2: strn): bool
 (* ****** ****** *)
-
+//
 fun<>
 strn_cmp
 (x1: strn, x2: strn): sint
-
+//
+fun<>
+strn_compare
+(x1: strn, x2: strn): sint
+//
 (* ****** ****** *)
 //
 fun<>
 strn_print(cs: strn): void
+#symload
+pstrn with strn_print of 1000
 //
 (* ****** ****** *)
 
@@ -246,11 +255,11 @@ strn_length
 (* ****** ****** *)
 //
 fun<>
-strn_get_at
+strn_get$at
 {n:int}
 {i:nat|i < n}
 ( cs:
-  strn(n), i0: int(i)): cgtz
+  strn(n), i0: sint(i)): cgtz
 //
 (* ****** ****** *)
 //
@@ -269,9 +278,20 @@ strn_append_vt
 (* ****** ****** *)
 //
 fun<>
+strn_rappend
+{m,n:int}
+( xs: strn(m)
+, ys: strn(n)): strn(m+n)
+fun<>
 strn_reverse
 {n:int}
 ( cs: strn(n) ) : strn(n)
+//
+fun<>
+strn_rappend_vt
+{m,n:int}
+( xs: strn(m)
+, ys: strn(n)): strn_vt(m+n)
 fun<>
 strn_reverse_vt
 {n:int}
@@ -295,14 +315,21 @@ strn_foldr
 fun<>
 strn_forall(strn): bool
 fun<>
-strn_foreach(strn): void
+strn_foritm(strn): void
 //
 (* ****** ****** *)
 //
 fun<>
 strn_rforall(strn): bool
 fun<>
-strn_rforeach(strn): void
+strn_rforitm(strn): void
+//
+(* ****** ****** *)
+//
+fun<>
+strn_iforall(strn): bool
+fun<>
+strn_iforitm(strn): void
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -360,15 +387,23 @@ strn_copy_vt
 {n:int}(strn(n)): strn_vt(n)
 //
 (* ****** ****** *)
+(* ****** ****** *)
 //
 fun<>
 strn_make_list
 {n:int}
-(cs:list(cgtz, n)): strn(n)
+(cs:
+ list(cgtz, n)): strn(n)
 fun<>
 strn_make0_llist
 {n:int}
-(cs:list_vt(cgtz, n)): strn(n)
+( cs:
+~ list_vt(cgtz, n)): strn(n)
+fun<>
+strn_make1_llist
+{n:int}
+( cs:
+! list_vt(cgtz, n)): strn(n)
 //
 (* ****** ****** *)
 //
@@ -377,6 +412,9 @@ strn_make_strm
   (cs:strm(cgtz)): strn(*0*)
 fun<>
 strn_make0_lstrm
+  (cs:strm_vt(cgtz)): strn(*0*)
+fun<>
+strn_make1_lstrm
   (cs:strm_vt(cgtz)): strn(*0*)
 //
 (* ****** ****** *)
@@ -405,12 +443,12 @@ strn_tabulate
 ( n0: sint(n) ) : strn(n)
 //
 fun<>
-strn_tabulate_cfr
+strn_tabulate_f1un
 {n:nat}
 ( n0
 : sint(n)
 , f0
-: nintlt(n) -<cfr> cgtz): strn(n)
+: nintlt(n) -> cgtz): strn(n)
 //
 (* ****** ****** *)
 //
@@ -468,9 +506,9 @@ consq with strn_consq of 1000
 (* ****** ****** *)
 //
 #symload
-[] with strn_get_at of 1000
+[] with strn_get$at of 1000
 #symload
-get_at with strn_get_at of 1000
+get$at with strn_get$at of 1000
 //
 (* ****** ****** *)
 //
@@ -479,25 +517,27 @@ get_at with strn_get_at of 1000
 #symload
 head with strn_head of 1000
 #symload
-head_opt with strn_head_opt of 1000
+head$opt with strn_head$opt of 1000
 #symload
-head_exn with strn_head_exn of 1000
+head$exn with strn_head$exn of 1000
 //
 (* ****** ****** *)
 //
 #symload
 tail with strn_tail of 1000
 #symload
-tail_opt with strn_tail_opt of 1000
+tail$opt with strn_tail$opt of 1000
 #symload
-tail_exn with strn_tail_exn of 1000
+tail$exn with strn_tail$exn of 1000
 //
+(* ****** ****** *)
 (* ****** ****** *)
 //
 (*
 #symload print with strn_print of 1000
 *)
 //
+(* ****** ****** *)
 (* ****** ****** *)
 //
 #symload length with strn_length of 1000
@@ -511,18 +551,23 @@ tail_exn with strn_tail_exn of 1000
 #symload reverse with strn_reverse of 1000
 //
 (* ****** ****** *)
-
+(* ****** ****** *)
+//
 #symload forall with strn_forall of 1000
 #symload rforall with strn_rforall of 1000
-
+//
 (* ****** ****** *)
-
+(* ****** ****** *)
+//
 #symload listize with strn_listize of 1000
 #symload strmize with strn_strmize of 1000
 #symload strxize with strn_strxize of 1000
-
+//
 (* ****** ****** *)
+//
 #symload rlistize with strn_rlistize of 1000
+//
+(* ****** ****** *)
 (* ****** ****** *)
 
 (* end of [ATS3/XANADU_srcgen1_prelude_SATS_strn000.sats] *)

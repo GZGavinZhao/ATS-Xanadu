@@ -205,7 +205,7 @@ end where
 val loc0 = d3cl.lctn()
 (*
 val (  ) =
-prerrln("f0_valdclst(34): d3cl = ", d3cl)
+prerrsln("f0_valdclst(34): d3cl = ", d3cl)
 *)
 //
 }(*where*) // end of [f0_valdclst(env0,d3cl)]
@@ -235,7 +235,7 @@ end where
 val loc0 = d3cl.lctn()
 (*
 val (  ) =
-prerrln("f0_vardclst(34): d3cl = ", d3cl)
+prerrsln("f0_vardclst(34): d3cl = ", d3cl)
 *)
 //
 }(*where*) // end of [f0_vardclst(env0,d3cl)]
@@ -269,7 +269,7 @@ end where
 val loc0 = d3cl.lctn()
 (*
 val (  ) =
-prerrln("f0_fundclst(34): d3cl = ", d3cl)
+prerrsln("f0_fundclst(34): d3cl = ", d3cl)
 *)
 //
 }(*where*) // end of [f0_fundclst(env0,d3cl)]
@@ -277,9 +277,11 @@ prerrln("f0_fundclst(34): d3cl = ", d3cl)
 (* ****** ****** *)
 (* ****** ****** *)
 //
+(*
 val () =
 (
-  prerrln("trans34_d3ecl: d3cl = ", d3cl) )
+  prerrsln("trans34_d3ecl: d3cl = ", d3cl) )
+*)
 //
 } (*where*) // end-of-[trans34_d3ecl(env0,d3cl)]
 //
@@ -391,9 +393,9 @@ val (  ) = // enter
 tr34env_pshlam0(env0)//enter
 //
 (*
-val (  ) = prerrln
+val (  ) = prerrsln
 ("trans34_d3fundcl: f3as = ", f3as)
-val (  ) = prerrln
+val (  ) = prerrsln
 ("trans34_d3fundcl: tdxp = ", tdxp)
 *)
 //
@@ -419,9 +421,9 @@ val tres =
 f0_tres(f3as, dvar.styp())
 //
 (*
-val (  ) = prerrln(
+val (  ) = prerrsln(
 "f0_d3fundcl(34): dvar = ", dvar)
-val (  ) = prerrln(
+val (  ) = prerrsln(
 "f0_d3fundcl(34): tres = ", tres)
 *)
 //
@@ -441,9 +443,9 @@ f4as = trans34_f4aftlst(env0,f4as)}
 ) (*case+*) // end-of-[ val(tdxp) ]
 //
 (*
-val (  ) = prerrln
+val (  ) = prerrsln
 ("trans34_d3fundcl: f3as = ", f3as)
-val (  ) = prerrln
+val (  ) = prerrsln
 ("trans34_d3fundcl: tdxp = ", tdxp)
 *)
 //
@@ -488,12 +490,14 @@ val dvts =
 (
    d2vts_drop_vars(dvts, d2vs))
 //
+(*
 val (  ) =
-prerrln("\
+prerrsln("\
 trans34_d3fundcl: d2vs = ", d2vs)
 val (  ) =
-prerrln("\
+prerrsln("\
 trans34_d3fundcl: dvts = ", dvts)
+*)
 //
 val (  ) =
   tr34env_poplam0(env0)
@@ -594,10 +598,10 @@ D4Cvaldclst
 //
 in//let
 (
-foreach(env0, d4vs)) where
+foritm(env0, d4vs)) where
 {
 fun
-foreach
+foritm
 ( env0:
 ! tr34env
 , d4vs: d4valdclist): void =
@@ -606,15 +610,17 @@ case+ d4vs of
 |list_nil() => ()
 |list_cons(d4v1, d4vs) =>
 (
-  foreach(env0, d4vs)) where
+  foritm(env0, d4vs)) where
 { val () =
   trans34_d4valdcl_fold(env0, d4v1) }
 )(*case+*)
-}(*where*)//end-of-[foreach(env0,d4vs)]
+}(*where*)//end-of-[foritm(env0,d4vs)]
 end(*let*)//end-of-[f0_valdclst( ... )]
 //
-val (  ) = prerrln
+(*
+val (  ) = prerrsln
   ("trans34_d4ecl_fold: d4cl = ", d4cl)
+*)
 //
 }(*where*) // end-of-[trans34_d4ecl_fold(...)]
 //
@@ -635,8 +641,10 @@ in//let
 end where
 {
 //
-val (  ) = prerrln
+(*
+val (  ) = prerrsln
   ("trans34_d4valdcl_fold: dval = ", dval)
+*)
 //
 }(*where*) // end-of-[trans34_d4ecl_fold(...)]
 
@@ -646,7 +654,7 @@ val (  ) = prerrln
 trans34_d4eclist_fold
   ( env0 , dcls ) =
 (
-list_foreach_e1nv
+list_foritm_e1nv
 <x0><e1>(dcls, env0)) where
 {
 (*
@@ -656,7 +664,7 @@ tqdes = list(tqd4e)
 #typedef x0 = d4ecl
 #vwtpdef e1 = tr34env
 #impltmp
-foreach$work_e1nv<x0><e1>
+foritm$work_e1nv<x0><e1>
 (d4cl, env0) = trans34_d4ecl_fold(env0, d4cl)
 } (*where*) // end of [list_trans34_fnp(e1,xs,fopr)]
 //

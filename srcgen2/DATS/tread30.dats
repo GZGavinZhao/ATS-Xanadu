@@ -121,8 +121,7 @@ endlet // end of [optn_cons(syn)]
 //
 #implfun
 d3parsed_of_tread30
-  (dpar) =
-let
+  (dpar) = let
 //
 var nerror: sint = 0
 //
@@ -145,7 +144,7 @@ val parsed =
 tread30_d3eclistopt(parsed, nerror)
 //
 (*
-val (    ) = prerrln
+val (    ) = prerrsln
 ("d3parsed_of_tread30: t3penv = ", t3penv)
 *)
 //

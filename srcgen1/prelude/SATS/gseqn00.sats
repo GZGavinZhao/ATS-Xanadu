@@ -15,13 +15,11 @@
 //
 #sexpdef
 listn(a:t0) =
-(
-lam(n:i0) => list(a,n))
+(lam(n:i0) => list(a,n))
 //
 #sexpdef
 strqn(a:t0) =
-(
-lam(n:i0) => strq(a,n))
+(lam(n:i0) => strq(a,n))
 //
 (* ****** ****** *)
 //
@@ -85,7 +83,7 @@ fun
 i0->t0>
 <x0:t0>
 <ln:i0>
-gseqn_get_at
+gseqn_get$at
 (xs:xs(ln),ln:nintlt(ln)): x0
 
 (* ****** ****** *)
@@ -190,6 +188,8 @@ gseqn_map_rlist
 (*
 HX-2020-07-04:
 Is this interesting?!
+HX-2024-07-11:
+This looks very interesting!
 *)
 //
 (*
@@ -198,10 +198,11 @@ fun
 <xs:
 i0->t0>
 <x0:t0>
-<rz:vt>
+<rz:
+i0->vt>
 <ln:i0>
 gseqn_foldln
-  (xs: xs(ln), r0: rz(0)): (rz(ln))
+(xs: xs(ln), r0: rz(0)): rz(ln)
 *)
 //
 (* ****** ****** *)
@@ -222,7 +223,7 @@ fun
 i0->t0>
 <x0:t0>
 <ln:i0>
-gseqn_iforeachn(xs: xs(ln)): void
+gseqn_iforitmn(xs: xs(ln)): void
 //
 (* ****** ****** *)
 

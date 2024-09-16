@@ -157,7 +157,7 @@ let
 (*
 //
 val () =
-prerrln
+prerrsln
 ("js1emit_i1dcl: dcl0 = ", dcl0))
 //
 *)
@@ -244,7 +244,7 @@ g_print$out<>() = filr
 //
 in//let
 nindfpr(filr, nind);
-print
+prints
 ("// I1Dextern(",loc0,")\n")
 end//let
 //
@@ -281,7 +281,7 @@ g_print$out<>() = filr
 //
 in//let
 nindfpr(filr, nind);
-print
+prints
 ("// I1Dstatic(",loc0,")\n")
 end//let
 //
@@ -319,7 +319,7 @@ g_print$out<>() = filr
 in//let
 (
 nindfpr(filr, nind);
-print
+prints
 ("// I1Dlocal0(",loc0,")\n"))
 end//let
 //
@@ -361,7 +361,7 @@ g_print$out<>() = filr
 in//let
 (
 nindfpr(filr, nind);
-print
+prints
 ("// I1Dinclude(",loc0,")\n"))
 end//let
 //
@@ -384,14 +384,21 @@ f0_valdclst
 , dcl0: i1dcl): void =
 let
 //
-val filr = env0.filr()
-val nind = env0.nind()
-//
-val loc0 = dcl0.lctn()
+val filr =
+  env0.filr((*void*))
+val nind =
+  env0.nind((*void*))
+val loc0 =
+  dcl0.lctn((*void*))
 //
 val-
 I1Dvaldclst
-( tknd, i1vs) = dcl0.node()
+(tknd, i1vs) = dcl0.node()
+//
+val
+prvq =
+(
+  valtok_prvq( tknd ))
 //
 val (  ) =
 let
@@ -400,12 +407,26 @@ let
 g_print$out<>() = filr
 //
 in//let
-nindfpr(filr, nind);
-print
+//
+(
+  nindfpr(filr, nind));
+//
+if
+prvq
+then prints
+("// I1Dprvdclist(",loc0,")\n")
+else prints
 ("// I1Dvaldclist(",loc0,")\n")
+//
 end//let
 //
 val (  ) =
+if
+prvq
+then
+(
+ xats2js_i1valdclist(env0, i1vs))
+else
 (
  js1emit_i1valdclist(env0, i1vs))
 //
@@ -427,7 +448,7 @@ val loc0 = dcl0.lctn()
 //
 val-
 I1Dvardclst
-( tknd, i1vs) = dcl0.node()
+(tknd, i1vs) = dcl0.node()
 //
 val (  ) =
 let
@@ -437,7 +458,7 @@ g_print$out<>() = filr
 //
 in//let
 nindfpr(filr, nind);
-print
+prints
 ("// I1Dvardclist(",loc0,")\n")
 end//let
 //
@@ -456,15 +477,21 @@ f0_fundclst
 , dcl0: i1dcl): void =
 let
 //
-val filr = env0.filr()
-val nind = env0.nind()
-//
-val loc0 = dcl0.lctn()
+val filr =
+  env0.filr((*void*))
+val nind =
+  env0.nind((*void*))
+val loc0 =
+  dcl0.lctn((*void*))
 //
 val-
 I1Dfundclst
-( tknd
-, d2cs, i1fs) = dcl0.node()
+(tknd
+,d2cs, i1fs) = dcl0.node()
+//
+val prfq =
+(
+  funtok_prfq( tknd ))
 //
 val (  ) =
 let
@@ -473,12 +500,26 @@ let
 g_print$out<>() = filr
 //
 in//let
-nindfpr(filr, nind);
-print
+//
+(
+  nindfpr(filr, nind));
+//
+if
+prfq
+then prints
+("// I1Dprfdclist(",loc0,")\n")
+else prints
 ("// I1Dfundclist(",loc0,")\n")
+//
 end//let
 //
 val (  ) =
+if
+prfq
+then
+(
+ xats2js_i1fundclist(env0, i1fs))
+else
 (
  js1emit_i1fundclist(env0, i1fs))
 //
@@ -601,39 +642,38 @@ TEQI1CMPnone
 |
 TEQI1CMPsome
 (teq1, icmp) =>
-(
-f0_i1tnmcmp
-(env0, itnm, icmp)) where
-{
+let
 //
-val
-ival = i1cmp_get_ival(icmp)
-//
-val
-filr = envx2js_get_filr(env0)
-val
-nind = envx2js_get_nind(env0)
+val ival =
+i1cmp_get_ival(icmp)
+val filr =
+envx2js_get_filr(env0)
+val nind =
+envx2js_get_nind(env0)
 //
 val () =
 (
 nindstrnfpr
-(filr, nind, "XATS000_patck("))
+(filr, nind, "let ");
+i1tnmfpr
+(filr, itnm);fprintln(filr))
+//
+// HX: for computing ival
 val () =
-(
-i0pckjs1
-(filr, ival, ipat);strnfpr(filr, ")");fprintln(filr))
+f0_i1tnmcmp(env0, itnm, icmp)
 //
 val () =
 (
 nindstrnfpr
-(filr, nind, "let ");i1tnmfpr(filr, itnm);fprintln(filr))
+(filr, nind, "XATS000_patck(");
+i0pckjs1(filr, ival, ipat);
+strnfpr(filr, ")");fprintln(filr))
 //
-}(*where*)
-)
+endlet(*TEQI1CMPsome*))(*case+(tdxp)*)
 //
 (* ****** ****** *)
 //
-end where
+end where//end-of-let(js1emit_i1valdcl(...)]
 {
 //
 val (  ) =
@@ -648,8 +688,6 @@ in//let
 (
  nindstrnfpr(filr, nind, "// I1VALDCL\n"))
 end//let//end-of-[val()]
-//
-(* ****** ****** *)
 //
 fun
 f0_i1tnmcmp

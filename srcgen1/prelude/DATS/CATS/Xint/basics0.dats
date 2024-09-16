@@ -5,7 +5,8 @@ Basics for Xinterp
 (* ****** ****** *)
 #staload
 UN = // for casting
-"prelude/SATS/unsafex.sats"
+"srcgen1\
+/prelude/SATS/unsafex.sats"
 (* ****** ****** *)
 #staload
 "srcgen1\
@@ -289,23 +290,23 @@ gint_abs_sint<> = XINTERP_gint_abs_sint
 //
 #extern
 fun
-XINTERP_gint_succ_sint
+XINTERP_gint_suc_sint
 {i:int}
 ( x0
 : sint(i))
 : sint(i+1) = $extnam((*0*))
 #extern
 fun
-XINTERP_gint_pred_sint
+XINTERP_gint_pre_sint
 {i:int}
 ( x0
 : sint(i))
 : sint(i-1) = $extnam((*0*))
 //
 #impltmp
-gint_succ_sint<> = XINTERP_gint_succ_sint
+gint_suc_sint<> = XINTERP_gint_suc_sint
 #impltmp
-gint_pred_sint<> = XINTERP_gint_pred_sint
+gint_pre_sint<> = XINTERP_gint_pre_sint
 //
 (* ****** ****** *)
 //
@@ -490,16 +491,16 @@ gflt_abs_dflt<> = XINTERP_gflt_abs_dflt
 //
 #extern
 fun
-XINTERP_gflt_succ_dflt
+XINTERP_gflt_suc_dflt
 ( x0: dflt ): dflt = $extnam()
 #impltmp
-gflt_succ_dflt<> = XINTERP_gflt_succ_dflt
+gflt_suc_dflt<> = XINTERP_gflt_suc_dflt
 #extern
 fun
-XINTERP_gflt_pred_dflt
+XINTERP_gflt_pre_dflt
 ( x0: dflt ): dflt = $extnam()
 #impltmp
-gflt_pred_dflt<> = XINTERP_gflt_pred_dflt
+gflt_pre_dflt<> = XINTERP_gflt_pre_dflt
 //
 (* ****** ****** *)
 //
@@ -627,29 +628,29 @@ strn_print<> = XINTERP_strn_print
 //
 #extern
 fun
-XINTERP_strn_head_opt
+XINTERP_strn_head$opt
 ( x0
 : strn ): char = $extnam()
 #impltmp
-strn_head_opt<> = XINTERP_strn_head_opt
+strn_head$opt<> = XINTERP_strn_head$opt
 //
 (* ****** ****** *)
 //
 #extern
 fun
-XINTERP_strn_head_raw
+XINTERP_strn_head$raw
 ( x0
 : strn ): char = $extnam()
 #extern
 fun
-XINTERP_strn_tail_raw
+XINTERP_strn_tail$raw
 ( x0
 : strn ): strn = $extnam()
 //
 #impltmp
-strn_head_raw<> = XINTERP_strn_head_raw
+$UN.strn_head$raw<> = XINTERP_strn_head$raw
 #impltmp
-strn_tail_raw<> = XINTERP_strn_tail_raw
+$UN.strn_tail$raw<> = XINTERP_strn_tail$raw
 //
 (* ****** ****** *)
 //
@@ -668,24 +669,24 @@ strtmp_vt_alloc<> = XINTERP_strtmp_vt_alloc
 //
 #extern
 fun
-XINTERP_strn_get_at
+XINTERP_strn_get$at
 {n:nat}
 {i:int|i<n}
 ( p0: strn(n), i0: sint(i) ): cgtz
 = $extnam((*self*))
 #impltmp
-strn_get_at<> = XINTERP_strn_get_at
+strn_get$at<> = XINTERP_strn_get$at
 //
 #extern
 fun
-XINTERP_strtmp_vt_set_at
+XINTERP_strtmp_vt_set$at
 {n:nat}
 {i:int|i<n}
 ( p0:
 ! strtmp_vt(n), i0: sint(i), c0: cgtz): void
 = $extnam((*self*))
 #impltmp
-strtmp_vt_set_at<> = XINTERP_strtmp_vt_set_at
+strtmp_vt_set$at<> = XINTERP_strtmp_vt_set$at
 //
 (* ****** ****** *)
 //
@@ -729,77 +730,76 @@ a1ptr_alloc<a> = XINTERP_a1ptr_alloc
 //
 #extern
 fun
-XINTERP_a0ref_get_raw
+XINTERP_a0ref_dtget
 {a:vt}
-( A0
-: a0ref(a))
-: (~a) = $extnam()
+(A0: a0ref(a)): (?!a) = $extnam()
 #extern
 fun
-XINTERP_a0ref_set_raw
+XINTERP_a0ref_dtset
 {a:vt}
-( A0
-: a0ref(a), x0: a)
-: void = $extnam((*self*))
+(A0
+:a0ref(a), x0: ?!a): void = $extnam()
+//
+(* ****** ****** *)
 //
 #impltmp
 {a:vt}
-a0ref_get0<a> = XINTERP_a0ref_get_raw{a}
+a0ref_dtget<a> = XINTERP_a0ref_dtget{a}
+//
 #impltmp
 {a:vt}
-a0ref_setf<a> = XINTERP_a0ref_set_raw{a}
+a0ref_dtset<a> = XINTERP_a0ref_dtset{a}
 //
+(* ****** ****** *)
 (* ****** ****** *)
 //
 #extern
 fun
-XINTERP_a1ref_head_raw
+XINTERP_a1ref_head$raw
 {a:vt}
 {n:i0}
 ( A0
-: a1ref(a, n))
-: (~a) = $extnam((*self*))
+: a1ref(a, n)): (?!a) = $extnam()
 #extern
 fun
-XINTERP_a1ref_tail_raw
+XINTERP_a1ref_tail$raw
 {a:vt}{n:i0}
-( A0
-: a1ref(a, n))
-: a1ref(a, n-1) = $extnam((*self*))
+(A0
+:a1ref(a,n)): a1ref(a,n-1) = $extnam()
 //
 #extern
 fun
-XINTERP_a1ref_get_at_raw
+XINTERP_a1ref_dtget$at
 {a:vt}{n:int}
 ( A0
 : a1ref(a, n)
 , i0
-: sint(*index*)): (~a) = $extnam((*self*))
+: sint(*index*)): (?!a) = $extnam((*self*))
 #extern
 fun
-XINTERP_a1ptr_get_at_raw
+XINTERP_a1ptr_dtget$at1
 {a:vt}{n:int}
 ( A0:
 ! a1ptr(a, n)
 , i0
-: sint(*index*)): (~a) = $extnam((*self*))
+: sint(*index*)): (?!a) = $extnam((*self*))
 //
 #extern
 fun
-XINTERP_a1ref_set_at_raw
+XINTERP_a1ref_dtset$at
 {a:vt}{n:int}
 ( A0
 : a1ref(a, n)
 , i0
-: sint(*idx*), x0: a): void = $extnam((*0*))
+: sint(*idx*), x0: ?!a): void = $extnam((*0*))
 #extern
 fun
-XINTERP_a1ptr_set_at_raw
+XINTERP_a1ptr_dtset$at1
 {a:vt}{n:int}
 ( A0:
 ! a1ptr(a, n)
 , i0
-: sint(*idx*), x0: a): void = $extnam((*0*))
+: sint(*idx*), x0: ?!a): void = $extnam((*0*))
 //
 (* ****** ****** *)
 //
@@ -807,52 +807,47 @@ XINTERP_a1ptr_set_at_raw
 {a:t0}
 a1ref_head<a>
 (A0) =
-XINTERP_a1ref_head_raw{a}(A0)
+XINTERP_a1ref_head$raw{a}(A0)
 #impltmp
 {a:vt}
 a1ref_tail<a>
 (A0) =
-XINTERP_a1ref_tail_raw{a}(A0)
+XINTERP_a1ref_tail$raw{a}(A0)
 //
 #impltmp
 {a:t0}
-a1ref_get_at<a>
+a1ref_get$at<a>
 (A0, i0) =
-XINTERP_a1ref_get_at_raw{a}(A0, i0)
+XINTERP_a1ref_dtget$at{a}(A0, i0)
 #impltmp
 {a:t0}
-a1ptr_get_at<a>
+a1ptr_get$at1<a>
 (A0, i0) =
-XINTERP_a1ptr_get_at_raw{a}(A0, i0)
+XINTERP_a1ptr_dtget$at1{a}(A0, i0)
 //
 #impltmp
 {a:vt}
-a1ref_get0_at<a>
+a1ref_dtget$at<a>
 (A0, i0) =
-XINTERP_a1ref_get_at_raw{a}(A0, i0)
+XINTERP_a1ref_dtget$at{a}(A0, i0)
 #impltmp
 {a:vt}
-a1ptr_get0_at<a>
+a1ptr_dtget$at1<a>
 (A0, i0) =
-XINTERP_a1ptr_get_at_raw{a}(A0, i0)
+XINTERP_a1ptr_dtget$at1{a}(A0, i0)
 //
 (* ****** ****** *)
 //
 #impltmp
 {a:t0}
-a1ref_set_at<a>
+a1ref_set$at<a>
 (A0, i0, x0) =
-XINTERP_a1ref_set_at_raw{a}(A0, i0, x0)
+XINTERP_a1ref_dtset$at{a}(A0, i0, x0)
 #impltmp
 {a:t0}
-a1ptr_set_at<a>
+a1ptr_set$at1<a>
 (A0, i0, x0) =
-XINTERP_a1ptr_set_at_raw{a}(A0, i0, x0)
-#impltmp
-{a:vt}
-a1ptr_set_at_raw<a>
-(A0, i0, x0) =
-XINTERP_a1ptr_set_at_raw{a}(A0, i0, x0)
+XINTERP_a1ptr_dtset$at1{a}(A0, i0, x0)
 //
 (* ****** ****** *)
 

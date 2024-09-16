@@ -76,17 +76,17 @@ strqcon_cons_
 fun
 <x0:t0>
 <r0:vt>
-strmcon_uncons_cfr
+strmcon_uncons_funs
 ( xs: strmcon( x0 )
-, f0: ((*void*)) -<cfr> r0
-, f1: (x0, strm(x0)) -<cfr> r0): r0
+, f0: ((*void*)) -> r0
+, f1: (x0, strm(x0)) -> r0): r0
 //
 fun
 <x0:t0>
 <r0:vt>
-strxcon_uncons_cfr
+strxcon_uncons_funs
 ( xs: strxcon(x0)
-, f1: (x0, strx(x0)) -<cfr> r0): r0
+, f1: (x0, strx(x0)) -> r0): r0
 //
 (* ****** ****** *)
 //
@@ -123,21 +123,6 @@ strm_pair(x1: a, x2: a): strm(a)
 //
 (* ****** ****** *)
 //
-fun
-<a:t0>
-strm_head_raw(strm(a)): a
-fun
-<a:t0>
-strm_tail_raw(strm(a)): strm(a)
-fun
-<a:t0>
-strmcon_head_raw(strmcon(a)): a
-fun
-<a:t0>
-strmcon_tail_raw(strmcon(a)): strm(a)
-//
-(* ****** ****** *)
-//
 (*
 Sun Jul  3 13:01:34 EDT 2022
 *)
@@ -150,7 +135,7 @@ strm_from$next(x0: a): (a)
 (*
 HX-2022-07-03:
 The default for [$next]:
-strm_from$next(x0) = g_succ(x0)
+strm_from$next(x0) = g_suc(x0)
 *)
 //
 fun
@@ -162,7 +147,7 @@ strx_from$next(x0: a): (a)
 (*
 HX-2022-07-03:
 The default for [$next]:
-strx_from$next(x0) = g_succ(x0)
+strx_from$next(x0) = g_suc(x0)
 *)
 //
 (* ****** ****** *)
@@ -239,12 +224,12 @@ strq_forall
 //
 fun
 <a:t0>
-strm_foreach
-(xs: strm(a)): void // foreach
+strm_foritm
+(xs: strm(a)): void // foritm
 fun
 <a:t0>
-strq_foreach
-(xs: strq(a)): void // foreach
+strq_foritm
+(xs: strq(a)): void // foritm
 //
 (* ****** ****** *)
 //
@@ -462,8 +447,8 @@ strm_itakeif_vt(strm(x0)): strm_vt(x0)
 (* ****** ****** *)
 //
 fun
-<x0:t0
-,y0:t0>
+<x0:t0>
+<y0:t0>
 <z0:vt>
 strm_x2map_vt_cmp
 (xs:strm(x0),ys:strm(y0)): strm_vt(z0)
@@ -498,7 +483,7 @@ concat with strm_concat of 1000
 forall with strm_forall of 1000
 (*
 #symload
-foreach with strm_foreach of 1000
+foritm with strm_foritm of 1000
 *)
 //
 (* ****** ****** *)

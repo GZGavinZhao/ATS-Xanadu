@@ -36,7 +36,8 @@
 // Authoremail: gmhwxiATgmailDOTcom
 //
 (* ****** ****** *)
-
+(* ****** ****** *)
+//
 fun<>
 optn_nil_
 {a:t0}
@@ -45,18 +46,33 @@ fun
 <a:t0>
 optn_cons_
 (x0: a): optn(a, tt)
-
+//
+(* ****** ****** *)
+//
+fun
+<a:t0>
+optn_make_1val
+(x0: a): optn(a, tt)
+//
 (* ****** ****** *)
 //
 fun<>
 optn_nilq
 {a:t0}{b:b0}
-(xs: optn(a, b)): bool(b=ff)
+(xs: optn(a, b)): bool(~b)
 fun<>
 optn_consq
 {a:t0}{b:b0}
-(xs: optn(a, b)): bool(b=tt)
+(xs: optn(a, b)): bool( b )
 //
+(* ****** ****** *)
+//
+fun
+<a:t0>
+optn_head
+(xs: optn(a, tt)): (  a  )
+//
+(* ****** ****** *)
 (* ****** ****** *)
 //
 fun
@@ -73,16 +89,26 @@ optn_forall
 {b:b0}(xs: optn(a, b)): bool
 fun
 <a:t0>
-optn_foreach
-{b:b0}(xs: optn(a, b)): void
-//
-fun
-<a:t0>
 optn_rforall
 {b:b0}(xs: optn(a, b)): bool
 fun
 <a:t0>
-optn_rforeach
+optn_iforall
+{b:b0}(xs: optn(a, b)): bool
+fun
+<a:t0>
+optn_irforall
+{b:b0}(xs: optn(a, b)): bool
+//
+(* ****** ****** *)
+//
+fun
+<a:t0>
+optn_foritm
+{b:b0}(xs: optn(a, b)): void
+fun
+<a:t0>
+optn_rforitm
 {b:b0}(xs: optn(a, b)): void
 //
 (* ****** ****** *)
@@ -97,6 +123,7 @@ fun
 optn_rlistize
 {b:b0}
 (optn(a, b)): list_vt(a, b2i(b))
+//
 (* ****** ****** *)
 //
 fun
@@ -152,12 +179,12 @@ optn_copy_vt
 (* ****** ****** *)
 
 #symload forall with optn_forall of 1000
-#symload foreach with optn_foreach of 1000
+#symload foritm with optn_foritm of 1000
 
 (* ****** ****** *)
 
 #symload rforall with optn_rforall of 1000
-#symload rforeach with optn_rforeach of 1000
+#symload rforitm with optn_rforitm of 1000
 
 (* ****** ****** *)
 

@@ -1,25 +1,127 @@
 (* ****** ****** *)
+(* ****** ****** *)
 #staload UN =
-"prelude/SATS/unsafex.sats"
+"prelude/SATS/unsfx00.sats"
+(* ****** ****** *)
 (* ****** ****** *)
 //
 #include
 "srcgen1\
 /prelude/HATS/prelude_dats.hats"
+#include
+"srcgen2\
+/prelude/HATS/prelude_dats.hats"
+(* ****** ****** *)
 //
 #include
 "srcgen1\
-/prelude/HATS/CATS/JS/prelude_dats.hats"
+/prelude\
+/HATS/CATS/JS/prelude_dats.hats"
+//
+(* ****** ****** *)
+//
+#staload _ =
+"srcgen1\
+/prelude\
+/DATS/CATS/JS/Node/g_print.dats"
+//
+(* ****** ****** *)
+#staload
+"xatslib/JS/SATS/Array.sats"
+#staload
+"xatslib/JS/DATS/Array01.dats"
+#include
+"xatslib/JS/HATS/xatslib_JS_dats.hats"
+(* ****** ****** *)
+//
+(*
+//
+#extcode
+"
+var A = [1,2,3]
+"(*end-of-[extcode]*)
+val A =
+$synext("A"):jsarray(sint,3)
+//
+*)
+//
+(* ****** ****** *)
+//
+val A =
+jsarray(1, 3, 2)
+val () =
+(
+println("A = ", A))
+val () = A.sortref()
+val () =
+(
+println("A = ", A))
+//
+(* ****** ****** *)
+val () =
+A.mapref(lam x => x*x)
+(* ****** ****** *)
+val () =
+A.foritm
+(
+lam
+(x:nint) => println(x))
+(* ****** ****** *)
+//
+val iA =
+gseq_ifolditm
+<xs><x0><r0>(A, 0) where
+{
+#typedef r0 = sint
+#typedef x0 = sint
+#typedef xs = jsarray(sint)
+#impltmp
+ifolditm$fopr
+<r0><x0>(r0, i0, x0) = r0 + (i0+1)*x0
+}
+//
+val () =
+(
+  println("iA = ", iA))
 //
 (* ****** ****** *)
 (* ****** ****** *)
-
+//
+val B =
+jsarray
+(map_lstrm(10,lam(i)=>i+1))
+val () = println("B = ", B)
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+val AB =
+jsarray_append(A, B)
+val () = println("AB = ", AB)
+val BA =
+jsarray_prepend(A, B)
+val () = println("BA = ", BA)
+val A1B =
+jsarray_rappend(A, B)
+val () = println("A1B = ", A1B)
+val () =
+A1B.sortref() where
+{
+#typedef x0 = sint
+#impltmp
+g_cmp11<x0,x0>(x, y) = y - x
+}
+val () = println("A1B = ", A1B)
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
 fun
 cube(x1: sint): sint =
 let
-val x2 = x1 * x1 in x1 * x2
-end // let // end (cube(x1))
-
+  val x2 = x1 * x1 in x1 * x2
+end // let // end-of(cube(x1))
+//
 (* ****** ****** *)
 (* ****** ****** *)
 //
@@ -79,9 +181,10 @@ length4
 (
 list_foldl<x0><r0>(xs, 0))
 where
-{ #typedef x0 = sint
-  #typedef r0 = sint
-  #impltmp foldl$fopr<x0><r0>(r0, x0) = r0+1 }//where
+{
+#typedef x0 = sint
+#typedef r0 = sint
+#impltmp foldl$fopr<x0><r0>(r0, x0) = r0+1 }
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -109,20 +212,58 @@ end//let
 (* ****** ****** *)
 (* ****** ****** *)
 //
+#symload sum0 with gseq_sum0
+#symload prod0 with gseq_prod0
+//
+(* ****** ****** *)
+(* ****** ****** *)
 (*
 HX-2024-01-03:
 More than 10 template layers!
 *)
+(* ****** ****** *)
+(* ****** ****** *)
+//
 fun
-fact1_mul_tail
+nsum0_tail
   (x: sint): sint =
 (
-  strm_vt_mul0(tail0(strmize(x+1))))//fun
+  sum0(tail0(strmize(x+1))))//fun
+//
+(* ****** ****** *)
+//
+fun
+fact1_prod_tail
+  (x: sint): sint =
+(
+  prod0(tail0(strmize(x+1))))//fun
 //
 (* ****** ****** *)
 (* ****** ****** *)
+//
 val () = println
-("mytest12:fact1_mul_tail(10)=",fact1_mul_tail(10))
+(
+"mytest12:nsum0_tail(10)=",nsum0_tail(10))
+val () = println
+(
+"mytest12:fact1_prod_tail(10)=",fact1_prod_tail(10))
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+val xs1 = list_pair(1, 2)
+val xs2 = list_pair(3, 4)
+val ( ) = println("xs1 = ", xs1)
+val ( ) = println("xs2 = ", xs2)
+val ( ) = println("|xs1| = ", length(xs1))
+val ( ) = println("|xs2| = ", length(xs2))
+val xs3 = append(xs1, xs2)
+val ( ) = println("xs3 = ", xs3)
+val ( ) = println("|xs3| = ", length(xs3))
+val xs4 = reverse(  xs3  )
+val ( ) = println("xs4 = ", xs4)
+val ( ) = println("|xs4| = ", length(xs4))
+//
 (* ****** ****** *)
 (* ****** ****** *)
 

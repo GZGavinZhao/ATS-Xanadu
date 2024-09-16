@@ -181,10 +181,10 @@ g_print$out<>() = out
 val
 loc0 = d3p0.lctn()
 val () =
-prerrln
+prerrsln
 ("d3pat_fpemsg: loc0 = ", loc0)
 val () =
-prerrln
+prerrsln
 ("d3pat_fpemsg: d3p0 = ", d3p0)
 *)
 //
@@ -202,7 +202,7 @@ if
 let
 val
 loc0 = d3p0.lctn() in // let
-println
+printsln
 ("TREAD23-ERROR:",loc0,":",d3p0)
 end // let // else // end-of-[if]
 ) (* end-of-[ D3Perrck(lvl,d2p1) ] *)
@@ -478,18 +478,49 @@ let
 val () = d3exp_fpemsg(out , d3e1)
 endlet // end of [ D3Enone2( ... ) ]
 //
+(* ****** ****** *)
+(* ****** ****** *)
+//
 |
 D3Eextnam
-( tknd, gnm1) =>
+( tknd, gnam) =>
 let
-// HX-2023-11-03: (* nothing yet *)
-endlet//end-of-[D3Eextnam(tknd,gnm1)]
+(*
+HX-2023-11-03: (* nothing yet *)
+*)
+(*
+  val () = g1nam_fpemsg(out, gnam)
+*)
+endlet//end-of-[D3Eextnam(tknd,gnam)]
 //
-|D3Eerrck(_, _) => d3exp_fpemsg(out, d3e)
+|
+D3Esynext
+( tknd, gexp) =>
+let
+(*
+HX-2024-07-20: (* nothing yet *)
+*)
+(*
+  val () = g1exp_fpemsg(out, gexp)
+*)
+endlet//end-of-[D3Esynext(tknd,gexp)]
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+|
+D3Eerrck(_, _) => d3exp_fpemsg(out, d3e)
+//
+(* ****** ****** *)
+(* ****** ****** *)
 //
 (*
-|_(*otherwise*) => d3exp_fpemsg(out, d3e)
+|
+_(*otherwise*) => d3exp_fpemsg(out, d3e)
 *)
+//
+(* ****** ****** *)
+(* ****** ****** *)
 //
 end (*let*) // end-of-[auxmain(out, d3e)]
 
@@ -509,10 +540,10 @@ g_print$out<>() = out
 val
 loc0 = d3e0.lctn()
 val () =
-prerrln
+prerrsln
 ("d3exp_fpemsg: loc0 = ", loc0)
 val () =
-prerrln
+prerrsln
 ("d3exp_fpemsg: d3e0 = ", d3e0)
 *)
 //
@@ -530,7 +561,7 @@ if
 let
 val
 loc0 = d3e0.lctn() in // let
-println
+printsln
 ("TREAD23-ERROR:",loc0,":",d3e0)
 end // let // else // end-of-[if]
 ) (* end-of-[ D3Eerrck(lvl,d2e1) ] *)
@@ -782,10 +813,10 @@ g_print$out<>() = out
 val
 loc0 = dcl0.lctn()
 val () =
-prerrln
+prerrsln
 ("d3ecl_fpemsg: loc0 = ", loc0)
 val () =
-prerrln
+prerrsln
 ("d3ecl_fpemsg: dcl0 = ", dcl0)
 *)
 //
@@ -804,7 +835,7 @@ if
 let
 val
 loc0 = dcl0.lctn() in // let
-println
+printsln
 ("TREAD23-ERROR:",loc0,":",dcl0)
 end // let // else // end-of-[if]
 ) (* end-of-[ D3Cerrck(lvl,dcl0) ] *)
@@ -922,10 +953,10 @@ endlet where
 #implfun
 d3patlst_fpemsg
 (out, d3ps) =
-list_foreach<d3pat>(d3ps) where
+list_foritm<d3pat>(d3ps) where
 {
 #impltmp
-foreach$work<d3pat>(d3p1) = d3pat_fpemsg(out,d3p1)
+foritm$work<d3pat>(d3p1) = d3pat_fpemsg(out,d3p1)
 }
 //
 (* ****** ****** *)
@@ -933,10 +964,10 @@ foreach$work<d3pat>(d3p1) = d3pat_fpemsg(out,d3p1)
 #implfun
 l3d3plst_fpemsg
 (out, ldps) =
-list_foreach<l3d3p>(ldps) where
+list_foritm<l3d3p>(ldps) where
 {
 #impltmp
-foreach$work<l3d3p>(ld3p) = l3d3p_fpemsg(out,ld3p)
+foritm$work<l3d3p>(ld3p) = l3d3p_fpemsg(out,ld3p)
 }
 //
 (* ****** ****** *)
@@ -944,19 +975,19 @@ foreach$work<l3d3p>(ld3p) = l3d3p_fpemsg(out,ld3p)
 #implfun
 d3explst_fpemsg
 (out, d3es) =
-list_foreach<d3exp>(d3es) where
+list_foritm<d3exp>(d3es) where
 {
 #impltmp
-foreach$work<d3exp>(d3e1) = d3exp_fpemsg(out,d3e1)
+foritm$work<d3exp>(d3e1) = d3exp_fpemsg(out,d3e1)
 }
 //
 #implfun
 d3expopt_fpemsg
 (out, dopt) =
-optn_foreach<d3exp>(dopt) where
+optn_foritm<d3exp>(dopt) where
 {
 #impltmp
-foreach$work<d3exp>(d3e1) = d3exp_fpemsg(out,d3e1)
+foritm$work<d3exp>(d3e1) = d3exp_fpemsg(out,d3e1)
 }
 //
 (* ****** ****** *)
@@ -964,10 +995,10 @@ foreach$work<d3exp>(d3e1) = d3exp_fpemsg(out,d3e1)
 #implfun
 l3d3elst_fpemsg
 (out, ldes) =
-list_foreach<l3d3e>(ldes) where
+list_foritm<l3d3e>(ldes) where
 {
 #impltmp
-foreach$work<l3d3e>(ld3e) = l3d3e_fpemsg(out,ld3e)
+foritm$work<l3d3e>(ld3e) = l3d3e_fpemsg(out,ld3e)
 }
 //
 (* ****** ****** *)
@@ -975,10 +1006,10 @@ foreach$work<l3d3e>(ld3e) = l3d3e_fpemsg(out,ld3e)
 #implfun
 f3arglst_fpemsg
 (out, f3as) =
-list_foreach<f3arg>(f3as) where
+list_foritm<f3arg>(f3as) where
 {
 #impltmp
-foreach$work<f3arg>(f3a1) = f3arg_fpemsg(out,f3a1)
+foritm$work<f3arg>(f3a1) = f3arg_fpemsg(out,f3a1)
 }
 //
 (* ****** ****** *)
@@ -986,19 +1017,19 @@ foreach$work<f3arg>(f3a1) = f3arg_fpemsg(out,f3a1)
 #implfun
 d3gualst_fpemsg
 (out, d3gs) =
-list_foreach<d3gua>(d3gs) where
+list_foritm<d3gua>(d3gs) where
 {
 #impltmp
-foreach$work<d3gua>(d3g1) = d3gua_fpemsg(out,d3g1)
+foritm$work<d3gua>(d3g1) = d3gua_fpemsg(out,d3g1)
 }
 //
 #implfun
 d3clslst_fpemsg
 (out, d3cs) =
-list_foreach<d3cls>(d3cs) where
+list_foritm<d3cls>(d3cs) where
 {
 #impltmp
-foreach$work<d3cls>(d3c1) = d3cls_fpemsg(out,d3c1)
+foritm$work<d3cls>(d3c1) = d3cls_fpemsg(out,d3c1)
 }
 //
 (* ****** ****** *)
@@ -1006,10 +1037,10 @@ foreach$work<d3cls>(d3c1) = d3cls_fpemsg(out,d3c1)
 #implfun
 d3eclist_fpemsg
 (out, dcls) =
-list_foreach<d3ecl>(dcls) where
+list_foritm<d3ecl>(dcls) where
 {
 #impltmp
-foreach$work<d3ecl>(dcl1) = d3ecl_fpemsg(out,dcl1)
+foritm$work<d3ecl>(dcl1) = d3ecl_fpemsg(out,dcl1)
 }
 //
 (* ****** ****** *)
@@ -1017,10 +1048,10 @@ foreach$work<d3ecl>(dcl1) = d3ecl_fpemsg(out,dcl1)
 #implfun
 d3valdclist_fpemsg
 (out, d3vs) =
-list_foreach<d3valdcl>(d3vs) where
+list_foritm<d3valdcl>(d3vs) where
 {
 #impltmp
-foreach$work<d3valdcl>(dvar) = d3valdcl_fpemsg(out,dvar)
+foritm$work<d3valdcl>(dvar) = d3valdcl_fpemsg(out,dvar)
 }
 //
 (* ****** ****** *)
@@ -1028,10 +1059,10 @@ foreach$work<d3valdcl>(dvar) = d3valdcl_fpemsg(out,dvar)
 #implfun
 d3vardclist_fpemsg
 (out, d3vs) =
-list_foreach<d3vardcl>(d3vs) where
+list_foritm<d3vardcl>(d3vs) where
 {
 #impltmp
-foreach$work<d3vardcl>(dvar) = d3vardcl_fpemsg(out,dvar)
+foritm$work<d3vardcl>(dvar) = d3vardcl_fpemsg(out,dvar)
 }
 //
 (* ****** ****** *)
@@ -1039,10 +1070,10 @@ foreach$work<d3vardcl>(dvar) = d3vardcl_fpemsg(out,dvar)
 #implfun
 d3fundclist_fpemsg
 (out, d3fs) =
-list_foreach<d3fundcl>(d3fs) where
+list_foritm<d3fundcl>(d3fs) where
 {
 #impltmp
-foreach$work<d3fundcl>(dfun) = d3fundcl_fpemsg(out,dfun)
+foritm$work<d3fundcl>(dfun) = d3fundcl_fpemsg(out,dfun)
 }
 //
 (* ****** ****** *)

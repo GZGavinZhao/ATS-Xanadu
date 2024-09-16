@@ -48,35 +48,35 @@ Authoremail: gmhwxiATgmailDOTcom
 (* ****** ****** *)
 //
 #abstbox
-a0ref_vt_x0
+a0ref_vt_tx
 (elem:vwtp)
 //
 #typedef
-a0ref(a:vt) = a0ref_vt_x0(a)
+a0ref(a:vt) = a0ref_vt_tx(a)
 //
 (* ****** ****** *)
 // HX: 1-dimensional
 (* ****** ****** *)
 //
 #abstbox
-a1ref_vt_i0_x0
+a1ref_vt_i0_tx
 (elem:vt,ntot:i0)
 //
 #typedef
-a1ref(a:vt,n:i0) = a1ref_vt_i0_x0(a, n)
+a1ref(a:vt,n:i0) = a1ref_vt_i0_tx(a, n)
 //
 (* ****** ****** *)
 // HX: 2-dimensional
 (* ****** ****** *)
 //
 #abstbox
-a2ref_vt_i0_i0_x0
+a2ref_vt_i0_i0_tx
 (elem:vt,nrow:i0,ncol:i0)
 //
 #typedef
 a2ref
 (a:vt
-,m:i0,n:i0) = a2ref_vt_i0_i0_x0(a, m, n)
+,m:i0,n:i0) = a2ref_vt_i0_i0_tx(a, m, n)
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -89,40 +89,45 @@ a0ref_make_1val(a): a0ref(a)
 //
 fun
 <a:t0>
-a0ref_get(a0ref(a)): a//non
+a0ref_get
+(A0: a0ref(a)): ( a )
 fun
 <a:t0>
-a0ref_set(a0ref(a), a): void
+a0ref_set
+(A0: a0ref(a), x0: a): void
 //
 (* ****** ****** *)
 //
-fun
-<a:vt> // read-only
-a0ref_get0(A0: a0ref(a)): ?!a
 (*
-//HX-2022-07-06:
-//this one is in unsafex.sats
-fun
-<a:vt>
-a0ref_set0
-(A0: a0ref(a), x0: ?!a): void
+HX: new<->old
 *)
-//
-fun
-<a:vt> // copy+get
-a0ref_cget
-  (A0: a0ref(a)): (a)
-fun
-<a:vt> // set+free
-a0ref_setf
-  (A0: a0ref(a), x0: a): void
-//
-(* ****** ****** *)
 //
 fun
 <a:vt>
 a0ref_exch
-(a0ref(a), a(*new*)): a(*old*)
+(A0: a0ref(a), x0: a): ( a )
+//
+(* ****** ****** *)
+//
+fun
+<a:vt>
+a0ref_dtget
+(A0: a0ref(a)): (?!a)
+fun
+<a:vt>
+a0ref_dtset
+(A0: a0ref(a), x0: ?!a): void
+//
+(* ****** ****** *)
+//
+fun
+<a:vt> // copy+get
+a0ref_cpget
+  (A0: a0ref(a)): (a)
+fun
+<a:vt> // set+free
+a0ref_frset
+  (A0: a0ref(a), x0: a): void
 //
 (* ****** ****** *)
 //
@@ -142,7 +147,7 @@ a0ref_updt(A0: a0ref(a)): void
 (* ****** ****** *)
 //
 fun
-<a:vt>
+<a:t0>
 a1ref_make_nval
 {n:nat}
 ( asz
@@ -183,39 +188,60 @@ fun
 a1ref_length(a1ref(a, n)): nint(n)
 //
 (* ****** ****** *)
+(* ****** ****** *)
 //
 fun
 <a:t0>
-a1ref_get_at
+a1ref_get$at
 {n:i0}
 ( A0
 : a1ref(a, n), i0: nintlt(n)): (a)
 fun
 <a:t0>
-a1ref_set_at
+a1ref_set$at
 {n:i0}
 ( A0
 : a1ref(a, n)
 , i0: nintlt(n), x0: a(*new*)): void
 //
 (* ****** ****** *)
+(* ****** ****** *)
 //
 fun
 <a:vt>
-a1ref_get0_at
+a1ref_exch$at
+{n:i0}
+( A0:
+  a1ref(a, n)
+, i0: nintlt(n), x0: a(*new*)): a(*old*)
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun
+<a:vt>
+a1ref_dtget$at
 {n:i0}
 ( A0:
   a1ref(a, n), i0: nintlt(n)): (?!a)
 //
+fun
+<a:vt>
+a1ref_dtset$at
+{n:i0}
+( A0:
+  a1ref(a, n), i0: nintlt(n), x: ?!a): void
+//
+(* ****** ****** *)
 (* ****** ****** *)
 //
 (*
-HX: [cget_at]: copy+get
+HX: [cget$at]: copy+get$at
 *)
 //
 fun
 <a:vt>
-a1ref_cget_at
+a1ref_cpget$at
 {n:i0}
 ( A0:
   a1ref(a, n), i0: nintlt(n)): (a)
@@ -223,27 +249,18 @@ a1ref_cget_at
 (* ****** ****** *)
 //
 (*
-HX: [setf_at]: set_at+free
+HX: [frset$at]: free+set$at
 *)
 //
 fun
 <a:vt>
-a1ref_setf_at
+a1ref_frset$at
 {n:i0}
 ( A0
 : a1ref(a, n)
 , i0: nintlt(n), x0 : a(*new*)): void
 //
 (* ****** ****** *)
-//
-fun
-<a:vt>
-a1ref_exch_at
-{n:i0}
-( A0:
-  a1ref(a, n)
-, i0: nintlt(n), x0: a(*new*)): a(*old*)
-//
 (* ****** ****** *)
 //
 (*
@@ -253,7 +270,7 @@ g_updt(x0: &a >> _): void
 *)
 fun
 <a:vt>
-a1ref_updt_at
+a1ref_updt$at
 {n:i0}
 ( A0:
   a1ref(a, n), i0: nintlt(n)): void
@@ -295,11 +312,11 @@ a1ref_forall1
 //
 fun
 <x0:t0>
-a1ref_foreach
+a1ref_foritm
 {n:i0}(A0: a1ref(x0, n)): (void)
 fun
 <x0:vt>
-a1ref_foreach1
+a1ref_foritm1
 {n:i0}(A0: a1ref(x0, n)): (void)
 //
 (* ****** ****** *)
@@ -333,10 +350,10 @@ a1ref_rforall1
 //
 (* ****** ****** *)
 //
-#symload [] with a1ref_get_at of 1000
-#symload [] with a1ref_set_at of 1000
-#symload get_at with a1ref_get_at of 1000
-#symload set_at with a1ref_set_at of 1000
+#symload [] with a1ref_get$at of 1000
+#symload [] with a1ref_set$at of 1000
+#symload get$at with a1ref_get$at of 1000
+#symload set$at with a1ref_set$at of 1000
 //
 (* ****** ****** *)
 #symload a0ref with a0ref_make_1val of 1000

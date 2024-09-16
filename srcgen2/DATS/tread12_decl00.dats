@@ -286,6 +286,7 @@ d2ecl_make_node
 end (*let*) // end of [d2ecl_staload_errck]
 //
 (* ****** ****** *)
+(* ****** ****** *)
 //
 fun
 d2ecl_datasort_errck
@@ -299,6 +300,7 @@ d2ecl_errck
 (lvl+1,d2ecl(loc0,D2Cdatasort(d1cl,s2ts)))
 end (*let*) // end of [d2ecl_datasort_errck]
 //
+(* ****** ****** *)
 (* ****** ****** *)
 //
 fun
@@ -357,6 +359,7 @@ d2ecl_errck
 end (*let*) // end of [d2ecl_fundclst_errck]
 //
 (* ****** ****** *)
+(* ****** ****** *)
 //
 fun
 d2ecl_implmnt0_errck
@@ -391,6 +394,7 @@ d2ecl_make_node
 end (*let*) // end of [d2ecl_implmnt0_errck]
 //
 (* ****** ****** *)
+(* ****** ****** *)
 //
 fun
 d2ecl_excptcon_errck
@@ -419,6 +423,7 @@ d2ecl_errck
 end (*let*) // end of [d2ecl_datatype_errck]
 //
 (* ****** ****** *)
+(* ****** ****** *)
 //
 fun
 d2ecl_dynconst_errck
@@ -434,6 +439,7 @@ d2ecl_errck
 , d2ecl(loc0, D2Cdynconst(tknd,tqas,d2cs)))
 end (*let*) // end of [d2ecl_dynconst_errck]
 //
+(* ****** ****** *)
 (* ****** ****** *)
 
 #implfun
@@ -480,6 +486,20 @@ D2Cinclude _ => f0_include(d2cl, err)
 |
 D2Cstaload _ => f0_staload(d2cl, err)
 //
+(* ****** ****** *)
+//
+(*
+HX-2024-07-20:
+Sat 20 Jul 2024 01:50:44 PM EDT
+*)
+//
+|
+D2Cdyninit _ => f0_dyninit(d2cl, err)
+|
+D2Cextcode _ => f0_extcode(d2cl, err)
+//
+(* ****** ****** *)
+//
 |
 D2Cdatasort _ => f0_datasort(d2cl, err)
 //
@@ -515,7 +535,7 @@ endlet // end of [  _(* otherwise *)  ]
 (* ****** ****** *)
 (*
 val (  ) =
-prerrln("tread12_d2ecl: d2cl = ", d2cl)
+prerrsln("tread12_d2ecl: d2cl = ", d2cl)
 *)
 (* ****** ****** *)
 //
@@ -539,6 +559,8 @@ if
 then dcl else
 d2ecl_static_errck(dcl.lctn(),tknd,dcl1)
 end (*let*) // end of [ f0_static(dcl,err) ]
+//
+(* ****** ****** *)
 //
 fun
 f0_extern
@@ -822,10 +844,10 @@ val loc = dcl.lctn()
 //
 (*
 val () =
-prerrln
+prerrsln
 ("f0_include(12): loc = ", loc)
 val () =
-prerrln
+prerrsln
 ("f0_include(12): dopt = ", dopt)
 *)
 //
@@ -875,19 +897,19 @@ case+ dres of
 //
 (*
 val () =
-prerrln
+prerrsln
 ("f0_staload(12): loc = ", loc)
 val () =
-prerrln
+prerrsln
 ("f0_staload(12): gsrc = ", gsrc)
 val () =
-prerrln
+prerrsln
 ("f0_staload(12): fopt = ", fopt)
 val () =
-prerrln
+prerrsln
 ("f0_staload(12): dres = ", dres)
 val () =
-prerrln
+prerrsln
 ("f0_staload(12): fknd = ", fknd)
 *)
 //
@@ -899,6 +921,29 @@ d2ecl_staload_errck
 ( loc, knd0, tknd, gsrc, fopt, dres )
 end (*let*) // end of [f0_staload(dcl,err)]
 //
+(* ****** ****** *)
+(* ****** ****** *)
+//
+(*
+HX-2024-07-20:
+Sat 20 Jul 2024 01:52:57 PM EDT
+*)
+//
+fun
+f0_dyninit
+(dcl: d2ecl
+,err: &sint >> _): d2ecl =
+let
+val-D2Cdyninit _ = dcl.node() in (dcl) end
+//
+fun
+f0_extcode
+(dcl: d2ecl
+,err: &sint >> _): d2ecl =
+let
+val-D2Cextcode _ = dcl.node() in (dcl) end
+//
+(* ****** ****** *)
 (* ****** ****** *)
 //
 local
@@ -1278,9 +1323,9 @@ case+ scs2 of
 (*
   val loc0 = simp.lctn()
   val (  ) =
-  prerrln("tread12_simpl: loc0 = ", loc0)
+  prerrsln("tread12_simpl: loc0 = ", loc0)
   val (  ) =
-  prerrln("tread12_simpl: simp = ", simp)
+  prerrsln("tread12_simpl: simp = ", simp)
 *)
 //
 } (*where*) // end-of-[tread12_simpl(simp,err)]
@@ -1315,9 +1360,9 @@ case+ d2cs of
 (*
   val loc0 = dimp.lctn()
   val (  ) =
-  prerrln("tread12_dimpl: loc0 = ", loc0)
+  prerrsln("tread12_dimpl: loc0 = ", loc0)
   val (  ) =
-  prerrln("tread12_dimpl: dimp = ", dimp)
+  prerrsln("tread12_dimpl: dimp = ", dimp)
 *)
 //
 } (*where*) // end-of-[tread12_dimpl(dimp,err)]
@@ -1377,7 +1422,7 @@ let
 val e00 = err
 (*
 val ( ) =
-prerrln
+prerrsln
 ("tread12_teqd2exp: d2e2 = ", d2e2)
 *)
 val d2e2 = tread12_d2exp(d2e2, err)
@@ -1403,7 +1448,7 @@ let
 val e00 = err
 (*
 val ( ) =
-prerrln
+prerrsln
 ("tread12_wths2exp: s2e1 = ", s2e1)
 *)
 val s2e1 = tread12_s2exp(s2e1, err)

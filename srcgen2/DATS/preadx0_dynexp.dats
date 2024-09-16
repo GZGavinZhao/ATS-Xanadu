@@ -108,15 +108,18 @@ D0Perrck
 d0pat_errvl with d0pat_errvl_a1
 #symload errvl with d0pat_errvl_a1
 (* ****** ****** *)
+//
 fun
 d0pat_errvl_a2
 (de1: d0pat
 ,de2: d0pat): sint =
-gmax
+maxs
 (errvl(de1),errvl(de2))
+//
 #symload
 d0pat_errvl with d0pat_errvl_a2
 #symload errvl with d0pat_errvl_a2
+//
 (* ****** ****** *)
 //
 #extern
@@ -137,7 +140,7 @@ list_nil
 |
 list_cons
 (d0p1,d0ps) =>
-gmax(errvl(d0p1), errvl(d0ps)))
+maxs(errvl(d0p1), errvl(d0ps)))
 //
 (* ****** ****** *)
 #extern
@@ -172,7 +175,7 @@ list_nil
 |
 list_cons
 (ldp1,ldps) =>
-gmax(errvl(ldp1), errvl(ldps)))
+maxs(errvl(ldp1), errvl(ldps)))
 //
 (* ****** ****** *)
 //
@@ -263,7 +266,7 @@ d0pat_lpar_errck
 : d0pat_RPAREN): d0pat =
 let
 val lvl =
-gmax(errvl(d0ps),errvl(drp0))
+maxs(errvl(d0ps),errvl(drp0))
 in//let
 d0pat_errck
 ( lvl+1
@@ -286,7 +289,8 @@ d0pat_tup1_errck
 : d0pat_RPAREN): d0pat =
 let
 val lvl =
-gmax(errvl(d0ps),errvl(tend))
+(
+  maxs(errvl(d0ps),errvl(tend)))
 in//let
 d0pat_errck
 (lvl+1,
@@ -310,7 +314,8 @@ d0pat_rcd2_errck
 : l0d0p_RBRACE): d0pat =
 let
 val lvl =
-gmax(errvl(ldps),errvl(tend))
+(
+  maxs(errvl(ldps),errvl(tend)))
 in//let
 d0pat_errck
 (lvl+1,
@@ -358,27 +363,33 @@ D0Eerrck
 d0exp_errvl with d0exp_errvl_a1
 #symload errvl with d0exp_errvl_a1
 (* ****** ****** *)
+//
 fun
 d0exp_errvl_a2
 (de1: d0exp
 ,de2: d0exp): sint =
-gmax
+maxs
 (errvl(de1),errvl(de2))
+//
 #symload
 d0exp_errvl with d0exp_errvl_a2
 #symload errvl with d0exp_errvl_a2
+//
 (* ****** ****** *)
+//
 fun
 d0exp_errvl_a3
 (de1: d0exp
 ,de2: d0exp
 ,de3: d0exp): sint =
-gmax
+maxs
 (errvl(de1)
 ,errvl(de2),errvl(de3))
+//
 #symload
 d0exp_errvl with d0exp_errvl_a3
 #symload errvl with d0exp_errvl_a3
+//
 (* ****** ****** *)
 //
 #extern
@@ -396,7 +407,7 @@ case+ d0es of
 |
 list_nil((*nil*)) => 0
 |
-list_cons(d0e1,d0es) => gmax
+list_cons(d0e1,d0es) => maxs
 (d0exp_errvl(d0e1), d0exp_errvl(d0es))
 ) (*case+*)//end-of-[d0exp_errvl_list]
 //
@@ -515,7 +526,7 @@ case+ ldes of
 |
 list_nil((*nil*)) => 0
 |
-list_cons(lde1,ldes) => gmax
+list_cons(lde1,ldes) => maxs
 (l0d0e_errvl(lde1), l0d0e_errvl(ldes))
 ) (*case+*)//end-of-(l0d0e_errvl_list)
 //
@@ -570,7 +581,7 @@ case+ dcls of
 |
 list_nil((*nil*)) => 0
 |
-list_cons(dcl1,dcls) => gmax
+list_cons(dcl1,dcls) => maxs
 (errvl(dcl1), d0cls_errvl_lst(dcls))
 ) (*case+*)//end-of-(d0cls_errvl_lst)
 //
@@ -606,7 +617,7 @@ case+ dcls of
 |
 list_nil((*nil*)) => 0
 |
-list_cons(dcl1,dcls) => gmax
+list_cons(dcl1,dcls) => maxs
 (d0ecl_errvl(dcl1), d0ecl_errvl(dcls))
 ) (*case+*)//end-of-(d0ecl_errvl_list)
 //
@@ -686,8 +697,9 @@ d0exp_lpar_errck
 , drp
 : d0exp_RPAREN): d0exp =
 let
-  val lvl =
-  gmax(errvl(des),errvl(drp))
+val lvl =
+(
+  maxs(errvl(des),errvl(drp)))
 in//let
 d0exp_errck
 (lvl+1, d0exp(loc,D0Elpar(tkb,des,drp)))
@@ -705,7 +717,7 @@ d0exp_ift0_errck
 let
 val lvl =
 (
-gmax
+maxs
 (errvl(d0e1)
 ,errvl(dthn),errvl(dels)))
 in//let
@@ -728,7 +740,7 @@ d0exp_ift1_errck
 let
 val lvl =
 (
-gmax
+maxs
 (errvl(d0e1)
 ,errvl(dthn),errvl(dels)))
 in//let
@@ -758,7 +770,7 @@ d0exp_cas0_errck
 let
 val lvl =
 (
-gmax
+maxs
 (errvl(d0e1),errvl(dcls)))
 in//let
 d0exp_errck
@@ -788,7 +800,7 @@ d0exp_cas1_errck
 let
 val lvl =
 (
-gmax
+maxs
 (errvl(d0e1),errvl(dcls)))
 in//let
 d0exp_errck
@@ -814,8 +826,9 @@ d0exp_tup1_errck
 , tend
 : d0exp_RPAREN): d0exp =
 let
-  val lvl =
-  gmax(errvl(d0es),errvl(tend))
+val lvl =
+(
+  maxs(errvl(d0es),errvl(tend)))
 in//let
 d0exp_errck
 (lvl+1,
@@ -838,8 +851,9 @@ d0exp_rcd2_errck
 , tend
 : l0d0e_RBRACE): d0exp =
 let
-  val lvl =
-  gmax(errvl(ldes),errvl(tend))
+val lvl =
+(
+  maxs(errvl(ldes),errvl(tend)))
 in//let
 d0exp_errck
 (lvl+1,
@@ -863,8 +877,9 @@ d0exp_let0_errck
 : d0explst
 , tend: token): d0exp =
 let
-  val lvl =
-  gmax(errvl(dcls),errvl(d0es))
+val lvl =
+(
+  maxs(errvl(dcls),errvl(d0es)))
 in//let
 d0exp_errck
 (lvl+1,
@@ -891,7 +906,7 @@ case+ dcls of
 |
 d0eclseq_WHERE
 (tbeg,topt,d0cs,tend) =>
-gmax(errvl(d0e1),errvl(d0cs)))
+maxs(errvl(d0e1),errvl(d0cs)))
 //
 in//let
 d0exp_errck
@@ -940,10 +955,11 @@ d0exp_try0_errck
 , twth: token
 , tbar: tokenopt
 , dcls: d0clslst
-, tend: token   ): d0exp =
+, tend: tokenopt): d0exp =
 let
 val lvl =
-gmax(errvl(d0es),errvl(dcls))
+(
+  maxs(errvl(d0es),errvl(dcls)))
 in//let
 d0exp_errck
 ( lvl+1,
@@ -1050,12 +1066,12 @@ fun
 d0exp_extnam_errck
 ( loc
 : loc_t
-, tok1: token
-, gnm2: g0nam): d0exp =
+, tknd: token
+, gnam: g0nam): d0exp =
 let
 val lvl = 0 in
 d0exp_errck
-(lvl+1,d0exp(loc,D0Eextnam(tok1,gnm2)))
+(lvl+1,d0exp(loc,D0Eextnam(tknd,gnam)))
 end (*let*) // end of [d0exp_extnam_errck]
 //
 (* ****** ****** *)
@@ -1077,11 +1093,27 @@ d0exp_errck
 end (*let*) // end of [d0exp_exists_errck]
 //
 (* ****** ****** *)
+//
+fun
+d0exp_synext_errck
+( loc
+: loc_t
+, tknd: token
+, gexp: g0exp): d0exp =
+let
+val lvl = 0 in
+d0exp_errck
+(lvl+1,d0exp(loc,D0Esynext(tknd,gexp)))
+end (*let*) // end of [d0exp_synext_errck]
+//
+(* ****** ****** *)
+(* ****** ****** *)
 (*
 HX-2022-07:
 implement [preadx0_d0pat]
 implement [preadx0_d0exp]
 *)
+(* ****** ****** *)
 (* ****** ****** *)
 #extern
 fun
@@ -1411,6 +1443,11 @@ D0Edtsel _ => f0_dtsel(d0e, err)
 D0Eextnam _ => f0_extnam( d0e, err )
 |
 D0Eexists _ => f0_exists( d0e, err )
+//
+(* ****** ****** *)
+//
+|
+D0Esynext _ => f0_synext( d0e, err )
 //
 (* ****** ****** *)
 //
@@ -1934,6 +1971,9 @@ _(*non-T_WITH*) => (err := err+1)
 val
 dcls = preadx0_d0clslst(dcls, err)
 //
+(*
+HX-2024-07-16:
+[tend] is optional (tokenopt)!
 val (  ) =
 (
 case+
@@ -1941,8 +1981,8 @@ tend.node() of
 | T_END() => ()
 | T_ENDTRY() => ()
 |
-_(*non-T_ENDTRY*) => (err := err+1)
-)
+_(*non-T_ENDTRY*) => (err := err+1))
+*)
 //
 in//let
 if
@@ -2110,17 +2150,17 @@ val e00 = err
 //
 val-
 D0Eextnam
-( tok1, gnm2) = d0e.node()
+( tknd, gnam) = d0e.node()
 //
 (*
-val gnm2 = preadx0_g0nam(gnm2, err)
+val gnam = preadx0_g0nam(gnam, err)
 *)
 //
 in//let
 if
 (err=e00)
 then (d0e) else
-d0exp_extnam_errck(d0e.lctn(),tok1,gnm2)
+d0exp_extnam_errck(d0e.lctn(),tknd,gnam)
 end (*let*) // end of [f0_extnam(d0e,err)]
 //
 (* ****** ****** *)
@@ -2147,14 +2187,41 @@ val loc = d0e.lctn()
 in
   d0exp_exists_errck(loc,tknd,d0es,d0e1)
 end
-end (*let*) // end of [f0_extnam(d0e,err)]
+end (*let*) // end of [f0_exists(d0e,err)]
 //
+(* ****** ****** *)
 (* ****** ****** *)
 //
 fun
 f0_none0
 ( d0e: d0exp
 , err: &sint >> _): d0exp = d0e//f0_none0
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun
+f0_synext
+( d0e: d0exp
+, err: &sint >> _): d0exp =
+let
+//
+val e00 = err
+//
+val-
+D0Esynext
+( tknd, gexp) = d0e.node()
+//
+(*
+val gexp = preadx0_g0exp(g0exp, err)
+*)
+//
+in//let
+if
+(err=e00)
+then (d0e) else
+d0exp_synext_errck(d0e.lctn(),tknd,gexp)
+end (*let*) // end-of-[f0_synext(d0e,err)]
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -3023,7 +3090,7 @@ endlet // end of [l0d0e_RBRACE_cons1]
 preadx0_d0eclseq_WHERE
   (dcls, err) =
 (
-case+ dcls of
+case- dcls of
 |
 d0eclseq_WHERE
 (tbeg, topt, d0cs, tend) =>
@@ -3036,32 +3103,56 @@ preadx0_d0eclist(d0cs, err)
 //
 val (  ) =
 (
-case+ tend of
+case- tend of
 |
 tkend_WHERE_cons1
 (     tok1     ) =>
 (
 case+
 tok1.node() of
+//
+| T_ENDWHR() =>
+(
+case+ topt of
+|optn_nil _  => (  (*void*)  )
+|optn_cons _ => (err := err+1))
+//
+| T_RBRACE() =>
+(
+case+ topt of
+|optn_nil _  => (err := err+1)
+|optn_cons _ => (  (*void*)  ))
+//
 |
-T_ENDWHR() =>
-( case+ topt of
-| optn_nil() => ()
-| optn_cons _ => (err := err+1))
-|
-T_RBRACE() =>
-(case+ topt of
-| optn_nil() =>
-  (err := err+1) | optn_cons _ => ())
-)
-) (*case+*) // end of [val()]
+_(*otherwise*) => ( err := err+1 )
+//
+) where
+{
+(*
+//
+val loc1 = tok1.lctn()
+val (  ) = prerrsln("\
+preadx0_d0eclseq_WHERE: loc1 = ", loc1)
+//
+*)
+}
+) where
+{
+//
+(*
+val (  ) = prerrsln("\
+preadx0_d0eclseq_WHERE: tend = ", tend)
+*)
+//
+}(*where*)//(*case+*)//end-of-[ val(  ) ]
 //
 in
 if
 (err=e00)
 then (dcls)
 else
-d0eclseq_WHERE(tbeg, topt, d0cs, tend)
+(
+  d0eclseq_WHERE(tbeg, topt, d0cs, tend))
 endlet // end of [d0eclseq_WHERE(_,_,_,_)]
 ) (*case+*)//end(preadx0_d0eclseq_WHERE(dcls,err))
 //  

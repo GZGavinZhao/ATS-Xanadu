@@ -120,8 +120,21 @@ strq_vt_free(strq_vt(a)): void
 //
 fun
 <a:vt>
+strm_vt_head0
+  (xs: strm_vt(a)): ( a )
+fun
+<a:vt>
 strm_vt_tail0
   (xs: strm_vt(a)): strm_vt(a)
+//
+fun
+<a:vt>
+strm_vt_head$opt0
+  (xs: strm_vt(a)): optn_vt(a)
+fun
+<a:vt>
+strm_vt_tail$opt0
+  (xs: strm_vt(a)): optn_vt(strm_vt(a))
 //
 (* ****** ****** *)
 //
@@ -137,7 +150,7 @@ strm_vt_from$next(x0: !a): ( a )
 (*
 HX-2022-07-03:
 The default for [$next]:
-strm_vt_from$next(x0) = g_succ(x0)
+strm_vt_from$next(x0) = g_suc(x0)
 *)
 //
 fun
@@ -149,7 +162,7 @@ strx_vt_from$next(x0: !a): (a)
 (*
 HX-2022-07-03:
 The default for [$next]:
-strx_vt_from$next(x0) = g_succ(x0)
+strx_vt_from$next(x0) = g_suc(x0)
 *)
 //
 (* ****** ****** *)
@@ -217,7 +230,7 @@ strm_vt_prefixq0
 (* ****** ****** *)
 fun
 <x0:vt>
-strm_vt_fset0_at
+strm_vt_fset$at0
 ( xs: strm_vt(x0)
 , i0: nint, x0: x0): strm_vt(x0)
 (* ****** ****** *)
@@ -250,11 +263,11 @@ strm_vt_tabulate
 (n0: sint(n)): strm_vt( a )
 fun
 <a:vt>
-strm_vt_tabulate_cfr
+strm_vt_tabulate_f1un
 {n:nat}
-( n0: sint(n)
-, f0
-: nintlt(n) -<cfr> a): strm_vt( a )
+(
+n0: sint(n),
+f0: nintlt(n) -> a): strm_vt(a)
 //
 (* ****** ****** *)
 (*
@@ -277,12 +290,13 @@ fun
 strm_vt_forall0(strm_vt(x0)): bool
 fun
 <x0:vt>
-strm_vt_foreach0(strm_vt(x0)): void
+strm_vt_foritm0(strm_vt(x0)): void
 //
 (* ****** ****** *)
 //
 (*
-strm_vt_map0: map0$fopr
+strm_vt_map0: map$fopr0
+strq_vt_map0: map$fopr0
 *)
 //
 fun
@@ -290,17 +304,28 @@ fun
 <y0:vt>
 strm_vt_map0
   (xs: strm_vt(x0)): strm_vt(y0)
+fun
+<x0:vt>
+<y0:vt>
+strq_vt_map0
+  (xs: strq_vt(x0)): strq_vt(y0)
 //
 (* ****** ****** *)
 //
 (*
-strm_vt_filter: filter0$test
+strm_vt_filter: filter$test0
 *)
 //
 fun
 <x0:vt>
 strm_vt_filter0
   (xs: strm_vt(x0)): strm_vt(x0)
+(*
+fun
+<x0:vt>
+strq_vt_filter0
+  (xs: strq_vt(x0)): strq_vt(x0)
+*)
 //
 (* ****** ****** *)
 //
@@ -405,9 +430,21 @@ strm_vt_group0_llist
 //
 fun
 <x0:vt>
+strm_vt_iforall0
+  (xs: strm_vt(x0)): ( bool )
+//
+(* ****** ****** *)
+//
+fun
+<x0:vt>
 <y0:vt>
 strm_vt_imap0
   (xs: strm_vt(x0)): strm_vt(y0)
+fun
+<x0:vt>
+<y0:vt>
+strq_vt_imap0
+  (xs: strq_vt(x0)): strq_vt(y0)
 //
 (* ****** ****** *)
 //
@@ -415,6 +452,10 @@ fun
 <x0:vt>
 strm_vt_ifilter0
   (xs: strm_vt(x0)): strm_vt(x0)
+fun
+<x0:vt>
+strq_vt_ifilter0
+  (xs: strq_vt(x0)): strq_vt(x0)
 //
 (* ****** ****** *)
 fun
@@ -448,14 +489,14 @@ strm_vt_istrmize0
 (* ****** ****** *)
 //
 fun
-<x0:vt
-,y0:vt>
+<x0:vt>
+<y0:vt>
 strm_vt_z2forall0
   ( xs: strm_vt(x0)
   , ys: strm_vt(y0)): bool
 fun
-<x0:vt
-,y0:vt>
+<x0:vt>
+<y0:vt>
 strm_vt_z2forcmp0
   ( xs: strm_vt(x0)
   , ys: strm_vt(y0)): sint
@@ -463,17 +504,17 @@ strm_vt_z2forcmp0
 (* ****** ****** *)
 //
 fun
-<x0:vt
-,y0:vt>
-strm_vt_z2foreach0
+<x0:vt>
+<y0:vt>
+strm_vt_z2foritm0
   ( xs: strm_vt(x0)
   , ys: strm_vt(y0)): void
 //
 (* ****** ****** *)
 //
 fun
-<x0:vt
-,y0:vt>
+<x0:vt>
+<y0:vt>
 <z0:vt>
 strm_vt_z2map0//seq
 ( xs: strm_vt(x0)
@@ -482,8 +523,8 @@ strm_vt_z2map0//seq
 (* ****** ****** *)
 //
 fun
-<x0:vt
-,y0:vt>
+<x0:vt>
+<y0:vt>
 strm_vt_z2strmize0
 ( xs: strm_vt(x0)
 , ys: strm_vt(y0)): strm_vt(@(x0,y0))
@@ -491,32 +532,32 @@ strm_vt_z2strmize0
 (* ****** ****** *)
 //
 fun
-<x0:vt
-,y0:vt>
+<x0:vt>
+<y0:vt>
 <z0:vt>
-strm_vt_z2imap0//seq
+strm_vt_iz2map0//seq
 ( xs: strm_vt(x0)
 , ys: strm_vt(y0)): strm_vt(   z0   )
 //
 (* ****** ****** *)
 //
 fun
-<x0:vt
-,y0:vt>
-strm_vt_z2iforall0
+<x0:vt>
+<y0:vt>
+strm_vt_iz2forall0
 (xs: strm_vt(x0), ys: strm_vt(y0)): bool
 fun
-<x0:vt
-,y0:vt>
-strm_vt_z2iforcmp0
+<x0:vt>
+<y0:vt>
+strm_vt_iz2forcmp0
 (xs: strm_vt(x0), ys: strm_vt(y0)): sint
 //
 (* ****** ****** *)
 //
 fun
-<x0:vt
-,y0:vt>
-strm_vt_z2iforeach0
+<x0:vt>
+<y0:vt>
+strm_vt_iz2foritm0
 (xs: strm_vt(x0), ys: strm_vt(y0)): void
 //
 (* ****** ****** *)
@@ -586,7 +627,7 @@ rlistize0 with strm_vt_rlistize0 of 1000
 (* ****** ****** *)
 #symload exists0 with strm_vt_exists0 of 1000
 #symload forall0 with strm_vt_forall0 of 1000
-#symload foreach0 with strm_vt_foreach0 of 1000
+#symload foritm0 with strm_vt_foritm0 of 1000
 (* ****** ****** *)
 (* ****** ****** *)
 

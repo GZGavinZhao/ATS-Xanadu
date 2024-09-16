@@ -26,9 +26,9 @@ HX: for pure C-arrays
 (* ****** ****** *)
 #impltmp
 <a:vt>
-a0ptr_setf(A0, x0) =
+a0ptr_frset1(A0, x0) =
 g_free<a>
-(a0ptr_exch<a>(A0, x0))
+(a0ptr_exch1<a>(A0, x0))
 (* ****** ****** *)
 //
 (*
@@ -69,8 +69,8 @@ end(*let*)//end-of(a0ptr_make)
 (* ****** ****** *)
 #impltmp
 <a:t0>
-a1ptr_get_at(A0, i0) =
-a1ptr_get0_at<a>(A0, i0)
+a1ptr_get$at1(A0, i0) =
+a1ptr_dtget$at1<a>(A0, i0)
 (* ****** ****** *)
 //
 #impltmp
@@ -103,19 +103,16 @@ then
 let
 val
 i1 =
-succ(i0) in loop(A0, i1, x0)
+suc(i0) in loop(A0, i1, x0)
 end where
 {
-val x1 = g_copy<a>(x0)
 val () =
-a1ptr_set_at_raw<a>(A0, i0, x1)
+(
+a1ptr_set$at1<(?a)>(A0,i0,x0))
 } (*end of [then]*)
 else
-let
-val () = g_free<a>(x0)
-in
-  $UN.castlin10{a1ptr(a,n)}(A0)
-end // end of [else]
+(
+$UN.castlin10{a1ptr(a,n)}(A0))
 )
 } (* end of [a1ptr_make_nval] *)
 //
@@ -149,15 +146,15 @@ let
 val A0 =
 a1ptr_alloc(n0)
 val () =
-gseq_iforeach(xs) where
+gseq_iforitm(xs) where
 {
 #impltmp
-iforeach$work<a>(i, x) =
+iforitm$work<a>(i, x) =
 let
 val i =
 $UN.cast10{nintlt(n)}(i)
 in//let
-  a1ptr_set_at_raw<a>(A0, i, x)
+a1ptr_set$at1<(?a)>(A0, i, x)
 end//let
 }
 in
@@ -174,15 +171,17 @@ let
 val A0 =
 a1ptr_alloc(n0)
 val () =
-gseq_iforeach0(xs) where
+gseq_iforitm0(xs) where
 {
 #impltmp
-iforeach0$work<a>(i, x) =
+iforitm$work0<a>(i, x) =
 let
 val i =
 $UN.cast10{nintlt(n)}(i)
 in//let
-  a1ptr_set_at_raw<a>(A0, i, x)
+(
+  a1ptr_set$at1<(?a)>
+  (A0, i, $UN.delinear(x)))
 end//let
 }
 in
@@ -205,8 +204,7 @@ g_free
 a1ptr_free(A0, n0)
 ) where
 {
-val n0 = a1ptr_length1(A0)
-} (*where*) // g_free<a1ptr>
+  val n0 = a1ptr_length1(A0) }//where
 //
 (* ****** ****** *)
 (* ****** ****** *)

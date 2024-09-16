@@ -259,8 +259,10 @@ case+ id0 of
 I0DNTsome _ => ()
 |
 I0DNTnone(tok) =>
-println
-("PREADX0-ERROR:",tok.lctn(),":",id0)
+let
+val loc = tok.lctn() in
+printsln("\
+PREADX0-ERROR:", loc, ":", id0) end
 end (*let*)//end-of-[i0dnt_fpemsg(out,id0)]
 //
 (* ****** ****** *)
@@ -277,8 +279,10 @@ case+ lab of
 I0DNTsome _ => ()
 |
 I0DNTnone(tok) =>
-println
-("PREADX0-ERROR:",tok.lctn(),":",lab)
+let
+val loc = tok.lctn() in
+printsln("\
+PREADX0-ERROR:", loc, ":", lab) end
 end (*let*)//end-of-[l0abl_fpemsg(out,lab)]
 //
 (* ****** ****** *)
@@ -295,8 +299,10 @@ case+ int of
 T0INTsome _ => ()
 |
 T0INTnone(tok) =>
-println
-("PREADX0-ERROR:",tok.lctn(),":",int)
+let
+val loc = tok.lctn() in
+printsln("\
+PREADX0-ERROR:", loc, ":", int) end
 end (*let*)//end-of-[t0int_fpemsg(out,int)]
 //
 #implfun
@@ -311,7 +317,7 @@ case+ chr of
 T0CHRsome _ => ()
 |
 T0CHRnone(tok) =>
-println
+printsln
 ("PREADX0-ERROR:",tok.lctn(),":",chr)
 end (*let*)//end-of-[t0chr_fpemsg(out,chr)]
 //
@@ -327,7 +333,7 @@ case+ flt of
 T0FLTsome _ => ()
 |
 T0FLTnone(tok) =>
-println
+printsln
 ("PREADX0-ERROR:",tok.lctn(),":",flt)
 end (*let*)//end-of-[t0chr_fpemsg(out,flt)]
 //
@@ -343,7 +349,7 @@ case+ str of
 T0STRsome _ => ()
 |
 T0STRnone(tok) =>
-println
+printsln
 ("PREADX0-ERROR:",tok.lctn(),":",str)
 end (*let*)//end-of-[t0chr_fpemsg(out,str)]
 //
@@ -364,10 +370,11 @@ let
   val loc = g0e.lctn()
 in//let
 (*
-println
+printsln
 ("PREADX0-ERROR:",loc,":",g0e)
 *)
 endlet // end of [G0Eerrck(lvl,ge1)]
+//
 | _(* otherwise *) => ( (*void*) )
 //
 end(*let*)//end-of(g0exp_fpemsg(out,g0e))
@@ -425,7 +432,7 @@ auxmain( out, st1 );
 if
 (lvl
 >FPEMSG_ERRVL) then () else
-println
+printsln
 ("PREADX0-ERROR:",s0t.lctn(),":",s0t)
 )
 | _(* otherwise *) => ( (*void*) )
@@ -508,7 +515,7 @@ auxmain( out, se1 );
 if
 (lvl
 >FPEMSG_ERRVL) then () else
-println
+printsln
 ("PREADX0-ERROR:",s0e.lctn(),":",s0e)
 )
 | _(* otherwise *) => ( (*void*) )
@@ -541,7 +548,7 @@ case+
 s0a.node() of
 |
 S0ARGnone(tok) =>
-println
+printsln
 ("PREADX0-ERROR:",tok.lctn(),":",s0a)
 |
 S0ARGsome(sid0,topt) =>
@@ -565,7 +572,7 @@ sma.node() of
 S0MAGnone(tok) =>
 let
 val loc = sma.lctn() in
-println
+printsln
 ("PREADX0-ERROR:",loc,":",sma)
 end // end of [ S0MAGnone(tok) ]
 |
@@ -597,7 +604,7 @@ t0a.node() of
 T0ARGnone(tok) =>
 let
 val loc = t0a.lctn() in
-println
+printsln
 ("PREADX0-ERROR:",loc,":",t0a)
 end // end of [ T0ARGnone(tok) ]
 |
@@ -619,7 +626,7 @@ tma.node() of
 T0MAGnone(tok) =>
 let
 val loc = tok.lctn() in
-println
+printsln
 ("PREADX0-ERROR:",loc,":",tma)
 end // end of [ T0MAGnone(tok) ]
 |
@@ -724,36 +731,36 @@ optn_cons(s0e) => s0exp_fpemsg(out, s0e)
 #implfun
 i0dntlst_fpemsg
 (out, ids) =
-list_foreach<i0dnt>(ids) where
+list_foritm<i0dnt>(ids) where
 {
 #impltmp
-foreach$work<i0dnt>(id1) = i0dnt_fpemsg(out,id1)
+foritm$work<i0dnt>(id1) = i0dnt_fpemsg(out,id1)
 }
 (* ****** ****** *)
 //
 #implfun
 sort0lst_fpemsg
 (out, sts) =
-list_foreach<sort0>(sts) where
+list_foritm<sort0>(sts) where
 {
 #impltmp
-foreach$work<sort0>(st1) = sort0_fpemsg(out,st1)
+foritm$work<sort0>(st1) = sort0_fpemsg(out,st1)
 }
 #implfun
 s0explst_fpemsg
 (out, ses) =
-list_foreach<s0exp>(ses) where
+list_foritm<s0exp>(ses) where
 {
 #impltmp
-foreach$work<s0exp>(se1) = s0exp_fpemsg(out,se1)
+foritm$work<s0exp>(se1) = s0exp_fpemsg(out,se1)
 }
 #implfun
 l0s0elst_fpemsg
 (out, lxs) =
-list_foreach<l0s0e>(lxs) where
+list_foritm<l0s0e>(lxs) where
 {
 #impltmp
-foreach$work<l0s0e>(lx1) = l0s0e_fpemsg(out,lx1)
+foritm$work<l0s0e>(lx1) = l0s0e_fpemsg(out,lx1)
 }
 //
 (* ****** ****** *)
@@ -761,50 +768,50 @@ foreach$work<l0s0e>(lx1) = l0s0e_fpemsg(out,lx1)
 #implfun
 s0arglst_fpemsg
 (out, sas) =
-list_foreach<s0arg>(sas) where
+list_foritm<s0arg>(sas) where
 {
 #impltmp
-foreach$work<s0arg>(s0a) = s0arg_fpemsg(out,s0a)
+foritm$work<s0arg>(s0a) = s0arg_fpemsg(out,s0a)
 }
 (* ****** ****** *)
 //
 #implfun
 s0maglst_fpemsg
 (out, sms) =
-list_foreach<s0mag>(sms) where
+list_foritm<s0mag>(sms) where
 {
 #impltmp
-foreach$work<s0mag>(sma) = s0mag_fpemsg(out,sma)
+foritm$work<s0mag>(sma) = s0mag_fpemsg(out,sma)
 }
 (* ****** ****** *)
 //
 #implfun
 t0arglst_fpemsg
 (out, tas) =
-list_foreach<t0arg>(tas) where
+list_foritm<t0arg>(tas) where
 {
 #impltmp
-foreach$work<t0arg>(t0a) = t0arg_fpemsg(out,t0a)
+foritm$work<t0arg>(t0a) = t0arg_fpemsg(out,t0a)
 }
 (* ****** ****** *)
 //
 #implfun
 t0maglst_fpemsg
 (out, tms) =
-list_foreach<t0mag>(tms) where
+list_foritm<t0mag>(tms) where
 {
 #impltmp
-foreach$work<t0mag>(tma) = t0mag_fpemsg(out,tma)
+foritm$work<t0mag>(tma) = t0mag_fpemsg(out,tma)
 }
 (* ****** ****** *)
 //
 #implfun
 s0qualst_fpemsg
 (out, sqs) =
-list_foreach<s0qua>(sqs) where
+list_foritm<s0qua>(sqs) where
 {
 #impltmp
-foreach$work<s0qua>(sq1) = s0qua_fpemsg(out,sq1)
+foritm$work<s0qua>(sq1) = s0qua_fpemsg(out,sq1)
 }
 (* ****** ****** *)
 //
@@ -977,7 +984,7 @@ auxmain( out, dp1 );
 if
 (lvl
 >FPEMSG_ERRVL) then () else
-println
+printsln
 ("PREADX0-ERROR:",d0p.lctn(),":",d0p)
 )
 //
@@ -1128,11 +1135,13 @@ let
 //
 val () = d0exp_fpemsg(out, d0e1)
 val () = d0eclist_fpemsg(out, d0cs)
-val () = tkend_WHERE_fpemsg(out,topt,tend)
+val () =
+(
+  tkend_WHERE_fpemsg(out,topt,tend))
 //
-endlet // end-(d0eclseq_WHERE(...))
+endlet//end-of-(d0eclseq_WHERE(...))
 )
-endlet // end of [  D0Ewhere(_, _)  ]
+endlet // end-of-[  D0Ewhere(_, _)  ]
 //
 |
 D0Ebrckt
@@ -1154,13 +1163,17 @@ D0Etry0
 ,tbar,dcls,tend) =>
 let
 val () =
-  d0explst_fpemsg(out, d0es)
+d0explst_fpemsg(out, d0es)
 val () =
-  token_WITH_fpemsg(out, twth)
-val () =
-  d0clslst_fpemsg(out, dcls)
-val () =
-  token_ENDTRY_fpemsg(out, tend)
+token_WITH_fpemsg(out, twth)
+val () = d0clslst_fpemsg(out, dcls)
+(*
+(*
+HX-2024-07-16:
+[tend] changes to be optional!
+*)
+val () = token_ENDTRY_fpemsg(out, tend)
+*)
 endlet // end of [D0Etry0(_,_,_,_,_,_)]
 //
 |
@@ -1168,6 +1181,9 @@ D0Elam0
 (tknd,fags,sres
 ,arrw,body,tend) =>
 let
+(*
+HX-2024-07-16: [tend] is optional
+*)
 val () = f0arglst_fpemsg(out, fags)
 in//let
 ( fpemsg(out, sres);
@@ -1181,6 +1197,9 @@ D0Efix0
 ,sres,body,tend) =>
 let
 val () = i0dnt_fpemsg(out, dpid)
+(*
+HX-2024-07-16: [tend] is optional
+*)
 val () = f0arglst_fpemsg(out, fags)
 in//let
 ( fpemsg(out, sres);
@@ -1211,6 +1230,15 @@ D0Eexists
 (
   fpemsg(out, d0es); fpemsg(out, d0e1))
 //
+(* ****** ****** *)
+|
+D0Esynext
+(tok1, d0e2) =>
+(
+  fpemsg(out, d0e2(*literal-string*)) )
+//
+(* ****** ****** *)
+//
 |
 D0Etkerr(tok1) => () // fpemsg(out,tok1)
 //
@@ -1238,7 +1266,7 @@ auxmain( out, de1 );
 if
 (lvl
 >FPEMSG_ERRVL) then () else
-println
+printsln
 ("PREADX0-ERROR:",d0e.lctn(),":",d0e)
 )
 //
@@ -1669,11 +1697,26 @@ D0Cstaload
 (knd0,tknd,g0e1) =>
 (
   g0exp_fpemsg(out, g0e1))
+//
 |
 D0Cdyninit
 (tknd, g0e1) =>
 (
   g0exp_fpemsg(out, g0e1))
+//
+(* ****** ****** *)
+//
+(*
+HX-2024-07-20:
+Sat 20 Jul 2024 01:48:34 PM EDT
+*)
+|
+D0Cextcode
+(tknd, g0e1) =>
+(
+  g0exp_fpemsg(out, g0e1))
+//
+(* ****** ****** *)
 //
 |
 D0Cdatasort
@@ -1748,8 +1791,10 @@ dcl.node() of
 D0Cerrck(lvl, d1c)  =>
 (
 auxmain( out, d1c );
-println
-("PREADX0-ERROR:",dcl.lctn(),":",dcl))
+(
+printsln();
+printsln("\
+PREADX0-ERROR:",dcl.lctn(),":",dcl)))
 //
 | _(* otherwise *) => ((*void*))
 end (*let*)//end-of(d0ecl_fpemsg(out,dcl))
@@ -1784,19 +1829,19 @@ optn_cons(d0e) => d0exp_fpemsg(out, d0e)
 #implfun
 d0patlst_fpemsg
 (out, dps) =
-list_foreach<d0pat>(dps) where
+list_foritm<d0pat>(dps) where
 {
 #impltmp
-foreach$work<d0pat>(dp1) = d0pat_fpemsg(out,dp1)
+foritm$work<d0pat>(dp1) = d0pat_fpemsg(out,dp1)
 }
 //
 #implfun
 l0d0plst_fpemsg
 (out, dps) =
-list_foreach<l0d0p>(dps) where
+list_foritm<l0d0p>(dps) where
 {
 #impltmp
-foreach$work<l0d0p>(ldp) = l0d0p_fpemsg(out,ldp)
+foritm$work<l0d0p>(ldp) = l0d0p_fpemsg(out,ldp)
 }
 //
 (* ****** ****** *)
@@ -1804,19 +1849,19 @@ foreach$work<l0d0p>(ldp) = l0d0p_fpemsg(out,ldp)
 #implfun
 d0explst_fpemsg
 (out, des) =
-list_foreach<d0exp>(des) where
+list_foritm<d0exp>(des) where
 {
 #impltmp
-foreach$work<d0exp>(de1) = d0exp_fpemsg(out,de1)
+foritm$work<d0exp>(de1) = d0exp_fpemsg(out,de1)
 }
 //
 #implfun
 l0d0elst_fpemsg
 (out, des) =
-list_foreach<l0d0e>(des) where
+list_foritm<l0d0e>(des) where
 {
 #impltmp
-foreach$work<l0d0e>(lde) = l0d0e_fpemsg(out,lde)
+foritm$work<l0d0e>(lde) = l0d0e_fpemsg(out,lde)
 }
 //
 (* ****** ****** *)
@@ -1824,10 +1869,10 @@ foreach$work<l0d0e>(lde) = l0d0e_fpemsg(out,lde)
 #implfun
 f0arglst_fpemsg
 (out, f0as) =
-list_foreach<f0arg>(f0as) where
+list_foritm<f0arg>(f0as) where
 {
 #impltmp
-foreach$work<f0arg>(f0a1) = f0arg_fpemsg(out,f0a1)
+foritm$work<f0arg>(f0a1) = f0arg_fpemsg(out,f0a1)
 }
 //
 (* ****** ****** *)
@@ -1835,10 +1880,10 @@ foreach$work<f0arg>(f0a1) = f0arg_fpemsg(out,f0a1)
 #implfun
 t0qualst_fpemsg
 (out, t0qs) =
-list_foreach<t0qua>(t0qs) where
+list_foritm<t0qua>(t0qs) where
 {
 #impltmp
-foreach$work<t0qua>(t0q1) = t0qua_fpemsg(out,t0q1)
+foritm$work<t0qua>(t0q1) = t0qua_fpemsg(out,t0q1)
 }
 //
 (* ****** ****** *)
@@ -1846,10 +1891,10 @@ foreach$work<t0qua>(t0q1) = t0qua_fpemsg(out,t0q1)
 #implfun
 d0gualst_fpemsg
 (out, d0gs) =
-list_foreach<d0gua>(d0gs) where
+list_foritm<d0gua>(d0gs) where
 {
 #impltmp
-foreach$work<d0gua>(dgua) = d0gua_fpemsg(out,dgua)
+foritm$work<d0gua>(dgua) = d0gua_fpemsg(out,dgua)
 }
 //
 (* ****** ****** *)
@@ -1857,10 +1902,10 @@ foreach$work<d0gua>(dgua) = d0gua_fpemsg(out,dgua)
 #implfun
 d0clslst_fpemsg
 (out, d0cs) =
-list_foreach<d0cls>(d0cs) where
+list_foritm<d0cls>(d0cs) where
 {
 #impltmp
-foreach$work<d0cls>(dcls) = d0cls_fpemsg(out,dcls)
+foritm$work<d0cls>(dcls) = d0cls_fpemsg(out,dcls)
 }
 //
 (* ****** ****** *)
@@ -1868,10 +1913,10 @@ foreach$work<d0cls>(dcls) = d0cls_fpemsg(out,dcls)
 #implfun
 d0eclist_fpemsg
 (out, dcls) =
-list_foreach<d0ecl>(dcls) where
+list_foritm<d0ecl>(dcls) where
 {
 #impltmp
-foreach$work<d0ecl>(dcl1) = d0ecl_fpemsg(out,dcl1)
+foritm$work<d0ecl>(dcl1) = d0ecl_fpemsg(out,dcl1)
 }
 //
 (* ****** ****** *)
@@ -1890,7 +1935,7 @@ tok0.node() of
 T_AS0() => ((*void*))
 |
 _(*non-T_AS0*) =>
-println
+printsln
 ("PREADX0-ERROR:",tok0.lctn(),":",tok0)
 //
 end (*let*) // end of [t0ken_AS0_fpemsg]
@@ -1909,7 +1954,7 @@ tok0.node() of
 T_BAR() => ((*void*))
 |
 _(*non-T_BAR*) =>
-println
+printsln
 ("PREADX0-ERROR:",tok0.lctn(),":",tok0)
 //
 end (*let*) // end of [t0ken_BAR_fpemsg]
@@ -1927,7 +1972,7 @@ case+ tok0.node() of
 T_EQ0() => ((*void*))
 |
 _(*non-T_EQ0*) =>
-println
+printsln
 ("PREADX0-ERROR:",tok0.lctn(),":",tok0)
 //
 end (*let*) // end of [t0ken_EQ0_fpemsg]
@@ -1945,7 +1990,7 @@ case+ tok0.node() of
 T_GT0() => ((*void*))
 |
 _(*non-T_GT0*) =>
-println
+printsln
 ("PREADX0-ERROR:",tok0.lctn(),":",tok0)
 //
 end (*let*) // end of [t0ken_GT0_fpemsg]
@@ -1964,7 +2009,7 @@ tok0.node() of
 T_OF0() => ((*void*))
 |
 _(*non-T_OF0*) =>
-println
+printsln
 ("PREADX0-ERROR:",tok0.lctn(),":",tok0)
 //
 end (*let*) // end of [t0ken_OF0_fpemsg]
@@ -1982,7 +2027,7 @@ case+ tok0.node() of
 T_EQGT() => ((*void*))
 |
 _(*non-T_EQGT*) =>
-println
+printsln
 ("PREADX0-ERROR:",tok0.lctn(),":",tok0)
 //
 end (*let*) // end of [t0ken_EQGT_fpemsg]
@@ -2002,7 +2047,7 @@ case+ tok0.node() of
 T_WHEN() => ((*void*))
 |
 _(*non-T_WHEN*) =>
-println
+printsln
 ("PREADX0-ERROR:",tok0.lctn(),":",tok0)
 //
 end (*let*) // end of [t0ken_WHEN_fpemsg]
@@ -2021,7 +2066,7 @@ case+ tok0.node() of
 T_WITH() => ((*void*))
 |
 _(*non-T_WITH*) =>
-println
+printsln
 ("PREADX0-ERROR:",tok0.lctn(),":",tok0)
 //
 end (*let*) // end of [t0ken_WITH_fpemsg]
@@ -2041,7 +2086,7 @@ case+ tok0.node() of
 T_GTDOT() => ((*void*))
 |
 _(*non-T_GTDOT*) =>
-println
+printsln
 ("PREADX0-ERROR:",tok0.lctn(),":",tok0)
 //
 end (*let*) // end of [t0ken_GTDOT_fpemsg]
@@ -2060,8 +2105,8 @@ case+ tok0.node() of
 T_RPAREN() => ((*void*))
 |
 _(*non-T_RPAREN*) =>
-println
-("PREADX0-ERROR:",tok0.lctn(), ":",tok0)
+printsln
+("PREADX0-ERROR:",tok0.lctn(),":",tok0)
 end (*let*) // end of [token_RPAREN_fpemsg]
 //
 #implfun
@@ -2076,7 +2121,7 @@ case+ tok0.node() of
 T_RBRACE() => ((*void*))
 |
 _(*non-T_RBRACE*) =>
-println
+printsln
 ("PREADX0-ERROR:",tok0.lctn(),":",tok0)
 end (*let*) // end of [token_RBRACE_fpemsg]
 //
@@ -2092,7 +2137,7 @@ case+ tok0.node() of
 T_RBRCKT() => ((*void*))
 |
 _(*non-T_RBRCKT*) =>
-println
+printsln
 ("PREADX0-ERROR:",tok0.lctn(),":",tok0)
 end (*let*) // end of [token_RBRCKT_fpemsg]
 //
@@ -2110,7 +2155,7 @@ case+ tok0.node() of
 T_ENDWHR() => ((*void*))
 |
 _(*non-T_ENDWHR*) =>
-println
+printsln
 ("PREADX0-ERROR:",tok0.lctn(),":",tok0)
 end (*let*) // end of [token_ENDWHR_fpemsg]
 //
@@ -2130,7 +2175,7 @@ T_END() => ((*void*))
 T_ENDLET() => ((*void*))
 |
 _(*non-T_END/ENDLET*) =>
-println
+printsln
 ("PREADX0-ERROR:",tok0.lctn(),":",tok0)
 end (*let*) // end of [token_ENDLET_fpemsg]
 //
@@ -2174,7 +2219,7 @@ T_END() => ((*void*))
 T_ENDTRY() => ((*void*))
 |
 _(*non-T_END/ENDTRY*) =>
-println
+printsln
 ("PREADX0-ERROR:",tok0.lctn(),":",tok0)
 end (*let*) // end of [token_ENDTRY_fpemsg]
 //
@@ -2220,10 +2265,10 @@ endlet // end of [D0TSTnode(_,_,_,_)]
 #implfun
 s0tcnlst_fpemsg
 (out, tcns) =
-list_foreach<s0tcn>(tcns) where
+list_foritm<s0tcn>(tcns) where
 {
 #impltmp
-foreach$work<s0tcn>(tcn1) = s0tcn_fpemsg(out,tcn1)
+foritm$work<s0tcn>(tcn1) = s0tcn_fpemsg(out,tcn1)
 }
 //
 (* ****** ****** *)
@@ -2231,10 +2276,10 @@ foreach$work<s0tcn>(tcn1) = s0tcn_fpemsg(out,tcn1)
 #implfun
 d0tstlst_fpemsg
 (out, d0ts) =
-list_foreach<d0tst>(d0ts) where
+list_foritm<d0tst>(d0ts) where
 {
 #impltmp
-foreach$work<d0tst>(d0t1) = d0tst_fpemsg(out,d0t1)
+foritm$work<d0tst>(d0t1) = d0tst_fpemsg(out,d0t1)
 }
 //
 (* ****** ****** *)
@@ -2313,10 +2358,10 @@ endlet // end of [D0TYPnode(_,_,_,_,_)]
 #implfun
 s0unilst_fpemsg
 (out, s0us) =
-list_foreach<s0uni>(s0us) where
+list_foritm<s0uni>(s0us) where
 {
 #impltmp
-foreach$work<s0uni>(s0u1) = s0uni_fpemsg(out,s0u1)
+foritm$work<s0uni>(s0u1) = s0uni_fpemsg(out,s0u1)
 }
 //
 (* ****** ****** *)
@@ -2324,10 +2369,10 @@ foreach$work<s0uni>(s0u1) = s0uni_fpemsg(out,s0u1)
 #implfun
 d0tcnlst_fpemsg
 (out, tcns) =
-list_foreach<d0tcn>(tcns) where
+list_foritm<d0tcn>(tcns) where
 {
 #impltmp
-foreach$work<d0tcn>(tcn1) = d0tcn_fpemsg(out,tcn1)
+foritm$work<d0tcn>(tcn1) = d0tcn_fpemsg(out,tcn1)
 }
 //
 (* ****** ****** *)
@@ -2335,10 +2380,10 @@ foreach$work<d0tcn>(tcn1) = d0tcn_fpemsg(out,tcn1)
 #implfun
 d0typlst_fpemsg
 (out, d0ts) =
-list_foreach<d0typ>(d0ts) where
+list_foritm<d0typ>(d0ts) where
 {
 #impltmp
-foreach$work<d0typ>(d0t1) = d0typ_fpemsg(out,d0t1)
+foritm$work<d0typ>(d0t1) = d0typ_fpemsg(out,d0t1)
 }
 //
 (* ****** ****** *)
@@ -2403,8 +2448,12 @@ case+
 tqa.node() of
 |
 T0QAGnone(tok) =>
-print
-("PREADX0-ERROR:",tqa.lctn(),":",tqa)
+let
+val loc = tqa.lctn()
+in//let
+printsln
+("PREADX0-ERROR:", loc, ":", tqa)
+end//let
 |
 T0QAGsome
 (tbeg,q0as,tend) =>
@@ -2477,10 +2526,10 @@ endlet // end of [ D0ARGdyn2(_,_,_,_) ]
 #implfun
 q0arglst_fpemsg
 (out, q0as) =
-list_foreach<q0arg>(q0as) where
+list_foritm<q0arg>(q0as) where
 {
 #impltmp
-foreach$work<q0arg>(q0a1) = q0arg_fpemsg(out,q0a1)
+foritm$work<q0arg>(q0a1) = q0arg_fpemsg(out,q0a1)
 }
 //
 (* ****** ****** *)
@@ -2488,10 +2537,10 @@ foreach$work<q0arg>(q0a1) = q0arg_fpemsg(out,q0a1)
 #implfun
 t0qaglst_fpemsg
 (out, tqas) =
-list_foreach<t0qag>(tqas) where
+list_foritm<t0qag>(tqas) where
 {
 #impltmp
-foreach$work<t0qag>(tqa1) = t0qag_fpemsg(out,tqa1)
+foritm$work<t0qag>(tqa1) = t0qag_fpemsg(out,tqa1)
 }
 //
 (* ****** ****** *)
@@ -2499,10 +2548,10 @@ foreach$work<t0qag>(tqa1) = t0qag_fpemsg(out,tqa1)
 #implfun
 a0typlst_fpemsg
 (out, atps) =
-list_foreach<a0typ>(atps) where
+list_foritm<a0typ>(atps) where
 {
 #impltmp
-foreach$work<a0typ>(atp1) = a0typ_fpemsg(out,atp1)
+foritm$work<a0typ>(atp1) = a0typ_fpemsg(out,atp1)
 }
 //
 (* ****** ****** *)
@@ -2510,10 +2559,10 @@ foreach$work<a0typ>(atp1) = a0typ_fpemsg(out,atp1)
 #implfun
 d0arglst_fpemsg
 (out, d0as) =
-list_foreach<d0arg>(d0as) where
+list_foritm<d0arg>(d0as) where
 {
 #impltmp
-foreach$work<d0arg>(d0a1) = d0arg_fpemsg(out,d0a1)
+foritm$work<d0arg>(d0a1) = d0arg_fpemsg(out,d0a1)
 }
 //
 (* ****** ****** *)
@@ -2774,10 +2823,10 @@ l0d0e_RBRACE_cons1
 #implfun
 d0valdclist_fpemsg
 (out, d0cs) =
-list_foreach<d0valdcl>(d0cs) where
+list_foritm<d0valdcl>(d0cs) where
 {
 #impltmp
-foreach$work<d0valdcl>(d0c1) = d0valdcl_fpemsg(out,d0c1)
+foritm$work<d0valdcl>(d0c1) = d0valdcl_fpemsg(out,d0c1)
 }
 //
 (* ****** ****** *)
@@ -2785,10 +2834,10 @@ foreach$work<d0valdcl>(d0c1) = d0valdcl_fpemsg(out,d0c1)
 #implfun
 d0vardclist_fpemsg
 (out, d0cs) =
-list_foreach<d0vardcl>(d0cs) where
+list_foritm<d0vardcl>(d0cs) where
 {
 #impltmp
-foreach$work<d0vardcl>(d0c1) = d0vardcl_fpemsg(out,d0c1)
+foritm$work<d0vardcl>(d0c1) = d0vardcl_fpemsg(out,d0c1)
 }
 //
 (* ****** ****** *)
@@ -2796,10 +2845,10 @@ foreach$work<d0vardcl>(d0c1) = d0vardcl_fpemsg(out,d0c1)
 #implfun
 d0fundclist_fpemsg
 (out, d0cs) =
-list_foreach<d0fundcl>(d0cs) where
+list_foritm<d0fundcl>(d0cs) where
 {
 #impltmp
-foreach$work<d0fundcl>(d0c1) = d0fundcl_fpemsg(out,d0c1)
+foritm$work<d0fundcl>(d0c1) = d0fundcl_fpemsg(out,d0c1)
 }
 //
 (* ****** ****** *)
@@ -2807,10 +2856,10 @@ foreach$work<d0fundcl>(d0c1) = d0fundcl_fpemsg(out,d0c1)
 #implfun
 d0cstdclist_fpemsg
 (out, d0cs) =
-list_foreach<d0cstdcl>(d0cs) where
+list_foritm<d0cstdcl>(d0cs) where
 {
 #impltmp
-foreach$work<d0cstdcl>(d0c1) = d0cstdcl_fpemsg(out,d0c1)
+foritm$work<d0cstdcl>(d0c1) = d0cstdcl_fpemsg(out,d0c1)
 }
 //
 (* ****** ****** *)

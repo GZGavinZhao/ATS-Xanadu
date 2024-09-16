@@ -26,6 +26,7 @@
 *)
 
 (* ****** ****** *)
+(* ****** ****** *)
 //
 (*
 Author: Hongwei Xi
@@ -39,15 +40,66 @@ Authoremail: gmhwxiATgmailDOTcom
 (* ****** ****** *)
 //
 #impltmp
+< xs:vt >
+< x0:vt >
+gseq_sep((*void*)) = ","
+#impltmp
+< xs:vt >
+< x0:vt >
+gseq_end((*void*)) = ")"
+#impltmp
+< xs:vt >
+< x0:vt >
+gseq_beg((*void*)) = "gseq("
+//
+(* ****** ****** *)
+//
+#impltmp
+< xs:vt >
+< x0:vt >
+gseq_omit((*void*)) = "..."
+//
+(* ****** ****** *)
+//
+#impltmp
+< xs:vt >
+< x0:vt >
+gseq_prlen((*void*)) = (-1)
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+(*
+HX-2024-08-03:
+Sat 03 Aug 2024 02:54:34 PM EDT
+*)
+//
+#impltmp
+< xs:t0 >
+< x0:t0 >
+gseq_nilq(xs) =
+not(gseq_consq<xs><x0>(xs))
+//
+#impltmp
+< xs:t0 >
+< x0:t0 >
+gseq_consq(xs) =
+(
+ not(gseq_nilq<xs><x0>(xs)))
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+#impltmp
 < xs:t0 >
 < x0:t0 >
 gseq_free(xs) =
 (
-gseq_foreach0<xs><x0>(xs)
+gseq_foritm0<xs><x0>(xs)
 ) where
 {
 #impltmp
-foreach0$work<x0> = g_free<x0>
+foritm$work0<x0> = g_free<x0>
 }
 //
 #impltmp
@@ -59,7 +111,7 @@ gseq_map1_self<xs><x0>(xs)
 ) where
 {
 #impltmp
-map1$fopr<x0><x0> = g_copy<x0>
+map$fopr1<x0><x0> = g_copy<x0>
 }
 //
 (* ****** ****** *)
@@ -68,10 +120,24 @@ map1$fopr<x0><x0> = g_copy<x0>
 #impltmp
 < xs:t0 >
 < x0:t0 >
-gseq_length(xs) =
-strm_vt_length0<x0>
-(
-gseq_strmize<xs><x0>(xs))
+gseq_max = gseq_max0<xs><x0>
+//
+#impltmp
+< xs:t0 >
+< x0:t0 >
+gseq_min = gseq_min0<xs><x0>
+//
+(* ****** ****** *)
+//
+#impltmp
+< xs:t0 >
+< x0:t0 >
+gseq_sum = gseq_sum0<xs><x0>
+//
+#impltmp
+< xs:t0 >
+< x0:t0 >
+gseq_prod = gseq_prod0<xs><x0>
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -79,107 +145,119 @@ gseq_strmize<xs><x0>(xs))
 #impltmp
 < xs:t0 >
 < x0:t0 >
-gseq_forall(xs) =
-strm_vt_forall0<x0>
-(gseq_strmize<xs><x0>(xs))
+gseq_print = gseq_print0<xs><x0>
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+#impltmp
+< xs:t0 >
+< x0:t0 >
+gseq_length = gseq_length0<xs><x0>
+//
+(* ****** ****** *)
+(* ****** ****** *)
 //
 (*
-HX-2024-07-10:
-It may be more efficient with
-an array-based implementation
+HX-2024-07-17:
+Wed 17 Jul 2024 01:31:56 PM EDT
 *)
-#impltmp
-< xs:t0 >
-< x0:t0 >
-gseq_rforall(xs) =
-list_vt_forall0<x0>
-(
-  gseq_rlistize<xs><x0>(xs))
-//
-(* ****** ****** *)
-(* ****** ****** *)
-//
-#impltmp
-< xs:t0 >
-< x0:t0 >
-gseq_foreach(xs) =
-strm_vt_foreach0<x0>
-(
-  gseq_strmize<xs><x0>(xs))
 //
 (*
-HX-2024-07-10:
-It may be more efficient with
-an array-based implementation
+#impltmp
+< xs:t0 >
+< x0:t0 >
+< ys:vt >
+gseq_append =
+gseq_append00<xs><x0><ys>(*void*)
 *)
-#impltmp
-< xs:t0 >
-< x0:t0 >
-gseq_rforeach(xs) =
-list_vt_foreach0<x0>
-(
-  gseq_rlistize<xs><x0>(xs))
-//
-(* ****** ****** *)
-(* ****** ****** *)
-//
-#impltmp
-< xs:t0 >
-< x0:t0 >
-< r0:vt >
-gseq_foldlft(xs, r0) =
-strm_vt_foldlft0<x0><r0>
-(gseq_strmize<xs><x0>(xs), r0)
-//
-(*
-HX-2024-07-10:
-It may be more efficient with
-an array-based implementation
-*)
-#impltmp
-< xs:t0 >
-< x0:t0 >
-< r0:vt >
-gseq_rfoldlft(xs, r0) =
-let
-#impltmp
-foldlft$fopr
-< x0><r0 >
-( r0, x0 ) =
-(
-rfoldlft$fopr<x0><r0>(x0, r0))
-in//let
-list_vt_foldlft0<x0><r0>
-(gseq_rlistize<xs><x0>(xs), r0)
-end//let
-//
-(* ****** ****** *)
-(* ****** ****** *)
-//
-#impltmp
-< xs:t0 >
-< x0:t0 >
-gseq_filter_self =
-gseq_filter_ares<xs><x0><xs>
 //
 #impltmp
 < xs:t0 >
 < x0:t0 >
 < ys:vt >
-gseq_filter_ares
-  (xs) =
-g_make_lstrm<x0><ys>
+gseq_append
+  (xs, ys) =
+gseq_fmake_fwork<xs><x0>
 (
-gseq_filter_lstrm<xs><x0>(xs))
+lam(work) =>
+(
+gseq_foritm_f1un<xs><x0>(xs, work);
+gseq_foritm0_f1un<ys><x0>(ys, work)))
 //
 (* ****** ****** *)
+//
+(*
+HX-2024-07-17:
+Wed 17 Jul 2024 01:36:53 PM EDT
+*)
+//
+(*
+#impltmp
+< xs:t0 >
+< x0:t0 >
+< ys:vt >
+gseq_prepend =
+gseq_prepend00<xs><x0><ys>(*void*)
+*)
 //
 #impltmp
 < xs:t0 >
 < x0:t0 >
-gseq_filter_lstrm
-  (xs) =
-strm_vt_filter0<x0>(gseq_strmize<xs><x0>(xs))
+< ys:vt >
+gseq_prepend
+  (xs, ys) =
+gseq_fmake_fwork<xs><x0>
+(
+lam(work) =>
+(
+gseq_foritm0_f1un<ys><x0>(ys, work)
+;gseq_foritm_f1un<xs><x0>(xs, work)))
+//
+(* ****** ****** *)
+//
+(*
+Wed 17 Jul 2024 04:10:30 PM EDT
+*)
+//
+(*
+#impltmp
+< xs:t0 >
+< x0:t0 >
+< ys:vt >
+gseq_reverse =
+gseq_reverse0<xs><x0>(*void*)
+#impltmp
+< xs:t0 >
+< x0:t0 >
+< ys:vt >
+gseq_rappend =
+gseq_rappend00<xs><x0><ys>(*void*)
+*)
+//
+#impltmp
+< xs:t0 >
+< x0:t0 >
+gseq_reverse
+  ( xs ) =
+gseq_fmake_fwork<xs><x0>
+(
+lam(work) =>
+(
+gseq_rforitm_f1un<xs><x0>(xs, work)))
+//
+#impltmp
+< xs:t0 >
+< x0:t0 >
+< ys:vt >
+gseq_rappend
+  (xs, ys) =
+gseq_fmake_fwork<xs><x0>
+(
+lam(work) =>
+(
+gseq_rforitm_f1un<xs><x0>(xs, work);
+gseq_foritm0_f1un<ys><x0>(ys, work)))
 //
 (* ****** ****** *)
 (* ****** ****** *)

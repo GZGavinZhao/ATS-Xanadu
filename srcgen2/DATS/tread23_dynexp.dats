@@ -134,7 +134,7 @@ fun
 d3pat_errvl_a2
 (d3p1: d3pat
 ,d3p2: d3pat): sint =
-gmax
+maxs
 (errvl(d3p1),errvl(d3p2))
 #symload
 d3pat_errvl with d3pat_errvl_a2
@@ -156,7 +156,7 @@ case+ d3ps of
 list_nil((*nil*)) => 0
 |
 list_cons(d3p1,d3ps) =>
-gmax
+maxs
 (
 errvl(d3p1),d3pat_errvl_lst(d3ps))
 endcas // end of [ case+( d3ps ) ]
@@ -185,7 +185,7 @@ list_cons(ldp1,ldps) =>
 let
 val+
 D3LAB(lab, dp1) = ldp1 in
-gmax
+maxs
 ( errvl(dp1)
 , l3d3p_errvl_ldps(ldps)) end
 endcas // end of [ case+(ldps) ]
@@ -214,7 +214,7 @@ fun
 d3exp_errvl_a2
 (d3e1: d3exp
 ,d3e2: d3exp): sint =
-gmax
+maxs
 (errvl(d3e1),errvl(d3e2))
 #symload
 d3exp_errvl with d3exp_errvl_a2
@@ -236,7 +236,7 @@ case+ d3es of
 list_nil((*nil*)) => 0
 |
 list_cons(d3e1,d3es) =>
-gmax
+maxs
 (
 errvl(d3e1),d3exp_errvl_lst(d3es))
 endcas // end of [ case+( d3es ) ]
@@ -286,7 +286,7 @@ list_cons(lde1,ldes) =>
 let
 val+
 D3LAB(lab, de1) = lde1 in
-gmax
+maxs
 ( errvl(de1)
 , l3d3e_errvl_ldes(ldes)) end
 endcas // end of [ case+(ldes) ]
@@ -323,7 +323,7 @@ case+ dcls of
 |
 list_nil((*nil*)) => 0
 |
-list_cons(dcl1,dcls) => gmax
+list_cons(dcl1,dcls) => maxs
 (errvl(dcl1), d3cls_errvl_lst(dcls))
 ) (*case+*)//end-of-(d3cls_errvl_lst)
 //
@@ -431,7 +431,7 @@ d3pat_dapp_errck
 ,npf1: (sint)
 ,d3ps: d3patlst): d3pat =
 let
-val lvl0 = gmax
+val lvl0 = maxs
 (errvl(d3f0), errvl(d3ps)) in//let
 d3pat_errck
 (lvl0+1
@@ -499,12 +499,14 @@ d3pat_errck
 endlet // end of [d3pat_annot_errck(...)]
 //
 (* ****** ****** *)
-//
 (* ****** ****** *)
+//
 (*
 Various
 errck-functions for d3exp-values
 *)
+//
+(* ****** ****** *)
 (* ****** ****** *)
 //
 fun
@@ -580,7 +582,7 @@ d3exp_dapp_errck
 ,npf1: (sint)
 ,d3es: d3explst): d3exp =
 let
-val lvl0 = gmax
+val lvl0 = maxs
 (errvl(d3f0), errvl(d3es)) in//let
 d3exp_errck
 (lvl0+1
@@ -624,7 +626,7 @@ d3exp_let0_errck
 , d3e1
 : d3exp(*scope*)): d3exp =
 let
-val lvl0 = gmax
+val lvl0 = maxs
 (errvl(dcls), errvl(d3e1)) in//let
 d3exp_errck
 (lvl0+1,d3exp(loc0,D3Elet0(dcls,d3e1)))
@@ -640,7 +642,7 @@ d3exp_ift0_errck
 , opt2: d3expopt): d3exp =
 let
 val lvl0 =
-gmax
+maxs
 (errvl(d3e1)
 ,errvl(opt1), errvl(opt2)) in//let
 d3exp_errck
@@ -657,7 +659,7 @@ d3exp_cas0_errck
 ,d3e1: d3exp
 ,d3cs: d3clslst): d3exp =
 let
-val lvl = gmax
+val lvl = maxs
 (errvl(d3e1), errvl(d3cs))
 in//let
 d3exp_errck
@@ -674,7 +676,7 @@ d3exp_seqn_errck
 , d3e1
 : d3exp(* last *)): d3exp =
 let
-val lvl0 = gmax
+val lvl0 = maxs
 (errvl(d3es), errvl(d3e1)) in//let
 d3exp_errck
 ( lvl0+1
@@ -780,7 +782,7 @@ d3exp_try0_errck
 , d3e1: d3exp
 , dcls: d3clslst): d3exp =
 let
-val lvl = gmax
+val lvl = maxs
 (errvl(d3e1), errvl(dcls))
 in//let
 d3exp_errck
@@ -902,7 +904,7 @@ d3exp_where_errck
 , d3e1: d3exp
 , dcls: d3eclist): d3exp =
 let
-val lvl0 = gmax
+val lvl0 = maxs
 (errvl(d3e1), errvl(dcls)) in//let
 d3exp_errck
 ( lvl0+1
@@ -917,7 +919,7 @@ d3exp_assgn_errck
 , d3el: d3exp
 , d3er: d3exp): d3exp =
 let
-val lvl0 = gmax
+val lvl0 = maxs
 (errvl(d3el), errvl(d3er)) in//let
 d3exp_errck
 ( lvl0+1
@@ -961,7 +963,7 @@ d3exp_l1azy_errck
 , d3e1: d3exp
 , d3es: d3explst): d3exp =
 let
-val lvl0 = gmax
+val lvl0 = maxs
 (errvl(d3e1), errvl(d3es)) in//let
 d3exp_errck
 ( lvl0+1
@@ -1012,6 +1014,7 @@ d3exp_errck
 , d3exp(loc0,D3Eannot(d3e1,s1e2,s2e2)))
 endlet // end of [d3exp_annot_errck(...)]
 //
+(* ****** ****** *)
 (* ****** ****** *)
 //
 #implfun
@@ -1350,7 +1353,7 @@ end (*let*) // end of [f0_annot(d3p,err)]
 (* ****** ****** *)
 (*
   val () =
-  prerrln("tread23_d3pat: d3p0 = ", d3p0)
+  prerrsln("tread23_d3pat: d3p0 = ", d3p0)
 *)
 (* ****** ****** *)
 //
@@ -1465,20 +1468,30 @@ d3e0.node() of
 //
 |D3Eannot _ => f0_annot(d3e0, err)
 //
+(* ****** ****** *)
 |D3Enone0 _ => f0_none0(d3e0, err)
 |D3Enone1 _ => f0_none1(d3e0, err)
 |D3Enone2 _ => f0_none2(d3e0, err)
+(* ****** ****** *)
+(* ****** ****** *)
 //
 |
 D3Eextnam _ => f0_extnam(d3e0, err)
+|
+D3Esynext _ => f0_synext(d3e0, err)
 //
-| _(*otherwise*) =>
+(* ****** ****** *)
+(* ****** ****** *)
+|
+_(*otherwise*) =>
 let
-val lvl0 = 1
-in//let
+val lvl0 = 1 in//let
 (
 err := err+1; d3exp_errck(lvl0,d3e0))
 endlet // end of [ _(* otherwise *) ]
+//
+(* ****** ****** *)
+(* ****** ****** *)
 //
 ) where // end-of-[(*case+(d3e0)-of*)]
 {
@@ -2478,11 +2491,21 @@ let
 val-
 D3Eextnam _ = d3e.node() in (d3e) endlet
 //
+fun
+f0_synext
+(d3e: d3exp
+,err: &sint >> _): d3exp =
+let
+val-
+D3Esynext _ = d3e.node() in (d3e) endlet
+//
+(* ****** ****** *)
 (* ****** ****** *)
 (*
   val () =
-  prerrln("tread23_d3exp: d3e0 = ", d3e0)
+  prerrsln("tread23_d3exp: d3e0 = ", d3e0)
 *)
+(* ****** ****** *)
 (* ****** ****** *)
 //
 } (*where*)//end-[tread23_d3exp(d3e0,err)]

@@ -303,21 +303,17 @@ d3pat_node =
 //
 |D3Pdap1 of (d3pat)//argless
 //
-|
-D3Pdapp of
-( d3pat
-, sint(*npf*), d3patlst(*darg*)
+|D3Pdapp of
+(d3pat
+,sint(*npf*), d3patlst(*darg*)
 ) (* D3Pdapp *)
 //
-|
-D3Ptup0 of (sint(*npf*), d3patlst)
+|D3Ptup0 of (sint(*npf*), d3patlst)
 //
-|
-D3Ptup1 of
+|D3Ptup1 of
 (
 token(*knd*), sint(*npf*), d3patlst)
-|
-D3Prcd2 of
+|D3Prcd2 of
 (
 token(*knd*), sint(*npf*), l3d3plst)
 //
@@ -549,14 +545,17 @@ it may be of other uses in the future
 (* ****** ****** *)
 //
 |
-D3Eextnam of (token, g1nam)//HX: external
+D3Eexists of
+(
+  s2explst(*witness*), d3exp(*scopexp*) )
 //
 (* ****** ****** *)
 //
 |
-D3Eexists of
-(
-  s2explst(*witness*), d3exp(*scopexp*) )
+D3Eextnam of (token, g1nam)//HX: external
+//
+| // HX-2024-07-19: [d3exp] evaluates
+D3Esynext of (token, g1exp)//to lit-string
 //
 (* ****** ****** *)
 //
@@ -851,6 +850,28 @@ d3ecl_node =
 , g1exp // src
 , fpathopt
 , s3taloadopt) // staloading
+//
+(* ****** ****** *)
+//
+(*
+HX-2024-07-20:
+Sat 20 Jul 2024 02:17:15 PM EDT
+*)
+|
+D3Cdyninit of
+(token
+ (*DYNLOAD*), g1exp(*fpath*))
+//
+(*
+HX-2024-07-20:
+Sat 20 Jul 2024 02:17:15 PM EDT
+*)
+|
+D3Cextcode of
+(token
+ (*EXTCODE*), g1exp(*xcode*))
+//
+(* ****** ****** *)
 //
 |
 D3Cvaldclst of

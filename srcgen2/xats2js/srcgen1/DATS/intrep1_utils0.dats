@@ -60,6 +60,9 @@ XATSOPT "./../../.."
 #staload
 "./../../../SATS/xsymbol.sats"
 (* ****** ****** *)
+#staload
+"./../../../SATS/dynexp2.sats"
+(* ****** ****** *)
 (* ****** ****** *)
 #staload "./../SATS/intrep0.sats"
 #staload "./../SATS/intrep1.sats"
@@ -86,6 +89,22 @@ of // case+
 | I1Vcst _ => true
 | _(*non-I1Vcst*) => false)
 //
+(* ****** ****** *)
+//
+#implfun
+i1val_cfnq
+  (ival) =
+(
+case+
+ival.node()
+of // case+
+| I1Vcst(d2c) =>
+(
+  d2cst_castq(d2c) )
+| _(*non-I1Vcst*) => false)
+//
+(* ****** ****** *)
+//
 #implfun
 i1val_varq
   (ival) =
@@ -96,6 +115,7 @@ of // case+
 | I1Vvar _ => true
 | _(*non-I1Vvar*) => false)
 //
+(* ****** ****** *)
 (* ****** ****** *)
 
 #implfun
@@ -146,8 +166,10 @@ case+ fjas of
 //
 )(*case+*)//end-of-[ f1_dopt(dopt) ]
 //
+(*
 val () =
-prerrln("t1imp_i1cmpq: timp = ", timp)
+prerrsln("t1imp_i1cmpq: timp = ", timp)
+*)
 //
 }(*where*)//end-of-[t1imp_i1cmpq( timp )]
 
@@ -195,8 +217,10 @@ idcl.node() of
 //
 )(*case+*)//end-of-[ f1_dopt(dopt) ]
 //
+(*
 val () =
-prerrln("t1imp_i1dclq: timp = ", timp)
+prerrsln("t1imp_i1dclq: timp = ", timp)
+*)
 //
 }(*where*)//end-of-[t1imp_i1dclq( timp )]
 

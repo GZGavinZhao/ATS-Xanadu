@@ -77,10 +77,10 @@ let
 val
 loc0 = d3e0.lctn()
 val () =
-prerrln
+prerrsln
 ("trtmp3c_d3exp: loc0 = ", loc0)
 val () =
-prerrln
+prerrsln
 ("trtmp3c_d3exp: d3e0 = ", d3e0)
 *)
 //
@@ -194,6 +194,9 @@ d3e0.node() of
 //
 |
 D3Eextnam _ => f0_extnam(env0, d3e0)
+//
+|
+D3Esynext _ => f0_synext(env0, d3e0)
 //
 (* ****** ****** *)
 |D3Enone0() => d3e0 |D3Enone1(d2e1) => d3e0
@@ -315,7 +318,7 @@ end where // end-of-[f0_tapp(env0,d3e0)]
 {
 //
 (*
-val () = prerrln
+val () = prerrsln
 ("trtmp3c_d3exp: f0_tapp: d3e0 = ", d3e0)
 *)
 //
@@ -376,7 +379,7 @@ end where // end-of-[f0_tapq(env0,d3e0)]
 {
 //
 (*
-val () = prerrln
+val () = prerrsln
 ("trtmp3c_d3exp: f0_tapq: d3e0 = ", d3e0)
 *)
 //
@@ -1132,7 +1135,25 @@ let
 //
 val-
 D3Eextnam
-( tknd, gnm1) = d3e0.node() in (d3e0) end
+( tknd, gnam) = d3e0.node() in (d3e0) end
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+(*
+HX-2024-07-20:
+Sat 20 Jul 2024 12:00:52 PM EDT
+*)
+fun
+f0_synext
+( env0:
+! tr3cenv
+, d3e0: d3exp): d3exp =
+let
+//
+val-
+D3Esynext
+( tknd, gexp) = d3e0.node() in (d3e0) end
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -1154,7 +1175,7 @@ D3LAB
 val loc0 = dgpt.lctn()
 val
 val () =
-prerrln
+prerrsln
 ("trtmp3c_l3d3e: ld3e = ", ld3e)
 *)
 //
@@ -1172,7 +1193,7 @@ trtmp3c_d3gpt
 val loc0 = dgpt.lctn()
 val
 val () =
-prerrln
+prerrsln
 ("trtmp3c_d3gpt: dgpt = ", dgpt)
 *)
 //
@@ -1199,7 +1220,7 @@ val loc0 = dcls.lctn()
 (*
 val
 val () =
-prerrln
+prerrsln
 ("trtmp3c_d3cls: dcls = ", dcls)
 *)
 //

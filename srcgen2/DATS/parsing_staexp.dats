@@ -100,18 +100,10 @@ tnode with token_get_node//lexing0
 (* ****** ****** *)
 //
 #extern
-fun p1_g0nam_atm: p1_fun(g0nam)
-//
-#extern
 fun
 p1_g0namseq_COMMA: p1_fun(g0namlst)
 //
 (* ****** ****** *)
-//
-#extern
-fun p1_g0exp_atm: p1_fun(g0exp)
-#extern
-fun p1_g0exp_app: p1_fun(g0exp)
 //
 #extern
 fun
@@ -138,8 +130,6 @@ p1_g0argseq_COMMA: p1_fun(g0arglst)
 #extern
 fun p1_sort0_tid: p1_fun(sort0)
 #extern
-fun p1_sort0_atm: p1_fun(sort0)
-#extern
 fun p1_sort0seq_atm: p1_fun(sort0lst)
 #extern
 fun p1_sort0seq_COMMA: p1_fun(sort0lst)
@@ -161,8 +151,6 @@ fun p1_s0qua: p1_fun(s0qua)
 #extern
 fun p1_l0s0e: p1_fun(l0s0e)
 //
-#extern
-fun p1_s0exp_atm: p1_fun(s0exp)
 #extern
 fun
 p1_s0expseq_atm: p1_fun(s0explst)
@@ -799,7 +787,7 @@ val tnd = tok.tnode()
 //
 (*
 val ( ) =
-prerrln("p1_l0abl: tok = ", tok)
+prerrsln("p1_l0abl: tok = ", tok)
 *)
 //
 in
@@ -1756,7 +1744,7 @@ val tok = buf.getk0()
 //
 (*
 val ( )
-prerrln
+prerrsln
 ("pq_sort0_anno: tok = ", tok)
 *)
 //
@@ -2356,7 +2344,7 @@ val tnd = tok.tnode()
 //
 (*
 val () =
-prerrln("p1_s0exp_atm: tok = ", tok)
+prerrsln("p1_s0exp_atm: tok = ", tok)
 *)
 //
 in//let
@@ -2571,7 +2559,7 @@ end (*let*) // end of [T_TRCD20{...|...}]
 let
 (*
 val () =
-prerrln
+prerrsln
 ("p1_s0exp_atm: otherwise: tok = ", tok)
 *)
 in//let

@@ -37,47 +37,380 @@ Authoremail: gmhwxiATgmailDOTcom
 //
 (* ****** ****** *)
 (* ****** ****** *)
-//
-fun
-<x0:vt>
-<ys:vt>
-g_make_lstrm
-(xs: strm_vt(x0)): (ys)
-fun
-<x0:vt>
-<ys:vt>
-g_make_lstrq
-(xs: strq_vt(x0)): (ys)
-//
+#typedef ni = nint
+#typedef si = sint
+(* ****** ****** *)
 (* ****** ****** *)
 //
 fun
-<x0:t0>
-list_make_lstrm
-(xs: strm_vt(x0)): list(x0)
+<x0:vt>
+strm_vt_forall0
+(xs: strm_vt(x0)): bool
 fun
-<x0:t0>
-list_make_lstrq
+<x0:vt>
+strm_vt_iforall0
+(xs: strm_vt(x0)): bool
+//
+#symload
+forall0 with strm_vt_forall0 of 1000
+#symload
+iforall0 with strm_vt_iforall0 of 1000
+//
+fun
+<x0:vt>
+strm_vt_forall0_f1un
+( xs: strm_vt(x0)
+, test: (~x0) -> bool): bool
+//
+#symload
+forall0 with strm_vt_forall0_f1un of 1000
+#symload
+forall0_fun with strm_vt_forall0_f1un of 1000
+//
+fun
+<x0:vt>
+strm_vt_iforall0_f2un
+( xs: strm_vt(x0)
+, test: (ni,~x0)->bool): bool
+//
+#symload
+iforall0 with strm_vt_iforall0_f2un of 1000
+#symload
+iforall0_fun with strm_vt_iforall0_f2un of 1000
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun
+<x0:vt>
+strm_vt_foritm0
+(xs: strm_vt(x0)): void
+fun
+<x0:vt>
+strm_vt_iforitm0
+(xs: strm_vt(x0)): void
+//
+#symload
+foritm0 with strm_vt_foritm0 of 1000
+#symload
+iforitm0 with strm_vt_iforitm0 of 1000
+//
+fun
+<x0:vt>
+strm_vt_foritm0_f1un
+( xs: strm_vt(x0)
+, work: (~x0) -> void): void
+//
+#symload
+foritm0 with strm_vt_foritm0_f1un of 1000
+#symload
+foritm0_fun with strm_vt_foritm0_f1un of 1000
+//
+fun
+<x0:vt>
+strm_vt_iforitm0_f2un
+( xs: strm_vt(x0)
+, work: (ni,~x0) -> void): void
+//
+#symload
+iforitm0 with strm_vt_iforitm0_f2un of 1000
+#symload
+iforitm0_fun with strm_vt_iforitm0_f2un of 1000
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun
+<x0:vt>
+<r0:vt>
+strm_vt_folditm0
+(xs: strm_vt(x0), r0: r0): (r0)
+fun
+<x0:vt>
+<r0:vt>
+strm_vt_ifolditm0
+(xs: strm_vt(x0), r0: r0): (r0)
+//
+#symload
+folditm0 with strm_vt_folditm0 of 1000
+#symload
+ifolditm0 with strm_vt_ifolditm0 of 1000
+//
+fun
+<x0:vt>
+<r0:vt>
+strm_vt_folditm0_f2un
+( xs
+: strm_vt(x0), r0: r0
+, fopr: (r0, ~x0) -> (r0)): (r0)
+//
+#symload
+folditm0 with strm_vt_folditm0_f2un of 1000
+#symload
+folditm0_fun with strm_vt_folditm0_f2un of 1000
+//
+fun
+<x0:vt>
+<r0:vt>
+strm_vt_ifolditm0_f3un
+( xs
+: strm_vt(x0), r0: r0
+, fopr: (r0, ni, ~x0) -> (r0)): (r0)
+//
+#symload
+ifolditm0 with strm_vt_ifolditm0_f3un of 1000
+#symload
+ifolditm0_fun with strm_vt_ifolditm0_f3un of 1000
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun
+<x0:vt>
+<r0:vt>
+strm_vt_foldall0
+(xs: strm_vt(x0), r0: r0): (r0)
+fun
+<x0:vt>
+<r0:vt>
+strm_vt_ifoldall0
+(xs: strm_vt(x0), r0: r0): (r0)
+//
+fun
+<x0:vt>
+<r0:vt>
+strm_vt_foldall0_f2un
+( xs
+: strm_vt(x0), r0: r0
+, fopr: (r0, ~x0) -> (bool,r0)): (r0)
+//
+#symload
+foldall0 with strm_vt_foldall0_f2un of 1000
+#symload
+foldall0_fun with strm_vt_foldall0_f2un of 1000
+//
+fun
+<x0:vt>
+<r0:vt>
+strm_vt_ifoldall0_f3un
+( xs
+: strm_vt(x0), r0: r0
+, fopr: (ni, r0, ~x0) -> (bool,r0)): (r0)
+//
+#symload
+ifoldall0 with strm_vt_ifoldall0_f3un of 1000
+#symload
+ifoldall0_fun with strm_vt_ifoldall0_f3un of 1000
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun
+<x0:vt>
+<y0:vt>
+strm_vt_map0
+(xs: strm_vt(x0)): strm_vt(y0)
+fun
+<x0:vt>
+<y0:vt>
+strq_vt_map0
 {n0:i0}
-(xs: strq_vt(x0, n0)): list(x0, n0)
-//
-#symload list with list_make_lstrm
-#symload list with list_make_lstrq
+(xs: strq_vt(x0,n0)): strq_vt(y0,n0)
 //
 (* ****** ****** *)
 //
 fun
 <x0:vt>
-list_vt_make_lstrm
+<y0:vt>
+strm_vt_imap0
+(xs: strm_vt(x0)): strm_vt(y0)
+fun
+<x0:vt>
+<y0:vt>
+strq_vt_imap0
+{n0:i0}
+(xs: strq_vt(x0,n0)): strq_vt(y0,n0)
+//
+#symload map0 with strm_vt_map0 of 1000
+#symload map0 with strq_vt_map0 of 1000
+#symload imap0 with strm_vt_imap0 of 1000
+#symload imap0 with strq_vt_imap0 of 1000
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun
+<x0:vt>
+strm_vt_filter0
+(xs: strm_vt(x0)): strm_vt(x0)
+fun
+<x0:vt>
+strq_vt_filter0
+{n0:i0}
+(xs: strq_vt(x0,n0)): strqlte_vt(x0,n0)
+//
+fun
+<x0:vt>
+strm_vt_ifilter0
+(xs: strm_vt(x0)): strm_vt(x0)
+fun
+<x0:vt>
+strq_vt_ifilter0
+{n0:i0}
+(xs: strq_vt(x0,n0)): strqlte_vt(x0,n0)
+//
+#symload filter0 with strm_vt_filter0 of 1000
+#symload filter0 with strq_vt_filter0 of 1000
+#symload ifilter0 with strm_vt_ifilter0 of 1000
+#symload ifilter0 with strq_vt_ifilter0 of 1000
+//
+(* ****** ****** *)
+//
+fun
+<x0:vt>
+strm_vt_filter0_f1un
+( xs: strm_vt(x0)
+, test: (!x0) -> bool): strm_vt(x0)
+#symload filter0 with strm_vt_filter0_f1un of 1000
+#symload filter0_fun with strm_vt_filter0_f1un of 1000
+//
+fun
+<x0:vt>
+strm_vt_ifilter0_f2un
+( xs: strm_vt(x0)
+, test: (ni,!x0) -> bool): strm_vt(x0)
+#symload ifilter0 with strm_vt_ifilter0_f2un of 1000
+#symload ifilter0_fun with strm_vt_ifilter0_f2un of 1000
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun
+<x0:vt>
+<y0:vt>
+strm_vt_mapoptn0
+(xs: ~strm_vt(x0)): strm_vt(y0)
+fun
+<x0:vt>
+<y0:vt>
+strq_vt_mapoptn0
+(xs: ~strq_vt(x0)): strq_vt(y0)
+//
+#symload mapoptn0 with strm_vt_mapoptn0 of 1000
+#symload mapoptn0 with strq_vt_mapoptn0 of 1000
+//
+fun
+<x0:vt>
+<y0:vt>
+strm_vt_maplist0
+(xs: ~strm_vt(x0)): strm_vt(y0)
+fun
+<x0:vt>
+<y0:vt>
+strq_vt_maplist0
+(xs: ~strq_vt(x0)): strq_vt(y0)
+//
+#symload maplist0 with strm_vt_maplist0 of 1000
+#symload maplist0 with strq_vt_maplist0 of 1000
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+(*
+HX-2024-07-24:
+Wed 24 Jul 2024 07:35:00 PM EDT
+*)
+fun
+<x0:vt>
+<r0:vt>
+strm_vt_scanitm0
+(xs: ~strm_vt(x0), r0: r0): strm_vt(r0)
+fun
+<x0:vt>
+<r0:vt>
+strq_vt_scanitm0
+{n0:i0}
+(xs:
+~strq_vt(x0,n0), r0: r0): strq_vt(r0,n0+1)
+//
+#symload scanitm0 with strm_vt_scanitm0 of 1000
+#symload scanitm0 with strq_vt_scanitm0 of 1000
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+(*
+HX-2024-07-28:
+Sun 28 Jul 2024 01:52:55 PM EDT
+*)
+//
+(* ****** ****** *)
+//
+(*
+fun
+<x0:vt>
+strm_vt_strqize0
+(xs: strm_vt(x0)): strq_vt(x0)
+#symload strqize0 with strm_vt_strqize0 of 1000
+*)
+//
+(* ****** ****** *)
+//
+fun
+<x0:vt>
+strm_vt_listize0
 (xs: strm_vt(x0)): list_vt(x0)
 fun
 <x0:vt>
-list_vt_make_lstrq
+strq_vt_listize0
 {n0:i0}
-(xs: strq_vt(x0, n0)): list_vt(x0, n0)
+(xs: strq_vt(x0,n0)): list_vt(x0,n0)
 //
-#symload list_vt with list_vt_make_lstrm
-#symload list_vt with list_vt_make_lstrq
+fun
+<x0:vt>
+strm_vt_rlistize0
+(xs: strm_vt(x0)): list_vt(x0)
+fun
+<x0:vt>
+strq_vt_rlistize0
+{n0:i0}
+(xs: strq_vt(x0,n0)): list_vt(x0,n0)
+//
+#symload listize0 with strm_vt_listize0 of 1000
+#symload listize0 with strq_vt_listize0 of 1000
+#symload rlistize0 with strm_vt_rlistize0 of 1000
+#symload rlistize0 with strq_vt_rlistize0 of 1000
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun
+<x0:vt>
+strm_vt_a1rfize0
+(xs: strm_vt(x0)): a1rf_vt(x0)
+fun
+<x0:vt>
+strq_vt_a1rfize0
+{n0:i0}
+(xs: strq_vt(x0,n0)): a1rf_vt(x0,n0)
+//
+#symload a1rfize0 with strm_vt_a1rfize0 of 1000
+#symload a1rfize0 with strq_vt_a1rfize0 of 1000
+//
+(* ****** ****** *)
+//
+fun
+<x0:vt>
+strm_vt_a1szize0
+(xs: strm_vt(x0)): a1sz_vt(x0)
+fun
+<x0:vt>
+strq_vt_a1szize0
+{n0:i0}
+(xs: strq_vt(x0,n0)): a1sz_vt(x0,n0)
+//
+#symload a1szize0 with strm_vt_a1szize0 of 1000
+#symload a1szize0 with strq_vt_a1szize0 of 1000
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -85,4 +418,4 @@ list_vt_make_lstrq
 (* ****** ****** *)(* ****** ****** *)(* ****** ****** *)
 (* ****** ****** *)(* ****** ****** *)(* ****** ****** *)
 
-(* end of [ATS3/XANADU_prelude_SATS_VT_strn001_vt.sats] *)
+(* end of [ATS3/XANADU_prelude_SATS_VT_strm001_vt.sats] *)

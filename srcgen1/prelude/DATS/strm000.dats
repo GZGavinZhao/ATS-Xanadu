@@ -44,7 +44,7 @@ strqcon_cons(x0, xs)//fcons
 //
 #impltmp
 <x0><r0>
-strmcon_uncons_cfr
+strmcon_uncons_funs
 (xs, f0, f1) =
 (
 case+ xs of
@@ -56,7 +56,7 @@ endcas // end of [case+(xs)]
 )
 #impltmp
 <x0><r0>
-strxcon_uncons_cfr
+strxcon_uncons_funs
 (xs, f1) =
 (
 case+ xs of
@@ -122,24 +122,6 @@ strm_cons(x0, strm_sing(y0))
 //
 #impltmp
 <a>(*tmp*)
-strm_head_raw(xs) =
-strmcon_head_raw<a>(!xs)
-#impltmp
-<a>(*tmp*)
-strm_tail_raw(xs) =
-strmcon_tail_raw<a>(!xs)
-//
-#impltmp
-<a>(*tmp*)
-strmcon_head_raw(xs) = xs.0
-#impltmp
-<a>(*tmp*)
-strmcon_tail_raw(xs) = xs.1
-//
-(* ****** ****** *)
-//
-#impltmp
-<a>(*tmp*)
 strm_from(x0) =
 (
 auxmain(x0) ) where
@@ -155,7 +137,7 @@ strmcon_cons
 }
 #impltmp
 <a>(*tmp*)
-strm_from$next(x0) = g_succ<a>(x0)
+strm_from$next(x0) = g_suc<a>(x0)
 //
 (* ****** ****** *)
 //
@@ -176,7 +158,7 @@ strxcon_cons
 }
 #impltmp
 <a>(*tmp*)
-strx_from$next(x0) = g_succ<a>(x0)
+strx_from$next(x0) = g_suc<a>(x0)
 //
 (* ****** ****** *)
 
@@ -201,7 +183,7 @@ strmcon_nil
 ((*void*)) => i0
 |
 strmcon_cons
-( x0, xs ) => loop(xs, succ(i0))
+( x0, xs ) => loop(xs, suc(i0))
 )
 }(*where*)//end-of(strm_length(xs))
 
@@ -808,7 +790,7 @@ strmcon_nil
 strmcon_cons
 ( y0, ys1 ) =>
 let
-val knd = g_sel2<a>(x0, y0)
+val knd = g_s2el<a>(x0, y0)
 in//let
 //
 if
@@ -1036,15 +1018,14 @@ if
 itakeif$test<x0>(i0, x0)
 then
 strmcon_vt_cons
-(x0, auxmain(xs, succ(i0)))
+(x0, auxmain(xs, suc(i0)))
 else strmcon_vt_nil((*void*)))
 }(*where*)//end-of-(strm_itakeif(xs))
 //
 (* ****** ****** *)
 
 #impltmp
-<x0
-,y0><z0>
+<x0><y0><z0>
 strm_x2map_vt_cmp
   (xs, ys) =
 (
@@ -1072,18 +1053,18 @@ strmcon_cons(y0, ys1) =>
 let
 val z0 =
 x2map$fopr
-<x0,y0><z0>(x0, y0)
+<x0><y0><z0>(x0, y0)
 val zs1 =
 let
 #impltmp
 map$fopr<y0><z0>(y0) =
-x2map$fopr<x0,y0><z0>(x0, y0)
+x2map$fopr<x0><y0><z0>(x0, y0)
 in
   strm_map_vt<y0><z0>(ys1)
 end
 //
 #impltmp
-g_sel2<z0>(z1, z2) =
+g_s2el<z0>(z1, z2) =
 let
 val sgn =
 g_cmp11<z0>(z1, z2) in
@@ -1122,17 +1103,6 @@ gseq_nilq
 {a:t0}
 gseq_consq
 <strm(a)><a> = strm_consq<a>
-(* ****** ****** *)
-//
-#impltmp
-{a:type}
-gseq_head_raw
-<strm(a)><a> = strm_head_raw<a>
-#impltmp
-{a:type}
-gseq_tail_raw
-<strm(a)><a> = strm_tail_raw<a>
-//
 (* ****** ****** *)
 //
 #impltmp

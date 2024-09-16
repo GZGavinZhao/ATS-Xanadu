@@ -427,7 +427,7 @@ val tnd = tok.tnode()
 //
 (*
 val () =
-prerrln
+prerrsln
 ("fp_d0ecl: tok=", tok)
 *)
 //
@@ -458,9 +458,9 @@ T_ENDLOC() => true | _ => false)
 //
 (*
 val ( ) =
-prerrln("fp_d0ecl: f00 = ", f00)
+prerrsln("fp_d0ecl: f00 = ", f00)
 val ( ) =
-prerrln("fp_d0ecl: tok = ", tok)
+prerrsln("fp_d0ecl: tok = ", tok)
 *)
 //
 in//let
@@ -1005,6 +1005,25 @@ d0ecl_make_node(lres, D0Cdyninit(tknd, g0e1))
 end (*let*) // end of [T_SRP_DYNINIT(...)]
 //
 (* ****** ****** *)
+(* ****** ****** *)
+(*
+HX-2024-07-20:
+Sat 20 Jul 2024 01:37:18 PM EDT
+*)
+|
+T_SRP_EXTCODE() =>
+let
+  val tknd = tok
+  val (  ) = buf.skip1()
+  val g0e1 = p1_g0exp(buf, err)
+  val lres = tknd.lctn()+g0e1.lctn()
+in//let
+err := e00;
+d0ecl_make_node(lres, D0Cextcode(tknd, g0e1))
+end (*let*) // end of [T_SRP_EXTCODE(...)]
+//
+(* ****** ****** *)
+(* ****** ****** *)
 //
 | T_SRP_NONFIX() =>
 let
@@ -1352,7 +1371,7 @@ val tok = buf.getk0()
 //
 (*
 val () =
-prerrln("p1_s0qag: tok = ", tok)
+prerrsln("p1_s0qag: tok = ", tok)
 *)
 //
 in//let
@@ -1394,7 +1413,7 @@ val tok = buf.getk0()
 //
 (*
 val () =
-prerrln("p1_t0qag: tok = ", tok)
+prerrsln("p1_t0qag: tok = ", tok)
 *)
 //
 in//let
@@ -1852,7 +1871,7 @@ val (  ) = buf.skip1()
 //
 (*
 val (  ) =
-prerrln
+prerrsln
 ("pk_valdclst: tknd=", tknd)
 *)
 //
@@ -1890,7 +1909,7 @@ val (  ) = buf.skip1()
 //
 (*
 val (  ) =
-prerrln
+prerrsln
 ("pk_vardclst: tknd=", tknd)
 *)
 //
@@ -1928,7 +1947,7 @@ val (  ) = buf.skip1()
 //
 (*
 val (  ) =
-prerrln
+prerrsln
 ("pk_fundclst: tknd=", tknd)
 *)
 //
@@ -2046,9 +2065,11 @@ topt = pq_EQ0(buf, err)
 //
 (*
 val () =
-prerrln("p1_d0valdcl: dpat = ", dpat)
+prerrsln
+("p1_d0valdcl: dpat = ", dpat)
 val () =
-prerrln("p1_d0valdcl: topt = ", topt)
+prerrsln
+("p1_d0valdcl: topt = ", topt)
 *)
 //
 in//let

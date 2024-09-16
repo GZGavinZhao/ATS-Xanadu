@@ -78,10 +78,10 @@ in
 //
 (*
 val () =
-prerrln
+prerrsln
 ("fsrch_dcurrent: dir0 = ", dir0)
 val () =
-prerrln
+prerrsln
 ("fsrch_dcurrent: base = ", base)
 *)
 //
@@ -100,12 +100,13 @@ fopt = fsrch_dnmsbase(dirs, base)
 in//let
 //
 case+ fopt of
+//
 |optn_nil() => 
-(
-  fsrch_dnm1base(dir0, base)
-) where
-{ val
-  dir0 = the_XATSHOME((*nil*)) }
+let
+  val dir0 = the_XATSHOME()
+in//let
+  fsrch_dnm1base(dir0, base) end
+//
 |optn_cons _ => (      fopt      )
 //
 endlet // end-of-[fsrch_includes(base)]
@@ -180,10 +181,10 @@ fkndq1(base) then 1 else -1
 //
 (*
 val () =
-prerrln
+prerrsln
 ("fsrch_combined: fnm0 = ", fnm0)
 val () =
-prerrln
+prerrsln
 ("fsrch_combined: fknd = ", fknd)
 *)
 //
@@ -262,10 +263,10 @@ val n0 = strn_length(dir0)
 //
 (*
 val () =
-prerrln
+prerrsln
 ("fname_dbjoin: dir0 = ", dir0)
 val () =
-prerrln
+prerrsln
 ("fname_dbjoin: base = ", base)
 *)
 //
@@ -281,7 +282,7 @@ val n1 =
  then n0 else n0-1): sint
 val nb = strn_length(base)
 in//let
-strn_tabulate_cfr
+strn_tabulate_f1un
 ( n1+nb+1
 , lam i0 =>
   if
@@ -306,13 +307,13 @@ fname_dbjoin(dir0, base)
 //
 (*
 val () =
-prerrln
+prerrsln
 ("auxmain: dir0 = ", dir0)
 val () =
-prerrln
+prerrsln
 ("auxmain: base = ", base)
 val () =
-prerrln
+prerrsln
 ("auxmain: fnm1 = ", fnm1)
 *)
 //
@@ -334,7 +335,7 @@ fpath_rexists(name) where
 {
 (*
 val () =
-prerrln
+prerrsln
 ("fname_rexists: name = ", name)
 *)
 } (*where*)//end-[fname_rexists]
@@ -353,11 +354,11 @@ optn_cons
 {
 (*
 val () =
-prerrln("auxmain: base = ", base)
+prerrsln("auxmain: base = ", base)
 val () =
-prerrln("auxmain: fnm1 = ", fnm1)
+prerrsln("auxmain: fnm1 = ", fnm1)
 val () =
-prerrln("auxmain: isexi = ", isexi)
+prerrsln("auxmain: isexi = ", isexi)
 *)
 }
 else optn_nil(*void*)
@@ -377,9 +378,9 @@ fsrch_dnm1base
 //
 (*
 val ((*0*)) =
-prerrln("fsrch_dnm1base: dir0 = ", dir0)
+prerrsln("fsrch_dnm1base: dir0 = ", dir0)
 val ((*0*)) =
-prerrln("fsrch_dnm1base: base = ", base)
+prerrsln("fsrch_dnm1base: base = ", base)
 *)
 //
 } (*where*) // [fsrch_dnm1base(dirs,base)]
@@ -395,17 +396,20 @@ fsrch_dir1base
 //
   val dir0 = drpth_get_name(dir0)
 (*
-  val ((*0*)) =
-  prerrln("fsrch_dir1base: dir0 = ", dir0)
+val ((*0*)) =
+(
+ prerrsln("fsrch_dir1base: dir0 = ", dir0))
 *)
 //
 } where {
 //
 (*
-  val ((*0*)) =
-  prerrln("fsrch_dir1base: dir0 = ", dir0)
-  val ((*0*)) =
-  prerrln("fsrch_dir1base: base = ", base)
+val ((*0*)) =
+(
+ prerrsln("fsrch_dir1base: dir0 = ", dir0))
+val ((*0*)) =
+(
+ prerrsln("fsrch_dir1base: base = ", base))
 *)
 //
 } (*where*)//end-[fsrch_dir1base(dirs,base)]

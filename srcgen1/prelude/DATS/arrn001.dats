@@ -24,15 +24,15 @@ Wed Dec 20 19:13:09 EST 2023
 local
 //
 datatype
-a1rsz //
+a1rsz_dt //
 (a:vwtp,int(*sz*)) =
 {n:int}
 A1RSZ of
-(a1ref(a, n), sint(n))
+(a1ref(a,n), sint(n))
 //
 #absimpl
 a1rsz_vt_i0_x0
-( a:vt, n:i0 ) = a1rsz(a, n)
+(a:vt,n:i0) = a1rsz_dt(a,n)
 //
 (* ****** ****** *)
 in(*local*)
@@ -66,25 +66,25 @@ end(*local*)//end-of-[local(a1rsz)]
 //
 #impltmp
 <a>(*tmp*)
-a1rsz_get_at
+a1rsz_get$at
   (AZ, i0) =
 let
 val A0 =
 a1rsz_getref<>(AZ)
 in//let
-  a1ref_get_at<a>(A0, i0) end
-(*let*)//end-[a1rsz_get_at(...)]
+  a1ref_get$at<a>(A0, i0) end
+(*let*)//end-[a1rsz_get$at(...)]
 //
 #impltmp
 <a>(*tmp*)
-a1rsz_set_at
+a1rsz_set$at
   (AZ, i0, x0) =
 let
 val A0 =
 a1rsz_getref<>(AZ)
 in//let
-a1ref_set_at<a>(A0, i0, x0) end
-(*let*)//end-[a1rsz_set_at(...)]
+a1ref_set$at<a>(A0, i0, x0) end
+(*let*)//end-[a1rsz_set$at(...)]
 //
 (* ****** ****** *)
 //
@@ -188,8 +188,8 @@ gseq_forall
 #impltmp
 {a:t0}
 {n:i0}
-gseq_foreach
-<a1rsz(a,n)><a> = a1rsz_foreach<a>{n}
+gseq_foritm
+<a1rsz(a,n)><a> = a1rsz_foritm<a>{n}
 //
 (* ****** ****** *)
 //

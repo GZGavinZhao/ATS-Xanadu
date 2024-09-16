@@ -390,10 +390,10 @@ t2p0 = s2typ_subst0(t2p0, svts)
 //
 (*
 val () =
-prerrln
+prerrsln
 ("d2con23_tjagize: svts: ", svts)
 val () =
-prerrln
+prerrsln
 ("d2con23_tjagize: t2p0: ", t2p0)
 *)
 //
@@ -460,10 +460,10 @@ t2p0 = s2typ_subst0(t2p0, svts)
 //
 (*
 val () =
-prerrln
+prerrsln
 ("d2cst23_tapqize: svts: ", svts)
 val () =
-prerrln
+prerrsln
 ("d2cst23_tapqize: t2p0: ", t2p0)
 *)
 //
@@ -552,13 +552,22 @@ in//local
 d3exp_sapqize
 (    d3e0    ) =
 let
-val loc0 = d3e0.lctn()
-val t2p0 = d3e0.styp()
+//
+val
+loc0 = d3e0.lctn()
+val
+t2p0 = d3e0.styp()
+//
+val t2p0 =
+(
+  s2typ_hnfiz0(t2p0))
+//
 in//let
+//
 case+
 t2p0.node() of
-|
-T2Puni0(s2vs, t2p1) =>
+//
+|T2Puni0(s2vs, t2p1) =>
 let
 //
 val svts = list_nil()
@@ -573,7 +582,11 @@ in//let
 d3exp_sapqize
 (d3exp(loc0,t2p1,D3Esapq(d3e0,t2ps))))
 end (*let*) // end of [ T2Puni0(s2vs,t2p1) ]
-|_(* non-T2Puni0 *) => (     d3e0     )
+//
+|_(* non-T2Puni0 *) =>
+(
+  let val () = d3e0.styp(t2p0) in d3e0 end)
+//
 end (*let*) // end of [ d3exp_sapqize(d3e0) ]
 
 end (*local*) // end of [d3pat/d3exp_sapqize]
@@ -622,7 +635,7 @@ s2cst_get23_styp
 {
 (*
 val () =
-prerrln
+prerrsln
 ("\
 unify23_s2typ: \
 s2typ_eval$s2cst: s2c0 = ", s2c0)
@@ -670,9 +683,9 @@ s2typ_untopx(s2typ_unargx(t2p0)) }
 //
 (*
 val () =
-prerrln("unify23_s2typ: t2p1 = ", t2p1)
+prerrsln("unify23_s2typ: t2p1 = ", t2p1)
 val () =
-prerrln("unify23_s2typ: t2p2 = ", t2p2)
+prerrsln("unify23_s2typ: t2p2 = ", t2p2)
 *)
 //
 in//let

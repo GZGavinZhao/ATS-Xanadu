@@ -26,11 +26,13 @@
 *)
 
 (* ****** ****** *)
+(* ****** ****** *)
 //
 // Author: Hongwei Xi
 // Start Time: December, 2018
 // Authoremail: gmhwxiATgmailDOTcom
 //
+(* ****** ****** *)
 (* ****** ****** *)
 //
 #include
@@ -38,6 +40,7 @@
 #staload
 UN = "prelude/SATS/unsafe.sats"
 //
+(* ****** ****** *)
 (* ****** ****** *)
 //
 #staload
@@ -50,9 +53,20 @@ ENV = "./../SATS/xsymenv.sats"
 NMS = "./../SATS/nmspace.sats"
 //
 (* ****** ****** *)
-
+(* ****** ****** *)
+//
+#staload "./../SATS/mylib00.sats"
+#staload "./../DATS/mylib00.dats"
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
 #staload "./../SATS/xbasics.sats"
-
+//
+(* ****** ****** *)
+//
+#staload "./../SATS/xerrory.sats"
+//
 (* ****** ****** *)
 
 #staload "./../SATS/xlabel0.sats"
@@ -83,6 +97,10 @@ NMS = "./../SATS/nmspace.sats"
 #staload "./../SATS/trans01.sats"
 #staload "./../SATS/trans12.sats"
 
+(* ****** ****** *)
+(* ****** ****** *)
+implement
+fprint_val<token> = fprint_token
 (* ****** ****** *)
 implement
 fprint_val<s1qua> = fprint_s1qua
@@ -3167,7 +3185,7 @@ in
 end // end of [auxseqn]
 
 (* ****** ****** *)
-
+//
 fun
 aux_trcd11
 ( d1e0
@@ -3190,7 +3208,7 @@ val d2es = trans12_dexplst(d1es)
 in
   d2exp_trcd1(loc0, knd, npf, d2es)
 end // end of [aux_trcd11]
-
+//
 fun
 aux_trcd12
 ( d1e0
@@ -3223,8 +3241,9 @@ val d2es =
 in
   d2exp_trcd1(loc0, knd, npf, d2es)
 end // end of [aux_trcd12]
-
+//
 (* ****** ****** *)
+//
 fun
 aux_brack
 ( d1e0
@@ -3269,8 +3288,9 @@ in
   d2exp_make_node
   (loc0, D2Ebrack(dpis, d2es))
 end // end of [aux_brack]
+//
 (* ****** ****** *)
-
+//
 fun
 aux_dtsel
 ( d1e0
@@ -3375,7 +3395,7 @@ in
 d2exp_make_node
 (loc0, D2Edtsel(lab, dpis, npf, arg))
 end // end of [aux_dtsel]
-
+//
 (* ****** ****** *)
 
 fun
@@ -4094,7 +4114,7 @@ d2ecl_make_node
 , D2Cinclude
   (tok, src1, knd2, fopt, body))
 //
-end // end of [aux_include]
+end // end of [aux_include(d1cl)]
 
 (* ****** ****** *)
 
@@ -4246,7 +4266,9 @@ None_vt() =>
 the_nmspace_open(menv)
 | ~
 Some_vt(nm0) =>
-the_sexpenv_add(nm0, S2ITMfmodenv(menv))
+(
+the_sexpenv_add
+(nm0, S2ITMfmodenv(menv)))
 end // end of [Some]
 ) : void // end of val
 //
@@ -4254,9 +4276,10 @@ in//let
 //
 d2ecl_make_node
 ( loc0
-, D2Cstaload(tok0, src1, knd2, fopt, flag, body))
+, D2Cstaload
+( tok0, src1, knd2, fopt, flag, body))
 //
-end // end of [aux_staload]
+end // end of [aux_staload(d1cl)]
 
 (* ****** ****** *)
 
@@ -4280,7 +4303,7 @@ val s2tx =
 in
 the_sortenv_add(tid, s2tx);
 d2ecl_make_node(loc0, D2Cabssort(tid))
-end // end of [aux_abssort]
+end // end of [aux_abssort(d1cl)]
 
 (* ****** ****** *)
 
@@ -4353,7 +4376,7 @@ println!
 //
 in
   d2ecl_make_node(loc0, D2Cstacst0(s2c0, s2t0))
-end // end of [aux_stacst0]
+end // end of [aux_stacst0(d1cl)]
 
 (* ****** ****** *)
 
@@ -4473,13 +4496,25 @@ aux_sexpdef
 //
 val
 loc0 = d1cl.loc()
+//
+(*
+val () =
+println!
+("aux_sexpdef: loc0 = ", loc0)
+val () =
+println!
+("aux_sexpdef: d1cl = ", d1cl)
+*)
+//
 val-
 D1Csexpdef
 ( knd, sid
 , arg, res, body) = d1cl.node()
 //
-val (pf0|()) =
-the_sexpenv_pushnil()
+val
+(pf0|()) =
+(
+the_sexpenv_pushnil())
 //
 val
 s2e0 =
@@ -4623,7 +4658,6 @@ println!
 //
 } (* end of [where] *) // end of [val]
 //
-//
 val
 s2t0 = s2e0.sort()
 val
@@ -4638,11 +4672,12 @@ val () = stamp_s2cst_type(s2c0, t2p0)
 //
 in
 let
+//
 val () = the_sexpenv_add_cst(s2c0)
-in
+in//let
 d2ecl_make_node(loc0, D2Csexpdef(s2c0, s2e0))
-end
-end // end of [aux_sexpdef]
+end//let
+end // end of [aux_sexpdef(d1cl)]
 
 (* ****** ****** *)
 
@@ -5706,6 +5741,7 @@ println!
 val d2cs =
 (
 case+ dqid of
+//
 |
 DQ0EIDnone(id0) =>
 let
@@ -5715,15 +5751,18 @@ let
   // end of [val]
   val sym = dexpid_sym(tok)
   val opt = the_dexpenv_find(sym)
-in
-  case+ opt of
-  | ~None_vt() =>
-     list_nil()
-  | ~Some_vt(d2i) =>
-    ( case+ d2i of
-      | D2ITMcst(d2cs) => d2cs | _ => list_nil()
-    ) (* end of [Some_vt] *)
-end
+in//let
+case+ opt of
+| ~
+None_vt() =>
+  list_nil()
+| ~
+Some_vt(d2i) =>
+( case+ d2i of
+| D2ITMcst(d2cs) => d2cs | _ => list_nil()
+) (* end of [Some_vt] *)
+end // end-of-(DQ0EIDnone(id0))
+//
 |
 DQ0EIDsome(qua, id0) =>
 let
@@ -5733,17 +5772,37 @@ let
   // end of [val]
   val sym = dexpid_sym(tok)
   val opt = the_dexpenv_qfind(qua, sym)
-in
-  case+ opt of
-  | ~None_vt() =>
-     list_nil()
-  | ~Some_vt(d2i) =>
-    ( case+ d2i of
-      | D2ITMcst(d2cs) => d2cs | _ => list_nil()
-    ) (* end of [Some_vt] *)
-end
-) : d2cstlst // end of [val]
-} (* where *) // end of [auxdqid] *)
+in//let
+case+ opt of
+| ~
+None_vt() =>
+  list_nil()
+| ~
+Some_vt(d2i) =>
+( case+ d2i of
+| D2ITMcst(d2cs) => d2cs | _ => list_nil()
+) (* end of [Some_vt] *)
+end // end of [DQ0EIDsome(qua,id0))
+//
+) : d2cstlst // end of [ val(d2cs) ]
+//
+(*
+val () =
+list_foritm<d2cst>(d2cs) where
+{
+implement
+list_foritm$work<d2cst><void>
+  (d2c, env) =
+let
+val loc =
+d2cst_get_loc(d2c)
+in//let
+  println!("auxdqid: d2c = ", d2c, "(", loc, ")")
+end//end-of-[let]
+}
+*)
+//
+} (* where *) // end of [auxdqid(dqid:dq0eid)] *)
 
 (* ****** ****** *)
 
@@ -6030,21 +6089,21 @@ the_trans12_pushnil((*void*))
 //
 val () =
 (
-list_foreach<sq2arg>(sqas)
+list_foritm<sq2arg>(sqas)
 ) where
 {
 implement
-list_foreach$fwork<sq2arg><void>
+list_foritm$work<sq2arg><void>
   (sq2a, env) =
   the_sexpenv_add_s2vs(sq2a.s2vs())
 }
 val () =
 (
-list_foreach<tq2arg>(tqas)
+list_foritm<tq2arg>(tqas)
 ) where
 {
 implement
-list_foreach$fwork<tq2arg><void>
+list_foritm$work<tq2arg><void>
   (tq2a, env) =
   the_sexpenv_add_s2vs(tq2a.s2vs())
 }
@@ -6184,20 +6243,47 @@ D1Csymload
 , sym
 , dqid, opt) = d1cl.node()
 //
+(*
+val () = prerrln!
+("aux_symload: d1cl = ", d1cl)
+*)
+//
 val pval =
 (
 case+ opt of
-| None() =>
-  (0)(*default*)
-| Some(int) =>
-  (
+|
+None() =>
+(0)(*default*)
+|
+Some(int) =>
+(
   token2sint(tok)
-  ) where
-  {
-    val-
-    T0INTsome(tok) = int.node()
-  }
-) : int // end of [val]
+) where
+{
+val tok =
+(
+case+
+int.node() of
+|
+T0INTsome(tok) => tok
+|
+_(*non-T0INTsome*) =>
+(
+$raise
+XATSOPT_TRERR12_EXN())
+where
+{
+//
+val () =
+prerrln!
+("trans12-error: ", int.loc())
+val () =
+prerrln!("trans12-error: ", int)
+//
+}(*where*)
+) : token // end-of-[val(tok)]
+}
+) : (int) // end-of-[val(pval)]
 //
 val
 sym = auxsym(sym)
@@ -6242,11 +6328,13 @@ val ((*void*)) =
 }
 //
 in
-  d2ecl_make_node
-  (loc0, D2Csymload(tok, sym, dpi0))
+//
+d2ecl_make_node
+(loc0, D2Csymload(tok, sym, dpi0))
+//
 end // end of [aux_symload]
 
-end // end of [local]
+end // end of [ local(aux_symload) ]
 
 (* ****** ****** *)
 
@@ -6880,7 +6968,7 @@ let
   | None() => s2es
   | Some(arg1) =>
     (
-      s2es1 + s2es1
+      s2es1 + s2es2
     ) where
     {
       val () =
@@ -6992,6 +7080,9 @@ val
 loc0 = d1cl.loc()
 //
 (*
+val () =
+println!
+("trans12_decl: loc0 = ", loc0)
 val () =
 println!
 ("trans12_decl: d1cl = ", d1cl)

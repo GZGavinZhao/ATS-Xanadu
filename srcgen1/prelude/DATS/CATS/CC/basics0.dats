@@ -189,20 +189,20 @@ gint_abs_sint<> = XATS2CC_gint_abs_sint
 //
 #extern
 fun
-XATS2CC_gint_succ_sint
+XATS2CC_gint_suc_sint
 {i:int}
 ( x0
 : sint(i)): sint(i+1) = $extnam()
 #extern
 fun
-XATS2CC_gint_pred_sint
+XATS2CC_gint_pre_sint
 {i:int}
 ( x0
 : sint(i)): sint(i-1) = $extnam()
 #impltmp
-gint_succ_sint<> = XATS2CC_gint_succ_sint
+gint_suc_sint<> = XATS2CC_gint_suc_sint
 #impltmp
-gint_pred_sint<> = XATS2CC_gint_pred_sint
+gint_pre_sint<> = XATS2CC_gint_pre_sint
 //
 (* ****** ****** *)
 //
@@ -373,16 +373,16 @@ gflt_abs_dflt<> = XATS2CC_gflt_abs_dflt
 //
 #extern
 fun
-XATS2CC_gflt_succ_dflt
+XATS2CC_gflt_suc_dflt
   ( x0: dflt ): dflt = $extnam()
 #impltmp
-gflt_succ_dflt<> = XATS2CC_gflt_succ_dflt
+gflt_suc_dflt<> = XATS2CC_gflt_suc_dflt
 #extern
 fun
-XATS2CC_gflt_pred_dflt
+XATS2CC_gflt_pre_dflt
   ( x0: dflt ): dflt = $extnam()
 #impltmp
-gflt_pred_dflt<> = XATS2CC_gflt_pred_dflt
+gflt_pre_dflt<> = XATS2CC_gflt_pre_dflt
 //
 (* ****** ****** *)
 //
@@ -734,37 +734,41 @@ XATS2CC_strn_cmp
 }
 (* ****** ****** *)
 #impltmp
-strn_head_opt<> =
-XATS2CC_strn_head_opt
+strn_head$opt<> =
+XATS2CC_strn_head$opt
 where
 {
 #extern
 fun
-XATS2CC_strn_head_opt
+XATS2CC_strn_head$opt
 (cs: strn): char = $extnam()
 }
 (* ****** ****** *)
+//
 #impltmp
-strn_head_raw<> =
-XATS2CC_strn_head_raw
+$UN.strn_head$raw<> =
+XATS2CC_strn_head$raw
 where
 {
 #extern
 fun
-XATS2CC_strn_head_raw
+XATS2CC_strn_head$raw
 (cs: strn): char = $extnam()
 }
+//
 (* ****** ****** *)
+//
 #impltmp
-strn_tail_raw<> =
-XATS2CC_strn_tail_raw
+$UN.strn_tail$raw<> =
+XATS2CC_strn_tail$raw
 where
 {
 #extern
 fun
-XATS2CC_strn_tail_raw
+XATS2CC_strn_tail$raw
 (cs: strn): strn = $extnam()
 }
+//
 (* ****** ****** *)
 #impltmp
 strn_length<> =
@@ -799,19 +803,20 @@ XATS2CC_strn_vt_length1
 }
 //
 (* ****** ****** *)
+//
 #impltmp
-strn_get_at<> =
-XATS2CC_strn_get_at
+strn_get$at<> =
+XATS2CC_strn_get$at
 where
 {
 #extern
 fun
-XATS2CC_strn_get_at
+XATS2CC_strn_get$at
 ( cs
-: strn, i0: sint): char
-= $extnam((*self*))
+: strn, i0: sint): char = $extnam()
 }
 (* ****** ****** *)
+//
 #impltmp
 strn_forall<>(cs) =
 let
@@ -819,16 +824,20 @@ let
 #extern
 fun
 XATS2CC_strn_forall_cfr
-( cs: strn
-, f0: (cgtz) -<cfr> bool): bool
-= $extnam((*self*))
+( cs
+: strn
+, f0:
+ (cgtz)-<cfr>bool): bool = $extnam()
 //
 in
 XATS2CC_strn_forall_cfr
 ( cs
-, lam(c0) => forall$test<cgtz>(c0))
+, lam(c0) => forall$test<cgtz>( c0 ))
 end // end of [strn_forall]
+//
 (* ****** ****** *)
+(* ****** ****** *)
+//
 #impltmp
 strtmp_vt_alloc<> =
 XATS2CC_strtmp_vt_alloc
@@ -837,21 +846,27 @@ where
 #extern
 fun
 XATS2CC_strtmp_vt_alloc
-(bsz: sint) : strtmp0_vt = $extnam()
+( bsz: sint) : strtmp0_vt = $extnam()
 }
+//
 (* ****** ****** *)
+//
 #impltmp
-strtmp_vt_set_at<> =
-XATS2CC_strtmp_vt_set_at
+strtmp_vt_set$at<> =
+XATS2CC_strtmp_vt_set$at
 where
 {
 #extern
 fun
-XATS2CC_strtmp_vt_set_at
-( cs:strtmp0_vt
-, i0:sint, c0:char): void = $extnam()
+XATS2CC_strtmp_vt_set$at
+(
+cs:strtmp0_vt,
+i0:sint, c0:char): void = $extnam()
 }
+//
 (* ****** ****** *)
+(* ****** ****** *)
+//
 #impltmp
 strn_vt_forall0<>(cs) =
 let
@@ -860,15 +875,17 @@ let
 fun
 XATS2CC_strn_vt_forall_cfr
 ( cs: ~strn_vt
-, f0: (cgtz) -<cfr> bool): bool = $extnam()
+, f0:
+ (cgtz)-<cfr>bool): bool = $extnam()
 //
-in
+in//let
 XATS2CC_strn_vt_forall_cfr
 ( cs
-, lam(c0) =>
-  forall0$test<cgtz>(c0))
-end // end of [strn_vt_forall0]
+, lam(c0) => forall$test0<cgtz>( c0 ))
+end(*let*)//end-of-[strn_vt_forall0(cs)]
+//
 (* ****** ****** *)
+//
 #impltmp
 strn_vt_forall1<>(cs) =
 let
@@ -877,14 +894,19 @@ let
 fun
 XATS2CC_strn_vt_forall_cfr
 ( cs: !strn_vt
-, f0: (cgtz) -<cfr> bool): bool = $extnam()
+, f0:
+ (cgtz)-<cfr>bool): bool = $extnam()
 //
-in
+in//let
 XATS2CC_strn_vt_forall_cfr
 ( cs
-, lam(c0) =>
-  forall1$test<cgtz>(c0))
-end // end of [strn_vt_forall1]
+, lam(c0) => forall$test1<cgtz>( c0 ))
+end(*let*)//end-of-[strn_vt_forall1<>(cs)]
+//
 (* ****** ****** *)
+(* ****** ****** *)
+//
+(* ****** ****** *)(* ****** ****** *)
+(* ****** ****** *)(* ****** ****** *)
 
-(* end of [prelude_DATS_CATS_CC_basics0.dats] *)
+(* end of [srcgen1_prelude_DATS_CATS_CC_basics0.dats] *)

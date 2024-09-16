@@ -85,10 +85,10 @@ let
 val
 loc0 = d3p0.lctn()
 val () =
-prerrln
+prerrsln
 ("trans3a_d3pat: loc0 = ", loc0)
 val () =
-prerrln
+prerrsln
 ("trans3a_d3pat: d3p0 = ", d3p0)
 *)
 //
@@ -566,10 +566,10 @@ let
 val
 loc0 = d3e0.lctn()
 val () =
-prerrln
+prerrsln
 ("trans3a_d3exp: loc0 = ", loc0)
 val () =
-prerrln
+prerrsln
 ("trans3a_d3exp: d3e0 = ", d3e0)
 *)
 //
@@ -656,11 +656,18 @@ d3e0.node() of
 //
 |D3Enone0 _ => f0_none0(env0, d3e0)
 //
+(* ****** ****** *)
 |
 D3Eextnam _ => f0_extnam(env0, d3e0)
 //
 |
+D3Esynext _ => f0_synext(env0, d3e0)
+//
+(* ****** ****** *)
+|
 _(*otherwise*) => (d3exp_none2(d3e0))
+//
+(* ****** ****** *)
 //
 endlet where
 {
@@ -938,7 +945,7 @@ d3f0.node() of
 |D3Ecst(d2c1) =>
 let
 val dcls =
-tr3aenv_d2crch_opt(env0, d2c1)
+tr3aenv_d2crch$opt(env0, d2c1)
 val timp =
 timpl(loc0, TIMPLall1(d2c1, dcls))
 in//let
@@ -1921,6 +1928,7 @@ d3exp(d3e0.lctn(), t2p0, D3Enone0(*0*))
 end (*let*) // end of [f0_none0(env0,...)]
 //
 (* ****** ****** *)
+(* ****** ****** *)
 //
 fun
 f0_extnam
@@ -1951,6 +1959,45 @@ end (*let*) // end of [f0_extnam(env0,...)]
 //
 (* ****** ****** *)
 //
+(*
+HX-2024-07-20:
+Sat 20 Jul 2024 11:52:20 AM EDT
+*)
+fun
+f0_synext
+( env0:
+! tr3aenv
+, d3e0: d3exp): d3exp =
+let
+//
+val loc0 = d3e0.lctn()
+//
+val-
+D3Esynext
+( tknd
+, gexp ) = d3e0.node((*0*))
+//
+val t2p0 =
+  d3e0.styp((*0*))
+val t2p0 =
+  s2typ_hnfiz0(t2p0)
+val t2p0 =
+  trans3a_s2typ(env0, t2p0)
+//
+(*
+val
+gexp = trans3a_g1exp(env0, gexp)
+*)
+//
+in//let
+(
+  d3exp_make_tpnd
+  (loc0, t2p0, D3Esynext(tknd, gexp)) )
+end (*let*) // end of [f0_synext(env0,...)]
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
 } (*where*)//end-of-[trans3a_d3exp(env0,d3e0)]
 
 (* ****** ****** *)
@@ -1978,10 +2025,10 @@ let
 val
 loc0 = farg.lctn()
 val () =
-prerrln
+prerrsln
 ("trans3a_f3arg: loc0 = ", loc0)
 val () =
-prerrln
+prerrsln
 ("trans3a_f3arg: farg = ", farg)
 *)
 //
@@ -2073,7 +2120,7 @@ end//let//end-of-[D3GUAmat(...)]
 //
 (*
   val (  ) =
-  prerrln("trans3a_d3gua: dgua = ", dgua)
+  prerrsln("trans3a_d3gua: dgua = ", dgua)
 *)
 //
 }(*where*)//end-of-[trans3a_d3gua(env0,...)]
@@ -2089,7 +2136,7 @@ val loc0 = dgpt.lctn()
 (*
 val
 val () =
-prerrln
+prerrsln
 ("trans3a_d3gpt: dgpt = ", dgpt)
 *)
 //
@@ -2131,7 +2178,7 @@ val loc0 = d3c0.lctn()
 (*
 val
 val () =
-prerrln
+prerrsln
 ("trans3a_d3cls: d3c0 = ", d3c0)
 *)
 //

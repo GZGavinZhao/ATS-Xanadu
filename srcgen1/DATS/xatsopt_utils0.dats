@@ -312,52 +312,61 @@ implement
 the_fixity_load
   (XATSENV) = let
 //
-  val given =
-    "prelude/fixity0.sats"
+val
+given =
+"srcgen1/prelude/fixity0.sats"
 //
-  val fname =
-    dirbase(XATSENV, given)
-  val fpath =
-    fpath_make(given, fname)  
+val
+fname = dirbase(XATSENV, given)
+val
+fpath = fpath_make(given, fname)  
 //
-  val
-  (pf0 | ()) =
-  $FP0.the_filpathlst_push(fpath)
+val
+(pf0 | ()) =
+(
+  $FP0.the_filpathlst_push(fpath))
 //
-  val d0cs = let
-    val
-    opt =
-    fileref_open_opt(fname, file_mode_r)
-  in
-    case+ opt of
-    | ~None_vt() => list_nil()
-    | ~Some_vt(filr) => d0cs where
-      {
-        val d0cs =
-        parse_from_fileref_toplevel
-        (
-          0(*static*), filr(*input*)
-        )
-        val ((*void*)) = fileref_close(filr)
-      }
-   end : d0eclist // end of [val]
+val d0cs = let
+val
+opt =
+fileref_open_opt(fname, file_mode_r)
+in//let
 //
-  val
-  ((*popped*)) =
-  $FP0.the_filpathlst_pout(pf0 | (*none*))
+case+ opt of
+| ~
+None_vt() =>
+list_nil((*void*))
+| ~
+Some_vt(filr) => d0cs
+where
+{
+val
+d0cs =
+parse_from_fileref_toplevel
+(
+  0(*static*), filr(*input*)
+)
+val () = fileref_close(filr)
+}
 //
-  val
-  (pf0 | ()) =
-  the_fxtyenv_pushnil((*void*))
-  val d1cs = trans01_declist(d0cs)
-  val map0 = the_fxtyenv_pop(pf0 | (*none*))
+end : d0eclist // end of [val]
 //
-  val ((*joined*)) = the_fxtyenv_pjoinwth0(map0)
+val
+((*popd*)) =
+$FP0.the_filpathlst_pout(pf0 | (*none*))
+//
+val
+(pf0 | ()) =
+the_fxtyenv_pushnil((*void*))
+val d1cs = trans01_declist(d0cs)
+val map0 = the_fxtyenv_pop(pf0 | (*none*))
+//
+val ((*joined*)) = the_fxtyenv_pjoinwth0(map0)
 //
 (*
-  val () = println! "the_fxtyenv = "
-  val () = the_fxtyenv_println((*void*))
-  val () = println! "[the_fixity_load] is finished."
+val () = println! "the_fxtyenv = "
+val () = the_fxtyenv_println((*void*))
+val () = println! "[the_fixity_load] is finished."
 *)
 //
 in
@@ -524,7 +533,7 @@ val () =
 the_basics_load
 ( XATSENV
 , 0(*static*)
-, "prelude/basics0.sats")
+, "srcgen1/prelude/basics0.sats")
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -550,6 +559,14 @@ the_prelude_load
 ( XATSENV
 , 0(*static*)
 , "srcgen1/prelude/SATS/gbas001.sats")
+//
+(* ****** ****** *)
+//
+val () =
+the_prelude_load
+( XATSENV
+, 0(*static*)
+, "srcgen1/prelude/SATS/gdbg000.sats")
 //
 (* ****** ****** *)
 //
@@ -591,6 +608,14 @@ val () =
 the_prelude_load
 ( XATSENV
 , 0(*static*)
+, "srcgen1/prelude/SATS/gcls000.sats")
+//
+(* ****** ****** *)
+//
+val () =
+the_prelude_load
+( XATSENV
+, 0(*static*)
 , "srcgen1/prelude/SATS/gseq000.sats")
 val () =
 the_prelude_load
@@ -610,7 +635,21 @@ val () =
 the_prelude_load
 ( XATSENV
 , 0(*static*)
+, "srcgen1/prelude/SATS/gasz000.sats")
+//
+(* ****** ****** *)
+//
+val () =
+the_prelude_load
+( XATSENV
+, 0(*static*)
 , "srcgen1/prelude/SATS/gmap000.sats")
+val () =
+the_prelude_load
+( XATSENV
+, 0(*static*)
+, "srcgen1/prelude/SATS/gmap001.sats")
+//
 val () =
 the_prelude_load
 ( XATSENV
@@ -622,6 +661,20 @@ the_prelude_load
 ( XATSENV
 , 0(*static*)
 , "srcgen1/prelude/SATS/genv000.sats")
+//
+(* ****** ****** *)
+//
+val () =
+the_prelude_load
+( XATSENV
+, 0(*static*)
+, "srcgen1/prelude/SATS/gsyn000.sats")
+//
+val () =
+the_prelude_load
+( XATSENV
+, 0(*static*)
+, "srcgen1/prelude/SATS/gsyn001.sats")
 //
 (* ****** ****** *)
 //
@@ -657,12 +710,7 @@ val () =
 the_prelude_load
 ( XATSENV
 , 0(*static*)
-, "srcgen1/prelude/SATS/arrn000.sats")
-val () =
-the_prelude_load
-( XATSENV
-, 0(*static*)
-, "srcgen1/prelude/SATS/arrn001.sats")
+, "srcgen1/prelude/SATS/tupl000.sats")
 //
 val () =
 the_prelude_load
@@ -674,6 +722,28 @@ the_prelude_load
 ( XATSENV
 , 0(*static*)
 , "srcgen1/prelude/SATS/tupn001.sats")
+//
+val () =
+the_prelude_load
+( XATSENV
+, 0(*static*)
+, "srcgen1/prelude/SATS/arrn000.sats")
+val () =
+the_prelude_load
+( XATSENV
+, 0(*static*)
+, "srcgen1/prelude/SATS/arrn001.sats")
+//
+val () =
+the_prelude_load
+( XATSENV
+, 0(*static*)
+, "srcgen1/prelude/SATS/axrf000.sats")
+val () =
+the_prelude_load
+( XATSENV
+, 0(*static*)
+, "srcgen1/prelude/SATS/axsz000.sats")
 //
 val () =
 the_prelude_load
@@ -692,12 +762,6 @@ the_prelude_load
 ( XATSENV
 , 0(*static*)
 , "srcgen1/prelude/SATS/strm000.sats")
-//
-val () =
-the_prelude_load
-( XATSENV
-, 0(*static*)
-, "srcgen1/prelude/SATS/tupl000.sats")
 //
 (* ****** ****** *)
 //
@@ -731,7 +795,25 @@ val () =
 the_prelude_load
 ( XATSENV
 , 0(*static*)
+, "srcgen1/prelude/SATS/VT/gcls000_vt.sats")
+//
+val () =
+the_prelude_load
+( XATSENV
+, 0(*static*)
 , "srcgen1/prelude/SATS/VT/gseq000_vt.sats")
+//
+val () =
+the_prelude_load
+( XATSENV
+, 0(*static*)
+, "srcgen1/prelude/SATS/VT/gasz000_vt.sats")
+//
+val () =
+the_prelude_load
+( XATSENV
+, 0(*static*)
+, "srcgen1/prelude/SATS/VT/gsyn000_vt.sats")
 //
 val () =
 the_prelude_load
@@ -777,6 +859,14 @@ the_prelude_load
 ( XATSENV
 , 0(*static*)
 , "srcgen1/prelude/SATS/VT/synoug0_vt.sats")
+//
+(* ****** ****** *)
+//
+val () =
+the_prelude_load
+( XATSENV
+, 0(*static*)
+, "srcgen1/prelude/SATS/VT/xunimpl_vt.sats")
 //
 (* ****** ****** *)
 (*

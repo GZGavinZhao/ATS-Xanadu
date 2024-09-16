@@ -27,7 +27,14 @@ NODE=node --stack-size=4096
 MYTEST="."
 ######
 XSHARED="${XATSJSD}/xshared"
+######
 XATS2JS="${XATSJSD}/bin/xats2js"
+######
+# XATS2JS=\
+# nix run \
+# github:GZGavinZhao/ATS-Xanadu/nixify\#xats2js \
+# --extra-experimental-features flakes \
+# --extra-experimental-features nix-command --
 ######
 XATSJSD=\
 ./../../../srcgen1/xats2js/srcgen1
@@ -70,6 +77,7 @@ xats2js_myenv0.dats \
 xats2js_dynexp.dats \
 xats2js_decl00.dats \
 js1emit.dats \
+js1emit_utils0.dats \
 js1emit_dynexp.dats \
 js1emit_decl00.dats \
 xats2js_tmplib.dats \
@@ -86,7 +94,7 @@ libxats2js:: $(OBJDATS); \
 $(CAT) $(OBJDATS) > lib/libxats2js.js
 ########################################################################
 BUILD/JS/%_dats.js: \
-DATS/%.dats; $(XATS2JS) --output-a $@ --dynamic $<
+DATS/%.dats; $(XATS2JS) --output-w $@ --dynamic $<
 ########################################################################
 cleanall:: ; rm -f BUILD/JS/*_dats.js
 ########################################################################

@@ -38,12 +38,22 @@ Authoremail: gmhwxiATgmailDOTcom
 (* ****** ****** *)
 (* ****** ****** *)
 //
+(*
 fun
 <a:vt>
 g_free0( ~a ): void
 fun
 <a:vt>
+g_free1( !a ): void
+*)
+(*
+fun
+<a:vt>
+g_copy0( ~a ): ( a )
+fun
+<a:vt>
 g_copy1( !a ): ( a )
+*)
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -92,11 +102,11 @@ g_tostr1(obj: !a): strn
 (* ****** ****** *)
 //
 fun
-<a:vt>
-g_print0(obj: ~a): void
+<x0:vt>
+g_print0(obj: ~x0): void
 fun
-<a:vt>
-g_print1(obj: !a): void
+<x0:vt>
+g_print1(obj: !x0): void
 //
 (* ****** ****** *)(* ****** ****** *)
 (* ****** ****** *)(* ****** ****** *)

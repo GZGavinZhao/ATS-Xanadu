@@ -319,10 +319,10 @@ val loc0 = d0p0.lctn()
 (* ****** ****** *)
 (*
 val () =
-prerrln
+prerrsln
 ("trans01_d0pat: loc0 = ", loc0)
 val () =
-prerrln
+prerrsln
 ("trans01_d0pat: d0p0 = ", d0p0)
 *)
 (* ****** ****** *)
@@ -466,7 +466,7 @@ val sym1 = symbl(nam1)
 val d1p0 =
 d1pat(loc0, D1Pid0(sym1))
 val fopt =
-tr01env_search_opt(tenv, sym1)
+tr01env_search$opt(tenv, sym1)
 //
 in
 case+ fopt of
@@ -779,10 +779,10 @@ val loc0 = d0e0.lctn()
 //
 (*
 val () =
-prerrln
+prerrsln
 ("trans01_d0exp: loc0 = ", loc0)
 val () =
-prerrln
+prerrsln
 ("trans01_d0exp: d0e0 = ", d0e0)
 *)
 //
@@ -1038,12 +1038,39 @@ in // let
 FXITMatm
 (d1exp(loc0, D1Eexists(tknd,d1es,d1e1)))
 endlet//end-of-[D0Eexists(tknd,d0es,d0e1)]
+//
+(* ****** ****** *)
+//
+(*
+HX-2024-07-20:
+Sat 20 Jul 2024 11:12:32 AM EDT
+*)
+|
+D0Esynext
+(tknd, gexp) =>
+let
+//
+val loc0 = d0e0.lctn()
+//
+val
+gexp = trans01_g0exp(tenv, gexp)
+//
+in // let
+FXITMatm
+(
+  d1exp(loc0, D1Esynext( tknd, gexp )) )
+end (*let*)//end-of(D0Esynext(tknd,gexp))
+//
+(* ****** ****** *)
+//
 |
 _(* otherwise *) =>
 let
 val
 d1e0 = d1exp_none1(d0e0) in FXITMatm(d1e0)
 endlet // end of [ _(*otherwise*) ]
+//
+(* ****** ****** *)
 //
 ) (*case+*) // end of [f0_dexp(tenv,d0e0)]
 //
@@ -1098,7 +1125,7 @@ val sym1 = symbl(nam1)
 val d1e0 =
 d1exp(loc0, D1Eid0(sym1))
 val fopt =
-tr01env_search_opt(tenv, sym1)
+tr01env_search$opt(tenv, sym1)
 //
 in
 case+ fopt of
@@ -1840,10 +1867,10 @@ val loc0 = d0g0.lctn()
 //
 (*
 val () =
-prerrln
+prerrsln
 ("trans01_d0gua: loc0 = ", loc0)
 val () =
-prerrln
+prerrsln
 ("trans01_d0gua: d0g0 = ", d0g0)
 *)
 //
@@ -1878,10 +1905,10 @@ val loc0 = d0g0.lctn()
 //
 (*
 val () =
-prerrln
+prerrsln
 ("trans01_d0gua: loc0 = ", loc0)
 val () =
-prerrln
+prerrsln
 ("trans01_d0gua: d0g0 = ", d0g0)
 *)
 //
@@ -1916,10 +1943,10 @@ val loc0 = dgt0.lctn()
 //
 (*
 val () =
-prerrln
+prerrsln
 ("trans01_d0gpt: loc0 = ", loc0)
 val () =
-prerrln
+prerrsln
 ("trans01_d0gpt: dgt0 = ", dgt0)
 *)
 //
@@ -1955,10 +1982,10 @@ val loc0 = dcls.lctn()
 //
 (*
 val () =
-prerrln
+prerrsln
 ("trans01_d0cls: loc0 = ", loc0)
 val () =
-prerrln
+prerrsln
 ("trans01_d0cls: dcls = ", dcls)
 *)
 //
@@ -2188,26 +2215,26 @@ trans01_l0d0elst
 list_trans01_fnp(tenv, ldes, trans01_l0d0e)
 //
 (* ****** ****** *)
-
+//
 #implfun
 trans01_f0arglst
 ( tenv, f0as ) =
 list_trans01_fnp(tenv, f0as, trans01_f0arg)
-
+//
 (* ****** ****** *)
 
 #implfun
 trans01_d0gualst
 ( tenv, d0gs ) =
 list_trans01_fnp(tenv, d0gs, trans01_d0gua)
-
+//
 (* ****** ****** *)
-
+//
 #implfun
 trans01_d0clslst
 ( tenv, d0cs ) =
 list_trans01_fnp(tenv, d0cs, trans01_d0cls)
-
+//
 (* ****** ****** *)
 //
 #implfun
@@ -2270,5 +2297,9 @@ auxloop(tenv, d0e1, d0es, list_vt_nil(*0*))
 end//let//end-of-[trans01_d0expseq(tenv,d0es)]
 //
 (* ****** ****** *)
+(* ****** ****** *)
+//
+(* ****** ****** *)(* ****** ****** *)
+(* ****** ****** *)(* ****** ****** *)
 
 (* end of [ATS3/XATSOPT_srcgen2_DATS_trans01_dynexp.dats] *)

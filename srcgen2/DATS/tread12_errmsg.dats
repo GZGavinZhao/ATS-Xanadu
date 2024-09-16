@@ -137,7 +137,7 @@ auxmain( out, s2t1 );
 if
 (lvl
 >FPEMSG_ERRVL) then () else
-println("TREAD12-ERROR:", s2t0))
+printsln("TREAD12-ERROR:", s2t0))
 | _(* otherwise *) => (  (* skipped *)  )
 //
 end(*let*)//end-of(sort2_fpemsg(out,s2t0))
@@ -282,8 +282,9 @@ S2Eerrck _ => s2exp_fpemsg(out, s2e)
 endlet where
 {
 (*
-  val ( ) =
-  prerrln("auxmain: s2e = ", s2e)
+val ( ) =
+(
+prerrsln("auxmain(12): s2e = ", s2e))
 *)
 } (*where*)//end-of-(auxmain(out,s2e))
 //
@@ -306,7 +307,7 @@ auxmain( out, s2e1 );
 if
 (lvl
 >FPEMSG_ERRVL) then () else
-println("TREAD12-ERROR:", s2e0)
+printsln("TREAD12-ERROR:", s2e0)
 )
 | _(* otherwise *) => (  (* skipped *)  )
 //
@@ -468,7 +469,7 @@ g_print$out<>() = out
 //
 (*
 val () =
-prerrln
+prerrsln
 ("d2pat_fpemsg: d2p0 = ", d2p0)
 *)
 //
@@ -485,7 +486,7 @@ if
 >FPEMSG_ERRVL) then () else
 let
 val loc0 = d2p0.lctn() in
-println
+printsln
 ("TREAD12-ERROR:",loc0,":",d2p0)
 end
 )
@@ -721,20 +722,44 @@ endlet//end-of-[D2Eannot(d2e1,...)]
 |D2Enone0(    ) => (   (*void*)   )
 |D2Enone1(d1e1) => (   (*void*)   )
 //
+(* ****** ****** *)
+//
 |
 D2Eextnam
-( tknd, gnm1) =>
+( tknd, gnam) =>
 let
-// HX-2023-11-03: (* nothing yet *)
-endlet//end-of-[D2Eextnam(tknd,gnm1)]
+(*
+  val () = g1nam_fpemsg(out, gnam)
+*)
+endlet//end-of-[D2Eextnam(tknd,gnam)]
+//
+(*
+HX-2024-07-20:
+Sat 20 Jul 2024 08:55:24 AM EDT
+*)
+|
+D2Esynext
+( tknd, gexp) =>
+let
+(*
+  val () = g1exp_fpemsg(out, gexp)
+*)
+endlet//end-of-[D2Esynext(tknd,gexp)]
+//
+(* ****** ****** *)
 //
 |
 D2Eerrck(_,_) => d2exp_fpemsg(out, d2e)
 //
+(* ****** ****** *)
+//
 end where
 {
-  val
-  ( ) = prerrln("auxmain: d2e = ", d2e)
+(*
+val ( ) = 
+(
+  prerrsln("auxmain(12): d2e = ", d2e))
+*)
 } (*where*) // end-of-(auxmain(out,d2e))
 
 (* ****** ****** *)
@@ -751,7 +776,7 @@ g_print$out<>() = out
 //
 (*
 val () =
-prerrln
+prerrsln
 ("d2exp_fpemsg: d2e0 = ", d2e0)
 *)
 //
@@ -768,7 +793,7 @@ if
 >FPEMSG_ERRVL) then () else
 let
 val loc0 = d2e0.lctn() in
-println
+printsln
 ("TREAD12-ERROR:",loc0,":",d2e0)
 end
 )
@@ -1093,7 +1118,7 @@ g_print$out<>() = out
 //
 (*
 val () =
-prerrln
+prerrsln
 ("d2ecl_fpemsg: dcl0 = ", dcl0)
 *)
 //
@@ -1111,7 +1136,7 @@ if
 >FPEMSG_ERRVL) then () else
 let
 val loc0 = dcl0.lctn() in
-println
+printsln
 ("TREAD12-ERROR:",loc0,":",dcl0)
 end
 )
@@ -1177,7 +1202,7 @@ case+ simp of
 case+ scs2 of
 |
 list_nil() =>
-println
+printsln
 ("TREAD12-ERROR:", simp)
 |
 list_cons(s2c1, scs2) => ()
@@ -1208,19 +1233,19 @@ HX-2022-12-12: for various list/optn-derivatives
 #implfun
 sort2lst_fpemsg
 (out, s2ts) =
-list_foreach<sort2>(s2ts) where
+list_foritm<sort2>(s2ts) where
 {
 #impltmp
-foreach$work<sort2>(s2t1) = sort2_fpemsg(out,s2t1)
+foritm$work<sort2>(s2t1) = sort2_fpemsg(out,s2t1)
 }
 //
 #implfun
 sort2opt_fpemsg
 (out, topt) =
-optn_foreach<sort2>(topt) where
+optn_foritm<sort2>(topt) where
 {
 #impltmp
-foreach$work<sort2>(s2t1) = sort2_fpemsg(out,s2t1)
+foritm$work<sort2>(s2t1) = sort2_fpemsg(out,s2t1)
 }
 //
 (* ****** ****** *)
@@ -1228,18 +1253,18 @@ foreach$work<sort2>(s2t1) = sort2_fpemsg(out,s2t1)
 #implfun
 s2explst_fpemsg
 (out, s2es) =
-list_foreach<s2exp>(s2es) where
+list_foritm<s2exp>(s2es) where
 {
 #impltmp
-foreach$work<s2exp>(s2e1) = s2exp_fpemsg(out,s2e1)
+foritm$work<s2exp>(s2e1) = s2exp_fpemsg(out,s2e1)
 }
 #implfun
 s2expopt_fpemsg
 (out, sopt) =
-optn_foreach<s2exp>(sopt) where
+optn_foritm<s2exp>(sopt) where
 {
 #impltmp
-foreach$work<s2exp>(s2e1) = s2exp_fpemsg(out,s2e1)
+foritm$work<s2exp>(s2e1) = s2exp_fpemsg(out,s2e1)
 }
 //
 (* ****** ****** *)
@@ -1247,10 +1272,10 @@ foreach$work<s2exp>(s2e1) = s2exp_fpemsg(out,s2e1)
 #implfun
 l2s2elst_fpemsg
 (out, lses) =
-list_foreach<l2s2e>(lses) where
+list_foritm<l2s2e>(lses) where
 {
 #impltmp
-foreach$work<l2s2e>(ls2e) = l2s2e_fpemsg(out,ls2e)
+foritm$work<l2s2e>(ls2e) = l2s2e_fpemsg(out,ls2e)
 }
 //
 (* ****** ****** *)
@@ -1258,10 +1283,10 @@ foreach$work<l2s2e>(ls2e) = l2s2e_fpemsg(out,ls2e)
 #implfun
 d2patlst_fpemsg
 (out, d2ps) =
-list_foreach<d2pat>(d2ps) where
+list_foritm<d2pat>(d2ps) where
 {
 #impltmp
-foreach$work<d2pat>(d2p1) = d2pat_fpemsg(out,d2p1)
+foritm$work<d2pat>(d2p1) = d2pat_fpemsg(out,d2p1)
 }
 //
 (* ****** ****** *)
@@ -1269,10 +1294,10 @@ foreach$work<d2pat>(d2p1) = d2pat_fpemsg(out,d2p1)
 #implfun
 l2d2plst_fpemsg
 (out, ldps) =
-list_foreach<l2d2p>(ldps) where
+list_foritm<l2d2p>(ldps) where
 {
 #impltmp
-foreach$work<l2d2p>(ld2p) = l2d2p_fpemsg(out,ld2p)
+foritm$work<l2d2p>(ld2p) = l2d2p_fpemsg(out,ld2p)
 }
 //
 (* ****** ****** *)
@@ -1280,18 +1305,18 @@ foreach$work<l2d2p>(ld2p) = l2d2p_fpemsg(out,ld2p)
 #implfun
 d2explst_fpemsg
 (out, d2es) =
-list_foreach<d2exp>(d2es) where
+list_foritm<d2exp>(d2es) where
 {
 #impltmp
-foreach$work<d2exp>(d2e1) = d2exp_fpemsg(out,d2e1)
+foritm$work<d2exp>(d2e1) = d2exp_fpemsg(out,d2e1)
 }
 #implfun
 d2expopt_fpemsg
 (out, dopt) =
-optn_foreach<d2exp>(dopt) where
+optn_foritm<d2exp>(dopt) where
 {
 #impltmp
-foreach$work<d2exp>(d2e1) = d2exp_fpemsg(out,d2e1)
+foritm$work<d2exp>(d2e1) = d2exp_fpemsg(out,d2e1)
 }
 //
 (* ****** ****** *)
@@ -1299,10 +1324,10 @@ foreach$work<d2exp>(d2e1) = d2exp_fpemsg(out,d2e1)
 #implfun
 l2d2elst_fpemsg
 (out, ldes) =
-list_foreach<l2d2e>(ldes) where
+list_foritm<l2d2e>(ldes) where
 {
 #impltmp
-foreach$work<l2d2e>(ld2e) = l2d2e_fpemsg(out,ld2e)
+foritm$work<l2d2e>(ld2e) = l2d2e_fpemsg(out,ld2e)
 }
 //
 (* ****** ****** *)
@@ -1310,10 +1335,10 @@ foreach$work<l2d2e>(ld2e) = l2d2e_fpemsg(out,ld2e)
 #implfun
 f2arglst_fpemsg
 (out, f2as) =
-list_foreach<f2arg>(f2as) where
+list_foritm<f2arg>(f2as) where
 {
 #impltmp
-foreach$work<f2arg>(f2a1) = f2arg_fpemsg(out,f2a1)
+foritm$work<f2arg>(f2a1) = f2arg_fpemsg(out,f2a1)
 }
 //
 (* ****** ****** *)
@@ -1321,10 +1346,10 @@ foreach$work<f2arg>(f2a1) = f2arg_fpemsg(out,f2a1)
 #implfun
 s2qaglst_fpemsg
 (out, sqas) =
-list_foreach<s2qag>(sqas) where
+list_foritm<s2qag>(sqas) where
 {
 #impltmp
-foreach$work<s2qag>(sqa1) = s2qag_fpemsg(out,sqa1)
+foritm$work<s2qag>(sqa1) = s2qag_fpemsg(out,sqa1)
 }
 //
 (* ****** ****** *)
@@ -1332,10 +1357,10 @@ foreach$work<s2qag>(sqa1) = s2qag_fpemsg(out,sqa1)
 #implfun
 t2qaglst_fpemsg
 (out, tqas) =
-list_foreach<t2qag>(tqas) where
+list_foritm<t2qag>(tqas) where
 {
 #impltmp
-foreach$work<t2qag>(tqa1) = t2qag_fpemsg(out,tqa1)
+foritm$work<t2qag>(tqa1) = t2qag_fpemsg(out,tqa1)
 }
 //
 (* ****** ****** *)
@@ -1343,10 +1368,10 @@ foreach$work<t2qag>(tqa1) = t2qag_fpemsg(out,tqa1)
 #implfun
 t2iaglst_fpemsg
 (out, tias) =
-list_foreach<t2iag>(tias) where
+list_foritm<t2iag>(tias) where
 {
 #impltmp
-foreach$work<t2iag>(tia1) = t2iag_fpemsg(out,tia1)
+foritm$work<t2iag>(tia1) = t2iag_fpemsg(out,tia1)
 }
 //
 (* ****** ****** *)
@@ -1354,19 +1379,19 @@ foreach$work<t2iag>(tia1) = t2iag_fpemsg(out,tia1)
 #implfun
 d2gualst_fpemsg
 (out, d2gs) =
-list_foreach<d2gua>(d2gs) where
+list_foritm<d2gua>(d2gs) where
 {
 #impltmp
-foreach$work<d2gua>(dgua) = d2gua_fpemsg(out,dgua)
+foritm$work<d2gua>(dgua) = d2gua_fpemsg(out,dgua)
 }
 //
 #implfun
 d2clslst_fpemsg
 (out, d2cs) =
-list_foreach<d2cls>(d2cs) where
+list_foritm<d2cls>(d2cs) where
 {
 #impltmp
-foreach$work<d2cls>(d2cl) = d2cls_fpemsg(out,d2cl)
+foritm$work<d2cls>(d2cl) = d2cls_fpemsg(out,d2cl)
 }
 //
 (* ****** ****** *)
@@ -1374,10 +1399,10 @@ foreach$work<d2cls>(d2cl) = d2cls_fpemsg(out,d2cl)
 #implfun
 d2eclist_fpemsg
 (out, dcls) =
-list_foreach<d2ecl>(dcls) where
+list_foritm<d2ecl>(dcls) where
 {
 #impltmp
-foreach$work<d2ecl>(d2cl) = d2ecl_fpemsg(out,d2cl)
+foritm$work<d2ecl>(d2cl) = d2ecl_fpemsg(out,d2cl)
 }
 //
 (* ****** ****** *)
@@ -1385,10 +1410,10 @@ foreach$work<d2ecl>(d2cl) = d2ecl_fpemsg(out,d2cl)
 #implfun
 d2arglst_fpemsg
 (out, d2as) =
-list_foreach<d2arg>(d2as) where
+list_foritm<d2arg>(d2as) where
 {
 #impltmp
-foreach$work<d2arg>(d2a1) = d2arg_fpemsg(out,d2a1)
+foritm$work<d2arg>(d2a1) = d2arg_fpemsg(out,d2a1)
 }
 //
 (* ****** ****** *)
@@ -1538,10 +1563,10 @@ endlet where
 #implfun
 d2valdclist_fpemsg
 (out, d2vs) =
-list_foreach<d2valdcl>(d2vs) where
+list_foritm<d2valdcl>(d2vs) where
 {
 #impltmp
-foreach$work<d2valdcl>(dvar) = d2valdcl_fpemsg(out,dvar)
+foritm$work<d2valdcl>(dvar) = d2valdcl_fpemsg(out,dvar)
 }
 //
 (* ****** ****** *)
@@ -1549,10 +1574,10 @@ foreach$work<d2valdcl>(dvar) = d2valdcl_fpemsg(out,dvar)
 #implfun
 d2vardclist_fpemsg
 (out, d2vs) =
-list_foreach<d2vardcl>(d2vs) where
+list_foritm<d2vardcl>(d2vs) where
 {
 #impltmp
-foreach$work<d2vardcl>(dvar) = d2vardcl_fpemsg(out,dvar)
+foritm$work<d2vardcl>(dvar) = d2vardcl_fpemsg(out,dvar)
 }
 //
 (* ****** ****** *)
@@ -1560,10 +1585,10 @@ foreach$work<d2vardcl>(dvar) = d2vardcl_fpemsg(out,dvar)
 #implfun
 d2fundclist_fpemsg
 (out, d2fs) =
-list_foreach<d2fundcl>(d2fs) where
+list_foritm<d2fundcl>(d2fs) where
 {
 #impltmp
-foreach$work<d2fundcl>(dfun) = d2fundcl_fpemsg(out,dfun)
+foritm$work<d2fundcl>(dfun) = d2fundcl_fpemsg(out,dfun)
 }
 //
 (* ****** ****** *)
@@ -1571,10 +1596,10 @@ foreach$work<d2fundcl>(dfun) = d2fundcl_fpemsg(out,dfun)
 #implfun
 d2cstdclist_fpemsg
 (out, d2cs) =
-list_foreach<d2cstdcl>(d2cs) where
+list_foritm<d2cstdcl>(d2cs) where
 {
 #impltmp
-foreach$work<d2cstdcl>(dcst) = d2cstdcl_fpemsg(out,dcst)
+foritm$work<d2cstdcl>(dcst) = d2cstdcl_fpemsg(out,dcst)
 }
 //
 (* ****** ****** *)

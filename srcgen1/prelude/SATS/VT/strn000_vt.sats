@@ -179,21 +179,21 @@ strn_vt_length1
 (* ****** ****** *)
 //
 fun<>
-strn_vt_get_at
+strn_vt_get$at
 {n:int}
 {i:nat|i < n}
 ( cs:
 ! strn_vt(n), i0: int(i)): cgtz
 //
 fun<>
-strn_vt_set_at
+strn_vt_set$at
 {n:int}
 {i:nat|i < n}
 ( p0:
 ! strn_vt(n), i0: int(i), c0: cgtz): void
 //
 fun<>
-strtmp_vt_set_at
+strtmp_vt_set$at
 {n:int}
 {i:nat|i < n}
 ( p0:
@@ -375,12 +375,12 @@ strn_vt_tabulate
 ( n0: int(n) ) : strn_vt(n)
 //
 fun<>
-strn_vt_tabulate_cfr
+strn_vt_tabulate_f1un
 {n:nat}
 ( n0
 : int(n)
 , f0
-: nintlt(n) -<cfr> cgtz): strn_vt(n)
+: nintlt(n) -> cgtz): strn_vt(n)
 //
 (* ****** ****** *)
 //
@@ -425,18 +425,18 @@ strn_vt with strn_vt_make0_lstrm
 (* ****** ****** *)
 //
 #symload
-[] with strn_vt_get_at of 1000
+[] with strn_vt_get$at of 1000
 #symload
-[] with strn_vt_set_at of 1000
+[] with strn_vt_set$at of 1000
 #symload
-[] with strtmp_vt_set_at of 1000
+[] with strtmp_vt_set$at of 1000
 //
 #symload
-get_at with strn_vt_get_at of 1000
+get$at with strn_vt_get$at of 1000
 #symload
-set_at with strn_vt_set_at of 1000
+set$at with strn_vt_set$at of 1000
 #symload
-set_at with strtmp_vt_set_at of 1000
+set$at with strtmp_vt_set$at of 1000
 //
 (* ****** ****** *)
 //

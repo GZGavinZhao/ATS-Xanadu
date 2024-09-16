@@ -47,36 +47,175 @@ For further program verification
 (* ****** ****** *)
 (* ****** ****** *)
 //
-#include
-"srcgen1/prelude/SATS/bool000.sats"
-#include
-"srcgen1/prelude/SATS/char000.sats"
-//
-(* ****** ****** *)
-//
+(*
 #include
 "srcgen1/prelude/SATS/gbas000.sats"
 #include
 "srcgen1/prelude/SATS/gbas001.sats"
+*)
+#include
+"srcgen2/prelude/SATS/gbas000.sats"
+#include
+"srcgen2/prelude/SATS/VT/gbas000_vt.sats"
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+(*
+#include
+"srcgen1/prelude/SATS/gdbg000.sats"
+*)
+#include
+"srcgen2/prelude/SATS/gdbg000.sats"
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+(*
+#include
+"srcgen1/prelude/SATS/gnum000.sats"
+*)
+#include
+"srcgen2/prelude/SATS/gnum000.sats"
+//
+(* ****** ****** *)
+//
+(*
+#include
+"srcgen1/prelude/SATS/gord000.sats"
+*)
+#include
+"srcgen2/prelude/SATS/gord000.sats"
+//
+(* ****** ****** *)
+//
+(*
+#include
+"srcgen1/prelude/SATS/gcls000.sats"
+*)
+#include
+"srcgen2/prelude/SATS/gcls000.sats"
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+(*
+#include
+"srcgen1/prelude/SATS/gfor000.sats"
+*)
+//
+(* ****** ****** *)
+//
+(*
+#include
+"srcgen1/prelude/SATS/gfun000.sats"
+*)
+#include
+"srcgen2/prelude/SATS/gfun000.sats"
+//
+(* ****** ****** *)
+//
+(*
+#include
+"srcgen1/prelude/SATS/gseq000.sats"
+#include
+"srcgen1/prelude/SATS/gseq001.sats"
+*)
+//
+#include
+"srcgen2/prelude/SATS/gseq000.sats"
+//
+(* ****** ****** *)
+//
+(*
+#include
+"srcgen1/prelude/SATS/gseqn00.sats"
+*)
+//
+(* ****** ****** *)
+//
+(*
+#include
+"srcgen1/prelude/SATS/gasz000.sats"
+*)
+#include
+"srcgen2/prelude/SATS/gasz000.sats"
 //
 (* ****** ****** *)
 //
 #include
-"srcgen1/prelude/SATS/gnum000.sats"
-#include
-"srcgen1/prelude/SATS/gord000.sats"
+"srcgen1/prelude/SATS/gmap000.sats"
 //
+(* ****** ****** *)
+//
+#include
+"srcgen1/prelude/SATS/gras000.sats"
+#include
+"srcgen1/prelude/SATS/grasn00.sats"
+//
+(* ****** ****** *)
+//
+#include
+"srcgen1/prelude/SATS/genv000.sats"
+//
+(* ****** ****** *)
+//
+(*
+#include
+"srcgen1/prelude/SATS/gsyn000.sats"
+*)
+#include
+"srcgen2/prelude/SATS/gsyn000.sats"
+//
+(* ****** ****** *)
 (* ****** ****** *)
 #include
 "srcgen1/prelude/SATS/rand000.sats"
 (* ****** ****** *)
+(* ****** ****** *)
+//
+(*
+#include
+"srcgen1/prelude/SATS/bool000.sats"
+*)
+#include
+"srcgen2/prelude/SATS/bool000.sats"
+//
+(*
+#include
+"srcgen1/prelude/SATS/char000.sats"
+*)
+#include
+"srcgen2/prelude/SATS/char000.sats"
+//
+(* ****** ****** *)
+//
+(*
 #include
 "srcgen1/prelude/SATS/gint000.sats"
+*)
+#include
+"srcgen2/prelude/SATS/gint000.sats"
+//
+(* ****** ****** *)
+//
+(*
 #include
 "srcgen1/prelude/SATS/gflt000.sats"
+*)
+#include
+"srcgen2/prelude/SATS/gflt000.sats"
+//
+(* ****** ****** *)
+//
+(*
 #include
 "srcgen1/prelude/SATS/strn000.sats"
+*)
+#include
+"srcgen2/prelude/SATS/strn000.sats"
 //
+(* ****** ****** *)
 (* ****** ****** *)
 //
 #include
@@ -84,55 +223,88 @@ For further program verification
 #include
 "srcgen1/prelude/SATS/arrn001.sats"
 //
+(* ****** ****** *)
+//
+(*
+#include
+"srcgen1/prelude/SATS/axrf000.sats"
+#include
+"srcgen1/prelude/SATS/axsz000.sats"
+*)
+#include
+"srcgen2/prelude/SATS/axrf000.sats"
+#include
+"srcgen2/prelude/SATS/axsz000.sats"
+//
+(* ****** ****** *)
+//
+(*
+(*
+HX: homogeneous tuples
+*)
 #include
 "srcgen1/prelude/SATS/tupn000.sats"
 #include
 "srcgen1/prelude/SATS/tupn001.sats"
+*)
 //
-#include
-"srcgen1/prelude/SATS/list000.sats"
-#include
-"srcgen1/prelude/SATS/optn000.sats"
-#include
-"srcgen1/prelude/SATS/strm000.sats"
+(* ****** ****** *)
 //
+(*
 #include
 "srcgen1/prelude/SATS/tupl000.sats"
+*)
+#include
+"srcgen2/prelude/SATS/tupl000.sats"
+//
+(* ****** ****** *)
+//
+(*
 #include
 "srcgen1/prelude/SATS/utpl000.sats"
+*)
+//
+(* ****** ****** *)
+//
+(*
+#include
+"srcgen1/prelude/SATS/list000.sats"
+*)
+#include
+"srcgen2/prelude/SATS/list000.sats"
+//
+(* ****** ****** *)
+//
+(*
+#include
+"srcgen1/prelude/SATS/optn000.sats"
+*)
+#include
+"srcgen2/prelude/SATS/optn000.sats"
 //
 (* ****** ****** *)
 //
 #include
-"srcgen1/prelude/SATS/gfor000.sats"
-//
-#include
-"srcgen1/prelude/SATS/gfun000.sats"
-//
-#include
-"srcgen1/prelude/SATS/gmap000.sats"
-//
-#include
-"srcgen1/prelude/SATS/gras000.sats"
-#include
-"srcgen1/prelude/SATS/grasn00.sats"
-//
-#include
-"srcgen1/prelude/SATS/gseq000.sats"
-#include
-"srcgen1/prelude/SATS/gseq001.sats"
-#include
-"srcgen1/prelude/SATS/gseqn00.sats"
-//
-#include
-"srcgen1/prelude/SATS/genv000.sats"
+"srcgen1/prelude/SATS/strm000.sats"
 //
 (* ****** ****** *)
 //
 #include
 "srcgen1/prelude/SATS/excptn0.sats"
+//
+(* ****** ****** *)
+//
+(*
 #include
 "srcgen1/prelude/SATS/synoug0.sats"
+*)
+//
+(* ****** ****** *)
+//
+(*
+#include
+"srcgen1/prelude/SATS/xunimpl.sats"
+*)
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -141,6 +313,53 @@ HX:
 For viewtypes (that is, linear types)
 *)
 (* ****** ****** *)
+(* ****** ****** *)
+#include
+"srcgen2/prelude/SATS/VT/gnum000_vt.sats"
+(* ****** ****** *)
+#include
+"srcgen2/prelude/SATS/VT/gord000_vt.sats"
+(* ****** ****** *)
+#include
+"srcgen2/prelude/SATS/VT/gfun000_vt.sats"
+(* ****** ****** *)
+#include
+"srcgen2/prelude/SATS/VT/gcls000_vt.sats"
+(* ****** ****** *)
+(* ****** ****** *)
+//
+(*
+#include
+"srcgen1/prelude/SATS/VT/gseq000_vt.sats"
+*)
+#include
+"srcgen2/prelude/SATS/VT/gseq000_vt.sats"
+//
+(* ****** ****** *)
+//
+(*
+#include
+"srcgen1/prelude/SATS/VT/gseqn00_vt.sats"
+*)
+//
+(* ****** ****** *)
+//
+(*
+#include
+"srcgen1/prelude/SATS/VT/gasz000_vt.sats"
+*)
+#include
+"srcgen2/prelude/SATS/VT/gasz000_vt.sats"
+//
+(* ****** ****** *)
+//
+(*
+#include
+"srcgen1/prelude/SATS/VT/gsyn000_vt.sats"
+*)
+#include
+"srcgen2/prelude/SATS/VT/gsyn000_vt.sats"
+//
 (* ****** ****** *)
 //
 #include
@@ -154,29 +373,61 @@ For viewtypes (that is, linear types)
 "srcgen1/prelude/SATS/VT/arrn001_vt.sats"
 //
 #include
+"srcgen1/prelude/SATS/VT/axrf000_vt.sats"
+#include
+"srcgen1/prelude/SATS/VT/axsz000_vt.sats"
+//
+(* ****** ****** *)
+//
+(*
+#include
 "srcgen1/prelude/SATS/VT/list000_vt.sats"
+*)
+#include
+"srcgen2/prelude/SATS/VT/list000_vt.sats"
+//
+(* ****** ****** *)
+//
+(*
 #include
 "srcgen1/prelude/SATS/VT/optn000_vt.sats"
+*)
+#include
+"srcgen2/prelude/SATS/VT/optn000_vt.sats"
 //
+(* ****** ****** *)
+//
+(*
 #include
 "srcgen1/prelude/SATS/VT/strm000_vt.sats"
 #include
 "srcgen1/prelude/SATS/VT/strm001_vt.sats"
+*)
+#include
+"srcgen2/prelude/SATS/VT/strm000_vt.sats"
 //
+(* ****** ****** *)
+//
+(*
 #include
 "srcgen1/prelude/SATS/VT/tupl000_vt.sats"
+*)
+#include
+"srcgen2/prelude/SATS/VT/tupl000_vt.sats"
 //
 (* ****** ****** *)
 //
-#include
-"srcgen1/prelude/SATS/VT/gseq000_vt.sats"
-#include
-"srcgen1/prelude/SATS/VT/gseqn00_vt.sats"
-//
-(* ****** ****** *)
-//
+(*
 #include
 "srcgen1/prelude/SATS/VT/synoug0_vt.sats"
+*)
+//
+(* ****** ****** *)
+//
+(*
+#include
+"srcgen1/prelude/SATS/VT/xunimpl_vt.sats"
+*)
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -186,8 +437,8 @@ For viewtypes (that is, linear types)
 (*
 HX-2023-08-18:
 This does not work as 
-the type definitions in the above included
-files are not yet accessible!
+the type definitions in the above
+included files are not yet accessible!
 *)
 //
 #staload

@@ -64,10 +64,14 @@ _(*TRANS23*) = "./trans23.dats"
 (* ****** ****** *)
 #staload "./../SATS/dynexp3.sats"
 (* ****** ****** *)
+//
+#staload "./../SATS/trans12.sats"
+(*
 #staload "./../SATS/trans2a.sats"
 #staload "./../SATS/trsym2b.sats"
-(* ****** ****** *)
+*)
 #staload "./../SATS/trans23.sats"
+//
 (* ****** ****** *)
 #staload "./../SATS/xglobal.sats"
 (* ****** ****** *)
@@ -110,12 +114,22 @@ let
 in(*let*)
 (0, dpar) where
 {
+//
+(*
+HX-2024-08-02:
+This part is already
+done inside [trans12]!!!
+//
 val dpar =
 d2parsed_of_trans2a(dpar)
 val (  ) =
-d2parsed_at_trsym2b(dpar)
+d2parsed_by_trsym2b(dpar)
+//
+*)
+//
 val dpar =
 d3parsed_of_trans23(dpar)
+//
 val (  ) =
 the_d3parenv_pvsadd0(fnm2, dpar) }
 end//let//end-of-[ optn_vt_nil() ]
@@ -127,7 +141,7 @@ end where
 {
 (*
   val () =
-  prerrln
+  prerrsln
   ("s3taload_from_fpath: dpar = ", dpar)
 *)
 }(*where*)//end-of-[s3taload_from_fpath(...)]
@@ -142,10 +156,10 @@ trans23_d2ecl
 val
 loc0 = d2cl.lctn()
 val () =
-prerrln
+prerrsln
 ("trans23_d2ecl: loc0 = ", loc0)
 val () =
-prerrln
+prerrsln
 ("trans23_d2ecl: d2cl = ", d2cl)
 *)
 //
@@ -220,6 +234,15 @@ D2Cabsimpl _ => f0_absimpl(env0, d2cl)
 D2Cinclude _ => f0_include(env0, d2cl)
 |
 D2Cstaload _ => f0_staload(env0, d2cl)
+//
+(* ****** ****** *)
+//
+|
+D2Cdyninit _ => f0_dyninit(env0, d2cl)
+|
+D2Cextcode _ => f0_extcode(env0, d2cl)
+//
+(* ****** ****** *)
 //
 |
 D2Cvaldclst _ => f0_valdclst(env0, d2cl)
@@ -336,7 +359,7 @@ case+
 simp.node() of
 |SIMPLone1
 (s2c1) =>
-tr23env_insert_any(env0,s2c1)
+tr23env_insert$any(env0,s2c1)
 |_(*otherwise*) => ( (*void*) ))
 //
 in//let
@@ -362,7 +385,7 @@ case+
 simp.node() of
 |SIMPLone1
 (s2c1) =>
-tr23env_insert_any(env0,s2c1)
+tr23env_insert$any(env0,s2c1)
 //
 |SIMPLopt2
 (sqid,scs1,scs2) =>
@@ -370,7 +393,7 @@ tr23env_insert_any(env0,s2c1)
 case+ scs2 of
 |list_nil() => ()
 |list_cons(s2c1, _) =>
-tr23env_insert_any(env0,s2c1))
+tr23env_insert$any(env0,s2c1))
 //
 |SIMPLall1
 (sqid, s2cs) => ((*deadcode*)))
@@ -452,10 +475,10 @@ d2parsed_get_stadyn(dpar)
 in//let
 if
 stadyn <= 0
-then
+then // static
 (
   S3TALOADnone(dopt) )
-else
+else // dynamic
 (
 case+ fopt of
 |optn_nil() =>
@@ -481,6 +504,72 @@ in//let
 end (*let*) // end of [f0_staload(...)]
 //
 (* ****** ****** *)
+(* ****** ****** *)
+//
+(*
+HX-2024-07-20:
+Sat 20 Jul 2024 02:26:43 PM EDT
+*)
+//
+fun
+f0_dyninit
+( env0:
+! tr23env
+, d2cl: d2ecl): d3ecl =
+let
+//
+val-
+D2Cdyninit
+(tknd, g1e1) = d2cl.node()
+//
+in//let
+  d3ecl(loc0, D3Cdyninit(tknd, g1e1))
+end where
+{
+//
+val loc0 = d2cl.lctn((*void*))
+//
+(*
+val () = prerrsln
+("trans23_d2ecl: f0_dyninit: d2cl = ", d2cl)
+*)
+//
+} (*where*) // end of [f0_dyninit(env0,d2cl)]
+//
+(* ****** ****** *)
+//
+(*
+HX-2024-07-20:
+Sat 20 Jul 2024 02:26:43 PM EDT
+*)
+//
+fun
+f0_extcode
+( env0:
+! tr23env
+, d2cl: d2ecl): d3ecl =
+let
+//
+val-
+D2Cextcode
+(tknd, g1e1) = d2cl.node()
+//
+in//let
+  d3ecl(loc0, D3Cextcode(tknd, g1e1))
+end where
+{
+//
+val loc0 = d2cl.lctn((*void*))
+//
+(*
+val () = prerrsln
+("trans23_d2ecl: f0_extcode: d2cl = ", d2cl)
+*)
+//
+} (*where*) // end of [f0_extcode(env0,d2cl)]
+//
+(* ****** ****** *)
+(* ****** ****** *)
 //
 fun
 f0_valdclst
@@ -505,7 +594,7 @@ end where
 val loc0 = d2cl.lctn()
 (*
 val (  ) =
-prerrln("f0_valdclst(23): d2cl = ", d2cl)
+prerrsln("f0_valdclst(23): d2cl = ", d2cl)
 *)
 //
 }(*where*) // end of [f0_valdclst(env0,d2cl)]
@@ -535,7 +624,7 @@ end where
 val loc0 = d2cl.lctn()
 (*
 val (  ) =
-prerrln("f0_vardclst(23): d2cl = ", d2cl)
+prerrsln("f0_vardclst(23): d2cl = ", d2cl)
 *)
 //
 }(*where*) // end of [f0_vardclst(env0,d2cl)]
@@ -569,7 +658,7 @@ end where
 val loc0 = d2cl.lctn()
 (*
 val (  ) =
-prerrln("f0_fundclst(23): d2cl = ", d2cl)
+prerrsln("f0_fundclst(23): d2cl = ", d2cl)
 *)
 //
 }(*where*) // end of [f0_fundclst(env0,d2cl)]
@@ -613,9 +702,9 @@ val loc0 = d2cl.lctn()
 //
 (*
 val (  ) =
-prerrln("f0_implmnt0(23): loc0 = ", loc0)
+prerrsln("f0_implmnt0(23): loc0 = ", loc0)
 val (  ) =
-prerrln("f0_implmnt0(23): d2cl = ", d2cl)
+prerrsln("f0_implmnt0(23): d2cl = ", d2cl)
 *)
 //
 } (*where*) // end of [f0_implmnt0(env0,d2cl)]
@@ -766,9 +855,9 @@ val wsxp =
 d2fundcl_get_wsxp(dfun)
 //
 (*
-val (  ) = prerrln
+val (  ) = prerrsln
 ("trans23_d2fundcl: f2as = ", f2as)
-val (  ) = prerrln
+val (  ) = prerrsln
 ("trans23_d2fundcl: tdxp = ", tdxp)
 *)
 //
@@ -782,9 +871,9 @@ val f2cl = F2CLfun((*void*))
 *)
 //
 (*
-val (  ) = prerrln
+val (  ) = prerrsln
 ("trans23_d2fundcl: f3as = ", f3as)
-val (  ) = prerrln
+val (  ) = prerrsln
 ("trans23_d2fundcl: tdxp = ", tdxp)
 *)
 //

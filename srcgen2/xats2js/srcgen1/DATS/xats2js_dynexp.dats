@@ -141,7 +141,7 @@ in//let
 case+ ilet of
 |I1LETnew0(iins) =>
 (
-print
+prints
 ("I1LETnew0(", "...", ")\n");
 envx2js_incnind(env0,2(*inc*));
 xats2js_i1ins(  env0 , iins  );
@@ -154,7 +154,7 @@ xats2js_i1ins(  env0 , iins  );
 envx2js_decnind(env0,2(*dec*))) where
 {
 val () =
-print
+prints
 ("I1LETnew1(", itnm, ";", "...", ")\n")
 }
 //
@@ -307,6 +307,33 @@ nindfpr
 )
 //
 (* ****** ****** *)
+(* ****** ****** *)
+(*
+|I1INStup0 _ => 
+(
+ i1ins_fprint(filr, iins))
+|I1INStup1 _ => 
+(
+ i1ins_fprint(filr, iins))
+|I1INSrcd2 _ => 
+(
+ i1ins_fprint(filr, iins))
+*)
+(* ****** ****** *)
+(* ****** ****** *)
+//
+|I1INSlam0 _ =>
+(
+//
+f0_lam0(env0, iins);
+//
+nindfpr
+(filr, nind); strnfpr
+(filr, "// I1INSlam0-end");
+)
+//
+(* ****** ****** *)
+(* ****** ****** *)
 //
 |I1INSl0azy _ =>
 (
@@ -330,7 +357,7 @@ nindfpr
 //
 (* ****** ****** *)
 //
-|_(* else *) =>
+|_(*rest-of-I1INS...*) =>
 (
   i1ins_fprint(filr, iins)))
 //
@@ -351,7 +378,7 @@ I1INSdapp
 (i1f0, i1vs) = iins
 in//let
 //
-print
+prints
 ("I1INSdapp(",i1f0,";",i1vs,")")
 end//let//end-of-[f0_dapp(env0,iins)]
 //
@@ -370,7 +397,7 @@ I1INStimp
 in//let
 //
 print("I1INStimp(");
-print(i0f0,";","...",")\n");
+prints(i0f0,";","...",")\n");
 xats2js_t1imp(env0,timp(*impltmp*))
 end//let//end-of-[f0_timp(env0,iins)]
 //
@@ -393,7 +420,7 @@ I1INSlet0
 val () =
 (
 print("I1INSlet0(");
-print("...",";","...",")\n"))
+prints("...",";","...",")\n"))
 //
 val () =
 envx2js_incnind(env0, 2)
@@ -428,9 +455,9 @@ g_print$out<>() = filr
 //
 val () =
 (
-print
+prints
 ("I1INSift0(",test,";");
-print("...",";","...",")\n"))
+prints("...",";","...",")\n"))
 //
 val () =
 envx2js_incnind(env0, 2)
@@ -473,9 +500,9 @@ g_print$out<>() = filr
 //
 val () =
 (
-print
+prints
 ("I1INScas0(",cask,";");
-print(i1v1,";","...",")\n"))
+prints(i1v1,";","...",")\n"))
 //
 val () =
 envx2js_incnind(env0, 2)
@@ -486,6 +513,40 @@ xats2js_i1clslst(env0, icls)
 val () = envx2js_decnind(env0, 2)
 //
 end//let//end-of-[f0_cas0(env0,iins)]
+//
+(* ****** ****** *)
+//
+fun
+f0_lam0
+( env0:
+! envx2js
+, iins: i1ins): void =
+let
+//
+#impltmp
+g_print$out<>() = filr
+//
+val-
+I1INSlam0
+( tknd
+, fjas, icmp) = iins
+//
+val () =
+(
+prints
+("I1INSlam0(",tknd,";");
+prints(fjas,";","...",")\n"))
+//
+val () =
+envx2js_incnind(env0, 2)
+//
+val () = // HX: body
+(
+  xats2js_i1cmp( env0, icmp ))
+//
+val () = envx2js_decnind(env0, 2)
+//
+end//let//end-of-[f0_lam0(env0,iins)]
 //
 (* ****** ****** *)
 //
@@ -506,7 +567,7 @@ I1INSl0azy
 val () =
 (
 print("I1INSl0azy(");
-print( dknd,";","...",")\n"))
+prints( dknd,";","...",")\n"))
 //
 val () =
 envx2js_incnind(env0, 2)
@@ -539,7 +600,7 @@ I1INSl1azy
 val () =
 (
 print("I1INSl1azy(");
-print( dknd,";","...",")\n"))
+prints( dknd,";","...",")\n"))
 //
 val () =
 envx2js_incnind(env0, 2)
@@ -571,7 +632,7 @@ let
 (*
 //
 val () =
-prerrln
+prerrsln
 ("xats2js_fjarg: farg = ", farg))
 //
 *)
@@ -612,7 +673,7 @@ farg.node() of
 |
 FJARGdarg(i1bs) =>
 (
-  print("FJARGdarg(", i1bs, ")"))
+  prints("FJARGdarg(", i1bs, ")"))
 end//let
 }(*where*)//end-of-[xats2js_fjarg(env0,farg)]
 //
@@ -626,7 +687,7 @@ let
 (*
 //
 val () =
-prerrln
+prerrsln
 ("xats2js_i1gpt: igpt = ", igpt))
 //
 *)
@@ -652,7 +713,7 @@ let
 (*
 //
 val () =
-prerrln
+prerrsln
 ("xats2js_i1cls: icls = ", icls))
 //
 *)

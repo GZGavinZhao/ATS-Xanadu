@@ -34,10 +34,16 @@ fun
 <xs:t0>
 <x0:t0>
 gseq_nil(): xs
+//
 fun
 <xs:t0>
 <x0:t0>
 gseq_cons(x0, xs): xs
+fun
+<xs:t0>
+<x0:t0>
+gseq_snoc(xs, x0): xs
+//
 (* ****** ****** *)
 //
 fun
@@ -107,44 +113,40 @@ gseq_copy(xs): (xs)
 fun
 <xs:t0>
 <x0:t0>
-gseq_head_raw(xs): x0
+gseq_head(xs): x0
 fun
 <xs:t0>
 <x0:t0>
-gseq_tail_raw(xs): xs
+gseq_tail(xs): xs
 //
 fun
 <xs:t0>
 <x0:t0>
-gseq_head_exn(xs): x0
+gseq_head$exn(xs): x0
 fun
 <xs:t0>
 <x0:t0>
-gseq_tail_exn(xs): xs
+gseq_tail$exn(xs): xs
 //
 fun
 <xs:t0>
 <x0:t0>
-gseq_head_opt(xs): optn_vt(x0)
+gseq_head$opt(xs): optn_vt(x0)
 fun
 <xs:t0>
 <x0:t0>
-gseq_tail_opt(xs): optn_vt(xs)
+gseq_tail$opt(xs): optn_vt(xs)
 //
 (* ****** ****** *)
 //
 fun
 <xs:t0>
 <x0:t0>
-gseq_last_raw(xs): x0
+gseq_last$exn(xs): x0
 fun
 <xs:t0>
 <x0:t0>
-gseq_last_exn(xs): x0
-fun
-<xs:t0>
-<x0:t0>
-gseq_last_opt
+gseq_last$opt
 ( xs: xs ): optn_vt(x0)
 //
 fun
@@ -159,27 +161,17 @@ fun
 <x0:t0>
 gseq_uncons
   (xs: &xs >> xs): x0
-fun
-<xs:t0>
-<x0:t0>
-gseq_uncons_raw
-  (xs: &xs >> xs): x0
 //
 fun
 <xs:t0>
 <x0:t0>
 gseq_uncons$exn
   (xs: &xs >> xs): x0
-fun
-<xs:t0>
-<x0:t0>
-gseq_uncons_exn
-  (xs: &xs >> xs): x0
 //
 fun
 <xs:t0>
 <x0:t0>
-gseq_uncons_opt
+gseq_uncons$opt
   (xs: &xs >> xs): optn_vt(x0)
 //
 (* ****** ****** *)
@@ -190,30 +182,46 @@ fun
 gseq_cmp(xs, xs): sint
 //
 (* ****** ****** *)
-
+//
+fun
+<xs:vt>
+<x0:vt>
+gseq_beg((*0*)): strn
+fun
+<xs:vt>
+<x0:vt>
+gseq_end((*0*)): strn
+fun
+<xs:vt>
+<x0:vt>
+gseq_sep((*0*)): strn
+//
+(* ****** ****** *)
+//
 fun
 <xs:t0>
 <x0:t0>
 gseq_print(xs: xs): void
+//
 fun
 <xs:t0>
 <x0:t0>
-gseq_print$beg((*void*)): void
+gseq_print$beg((*0*)): void
 fun
 <xs:t0>
 <x0:t0>
-gseq_print$end((*void*)): void
+gseq_print$end((*0*)): void
 fun
 <xs:t0>
 <x0:t0>
-gseq_print$sep((*void*)): void
-
+gseq_print$sep((*0*)): void
+//
 (* ****** ****** *)
 
 fun
 <xs:t0>
 <x0:t0>
-gseq_length(xs): nint
+gseq_length(xs: xs): nint
 
 (* ****** ****** *)
 //
@@ -226,28 +234,37 @@ fun
 <xs:t0>
 <x0:t0>
 <r0:vt>
-gseq_foldl(xs, r0): r0
+gseq_foldl(xs, r0): (r0)
 fun
 <xs:t0>
 <x0:t0>
 <r0:vt>
-gseq_foldr(xs, r0): r0
+gseq_foldr(xs, r0): (r0)
 //
 (* ****** ****** *)
 //
 fun
 <xs:t0>
-<x0:t0>
-gseq_exists(xs): bool
+g_exists(xs: xs): bool
+fun
+<xs:t0>
+g_forall(xs: xs): bool
+fun
+<xs:t0>
+g_foritm(xs: xs): void
 //
 fun
 <xs:t0>
 <x0:t0>
-gseq_forall(xs): bool
+gseq_exists(xs: xs): bool
 fun
 <xs:t0>
 <x0:t0>
-gseq_foreach(xs): void
+gseq_forall(xs: xs): bool
+fun
+<xs:t0>
+<x0:t0>
+gseq_foritm(xs: xs): void
 //
 (* ****** ****** *)
 //
@@ -282,12 +299,12 @@ gseq_rsearch$exn(xs): x0
 fun
 <xs:t0>
 <x0:t0>
-gseq_search_opt
+gseq_search$opt
   (xs: xs): optn_vt(x0)
 fun
 <xs:t0>
 <x0:t0>
-gseq_rsearch_opt
+gseq_rsearch$opt
   (xs: xs): optn_vt(x0)
 //
 (* ****** ****** *)
@@ -295,12 +312,12 @@ gseq_rsearch_opt
 fun
 <xs:t0>
 <x0:t0>
-gseq_get_at
+gseq_get$at
 (xs: xs, i0: nint): x0
 fun
 <xs:t0>
 <x0:t0>
-gseq_get_at$exn
+gseq_get$at$exn
 (xs: xs, i0: nint): x0
 //
 (* ****** ****** *)
@@ -308,14 +325,14 @@ gseq_get_at$exn
 fun
 <xs:t0>
 <x0:t0>
-gseq_set_at
+gseq_set$at
 ( xs:
 & xs >> xs
 , i0: nint, x0: x0): void
 fun
 <xs:t0>
 <x0:t0>
-gseq_set_at$exn
+gseq_set$at$exn
 ( xs:
 & xs >> xs
 , i0: nint, x0: x0): void
@@ -325,13 +342,13 @@ gseq_set_at$exn
 fun
 <xs:t0>
 <x0:t0>
-gseq_fset_at
+gseq_fset$at
 ( xs: xs
 , i0: nint, x0: x0): (xs)
 fun
 <xs:t0>
 <x0:t0>
-gseq_fset_at$exn
+gseq_fset$at$exn
 ( xs: xs
 , i0: nint, x0: x0): (xs)
 //
@@ -340,13 +357,13 @@ gseq_fset_at$exn
 fun
 <xs:t0>
 <x0:t0>
-gseq_get_at_opt
+gseq_get$at$opt
 ( xs: xs
 , i0: nint): optn_vt(x0)
 fun
 <xs:t0>
 <x0:t0>
-gseq_set_at_opt
+gseq_set$at$opt
 ( xs:
 & xs >> xs
 , i0: nint, x0: x0): optn_vt(x0)
@@ -356,7 +373,7 @@ gseq_set_at_opt
 fun
 <xs:t0>
 <x0:t0>
-gseq_fset_at_opt
+gseq_fset$at$opt
 ( xs: xs
 , i0: nint, x0: x0): optn_vt(xs)
 //
@@ -508,14 +525,12 @@ fun
 <xs:t0>
 <x0:t0>
 gseq_make_fwork
-( fwork
-: (x0-<cfr>void)-<cfr>void): (xs)
+( fwork: (x0->void)->void): (xs)
 fun
 <xs:t0>
 <x0:t0>
 gseq_make_filter
-( fwork:
-  (x0-<cfr>void)-<cfr>void): (xs)
+( fwork: (x0->void)->void): (xs)
 *)
 //
 (* ****** ****** *)
@@ -588,11 +603,17 @@ fun
 <x0:t0>
 <y0:vt>
 gseq_map_llist(xs): list_vt(y0)
+//
 fun
 <xs:t0>
 <x0:t0>
 <y0:vt>
 gseq_map_lstrm(xs): strm_vt(y0)
+fun
+<xs:t0>
+<x0:t0>
+<y0:vt>
+gseq_map_lstrq(xs): strq_vt(y0)
 //
 fun
 <xs:t0>
@@ -645,17 +666,32 @@ gseq_filter_self(xs: xs): (xs)
 fun
 <xs:t0>
 <x0:t0>
+gseq_filter_list(xs): list(x0)
+fun
+<xs:t0>
+<x0:t0>
 gseq_filter_llist(xs): list_vt(x0)
+//
 fun
 <xs:t0>
 <x0:t0>
 gseq_filter_lstrm(xs): strm_vt(x0)
+fun
+<xs:t0>
+<x0:t0>
+gseq_filter_lstrq(xs): strq_vt(x0)
 //
 (* ****** ****** *)
+//
+fun
+<xs:t0>
+<x0:t0>
+gseq_filter_rlist(xs): list(x0)
 fun
 <xs:t0>
 <x0:t0>
 gseq_filter_rllist(xs): list_vt(x0)
+//
 (* ****** ****** *)
 //
 fun
@@ -798,21 +834,21 @@ gseq_min$nil((*nil*)): x0
 fun
 <xs:t0>
 <x0:t0>
-gseq_max_exn(xs:xs): x0
+gseq_max$exn(xs:xs): x0
 fun
 <xs:t0>
 <x0:t0>
-gseq_min_exn(xs:xs): x0
+gseq_min$exn(xs:xs): x0
 //
 fun
 <xs:t0>
 <x0:t0>
-gseq_max_opt
+gseq_max$opt
 (  xs: xs  ): optn_vt(x0)
 fun
 <xs:t0>
 <x0:t0>
-gseq_min_opt
+gseq_min$opt
 (  xs: xs  ): optn_vt(x0)
 //
 (* ****** ****** *)
@@ -849,7 +885,7 @@ gseq_rforall(xs): bool
 fun
 <xs:t0>
 <x0:t0>
-gseq_rforeach(xs): void
+gseq_rforitm(xs): void
 //
 (* ****** ****** *)
 //
@@ -869,6 +905,7 @@ fun
 <x0:t0>
 <y0:vt>
 gseq_rmap_llist(xs): list_vt(y0)
+//
 fun
 <xs:t0>
 <x0:t0>
@@ -878,15 +915,31 @@ fun
 <xs:t0>
 <x0:t0>
 <y0:vt>
+gseq_rmap_lstrq(xs): strq_vt(y0)
+//
+fun
+<xs:t0>
+<x0:t0>
+<y0:vt>
 gseq_rmap_rllist(xs): list_vt(y0)
 //
+(* ****** ****** *)
 (* ****** ****** *)
 //
 fun
 <xs:t0>
 <x0:t0>
+<ys:vt>
 gseq_append
-(xs1: xs, xs2: xs): xs
+(xs: xs, ys: ~ys): xs
+//
+(*
+#symload
+append with gseq_append of 0100
+*)
+//
+(* ****** ****** *)
+//
 fun
 <xz:t0>
 <xs:t0>
@@ -902,17 +955,20 @@ gseq_reverse
 fun
 <xs:t0>
 <x0:t0>
+<ys:vt>
 gseq_rappend
-( xs1: xs, xs2: xs ): xs
+( xs: xs, ys: ~ys ): xs
 //
 (* ****** ****** *)
 //
 fun
 <xs:t0>
 <x0:t0>
+<ys:vt>
 gseq_append_lstrm
-(xs1: xs, xs2: xs): strm_vt(x0)
+(xs: xs, ys: ~ys): strm_vt(x0)
 //
+(* ****** ****** *)
 (* ****** ****** *)
 //
 (*
@@ -939,8 +995,9 @@ gseq_concat_lstrm
 fun
 <xs:t0>
 <x0:t0>
+<ys:vt>
 gseq_rappend_lstrm
-(xs1: xs, xs2: xs): strm_vt(x0)
+(xs: xs, ys: ~ys): strm_vt(x0)
 //
 (* ****** ****** *)
 //
@@ -983,7 +1040,6 @@ fun
 <xs:t0>
 <x0:t0>
 gseq_iexists(xs: xs): bool
-//
 fun
 <xs:t0>
 <x0:t0>
@@ -991,7 +1047,7 @@ gseq_iforall(xs: xs): bool
 fun
 <xs:t0>
 <x0:t0>
-gseq_iforeach(xs: xs): void
+gseq_iforitm(xs: xs): void
 //
 (* ****** ****** *)
 //
@@ -1032,13 +1088,6 @@ gseq_imap_list
 fun
 <xs:t0>
 <x0:t0>
-<y0:t0>
-gseq_imap_rlist
-  (xs: xs): list(y0)
-//
-fun
-<xs:t0>
-<x0:t0>
 <y0:vt>
 gseq_imap_llist
   (xs: xs): list_vt(y0)
@@ -1048,6 +1097,21 @@ fun
 <y0:vt>
 gseq_imap_lstrm
   (xs: xs): strm_vt(y0)
+fun
+<xs:t0>
+<x0:t0>
+<y0:vt>
+gseq_imap_lstrq
+  (xs: xs): strq_vt(y0)
+//
+(* ****** ****** *)
+//
+fun
+<xs:t0>
+<x0:t0>
+<y0:t0>
+gseq_imap_rlist
+  (xs: xs): list(y0)
 fun
 <xs:t0>
 <x0:t0>
@@ -1140,27 +1204,28 @@ gseq_permutize_lstrm(xs: xs): strm_vt(xs)
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
+<xs:t0>
 <x0:t0>
+<ys:t0>
+<y0:t0>
 gseq_z2cmp
   (xs: xs, ys: ys): sint
 //
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <r0:vt>
 gseq_z2foldl
   (xs: xs, ys: ys, r0: r0): r0
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <r0:vt>
 gseq_z2foldr
   (xs: xs, ys: ys, r0: r0): r0
@@ -1168,28 +1233,28 @@ gseq_z2foldr
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 gseq_z2forall
   (xs: xs, ys: ys): bool
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 gseq_z2forcmp
   (xs: xs, ys: ys): sint
 //
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_z2foreach
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
+gseq_z2foritm
   (xs: xs, ys: ys): void
 //
 (* ****** ****** *)
@@ -1216,73 +1281,73 @@ gseq_suffixq
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 gseq_z2listize
 (xs, ys): list_vt(@(x0, y0))
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 gseq_z2strmize
 (xs, ys): strm_vt(@(x0, y0))
 //
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <zs:vt>
 <z0:vt>
 gseq_z2map
   (xs: xs, ys: ys): (  zs  )
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:t0>
 gseq_z2map_list
   (xs: xs, ys: ys): list(z0)
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:t0>
 gseq_z2map_rlist
   (xs: xs, ys: ys): list(z0)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:vt>
 gseq_z2map_llist
   (xs: xs, ys: ys): list_vt(z0)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:vt>
 gseq_z2map_lstrm
   (xs: xs, ys: ys): strm_vt(z0)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:vt>
 gseq_z2map_rllist
   (xs: xs, ys: ys): list_vt(z0)
@@ -1290,84 +1355,84 @@ gseq_z2map_rllist
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_z2iforall
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
+gseq_iz2forall
   (xs: xs, ys: ys): bool
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_z2iforcmp
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
+gseq_iz2forcmp
   (xs: xs, ys: ys): sint
 //
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_z2iforeach
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
+gseq_iz2foritm
   (xs: xs, ys: ys): void
 //
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <zs:vt>
 <z0:vt>
-gseq_z2imap
+gseq_iz2map
   (xs: xs, ys: ys): (  zs  )
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:t0>
-gseq_z2imap_list
+gseq_iz2map_list
   (xs: xs, ys: ys): list(z0)
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:t0>
-gseq_z2imap_rlist
+gseq_iz2map_rlist
   (xs: xs, ys: ys): list(z0)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:vt>
-gseq_z2imap_llist
+gseq_iz2map_llist
   (xs: xs, ys: ys): list_vt(z0)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:vt>
-gseq_z2imap_lstrm
+gseq_iz2map_lstrm
   (xs: xs, ys: ys): strm_vt(z0)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:vt>
-gseq_z2imap_rllist
+gseq_iz2map_rllist
   (xs: xs, ys: ys): list_vt(z0)
 //
 (* ****** ****** *)
@@ -1377,37 +1442,37 @@ gseq_z2imap_rllist
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <zs:vt>
 <z0:vt>
 gseq_x2map
   (xs: xs, ys: ys): (  zs  )
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:t0>
 gseq_x2map_list
   (xs: xs, xs: ys): list(z0)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:vt>
 gseq_x2map_llist
   (xs: xs, xs: ys): list_vt(z0)
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:vt>
 gseq_x2map_lstrm
   (xs: xs, ys: ys): strm_vt(z0)
@@ -1415,51 +1480,66 @@ gseq_x2map_lstrm
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:vt>
 gseq_x2mapopt_lstrm(xs, ys): strm_vt(z0)
 //
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 gseq_x2strmize(xs, ys): strm_vt(@(x0,y0))
 //
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_x2foreach(xs, ys): void
-//
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
+gseq_x2forall(xs, ys): bool
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_x2foreach_row(xs, ys): void
-fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_x2foreach_col(xs, ys): void
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
+gseq_x2rforall(xs, ys): bool
 //
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
+gseq_x2foritm(xs, ys): void
+//
+fun
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
+gseq_x2foritm_row(xs, ys): void
+fun
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
+gseq_x2foritm_col(xs, ys): void
+//
+(* ****** ****** *)
+//
+fun
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <zs:vt>
 <z0:vt>
 gseq_x2imap(xs:xs, ys:ys): ( zs )
@@ -1467,59 +1547,68 @@ gseq_x2imap(xs:xs, ys:ys): ( zs )
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:t0>
 gseq_x2imap_list(xs, ys): list(z0)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:vt>
 gseq_x2imap_llist(xs, ys): list_vt(z0)
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:vt>
 gseq_x2imap_lstrm(xs, ys): strm_vt(z0)
 //
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:vt>
 gseq_x2imapopt_lstrm(xs, ys): strm_vt(z0)
 //
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_x2iforeach(xs, ys): void
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
+gseq_x2iforall(xs, ys): bool
+//
+(* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_x2iforeach_row(xs, ys): void
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
+gseq_x2iforitm(xs, ys): void
+//
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_x2iforeach_col(xs, ys): void
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
+gseq_x2iforitm_row(xs, ys): void
+fun
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
+gseq_x2iforitm_col(xs, ys): void
 //
 (* ****** ****** *)
 //
@@ -1543,16 +1632,9 @@ fun
 <xs:t0>
 <x0:t0>
 <r0:vt>
-gseq_foldl_c2fr
+gseq_foldl_f2un
 ( xs, r0
-, f0: (r0, x0) -<cfr> r0): (r0)
-fun
-<xs:t0>
-<x0:t0>
-<r0:vt>
-gseq_foldl_f2np
-( xs, r0
-, f0: (r0, x0) -<fnp> r0): (r0)
+, f0: (r0, x0) -> r0): (r0)
 (* ****** ****** *)
 //
 // HX: gseq_foldr
@@ -1562,67 +1644,84 @@ fun
 <xs:t0>
 <x0:t0>
 <r0:vt>
-gseq_foldr_c2fr
+gseq_foldr_f2un
 ( xs, r0
-, f0: (x0, r0) -<cfr> r0): (r0)
-fun
-<xs:t0>
-<x0:t0>
-<r0:vt>
-gseq_foldr_f2np
-( xs, r0
-, f0: (x0, r0) -<fnp> r0): (r0)
+, f0: (x0, r0) -> r0): (r0)
+(* ****** ****** *)
 (* ****** ****** *)
 //
 // HX: gseq_exists
 //
 (* ****** ****** *)
+(* ****** ****** *)
+//
 fun
 <xs:t0>
 <x0:t0>
-gseq_exists_c1fr
+gseq_exists_f1un
 ( xs: xs
-, cfr: (x0) -<cfr> bool): (bool)
+, test: (x0) -> bool): (bool)
+//
+(* ****** ****** *)
+//
 fun
 <xs:t0>
 <x0:t0>
-gseq_exists_f1np
+gseq_rexists_f1un
 ( xs: xs
-, fnp: (x0) -<fnp> bool): (bool)
+, test: (x0) -> bool): (bool)
+//
+(* ****** ****** *)
 (* ****** ****** *)
 //
 // HX: gseq_forall
 //
 (* ****** ****** *)
-fun
-<xs:t0>
-<x0:t0>
-gseq_forall_c1fr
-( xs: xs
-, cfr: (x0) -<cfr> bool): (bool)
-fun
-<xs:t0>
-<x0:t0>
-gseq_forall_f1np
-( xs: xs
-, fnp: (x0) -<fnp> bool): (bool)
-(* ****** ****** *)
-//
-// HX: gseq_foreach
-//
 (* ****** ****** *)
 fun
 <xs:t0>
 <x0:t0>
-gseq_foreach_c1fr
+gseq_forall_f1un
 ( xs: xs
-, cfr: (x0) -<cfr> void): (void)
+, test: (x0) -> bool): (bool)
+(* ****** ****** *)
 fun
 <xs:t0>
 <x0:t0>
-gseq_foreach_f1np
+gseq_rforall_f1un
 ( xs: xs
-, fnp: (x0) -<fnp> void): (void)
+, test: (x0) -> bool): (bool)
+(* ****** ****** *)
+#symload
+forall with gseq_forall_f1un of 0100
+#symload
+rforall with gseq_rforall_f1un of 0100
+(* ****** ****** *)
+(* ****** ****** *)
+//
+// HX: gseq_foritm
+//
+(* ****** ****** *)
+(* ****** ****** *)
+fun
+<xs:t0>
+<x0:t0>
+gseq_foritm_f1un
+( xs: xs
+, work: (x0) -> void): (void)
+(* ****** ****** *)
+fun
+<xs:t0>
+<x0:t0>
+gseq_rforitm_f1un
+( xs: xs
+, work: (x0) -> void): (void)
+(* ****** ****** *)
+#symload
+foritm with gseq_foritm_f1un of 0100
+#symload
+rforitm with gseq_rforitm_f1un of 0100
+(* ****** ****** *)
 (* ****** ****** *)
 //
 (*
@@ -1632,15 +1731,9 @@ HX: gseq_tabulate
 fun
 <xs:t0>
 <x0:t0>
-gseq_tabulate_c1fr
+gseq_tabulate_f1un
 {n0:i0}
-(sint(n0), nintlt(n0)-<cfr>x0): (xs)
-fun
-<xs:t0>
-<x0:t0>
-gseq_tabulate_f1np
-{n0:i0}
-(sint(n0), nintlt(n0)-<fnp>x0): (xs)
+(sint(n0), nintlt(n0) -> x0): (xs)
 //
 (* ****** ****** *)
 //
@@ -1652,15 +1745,8 @@ fun
 <x0:t0>
 <ys:vt>
 <y0:vt>
-gseq_map_c1fr
-(xs:xs, fopr: (x0)-<cfr>y0):(ys)
-fun
-<xs:t0>
-<x0:t0>
-<ys:vt>
-<y0:vt>
-gseq_map_f1np
-(xs:xs, fopr: (x0)-<fnp>y0):(ys)
+gseq_map_f1un
+(xs:xs, fopr: (x0) -> y0):(ys)
 fun
 <xs:t0>
 <x0:t0>
@@ -1687,31 +1773,25 @@ fun
 <xs:t0>
 <x0:t0>
 <y0:t0>
-gseq_map_c1fr_list
+gseq_map_f1un_list
 ( xs: xs
-, fopr: (x0) -<cfr> y0): list(y0)
+, fopr: (x0) -> y0): list(y0)
+(* ****** ****** *)
 fun
 <xs:t0>
 <x0:t0>
 <y0:t0>
-gseq_map_f1np_list
+gseq_map_f1un_rlist
 ( xs: xs
-, fopr: (x0) -<fnp> y0): list(y0)
+, fopr: (x0) -> y0): list(y0)
 (* ****** ****** *)
 fun
 <xs:t0>
 <x0:t0>
 <y0:vt>
-gseq_map_c1fr_llist
+gseq_map_f1un_llist
 ( xs: xs
-, fopr: (x0) -<cfr> y0): list_vt(y0)
-fun
-<xs:t0>
-<x0:t0>
-<y0:vt>
-gseq_map_f1np_llist
-( xs: xs
-, fopr: (x0) -<fnp> y0): list_vt(y0)
+, fopr: (x0) -> y0): list_vt(y0)
 (* ****** ****** *)
 //
 (*
@@ -1723,16 +1803,16 @@ fun
 <xs:t0>
 <x0:t0>
 <y0:vt>
-gseq_map_c1fr_lstrm
+gseq_map_f1un_lstrm
 ( xs: xs
-, fopr: (x0) -<cfr> y0): strm_vt(y0)
+, fopr: (x0) -> y0): strm_vt(y0)
 fun
 <xs:t0>
 <x0:t0>
 <y0:vt>
-gseq_map_f1np_lstrm
+gseq_map_f1un_lstrq
 ( xs: xs
-, fopr: (x0) -<fnp> y0): strm_vt(y0)
+, fopr: (x0) -> y0): strq_vt(y0)
 (* ****** ****** *)
 //
 // HX: gseq_filter
@@ -1741,13 +1821,8 @@ gseq_map_f1np_lstrm
 fun
 <xs:t0>
 <x0:t0>
-gseq_filter_c1fr
-(xs:xs, test:(x0) -<cfr> bool): (xs)
-fun
-<xs:t0>
-<x0:t0>
-gseq_filter_f1np
-(xs:xs, test:(x0) -<fnp> bool): (xs)
+gseq_filter_f1un
+(xs:xs, test:(x0) -> bool): (xs)
 (* ****** ****** *)
 //
 (*
@@ -1761,40 +1836,29 @@ HX: gseq_filter_lstrm
 fun
 <xs:t0>
 <x0:t0>
-gseq_filter_c1fr_list
+gseq_filter_f1un_list
 ( xs: xs
-, test: (x0)-<cfr>bool): list(x0)
+, test: (x0) -> bool): list(x0)
 fun
 <xs:t0>
 <x0:t0>
-gseq_filter_f1np_list
+gseq_filter_f1un_llist
 ( xs: xs
-, test: (x0)-<fnp>bool): list(x0)
-fun
-<xs:t0>
-<x0:t0>
-gseq_filter_c1fr_llist
-( xs: xs
-, test: (x0)-<cfr>bool): list_vt(x0)
-fun
-<xs:t0>
-<x0:t0>
-gseq_filter_f1np_llist
-( xs: xs
-, test: (x0)-<fnp>bool): list_vt(x0)
+, test: (x0) -> bool): list_vt(x0)
 //
 fun
 <xs:t0>
 <x0:t0>
-gseq_filter_c1fr_lstrm
+gseq_filter_f1un_lstrm
 ( xs: xs
-, test: (x0)-<cfr>bool): strm_vt(x0)
+, test: (x0) -> bool): strm_vt(x0)
+//
 fun
 <xs:t0>
 <x0:t0>
-gseq_filter_f1np_lstrm
+gseq_filter_f1un_lstrq
 ( xs: xs
-, test: (x0)-<fnp>bool): strm_vt(x0)
+, test: (x0) -> bool): strq_vt(x0)
 //
 (* ****** ****** *)
 //
@@ -1807,14 +1871,7 @@ fun
 <r0:vt>
 gseq_ifoldl_c3fr
 ( xs, r0
-, f0: (r0, nint, x0) -<cfr> r0): r0
-fun
-<xs:t0>
-<x0:t0>
-<r0:vt>
-gseq_ifoldl_f3np
-( xs, r0
-, f0: (r0, nint, x0) -<fnp> r0): r0
+, f0: (r0, nint, x0) -> r0): r0
 (* ****** ****** *)
 //
 // HX: gseq_ifoldr
@@ -1826,14 +1883,7 @@ fun
 <r0:vt>
 gseq_ifoldr_c3fr
 ( xs, r0
-, f0: (nint, x0, r0) -<cfr> r0): r0
-fun
-<xs:t0>
-<x0:t0>
-<r0:vt>
-gseq_ifoldr_f3np
-( xs, r0
-, f0: (nint, x0, r0) -<fnp> r0): r0
+, f0: (nint, x0, r0) -> r0): r0
 (* ****** ****** *)
 //
 // HX: gseq_iexists
@@ -1842,15 +1892,9 @@ gseq_ifoldr_f3np
 fun
 <xs:t0>
 <x0:t0>
-gseq_iexists_c2fr
+gseq_iexists_f2un
 ( xs: xs
-, test: (nint,x0) -<cfr> bool): bool
-fun
-<xs:t0>
-<x0:t0>
-gseq_iexists_f2np
-( xs: xs
-, test: (nint,x0) -<fnp> bool): bool
+, test: (nint,x0) -> bool): bool
 (* ****** ****** *)
 //
 // HX: gseq_iforall
@@ -1859,32 +1903,27 @@ gseq_iexists_f2np
 fun
 <xs:t0>
 <x0:t0>
-gseq_iforall_c2fr
+gseq_iforall_f2un
 ( xs: xs
-, test: (nint, x0)-<cfr>bool): bool
-fun
-<xs:t0>
-<x0:t0>
-gseq_iforall_f2np
-( xs: xs
-, test: (nint, x0)-<fnp>bool): bool
+, test: (nint, x0) -> bool): bool
 (* ****** ****** *)
 //
-// HX: gseq_iforeach
+// HX: gseq_iforitm
 //
 (* ****** ****** *)
 fun
 <xs:t0>
 <x0:t0>
-gseq_iforeach_c2fr
+gseq_iforitm_f2un
 ( xs: xs
-, test: (nint, x0)-<cfr>void): void
+, test: (nint, x0) -> void): void
+(* ****** ****** *)
 fun
 <xs:t0>
 <x0:t0>
-gseq_iforeach_f2np
+gseq_irforitm_f2un
 ( xs: xs
-, test: (nint, x0)-<fnp>void): void
+, test: (nint, x0) -> void): void
 (* ****** ****** *)
 //
 // HX: gseq_imap(seq)
@@ -1895,17 +1934,9 @@ fun
 <x0:t0>
 <ys:vt>
 <y0:vt>
-gseq_imap_c2fr
+gseq_imap_f2un
 ( xs: xs
-, fopr: (nint, x0) -<cfr> y0): (ys)
-fun
-<xs:t0>
-<x0:t0>
-<ys:vt>
-<y0:vt>
-gseq_imap_f2np
-( xs: xs
-, fopr: (nint, x0) -<fnp> y0): (ys)
+, fopr: (nint, x0) -> y0): (ys)
 (* ****** ****** *)
 //
 (*
@@ -1920,46 +1951,25 @@ fun
 <xs:t0>
 <x0:t0>
 <y0:t0>
-gseq_imap_c2fr_list
+gseq_imap_f2un_list
 ( xs: xs
-, fopr: (nint, x0) -<cfr> y0): list(y0)
-fun
-<xs:t0>
-<x0:t0>
-<y0:t0>
-gseq_imap_f2np_list
-( xs: xs
-, fopr: (nint, x0) -<fnp> y0): list(y0)
+, fopr: (nint, x0) -> y0): list(y0)
 //
 fun
 <xs:t0>
 <x0:t0>
 <y0:vt>
-gseq_imap_c2fr_llist
+gseq_imap_f2un_llist
 ( xs: xs
-, fopr: (nint, x0) -<cfr> y0): list_vt(y0)
-fun
-<xs:t0>
-<x0:t0>
-<y0:vt>
-gseq_imap_f2np_llist
-( xs: xs
-, fopr: (nint, x0) -<fnp> y0): list_vt(y0)
+, fopr: (nint, x0) -> y0): list_vt(y0)
 //
 fun
 <xs:t0>
 <x0:t0>
 <y0:vt>
-gseq_imap_c2fr_lstrm
+gseq_imap_f2un_lstrm
 ( xs: xs
-, fopr: (nint, x0) -<cfr> y0): strm_vt(y0)
-fun
-<xs:t0>
-<x0:t0>
-<y0:vt>
-gseq_imap_f2np_lstrm
-( xs: xs
-, fopr: (nint, x0) -<fnp> y0): strm_vt(y0)
+, fopr: (nint, x0) -> y0): strm_vt(y0)
 //
 (* ****** ****** *)
 //
@@ -1968,21 +1978,13 @@ gseq_imap_f2np_lstrm
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_z2forall_c2fr
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
+gseq_z2forall_f2un
 ( xs: xs
-, ys: ys, test: (x0,y0)-<cfr>bool): bool
-fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_z2forall_f2np
-( xs: xs
-, ys: ys, test: (x0,y0)-<fnp>bool): bool
+, ys: ys, test: (x0, y0) -> bool): bool
 //
 (* ****** ****** *)
 //
@@ -1991,44 +1993,28 @@ gseq_z2forall_f2np
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_z2forcmp_c2fr
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
+gseq_z2forcmp_f2un
 ( xs: xs
-, ys: ys, test: (x0,y0)-<cfr>sint): sint
-fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_z2forcmp_f2np
-( xs: xs
-, ys: ys, test: (x0,y0)-<fnp>sint): sint
+, ys: ys, test: (x0, y0) -> sint): sint
 //
 (* ****** ****** *)
 //
-// HX: gseq_z2foreach
+// HX: gseq_z2foritm
 //
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_z2foreach_c2fr
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
+gseq_z2foritm_f2un
 ( xs: xs
-, ys: ys, test: (x0,y0)-<cfr>void): void
-fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_z2foreach_f2np
-( xs: xs
-, ys: ys, test: (x0,y0)-<fnp>void): void
+, ys: ys, test: (x0, y0) -> void): void
 //
 (* ****** ****** *)
 //
@@ -2036,189 +2022,116 @@ gseq_z2foreach_f2np
 //
 (* ****** ****** *)
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <zs:vt>
 <z0:vt>
-gseq_z2map_c2fr
-(xs:xs, ys:ys, fopr:(x0,y0) -<cfr> z0): (zs)
-fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-<zs:vt>
-<z0:vt>
-gseq_z2map_f2np
-(xs:xs, ys:ys, fopr:(x0,y0)-<fnp>z0): (zs)
+gseq_z2map_f2un
+(xs:xs, ys:ys, fopr:(x0, y0) -> z0): (zs)
 (* ****** ****** *)
 //
 // HX: gseq_z2map_llist
 //
 (* ****** ****** *)
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:vt>
-gseq_z2map_c2fr_llist
+gseq_z2map_f2un_llist
 ( xs:xs
-, ys:ys, fopr:(x0,y0)-<cfr>z0): list_vt(z0)
-fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-<z0:vt>
-gseq_z2map_f2np_llist
-( xs:xs
-, ys:ys, fopr:(x0,y0)-<fnp>z0): list_vt(z0)
+, ys:ys, fopr:(x0, y0) -> z0): list_vt(z0)
 (* ****** ****** *)
 //
 // HX: gseq_z2map_strm
 //
 (* ****** ****** *)
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:vt>
-gseq_z2map_c2fr_lstrm
+gseq_z2map_f2un_lstrm
 ( xs:xs
-, ys:ys, fopr:(x0,y0)-<cfr>z0): strm_vt(z0)
-fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-<z0:vt>
-gseq_z2map_f2np_lstrm
-( xs:xs
-, ys:ys, fopr:(x0,y0)-<fnp>z0): strm_vt(z0)
+, ys:ys, fopr:(x0, y0) -> z0): strm_vt(z0)
 (* ****** ****** *)
 //
-// HX: gseq_z2iforall
+// HX: gseq_iz2forall
 //
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_z2iforall_c3fr
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
+gseq_iz2forall_c3fr
 ( xs:xs
 , ys:ys
-, work: (nint, x0, y0) -<cfr> bool): bool
+, work: (nint, x0, y0) -> bool): bool
+//
+(* ****** ****** *)
+//
+// HX: gseq_iz2forcmp
+//
+(* ****** ****** *)
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_z2iforall_f3np
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
+gseq_iz2forcmp_c3fr
 ( xs:xs
 , ys:ys
-, work: (nint, x0, y0) -<fnp> bool): bool
-//
+, work: (nint, x0, y0) -> sint): sint
 (* ****** ****** *)
 //
-// HX: gseq_z2iforcmp
+// HX: gseq_iz2foritm
 //
 (* ****** ****** *)
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_z2iforcmp_c3fr
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
+gseq_iz2foritm_c3fr
 ( xs:xs
 , ys:ys
-, work: (nint, x0, y0) -<cfr> sint): sint
-fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_z2iforcmp_f3np
-( xs:xs
-, ys:ys
-, work: (nint, x0, y0) -<fnp> sint): sint
+, work: (nint, x0, y0) -> void): void
 (* ****** ****** *)
 //
-// HX: gseq_z2iforeach
+// HX: gseq_iz2map(seq)
 //
 (* ****** ****** *)
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_z2iforeach_c3fr
-( xs:xs
-, ys:ys
-, work: (nint, x0, y0) -<cfr> void): void
-fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_z2iforeach_f3np
-( xs:xs
-, ys:ys
-, work: (nint, x0, y0) -<fnp> void): void
-(* ****** ****** *)
-//
-// HX: gseq_z2imap(seq)
-//
-(* ****** ****** *)
-fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <zs:vt>
 <z0:vt>
-gseq_z2imap_c3fr
+gseq_iz2map_c3fr
 ( xs:xs
 , ys:ys
-, fopr: (nint, x0, y0) -<cfr> z0): ( zs )
-fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-<zs:vt>
-<z0:vt>
-gseq_z2imap_f3np
-( xs:xs
-, ys:ys
-, fopr: (nint, x0, y0) -<fnp> z0): ( zs )
+, fopr: (nint, x0, y0) -> z0): ( zs )
 (* ****** ****** *)
 //
-// HX: gseq_x2foreach
+// HX: gseq_x2foritm
 //
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_x2foreach_c2fr
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
+gseq_x2foritm_f2un
 ( xs:xs
-, ys:ys, work:(x0, y0) -<cfr> void): void
-fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_x2foreach_f2np
-( xs:xs
-, ys:ys, work:(x0, y0) -<fnp> void): void
+, ys:ys, work:(x0, y0) -> void): void
 //
 (* ****** ****** *)
 //
@@ -2227,23 +2140,14 @@ gseq_x2foreach_f2np
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <zs:vt>
 <z0:vt>
-gseq_x2map_c2fr
-(xs:xs, ys:ys, fopr:(x0,y0) -<cfr> z0): (zs)
-fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-<zs:vt>
-<z0:vt>
-gseq_x2map_f2np
-(xs:xs, ys:ys, fopr:(x0,y0) -<fnp> z0): (zs)
+gseq_x2map_f2un
+(xs:xs, ys:ys, fopr:(x0,y0) -> z0): (zs)
 //
 (* ****** ****** *)
 //
@@ -2252,23 +2156,14 @@ gseq_x2map_f2np
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:vt>
-gseq_x2map_c2fr_llist
+gseq_x2map_f2un_llist
 ( xs:xs
-, ys:ys, fopr:(x0,y0) -<cfr> z0): list_vt(z0)
-fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-<z0:vt>
-gseq_x2map_f2np_llist
-( xs:xs
-, ys:ys, fopr:(x0,y0) -<fnp> z0): list_vt(z0)
+, ys:ys, fopr:(x0,y0) -> z0): list_vt(z0)
 //
 (* ****** ****** *)
 //
@@ -2277,50 +2172,31 @@ gseq_x2map_f2np_llist
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:vt>
-gseq_x2map_c2fr_lstrm
+gseq_x2map_f2un_lstrm
 ( xs:xs
-, ys:ys, fopr:(x0,y0) -<cfr> z0): strm_vt(z0)
-fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-<z0:vt>
-gseq_x2map_f2np_lstrm
-( xs:xs
-, ys:ys, fopr:(x0,y0) -<fnp> z0): strm_vt(z0)
+, ys:ys, fopr:(x0,y0) -> z0): strm_vt(z0)
 //
 (* ****** ****** *)
 //
-// HX: gseq_x2iforeach
+// HX: gseq_x2iforitm
 //
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_x2iforeach_c4fr
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
+gseq_x2iforitm_c4fr
 ( xs:xs
 , ys:ys
 , work:
-  (nint, x0, nint, y0) -<cfr> void): void
-fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-gseq_x2iforeach_f4np
-( xs:xs
-, ys:ys
-, work:
-  (nint, x0, nint, y0) -<fnp> void): void
+  (nint, x0, nint, y0) -> void): void
 //
 (* ****** ****** *)
 //
@@ -2329,27 +2205,16 @@ gseq_x2iforeach_f4np
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <zs:vt>
 <z0:vt>
 gseq_x2imap_c4fr
 ( xs:xs
 , ys:ys
-, fopr:(nint, x0, nint, y0) -<cfr> z0): (zs)
-fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-<zs:vt>
-<z0:vt>
-gseq_x2imap_f4np
-( xs:xs
-, ys:ys
-, fopr:(nint, x0, nint, y0) -<fnp> z0): (zs)
+, fopr:(nint, x0, nint, y0) -> z0): (zs)
 //
 (* ****** ****** *)
 //
@@ -2358,27 +2223,16 @@ gseq_x2imap_f4np
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:vt>
 gseq_x2imap_c4fr_llist
 ( xs:xs
 , ys:ys
 , fopr:
-  (nint, x0, nint, y0)-<cfr>z0): list_vt(z0)
-fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-<z0:vt>
-gseq_x2imap_f4np_llist
-( xs:xs
-, ys:ys
-, fopr:
-  (nint, x0, nint, y0)-<fnp>z0): list_vt(z0)
+  (nint, x0, nint, y0) -> z0): list_vt(z0)
 //
 (* ****** ****** *)
 //
@@ -2387,27 +2241,16 @@ gseq_x2imap_f4np_llist
 (* ****** ****** *)
 //
 fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
+<xs:t0>
+<x0:t0>
+<ys:t0>
+<y0:t0>
 <z0:vt>
 gseq_x2imap_c4fr_lstrm
 ( xs:xs
 , ys:ys
 , fopr:
-  (nint, x0, nint, y0)-<cfr>z0): strm_vt(z0)
-fun
-<xs:t0
-,ys:t0>
-<x0:t0
-,y0:t0>
-<z0:vt>
-gseq_x2imap_f4np_lstrm
-( xs:xs
-, ys:ys
-, fopr:
-  (nint, x0, nint, y0)-<fnp>z0): strm_vt(z0)
+  (nint, x0, nint, y0) -> z0): strm_vt(z0)
 //
 (* ****** ****** *)
 //
@@ -2423,15 +2266,15 @@ gseq_forall_of_strmize
 fun
 <xs:t0>
 <x0:t0>
-gseq_forall_of_foreach
-(foreach: foreach(xs, x0)): forall(xs, x0)
+gseq_forall_of_foritm
+(foritm: foritm(xs, x0)): forall(xs, x0)
 //
 (* ****** ****** *)
 fun
 <xs:t0>
 <x0:t0>
-gseq_foreach_of_strmize
-(strmize: strmize(xs, x0)): foreach(xs, x0)
+gseq_foritm_of_strmize
+(strmize: strmize(xs, x0)): foritm(xs, x0)
 (* ****** ****** *)
 fun
 <xs:t0>
@@ -2450,14 +2293,14 @@ fun
 <xs:t0>
 <x0:t0>
 <r0:vt>
-gseq_foldl_of_foreach//list-like
-(foreach: foreach(xs, x0)): foldl(xs, x0, r0)
+gseq_foldl_of_foritm//list-like
+(foritm: foritm(xs, x0)): foldl(xs, x0, r0)
 fun
 <xs:t0>
 <x0:t0>
 <r0:vt>
-gseq_foldr_of_rforeach//list-like
-(rforeach: rforeach(xs, x0)): foldr(xs, x0, r0)
+gseq_foldr_of_rforitm//list-like
+(rforitm: rforitm(xs, x0)): foldr(xs, x0, r0)
 (* ****** ****** *)
 //
 (*
@@ -2489,7 +2332,7 @@ with closed templates!
 (* ****** ****** *)
 (*
 #symload forall with gseq_forall of 0100
-#symload foreach with gseq_foreach of 0100
+#symload foritm with gseq_foritm of 0100
 *)
 (* ****** ****** *)
 (*
@@ -2500,129 +2343,82 @@ with closed templates!
 (* ****** ****** *)
 
 #symload
-foldl_cfr with gseq_foldl_c2fr of 0100
+foldl_fun with gseq_foldl_f2un of 0100
 #symload
-foldl_fnp with gseq_foldl_f2np of 0100
-#symload
-foldr_cfr with gseq_foldr_c2fr of 0100
-#symload
-foldr_fnp with gseq_foldr_f2np of 0100
+foldr_fun with gseq_foldr_f2un of 0100
 
 (* ****** ****** *)
 
 #symload
-forall_cfr with gseq_forall_c1fr of 0100
+forall_fun with gseq_forall_f1un of 0100
 #symload
-forall_fnp with gseq_forall_f1np of 0100
+foritm_fun with gseq_foritm_f1un of 0100
 
 (* ****** ****** *)
 
 #symload
-foreach_cfr with gseq_foreach_c1fr of 0100
+ifoldl_fun with gseq_ifoldl_c3fr of 0100
 #symload
-foreach_fnp with gseq_foreach_f1np of 0100
+ifoldr_fun with gseq_ifoldr_c3fr of 0100
 
 (* ****** ****** *)
 
 #symload
-ifoldl_cfr with gseq_ifoldl_c3fr of 0100
+iforall_fun with gseq_iforall_f2un of 0100
 #symload
-ifoldl_fnp with gseq_ifoldl_f3np of 0100
-#symload
-ifoldr_cfr with gseq_ifoldr_c3fr of 0100
-#symload
-ifoldr_fnp with gseq_ifoldr_f3np of 0100
-
-(* ****** ****** *)
-
-#symload
-iforall_cfr with gseq_iforall_c2fr of 0100
-#symload
-iforall_fnp with gseq_iforall_f2np of 0100
-#symload
-iforeach_cfr with gseq_iforeach_c2fr of 0100
-#symload
-iforeach_fnp with gseq_iforeach_f2np of 0100
+iforitm_fun with gseq_iforitm_f2un of 0100
 
 (* ****** ****** *)
 //
 #symload
-map_cfr with gseq_map_c1fr_lstrm of 0100
-#symload
-map_fnp with gseq_map_f1np_lstrm of 0100
+map_fun with gseq_map_f1un_lstrm of 0100
 //
 #symload
-map_cfr_list with gseq_map_c1fr_list of 0100
-#symload
-map_fnp_list with gseq_map_f1np_list of 0100
+map_fun_list with gseq_map_f1un_list of 0100
 //
 #symload
-map_cfr_llist with gseq_map_c1fr_llist of 0100
-#symload
-map_fnp_llist with gseq_map_f1np_llist of 0100
+map_fun_llist with gseq_map_f1un_llist of 0100
 //
 #symload
-map_cfr_lstrm with gseq_map_c1fr_lstrm of 0100
-#symload
-map_fnp_lstrm with gseq_map_f1np_lstrm of 0100
+map_fun_lstrm with gseq_map_f1un_lstrm of 0100
 //
 (* ****** ****** *)
 //
 #symload
-filter_cfr with gseq_filter_c1fr_lstrm of 0100
-#symload
-filter_fnp with gseq_filter_f1np_lstrm of 0100
+filter_fun with gseq_filter_f1un_lstrm of 0100
 //
 #symload
-filter_cfr_list with gseq_filter_c1fr_list of 0100
-#symload
-filter_fnp_list with gseq_filter_f1np_list of 0100
+filter_fun_list with gseq_filter_f1un_list of 0100
 //
 #symload
-filter_cfr_llist with gseq_filter_c1fr_llist of 0100
-#symload
-filter_fnp_llist with gseq_filter_f1np_llist of 0100
+filter_fun_llist with gseq_filter_f1un_llist of 0100
 //
 #symload
-filter_cfr_lstrm with gseq_filter_c1fr_lstrm of 0100
-#symload
-filter_fnp_lstrm with gseq_filter_f1np_lstrm of 0100
+filter_fun_lstrm with gseq_filter_f1un_lstrm of 0100
 //
 (* ****** ****** *)
 //
 #symload
-imap_cfr with gseq_imap_c2fr_lstrm of 0100
-#symload
-imap_fnp with gseq_imap_f2np_lstrm of 0100
+imap_fun with gseq_imap_f2un_lstrm of 0100
 //
 #symload
-imap_cfr_list with gseq_imap_c2fr_list of 0100
-#symload
-imap_fnp_list with gseq_imap_f2np_list of 0100
+imap_fun_list with gseq_imap_f2un_list of 0100
 //
 #symload
-imap_cfr_llist with gseq_imap_c2fr_llist of 0100
-#symload
-imap_fnp_llist with gseq_imap_f2np_llist of 0100
+imap_fun_llist with gseq_imap_f2un_llist of 0100
 //
 #symload
-imap_cfr_lstrm with gseq_imap_c2fr_lstrm of 0100
-#symload
-imap_fnp_lstrm with gseq_imap_f2np_lstrm of 0100
+imap_fun_lstrm with gseq_imap_f2un_lstrm of 0100
 //
 (* ****** ****** *)
 //
 (*
 //
 #symload
-ifilter_cfr_llist with gseq_ifilter_c2fr_llist of 0100
-#symload
-ifilter_fnp_llist with gseq_ifilter_f2np_llist of 0100
+ifilter_fun_llist with gseq_ifilter_f2un_llist of 0100
 //
 #symload
-imapopt_cfr_llist with gseq_imapopt_c2fr_llist of 0100
-#symload
-imapopt_fnp_llist with gseq_imapopt_f2np_llist of 0100
+imapopt_fun_llist with gseq_imapopt_f2un_llist of 0100
 *)
 //
 (* ****** ****** *)

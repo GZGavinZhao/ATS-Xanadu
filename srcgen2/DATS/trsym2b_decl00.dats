@@ -82,42 +82,13 @@ s2typ_subst0(t2p0, svts))
 (* ****** ****** *)
 
 local
-
+//
 fun
-my_d2cst_set_xtyp
+myd2c_fix_xtyp
   (d2c1: d2cst): void =
 (
-  d2c1.xtyp(xt2p)) where
-{
+  d2cfn_fix_xtyp(d2c1))
 //
-val xt2p =
-s2typ_subst0(t2p1, svts)
-//
-(*
-val (  ) = prerrln
-("\
-my_d2cst_set_xtyp: d2c1 = ", d2c1)
-val (  ) = prerrln
-("\
-my_d2cst_set_xtyp: t2p1 = ", t2p1)
-val (  ) = prerrln
-("\
-my_d2cst_set_xtyp: xt2p = ", xt2p)
-*)
-//
-} where // end of [where]
-{
-//
-val loc1 = d2c1.lctn((*void*))
-val tqas = d2c1.tqas((*void*))
-val t2p1 = d2c1.styp((*void*))
-//
-val svts =
-(
-  s2vts_make_lctn_tqas(loc1, tqas))
-//
-}(*where*)//end-[my_d2cst_set_xtyp]
-
 (* ****** ****** *)
 in(* in-of-local *)
 (* ****** ****** *)
@@ -131,10 +102,10 @@ let
 val
 loc = dcl0.lctn()
 val () =
-prerrln
+prerrsln
 ("trsym2b_d2ecl: loc0 = ", loc0)
 val () =
-prerrln
+prerrsln
 ("trsym2b_d2ecl: dcl0 = ", dcl0)
 *)
 //
@@ -201,6 +172,8 @@ endlet // end of [D2Clocal0(...)]
 |D2Cdatatype _ => ( (*void*) )
 *)
 //
+(* ****** ****** *)
+//
 |
 D2Cinclude
 ( knd0
@@ -216,6 +189,24 @@ D2Cstaload
 ( knd0
 , tknd, gsrc
 , fopt, dopt) => ((*_skipped_*))
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+(*
+HX-2024-07-20:
+Sat 20 Jul 2024 08:42:19 PM EDT
+*)
+//
+|
+D2Cdyninit
+( tknd, gexp) => ((*_skipped_*))
+|
+D2Cextcode
+( tknd, gexp) => ((*_skipped_*))
+//
+(* ****** ****** *)
+(* ****** ****** *)
 //
 |
 D2Cvaldclst
@@ -238,12 +229,12 @@ D2Cfundclst
 //
 (*
 val () =
-prerrln(
+prerrsln(
 "\
 trsym2b_d2ecl: \
 D2Cfundclst: d2cs = ", d2cs)
 val () =
-prerrln(
+prerrsln(
 "\
 trsym2b_d2ecl: \
 D2Cfundclst: tqas = ", tqas)
@@ -251,14 +242,21 @@ D2Cfundclst: tqas = ", tqas)
 //
 val () =
 (
-  list_foreach(d2cs)) where
+(*
+HX-2024-08-01:
+This part is moved
+to [trans2a_decl00]!
+(
+  list_foritm(d2cs)
+) where
 {
   #impltmp
-  foreach$work
+  foritm$work
   <d2cst>(d2c1) =
   (
-    my_d2cst_set_xtyp(d2c1) )
-} where
+    myd2c_fix_xtyp(d2c1) ) }
+*)
+) where
 {
 //
 // HX-2023-08-15:
@@ -290,7 +288,7 @@ loc0 = dcl0.lctn()
 //
 (*
 val () =
-prerrln
+prerrsln
 ("f0_implmnt0: loc0 = ", loc0)
 *)
 //
@@ -304,7 +302,7 @@ D2Cimplmnt0
 //
 (*
 val () =
-prerrln
+prerrsln
 ("f0_implmnt0: dcl0 = ", dcl0)
 *)
 //

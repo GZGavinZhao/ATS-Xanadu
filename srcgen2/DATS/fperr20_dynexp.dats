@@ -159,9 +159,9 @@ _(*otherwise*) =>
 let
   val
   loc = d2p.lctn()
-  val () = prerrln
+  val () = prerrsln
   ("fperr20_d2pat: auxmain: loc = ", loc)
-  val () = prerrln
+  val () = prerrsln
   ("fperr20_d2pat: auxmain: d2p = ", d2p)
 endlet
 //
@@ -182,13 +182,13 @@ let
 val loc0 = d2p0.lctn((*0*))
 in//let
 (*
-prerrln
+prerrsln
 ("fperr20_d2pat: loc0 = ", loc0)
 *)
 end//let
 (*
 val () =
-prerrln
+prerrsln
 ("fperr20_d2pat: d2p0 = ", d2p0)
 *)
 //
@@ -207,10 +207,8 @@ then ((*void*)) else
 let
 val loc0 = d2p0.lctn()
 in//let
-(*
-prerrln
-("FPERR20-ERROR:",loc0,":",d2p0)
-*)
+printsln("\
+FPERR20-ERROR:", loc0, ":", d2p0)
 end//let
 )
 | _(* otherwise *) => (  (* skipped *)  )
@@ -470,9 +468,9 @@ _(*otherwise*) =>
 let
   val
   loc = d2e.lctn((*0*))
-  val () = prerrln
+  val () = prerrsln
   ("fperr20_d2exp: auxmain: loc = ", loc)
-  val () = prerrln
+  val () = prerrsln
   ("fperr20_d2exp: auxmain: d2e = ", d2e)
 endlet
 //
@@ -493,13 +491,13 @@ let
 val loc0 = d2e0.lctn((*0*))
 in//let
 (*
-prerrln
+prerrsln
 ("fperr20_d2exp: loc0 = ", loc0)
 *)
 end//let
 (*
 val () =
-prerrln
+prerrsln
 ("fperr20_d2exp: d2e0 = ", d2e0)
 *)
 //
@@ -519,10 +517,11 @@ if
 then ((*void*)) else
 let
 val
-loc0 = d2e0.lctn() in // let
-println
-("FPERR20-ERROR:",loc0,":",d2e0)
-end // let // else // end-of-[if]
+loc0 = d2e0.lctn()
+in//let
+printsln("\
+FPERR20-ERROR:", loc0, ":", d2e0)
+end//let
 //
 ) (* end-of-[D2Eerrck(lvl, d2e1)] *)
 | // non-D2Eerrck // ... // ... // ...

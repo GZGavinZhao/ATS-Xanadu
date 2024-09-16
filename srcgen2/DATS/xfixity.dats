@@ -131,12 +131,22 @@ sub_prcdv_int
 ( cdv , int ) =
 prcdv(cdv.decd() - int)
 (* ****** ****** *)
+//
+(*
+HX-2024-08-07:
+Wed 07 Aug 2024
+11:45:37 AM EDT
+*)
+//
 #implval
 brckt_prcdv =
-add_prcdv_int(app_prcdv, 10)
+sub_prcdv_int
+(app_prcdv, 1)//f(A)[i]
 #implval
 dtsel_prcdv =
-add_prcdv_int(app_prcdv, 10)
+sub_prcdv_int
+(app_prcdv, 1)//f(A).m(x)
+//
 (* ****** ****** *)
 #implval
 forall_prcdv = prcdv( 0 )
@@ -215,7 +225,7 @@ case- fxt of
 //
 (*
 val () =
-prerrln("fixty_prcdv: fxt = ", fxt)
+prerrsln("fixty_prcdv: fxt = ", fxt)
 *)
 //
 } (*where*) // end of [fxopr_prcdv(fxt]
@@ -240,7 +250,7 @@ case- fxt of
 //
 (*
 val () =
-prerrln("fixty_assoc: fxt = ", fxt)
+prerrsln("fixty_assoc: fxt = ", fxt)
 *)
 //
 } (*where*) // end of [fxopr_assoc(fxt)]
@@ -274,10 +284,10 @@ in//let
 case+ fxi of
 |
 FXITMatm(itm) =>
-print("FXITMatm(",itm,")")
+prints("FXITMatm(",itm,")")
 |
 FXITMopr(itm,fxt) =>
-print("FXITMopr(",itm,";",fxt,")")
+prints("FXITMopr(",itm,";",fxt,")")
 end (*let*) // end of [fixty_fprint(out,fxi)]
 //
 (* ****** ****** *)
@@ -292,19 +302,19 @@ in//let
 case+ fxt of
 |
 FIXTYnon() =>
-print("FIXTYnon(",")")
+prints("FIXTYnon(",")")
 |
 FIXTYpre(p1) =>
-print("FIXTYpre(", p1, ")")
+prints("FIXTYpre(", p1, ")")
 |
 FIXTYpos(p1) =>
-print("FIXTYpos(", p1, ")")
+prints("FIXTYpos(", p1, ")")
 |
 FIXTYinf(p1, a2) =>
-print("FIXTYinf(",p1,";",a2,")")
+prints("FIXTYinf(",p1,";",a2,")")
 |
 FIXTYpreinf(p1, p2, a3) =>
-print("FIXTYpreinf(",p1,";",p2,";",a3,")")
+prints("FIXTYpreinf(",p1,";",p2,";",a3,")")
 end (*let*) // end of [fixty_fprint(out,fxt)]
 //
 (* ****** ****** *)
@@ -325,10 +335,10 @@ process(itms, list_nil())
 //
 (*
 val () =
-prerrln
+prerrsln
 ("fxitmlst_resolve: loc0 = ", loc0)
 val () =
-prerrln
+prerrsln
 ("fxitmlst_resolve: itms = ", itms)
 *)
 //
@@ -611,7 +621,7 @@ case+ ys0 of
     val
     sgn =
     (fixty_prcdv(fx) \cmp fixty_prcdv(fy))
-  in
+  in//let
     if
     (sgn < 0)
     then yreduce(y0 :: xs0, ys0)
@@ -634,7 +644,8 @@ case+ ys0 of
 //
 (*
 | _ (*error*) =>
-  fxitmlst_resolve$oprerr<a>(y0) // HX: deadcode?
+(
+  fxitmlst_resolve$oprerr<a>(y0)) // HX: deadcode???
 *)
 | _ (*error*) =>
   let
@@ -699,12 +710,11 @@ fxitm_get_lctn<a>(itm)
 (*
 val-FXITMatm(atm) = itm
 *)
-val () = prerr ( loc0 )
-val () = prerr (": error(1)")
-//
 val () =
-prerrln
-(": app-fixity cannot be resolved: ", itm)
+prerrs(loc0, ": error(1)")
+//
+val () = prerrsln("\
+: app-fixity cannot be resolved: ", itm)
 //
 in
 $raise
@@ -730,11 +740,11 @@ loc0 =
 fxitm_get_lctn<a>(itm)
 //
 val () =
-prerr("FIXITY-ERROR:")
-val () = prerr( loc0 )
+prerrs
+("FIXITY-ERROR(", loc0, "):")
 val () =
-prerrln
-(": opr-fixity cannot be resolved: ", itm)
+prerrsln("\
+opr-fixity cannot be resolved: ", itm)
 //
 in//let
 $raise
@@ -748,7 +758,7 @@ XATSOPT_fxitmlst_resolve$oprerr_exn of ((*void*))
 endlet // end of [fxitmlst_resolve$oprerr<a>(itm)]
 //
 (* ****** ****** *)
-
+//
 #impltmp
 <a>(*tmp*)
 fxitmlst_resolve$rederr
@@ -756,11 +766,11 @@ fxitmlst_resolve$rederr
 let
 //
 val () =
-prerr("FIXITY-ERROR:")
-val () = prerr( loc0 )
+prerrs
+("FIXITY-ERROR(", loc0, "):")
 val () =
-prerrln
-(": opr-fixity cannot be resolved: ", itms)
+prerrsln("\
+opr-fixity cannot be resolved: ", itms)
 //
 in//let
 $raise
@@ -772,7 +782,11 @@ excptcon
 XATSOPT_fxitmlst_resolve$rederr_exn of ((*void*))
 }
 endlet // end of [fxitmlst_resolve$rederr<a>(loc0,itms)]
-
+//
 (* ****** ****** *)
+(* ****** ****** *)
+//
+(* ****** ****** *)(* ****** ****** *)
+(* ****** ****** *)(* ****** ****** *)
 
 (* end of [ATS3/XATSOPT_srcgen2_DATS_xfixity.dats] *)

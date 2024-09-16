@@ -37,6 +37,19 @@ Authoremail: gmhwxiATgmailDOTcom
 //
 (* ****** ****** *)
 (* ****** ****** *)
+#typedef ni = nint
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun
+<a:t0>
+g_void( a ): void
+fun
+<a:vt>
+g_self( a ): ( a )
+//
+(* ****** ****** *)
+(* ****** ****** *)
 //
 fun
 <a:vt>
@@ -44,6 +57,25 @@ g_free( ~a ): void
 fun
 <a:vt>
 g_copy( !a ): ( a )
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun
+<a:t0>
+g_work(x : a): void
+fun
+<a:t0>
+g_test(x : a): bool
+//
+fun
+<a0:t0>
+g_iwork
+(i0:ni,x0:a0): void
+fun
+<a0:t0>
+g_itest
+(i0:ni,x0:a0): bool
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -76,14 +108,10 @@ fun
 <a:vt>
 g_input$exn
 ((*void*)): (  a  )
-fun
-<a:vt>
-g_input_exn
-((*void*)): (  a  )
 //
 fun
 <a:vt>
-g_input_opt
+g_input$opt
 ((*void*)): optn_vt(a)
 //
 (* ****** ****** *)
@@ -98,14 +126,10 @@ fun
 <a:vt>
 g_parse$exn
 (rep: strn): (  a  )
-fun
-<a:vt>
-g_parse_exn
-(rep: strn): (  a  )
 //
 fun
 <a:vt>
-g_parse_opt
+g_parse$opt
 (rep: strn): optn_vt(a)
 //
 (* ****** ****** *)
@@ -122,8 +146,26 @@ g_tostr(obj: a): strn
 (* ****** ****** *)
 //
 fun
-<a:t0>
-g_print(obj: a): void
+<x0:t0>
+g_print(obj: x0): void
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+#symload void with g_void of 0100
+#symload self with g_self of 0100
+//
+(* ****** ****** *)
+//
+#symload torep with g_torep of 0100
+#symload tostr with g_tostr of 0100
+//
+(* ****** ****** *)
+//
+#symload print with g_print of 0100
+//
+(* ****** ****** *)
+(* ****** ****** *)
 //
 (* ****** ****** *)(* ****** ****** *)
 (* ****** ****** *)(* ****** ****** *)

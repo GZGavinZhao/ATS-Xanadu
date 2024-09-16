@@ -95,7 +95,7 @@ symbl_make_name
   (  nam  ) =
 let
 val opt =
-symbl_search_opt(nam)
+symbl_search$opt(nam)
 in//let
 //
 case+ opt of
@@ -112,7 +112,7 @@ sym where
 {
 //
 val () =
-symbl_insert_any(sym)
+symbl_insert$any(sym)
 //
 val () =
 $GLB.the_xsymbls_insert(sym)
@@ -168,5 +168,41 @@ loop(cs, r0+1) else (g_free(cs); -1)
 } (*where*) // end of [symbl_wcard_kind(sym)]
 
 (* ****** ****** *)
+(* ****** ****** *)
+//
+#extern
+fun
+strn_append_uint
+( name: strn
+, stmp: uint): strn
+//
+#impltmp
+symbl_extend_stamp
+  (sym0, stmp) =
+let
+val name =
+  symbl_get_name(sym0)
+val uint =
+  stamp_get_uint(stmp)
+in//let
+symbl_make_name
+(strn_append_uint(name, uint))
+end//let//end-of-[symbl_extend_stamp]
+//
+#impltmp
+strn_append_uint
+  (name, stmp) =
+(
+XATSOPT_strn_append_uint
+  (name, stmp)) where
+{
+#extern
+fun
+XATSOPT_strn_append_uint
+(name: strn, stmp: uint): strn = $extnam()
+}
+//
+(* ****** ****** *)(* ****** ****** *)
+(* ****** ****** *)(* ****** ****** *)
 
 (* end of [ATS3/XATSOPT_srcgen2_DATS_xsymbol.dats] *)

@@ -122,20 +122,20 @@ val s2t1 = s2v1.sort((*0*))
 val s2t2 = t2p2.sort((*0*))
 //
 (*
-val () = prerrln
+val () = prerrsln
 (
 "s2vts_stleq: s2v1 = ", s2v1)
-val () = prerrln
+val () = prerrsln
 (
 "s2vts_stleq: t2p2 = ", t2p2)
-val () = prerrln
+val () = prerrsln
 (
 "s2vts_stleq: s2t1 = ", s2t1)
-val () = prerrln
+val () = prerrsln
 (
 "s2vts_stleq: s2t2 = ", s2t2)
 //
-val () = prerrln
+val () = prerrsln
 ( "s2vts_stleq: test = "
 , lte_sort2_sort2(s2t2, s2t1) )
 *)
@@ -147,7 +147,7 @@ in//let
 (* ****** ****** *)
 //
 #implfun
-s2vts_search_opt
+s2vts_search$opt
   (svts, s2v0) =
 (
   auxmain(svts) ) where
@@ -166,7 +166,7 @@ if
 then
 optn_vt_cons(svt1.1) else auxmain(svts)
 )
-} (*where*) // end of [s2vts_search_opt]
+} (*where*) // end of [s2vts_search$opt]
 //
 (* ****** ****** *)
 //
@@ -202,7 +202,7 @@ end (*let*)
 (* ****** ****** *)
 
 #implfun
-s2typ_prjout_opt
+s2typ_prjout$opt
   (t2p0, lab0) =
 (
 case+
@@ -240,7 +240,7 @@ optn_vt_cons(t2p1) else auxloop(ltps)
 end // end-of-[  list_cons(...)  ]
 )(*case+*)//end-of-[  auxloop(ltps)  ]
 //
-}(*where*)//end-of-[s2typ_search_opt(...)]
+}(*where*)//end-of-[s2typ_search$opt(...)]
 
 (* ****** ****** *)
 //
@@ -406,9 +406,9 @@ s2typlst_xtpck0(t2ps, xtp0) )
 {
 (*
 val () =
-prerrln("s2typ_xtpck0: t2p0 = ", t2p0)
+prerrsln("s2typ_xtpck0: t2p0 = ", t2p0)
 val () =
-prerrln("s2typ_xtpck0: xtp0 = ", xtp0)
+prerrsln("s2typ_xtpck0: xtp0 = ", xtp0)
 *)
 } (*where*)//end-of-[s2typ_xtpck0(...)]
 
@@ -676,7 +676,7 @@ endlet where // end of [let]
 {
 (*
 val () =
-prerrln("s2exp_stpize: s2e0 = ", s2e0)
+prerrsln("s2exp_stpize: s2e0 = ", s2e0)
 *)
 } (*where*) // end of [s2exp_stpize(s2e0)]
 //

@@ -82,15 +82,42 @@ list_btwe_vt
 //
 fun
 <a:t0>
-list_make_nval
+list_make_1val
+( x1: a): list(a, 1)
+fun
+<a:t0>
+list_make_2val
+(x1: a, x2: a): list(a, 2)
+fun
+<a:t0>
+list_make_3val
+(x1: a
+,x2: a, x3: a): list(a, 3)
+//
+(* ****** ****** *)
+//
+fun
+<a:t0>
+list_make_ncpy
 {n:nat}
 (n:sint(n),x:a): list(a,n)
 fun
 <a:t0>
-list_make_nval_vt
+list_make_ncpy_vt
 {n:nat}
 (n:sint(n),x:a): list_vt(a,n)
 //
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun
+<a:t0>
+list_make_nfun
+{n:nat}
+( x0: (a)
+, f0: nintlt(n)->(a)): list(a, n)
+//
+(* ****** ****** *)
 (* ****** ****** *)
 //
 fun
@@ -139,13 +166,10 @@ list_head
 {n:pos}(list(a, n)): (a)
 fun
 <a:t0>
-list_head_raw(xs: list(a)): (a)
+list_head$exn(xs: list(a)): (a)
 fun
 <a:t0>
-list_head_exn(xs: list(a)): (a)
-fun
-<a:t0>
-list_head_opt(xs: list(a)): optn_vt(a)
+list_head$opt(xs: list(a)): optn_vt(a)
 //
 (* ****** ****** *)
 //
@@ -155,13 +179,10 @@ list_tail
 {n:pos}(list(a, n)): list(a, n-1)
 fun
 <a:t0>
-list_tail_raw(xs: list(a)): list(a)
+list_tail$exn(xs: list(a)): list(a)
 fun
 <a:t0>
-list_tail_exn(xs: list(a)): list(a)
-fun
-<a:t0>
-list_tail_opt(xs: list(a)): optn_vt(list(a))
+list_tail$opt(xs: list(a)): optn_vt(list(a))
 //
 (* ****** ****** *)
 //
@@ -193,14 +214,14 @@ list_length
 //
 fun
 <a:t0>
-list_get_at
+list_get$at
 {n:int}
 (list(a, n), nintlt(n)): (a)
 //
 (* ****** ****** *)
 fun
 <a:t0>
-list_fset_at
+list_fset$at
 {n:int}
 ( xs: list(a,n)
 , i0: nintlt(n), x0: a): list(a,n)
@@ -289,13 +310,25 @@ list_foldr(list(x0), r0): (r0)
 //
 fun
 <x0:t0>
-list_exists(xs: list(x0)): bool
-fun
-<x0:t0>
 list_forall(xs: list(x0)): bool
 fun
 <x0:t0>
-list_foreach(xs: list(x0)): void
+list_exists(xs: list(x0)): bool
+fun
+<x0:t0>
+list_foritm(xs: list(x0)): void
+//
+(* ****** ****** *)
+//
+fun
+<x0:t0>
+list_rforall(xs: list(x0)): bool
+fun
+<x0:t0>
+list_rexists(xs: list(x0)): bool
+fun
+<x0:t0>
+list_rforitm(xs: list(x0)): void
 //
 (* ****** ****** *)
 //
@@ -410,10 +443,10 @@ list_tabulate
 (n0: nint(n0)): list(x0,n0)//end-fun
 fun
 <x0:t0>
-list_tabulate_cfr
+list_tabulate_f1un
 {n:int}
 (n0: nint(n)
-,f0: nintlt(n) -<cfr> x0): list(x0,n)
+,f0: nintlt(n) -> x0): list(x0,n)
 //
 (* ****** ****** *)
 //
@@ -431,7 +464,7 @@ list_iforall
 //
 fun
 <x0:t0>
-list_iforeach
+list_iforitm
 {n:int}(xs: list(x0, n)): void//fun
 //
 (* ****** ****** *)
@@ -524,12 +557,12 @@ list_subsetize_vt
 //
 (* ****** ****** *)
 
-#symload [] with list_get_at of 1000
-#symload get_at with list_get_at of 1000
+#symload [] with list_get$at of 1000
+#symload get$at with list_get$at of 1000
 
 (* ****** ****** *)
 
-#symload fset_at with list_fset_at of 1000
+#symload fset$at with list_fset$at of 1000
 
 (* ****** ****** *)
 //
@@ -555,10 +588,10 @@ list_subsetize_vt
 //
 #symload exists with list_exists of 1000
 #symload forall with list_forall of 1000
-#symload foreach with list_foreach of 1000
+#symload foritm with list_foritm of 1000
 //
 #symload iforall with list_iforall of 1000
-#symload iforeach with list_iforeach of 1000
+#symload iforitm with list_iforitm of 1000
 //
 (* ****** ****** *)
 #symload listize with list_listize of 1000
@@ -592,36 +625,37 @@ list_subsetize_vt
 fun
 <x0:t0>
 <y0:t0>
-list_map_c1fr
+list_map_f1un
 {n:int}
-(xs:list(x0,n), f0:(x0)-<cfr>y0): list(y0,n)
+(xs:list(x0,n), f0:(x0)->(y0)): list(y0,n)
+fun
+<x0:t0>
+<y0:vt>
+list_map_f1un_vt
+{n:int}
+(xs:list(x0,n), f0:(x0)->(y0)): list_vt(y0,n)
+//
+#symload map_fun with list_map_f1un of 1000
+#symload map_fun_vt with list_map_f1un_vt of 1000
+//
+(* ****** ****** *)
+//
 fun
 <x0:t0>
 <y0:t0>
-list_map_f1np
+list_maprev_f1un
 {n:int}
-(xs:list(x0,n), f0:(x0)-<fnp>y0): list(y0,n)
-//
-(* ****** ****** *)
-//
+(xs:list(x0,n), f0:(x0)->(y0)): list(y0,n)
 fun
 <x0:t0>
 <y0:vt>
-list_map_c1fr_vt
+list_maprev_f1un_vt
 {n:int}
-(xs:list(x0,n), f0:(x0)-<cfr>y0): list_vt(y0,n)
-fun
-<x0:t0>
-<y0:vt>
-list_map_f1np_vt
-{n:int}
-(xs:list(x0,n), f0:(x0)-<fnp>y0): list_vt(y0,n)
+(xs:list(x0,n), f0:(x0)->(y0)): list_vt(y0,n)
 //
-(* ****** ****** *)
-#symload map_cfr with list_map_c1fr of 1000
-#symload map_fnp with list_map_f1np of 1000
-#symload map_cfr_vt with list_map_c1fr_vt of 1000
-#symload map_fnp_vt with list_map_f1np_vt of 1000
+#symload maprev_fun with list_maprev_f1un of 1000
+#symload maprev_fun_vt with list_maprev_f1un_vt of 1000
+//
 (* ****** ****** *)
 //
 (*
@@ -634,20 +668,20 @@ quite difficult for formal verification.
 fun
 <x0:t0>
 list_make_fwork
-(fwork: ((x0)-<cfr>void) -<cfr> void): list(x0)
+(fwork: ((x0)->void) -> void): list(x0)
 fun
 <x0:t0>
 list_rmake_fwork
-(fwork: ((x0)-<cfr>void) -<cfr> void): list(x0)
+(fwork: ((x0)->void) -> void): list(x0)
 //
 fun
 <x0:t0>
 list_make_fwork_vt
-(fwork: ((x0)-<cfr>void) -<cfr> void): list_vt(x0)
+(fwork: ((x0)->void) -> void): list_vt(x0)
 fun
 <x0:t0>
 list_rmake_fwork_vt
-(fwork: ((x0)-<cfr>void) -<cfr> void): list_vt(x0)
+(fwork: ((x0)->void) -> void): list_vt(x0)
 //
 (* ****** ****** *)
 

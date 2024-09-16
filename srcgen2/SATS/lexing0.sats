@@ -249,6 +249,12 @@ datatype tnode =
   | T_DLR_EXTNAM of () // $exname
   | T_DLR_EXISTS of () // $exists
 //
+(*
+HX-2024-07-19:
+Fri 19 Jul 2024 10:07:36 PM EDT
+*)
+  | T_DLR_SYNEXT of () // $synext
+//
   | T_SRP_THEN of ()
   | T_SRP_ELSE of ()
   | T_SRP_IFDEC of int(*kind*)
@@ -280,6 +286,14 @@ datatype tnode =
   | T_SRP_INPASTE of () // #inpaste
 *)
 //
+(*
+HX-2024-07-20:
+For supporting
+co-programming with ATS
+For inclusion of external code
+Sat 20 Jul 2024 10:50:45 AM EDT
+*)
+  | T_SRP_EXTCODE of () // #extcode
 //
 // end-of-(datatype tnode)
 //

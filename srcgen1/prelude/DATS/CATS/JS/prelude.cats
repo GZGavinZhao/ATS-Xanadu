@@ -35,7 +35,7 @@ XATS2JS_a0ptr_alloc
 }
 //
 function
-XATS2JS_a0ptr_make_1val
+XATS2JS_a0ptr_make0_1val
   (x0)
 {
   var A0 =
@@ -59,13 +59,13 @@ XATS2JS_a0ref_set
 /* ****** ****** */
 //
 function
-XATS2JS_a0ref_get0
+XATS2JS_a0ref_dtget
   (A0)
 {
     return A0[0]; }
 //
 function
-XATS2JS_UN_a0ref_set0
+XATS2JS_UN_a0ref_dtset
   (A0, x0)
 {
     return (A0[0] = x0); }
@@ -88,12 +88,12 @@ XATS2JS_a1ptr_alloc
 /* ****** ****** */
 //
 function
-XATS2JS_a1ref_get_at
+XATS2JS_a1ref_get$at
   (A0, i0)
 {
     return A0[i0]; }
 function
-XATS2JS_a1ptr_get_at
+XATS2JS_a1ptr_get$at1
   (A0, i0)
 {
     return A0[i0]; }
@@ -101,19 +101,13 @@ XATS2JS_a1ptr_get_at
 /* ****** ****** */
 //
 function
-XATS2JS_a1ref_set_at
+XATS2JS_a1ref_set$at
   (A0, i0, x0)
 {
     return (A0[i0] = x0);
 }
 function
-XATS2JS_a1ptr_set_at
-  (A0, i0, x0)
-{
-    return (A0[i0] = x0);
-}
-function
-XATS2JS_a1ptr_set_at_raw
+XATS2JS_a1ptr_set$at1
   (A0, i0, x0)
 {
     return (A0[i0] = x0);
@@ -121,13 +115,24 @@ XATS2JS_a1ptr_set_at_raw
 //
 /* ****** ****** */
 //
+/*
 function
-XATS2JS_a1ref_get0_at
+XATS2JS_a1ptr_set$at$raw
+  (A0, i0, x0)
+{
+    return (A0[i0] = x0);
+}
+*/
+//
+/* ****** ****** */
+//
+function
+XATS2JS_a1ref_dtget$at
   (A0, i0)
 {
     return A0[   i0   ]; }
 function
-XATS2JS_a1ref_cget_at
+XATS2JS_a1ref_cget$at
   (A0, i0)
 {
     return A0[   i0   ]; }
@@ -135,7 +140,7 @@ XATS2JS_a1ref_cget_at
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 //
-// prelude/unsafe.sats
+// prelude/unsafex.sats
 //
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////

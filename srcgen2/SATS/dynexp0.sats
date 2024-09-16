@@ -463,34 +463,51 @@ D0Etry0 of
 ( token
 , d0explst // SMCLN-sequence
 , token(*WITH*)
-, tokenopt(*BAR*), d0clslst, token )
+, tokenopt(*BAR*)
+, d0clslst, tokenopt(*ENDTRY*))//try
 //
 |
 D0Elam0 of
 ( token(*lam/lam@*)
 , f0arglst(*arglst*)
-, s0res, f0unarrw, d0exp, tokenopt )
+, s0res, f0unarrw, d0exp, tokenopt)//lam
 |
 D0Efix0 of
 ( token(*fix/fix@*)
 , d0pid(*fixed-pnt*)
 , f0arglst(*arglst*)
-, s0res, f0unarrw, d0exp, tokenopt )
+, s0res, f0unarrw, d0exp, tokenopt)//fix
 //
 |
-D0Eraise of (token, d0exp) // HX: raising
+D0Eraise of (token, d0exp) //HX:raising
 //
 |
-D0Eannot of (d0exp, s0exp) // HX: annotation
+D0Eannot of (d0exp, s0exp) //HX:annotation
 | // qualified-id
-D0Equal0 of (token, d0exp) // HX: qual-d0exp
+D0Equal0 of (token, d0exp) //HX:qual-d0exp
 //
-| // HX-2020-11-04: for specifying
-D0Eextnam of (token, g0nam) // external names
 |
 D0Eexists of
-( token // HX-2021-01-14: $exists{..}..{..}
-, d0explst(*D0Esarglst*), d0exp ) // (d0exp)
+( token//HX-2021-01-14:$exists{..}..{..}
+, d0explst(*D0Esarglst*), d0exp )//(d0exp)
+//
+(* ****** ****** *)
+//
+| // HX-2020-11-04: for specifying
+D0Eextnam of (token, g0nam(*extern-name*))
+//
+(* ****** ****** *)
+|
+//
+(*
+HX-2024-07-19:
+Note that [g0exp] should
+evaluate to a literal string!
+Fri 19 Jul 2024 05:12:46 PM EDT
+*)
+D0Esynext of (token, g0exp(*literal-strn*))
+//
+(* ****** ****** *)
 //
 |
 (*
@@ -498,10 +515,14 @@ HX-2022-06-20:
 D0Etkerr(tok):
 tok is not consumed by the parser!
 *)
-D0Etkerr of (token) // HX: parsing error
+D0Etkerr of (token) // HX: for parsing error
+//
+(* ****** ****** *)
 //
 |
 D0Eerrck of (int(*lvl*), d0exp)//HX:pread-error
+//
+(* ****** ****** *)
 //
 // HX-2022-06-20: end-of-[datatype(d0exp_node)]
 //
@@ -875,12 +896,19 @@ D0Cnonfix of
 (token, i0dntlst)
 |
 D0Cfixity of
-(token, i0dntlst, precopt)
+(
+token, i0dntlst, precopt)
+//
+(* ****** ****** *)
 //
 |
-D0Cstatic of (token, d0ecl)
+D0Cstatic of
+(token, d0ecl) // locally
 |
-D0Cextern of (token, d0ecl)
+D0Cextern of
+(token, d0ecl) // globally
+//
+(* ****** ****** *)
 //
 (*
 HX-2022-12-15:
@@ -964,6 +992,13 @@ D0Cstaload of
 (sint(*s/d*), token, g0exp)//staloading
 |
 D0Cdyninit of (token, g0exp)//initization
+//
+(*
+HX-2024-07-20:
+Sat 20 Jul 2024 11:01:57 AM EDT
+*)
+|
+D0Cextcode of (token, g0exp)//extern-code
 //
 |
 D0Cdatasort of

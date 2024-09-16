@@ -45,6 +45,11 @@ detop1{a0:vt}(x0: ?a0): (a0)
 (* ****** ****** *)
 //
 fcast
+castxy{ax:t0}{ay:t0}(ax):(ay)
+fcast
+castyx{ay:t0}{ax:t0}(ax):(ay)
+//
+fcast
 cast01{a0:t0}{a1:t0}(a0):(a1)
 fcast
 cast10{a1:t0}{a0:t0}(a0):(a1)
@@ -57,6 +62,13 @@ fcast
 enlinear{a0:vt}(?!a0): (  a0  )
 //
 (* ****** ****** *)
+//
+fcast
+castxy0
+{ax:vt}{ay:vt}(ax):(ay)
+fcast
+castyx0
+{ay:vt}{ax:vt}(ax):(ay)
 //
 fcast
 castlin01{a0:vt}{a1:vt}(a0):(a1)
@@ -74,14 +86,15 @@ datacopy{a0:vt}(x0: !a0): (?!a0)
 (* ****** ****** *)
 //
 fcast
-optn_vt2t
+optn_vt2t1
 {a:t0}{b:b0}
 (xs: !optn_vt(a, b)): optn(a, b)
 fcast
-list_vt2t
+list_vt2t1
 {a:t0}{n:i0}
 (xs: !list_vt(a, n)): list(a, n)
 //
+(* ****** ****** *)
 (* ****** ****** *)
 //
 fun
@@ -94,6 +107,12 @@ fun
 <a:vt>
 p1tr_ret(p0: p1tr, x0: a): void
 //
+#symload ptr_get with p1tr_get of 1000
+#symload ptr_set with p1tr_set of 1000
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
 fun
 <a:vt>
 p2tr_get(p0: p2tr(a)): (a)
@@ -104,6 +123,10 @@ fun
 <a:vt>
 p2tr_ret(p0: p2tr(a), x0: a): void
 //
+#symload ptr_get with p2tr_get of 1000
+#symload ptr_set with p2tr_set of 1000
+//
+(* ****** ****** *)
 (* ****** ****** *)
 //
 (*
@@ -118,6 +141,10 @@ fun
 <a:vt>
 cp2tr_get(cp: cp2tr(a)): a
 //
+#symload cptr_get with cp1tr_get of 1000
+#symload cptr_get with cp2tr_get of 1000
+//
+(* ****** ****** *)
 (* ****** ****** *)
 //
 fun
@@ -139,30 +166,145 @@ p2tr_set_list_vt_cons
 (p0: p2tr(list_vt(a)), x0: a): void
 //
 (* ****** ****** *)
+(* ****** ****** *)
 //
+(*
+HX:
+these two are safe!
 fun
 <a:vt>
-a0ref_set0
-(A0: a0ref(a), x0: ?!a): void
+a0ref_dtget
+(A0: a0ref(a)): ?!a
+fun
+<a:vt>
+a0ref_dtset
+(a0ref(a), ?!a): void
+*)
 //
 (* ****** ****** *)
-//
-// HX-2020-05-30:
-// symbol overloading for unsafe
-//
 (* ****** ****** *)
 //
-#symload ptr_get with p1tr_get of 1000
-#symload ptr_set with p1tr_set of 1000
-//
-#symload ptr_get with p2tr_get of 1000
-#symload ptr_set with p2tr_set of 1000
-//
-(* ****** ****** *)
-//
-#symload cptr_get with cp1tr_get of 1000
-#symload cptr_get with cp2tr_get of 1000
+fun<>
+strn_head$raw(strn): cgtz
+fun<>
+strn_tail$raw(strn): strn
 //
 (* ****** ****** *)
+(* ****** ****** *)
+//
+fun
+<xs:t0>
+<x0:t0>
+gseq_head$raw(xs): x0
+fun
+<xs:t0>
+<x0:t0>
+gseq_tail$raw(xs): xs
+//
+fun
+<xs:t0>
+<x0:t0>
+gseq_last$raw(xs): x0
+//
+fun
+<xs:t0>
+<x0:t0>
+gseq_uncons$raw(xs: &xs >> xs): x0
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun
+<a:t0>
+list_head$raw(xs: list(a)): (a)
+fun
+<a:t0>
+list_tail$raw(xs: list(a)): list(a)
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun
+<a:t0>
+strm_head$raw(strm(a)): a
+fun
+<a:t0>
+strm_tail$raw(strm(a)): strm(a)
+fun
+<a:t0>
+strmcon_head$raw(strmcon(a)): a
+fun
+<a:t0>
+strmcon_tail$raw(strmcon(a)): strm(a)
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+(*
+HX-2024-07-26:
+These should be
+used with caution!!!
+*)
+//
+fun
+<xs:t0>
+<x0:t0>
+gasz_get$at$raw
+( xs: xs, i0: ni): x0
+fun
+<xs:t0>
+<x0:t0>
+gasz_set$at$raw
+( xs: xs, i0: ni, x0: x0): void
+//
+fun
+<xs:t0>
+<x0:vt>
+gasz_cget$at$raw
+( xs: xs, i0: ni): x0
+fun
+<xs:t0>
+<x0:vt>
+gasz_setf$at$raw
+( xs: xs, i0: ni, x0: x0): void
+//
+fun
+<xs:t0>
+<x0:vt>
+gasz_lget$at$raw
+( xs: xs
+, i0: ni): (owed(x0) | x0)
+fun
+<xs:t0>
+<x0:vt>
+gasz_lset$at$raw
+( pf: owed(x0)
+| xs: xs, i0: ni, x0: x0): void
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun
+<xs:vt>
+<x0:vt>
+gasz_get$at$raw1
+(xs: !xs, i0: ni): (x0)
+fun
+<xs:vt>
+<x0:vt>
+gasz_set$at$raw1
+(xs: !xs, i0: ni, x0: x0): void
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun<>
+strn_get$at$raw(strn, ni): (cgtz)
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+(* ****** ****** *)(* ****** ****** *)
+(* ****** ****** *)(* ****** ****** *)
 
 (* end of [ATS3/XANADU_srcgen1_prelude_SATS_unsafex.sats] *)

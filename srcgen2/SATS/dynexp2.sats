@@ -486,15 +486,16 @@ d2con_make_idtp
 //
 fun
 d2cst_make_dvar
-(dvar: d2var, tqas: t2qas): d2cst
+(tok0: token
+,dvar: d2var, tqas: t2qas): d2cst
 fun
 d2cst_make_idtp
 (tok0: token
 ,dpid: token
 ,tqas: t2qas, sexp: s2exp): d2cst
 //
-#symload d2cst with d2cst_make_dvar
 #symload d2con with d2con_make_idtp
+#symload d2cst with d2cst_make_dvar
 #symload d2cst with d2cst_make_idtp
 //
 (* ****** ****** *)
@@ -513,10 +514,24 @@ fun
 d2var_get_name:(d2var) -> sym_t
 fun
 d2var_get_stmp:(d2var) -> stamp
+(* ****** ****** *)
+//
+(*
+HX-2024-08-09:
+'unam': uniqe name
+Due to template resolution,
+code can be moved under lambdas
+Fri 09 Aug 2024 12:50:56 AM EDT
+*)
+fun
+d2var_get_unam:(d2var) -> sym_t
+//
+(* ****** ****** *)
 //
 #symload lctn with d2var_get_lctn
 #symload name with d2var_get_name
 #symload stmp with d2var_get_stmp
+#symload unam with d2var_get_unam
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -1053,15 +1068,27 @@ D2Elabck of (d2exp, label)//HX: casting
 |
 D2Et2pck of (d2exp, s2typ)//HX: casting
 //
-|
-D2Eextnam of (token, g1nam)//HX: external
+(* ****** ****** *)
+//
 |
 D2Eexists of
 (
-  s2explst(*witness*), d2exp(*scopexp*) )
+  s2explst(*witness*), d2exp(*scopexp*))
+//
+(* ****** ****** *)
+//
+|
+D2Eextnam of (token, g1nam)//HX:external
+//
+| // HX-2024-07-19: [g1exp] evaluates
+D2Esynext of (token, g1exp)//to lit-string
+//
+(* ****** ****** *)
 //
 |D2Enone0 of ((*0*))
 |D2Enone1 of (d1exp) | D2Enone2 of (d2exp)
+//
+(* ****** ****** *)
 //
 |D2Eerrck of
  (sint(*lvl*), d2exp(*err*))//HX:tread12-error
@@ -1337,10 +1364,16 @@ d2ecl_node =
 //
 |D2Cd1ecl of (d1ecl)
 //
+(* ****** ****** *)
+//
 |D2Cstatic of
- (token(*STATIC*), d2ecl)
+(token
+ (*STATIC*), d2ecl) // locally
 |D2Cextern of
- (token(*EXTERN*), d2ecl)
+(token
+ (*EXTERN*), d2ecl) // globally
+//
+(* ****** ****** *)
 //
 |D2Clocal0 of
  ( d2eclist(*local-head*)
@@ -1381,6 +1414,26 @@ D2Cstaload of
 , g1exp // src
 , fpathopt
 , s2taloadopt) // staloading
+//
+(* ****** ****** *)
+//
+(*
+HX-2024-07-20:
+Sat 20 Jul 2024 01:40:24 PM EDT
+*)
+|
+D2Cdyninit of
+(token(*DYNLOAD*), g1exp(*fpath*))
+//
+(*
+HX-2024-07-20:
+Sat 20 Jul 2024 01:40:24 PM EDT
+*)
+|
+D2Cextcode of
+(token(*EXTCODE*), g1exp(*xcode*))
+//
+(* ****** ****** *)
 //
 |
 D2Cdatasort of (d1ecl, sort2lst)
@@ -1474,10 +1527,13 @@ A2TDFdefn of s2exp//definition
 //
 and
 s2taloadopt =
-|S2TALOADnone of ()
-|S2TALOADfenv of (f2env)
-|S2TALOADdpar of
-(sint(*0/1*),d2parsed(*shrd*))
+|
+S2TALOADnone of ()
+|
+S2TALOADfenv of (f2env)
+|
+S2TALOADdpar of
+(sint(*0/1*), d2parsed(*shrd*))
 //
 (* ****** ****** *)
 fun

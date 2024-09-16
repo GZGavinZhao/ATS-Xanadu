@@ -180,7 +180,7 @@ list_vt_cons(_, xs) => loop(xs, ln+1)
 
 #impltmp
 <a>(*tmp*)
-list_vt_make_nval
+list_vt_make_ncpy
   (n0, x0) = let
 //
 fnx
@@ -200,14 +200,14 @@ else let
   (r0 := list_vt_cons(x1, _))
 in // let
 (
-  loop(pred(i0), r0.1); $fold(r0) )
+  loop(pre(i0), r0.1); $fold(r0) )
 end // end of [else]
 //
 in
 let
 var r0: list_vt(a) in loop(n0, r0); r0
 end
-end (* end of [list_vt_make_nval] *)
+end (* end of [list_vt_make_ncpy] *)
 
 (* ****** ****** *)
 
@@ -354,17 +354,16 @@ end // end of [let]
 #impltmp
 <a>(*tmp*)
 list_vt_reverse0(xs) =
-list_vt_rappend0<a>(xs, list_vt_nil())
+list_vt_rappend00<a>(xs, list_vt_nil())
 
 (* ****** ****** *)
 
 #impltmp
 <a>(*tmp*)
-list_vt_rappend0
+list_vt_rappend00
   (xs, ys) =
 (
-  loop(xs, ys)
-) where
+  loop(xs, ys)) where
 {
 //
 fnx
@@ -389,7 +388,7 @@ in
 end // end of [list_vt_cons]
 ) (* end of [loop] *)
 //
-} (* end of [list_vt_rappend0] *)
+} (* end of [list_vt_rappend00] *)
 
 (* ****** ****** *)
 
@@ -398,8 +397,7 @@ end // end of [list_vt_cons]
 list_vt_rappend10
   (xs, ys) =
 (
-  loop(xs, ys)
-) where
+  loop(xs, ys)) where
 {
 //
 fnx
@@ -432,8 +430,7 @@ end // end of [list_vt_cons]
 list_vt_rappend11
   (xs, ys) =
 (
-  loop(xs, ys)
-) where
+  loop(xs, ys)) where
 {
 //
 fnx
@@ -469,7 +466,7 @@ Quite an informative example:
 //
 #impltmp
 <a>(*tmp*)
-list_vt_tabulate_cfr
+list_vt_tabulate_f1un
   {n}(n0, f0) = let
 //
 #impltmp
@@ -477,7 +474,7 @@ tabulate$fopr<a><n>(i0) = f0(i0)
 //
 in
   list_vt_tabulate<a><n>(n0)
-end // end of [list_vt_tabulate_cfr]
+end // end of [list_vt_tabulate_f1un]
 //
 (* ****** ****** *)
 //
@@ -499,7 +496,7 @@ list_vt_nil() => true
 list_vt_cons(x0, xs) =>
 let
 val
-test = forall0$test<a>(x0)
+test = forall$test0<a>(x0)
 in
 //
 if
@@ -534,7 +531,7 @@ list_vt_nil() => true
 list_vt_cons(x0, xs) =>
 let
 val
-test = forall1$test<a>(x0)
+test = forall$test1<a>(x0)
 in//let
 //
 if test then loop(xs) else false
@@ -563,7 +560,7 @@ list_vt_nil() => true
 list_vt_cons(!x0, xs) =>
 let
 val
-test = forall2$test<a>(x0)
+test = forall$test2<a>(x0)
 in//let
 //
 if test then loop(xs) else false
@@ -577,7 +574,7 @@ end // end of [list_vt_cons]
 //
 #impltmp
 <a>(*tmp*)
-list_vt_foreach0
+list_vt_foritm0
   (xs) =
   (loop(xs)) where
 {
@@ -593,16 +590,16 @@ list_vt_nil() => ()
 list_vt_cons(x0, xs) =>
 let
 val () =
-foreach0$work<a>(x0) in loop(xs)
+foritm$work0<a>(x0) in loop(xs)
 end // end of [list_vt_cons]
 )
-}(*where*)//end-of-[list_vt_foreach0]
+}(*where*)//end-of-[list_vt_foritm0]
 //
 (* ****** ****** *)
 //
 #impltmp
 <a>(*tmp*)
-list_vt_foreach1
+list_vt_foritm1
   (xs) =
   (loop(xs)) where
 {
@@ -618,16 +615,16 @@ list_vt_nil() => ()
 list_vt_cons(x0, xs) =>
 let
 val () =
-foreach1$work<a>(x0) in loop(xs)
+foritm$work1<a>(x0) in loop(xs)
 end // end of [list_vt_cons]
 )
-}(*where*)//end-of-[list_vt_foreach1]
+}(*where*)//end-of-[list_vt_foritm1]
 //
 (* ****** ****** *)
 //
 #impltmp
 <a>(*tmp*)
-list_vt_foreach2
+list_vt_foritm2
   (xs) =
   (loop(xs)) where
 {
@@ -643,10 +640,10 @@ list_vt_nil() => ()
 list_vt_cons(!x0, xs) =>
 let
 val () =
-foreach2$work<a>(x0) in loop(xs)
+foritm$work2<a>(x0) in loop(xs)
 end // end of [list_vt_cons]
 )
-}(*where*)//end-of-[list_vt_foreach2]
+}(*where*)//end-of-[list_vt_foritm2]
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -706,7 +703,7 @@ list_vt_nil() =>
 list_vt_cons(x0, xs) =>
 let
   val y0 =
-  map0$fopr<x0><y0>(x0)
+  map$fopr0<x0><y0>(x0)
   val () =
   (r0 := list_vt_cons(y0, _))
 in
@@ -718,7 +715,7 @@ in
   let
   var r0: list_vt(y0)
   val () = loop(xs, r0) in r0 end
-end (*let*)//end of [list_map0_vt(...)]
+end (*let*)//end of [list_vt_map0_vt(...)]
 //
 (* ****** ****** *)
 
@@ -750,7 +747,7 @@ list_vt_nil() => ys
 list_vt_cons(x0, xs) =>
 let
   val y0 =
-  map0$fopr<x0><y0>(x0)
+  map$fopr0<x0><y0>(x0)
 in
   loop(xs, list_vt_cons(y0, ys))
 end
@@ -941,7 +938,7 @@ list_vt_free<a>(ys)}
 list_vt_cons(x0, xs) =>
 let
 val n0 = i0+j0
-val n1 = pred(n0)
+val n1 = pre(n0)
 val res1 =
 auxmain1(xy, n1) where
 {
@@ -955,7 +952,7 @@ strm_vt_map0
 #sexpdef n0 = i+j
 #sexpdef n1 = n0-1
 #impltmp
-map0$fopr
+map$fopr0
 <xs(n1)>
 <xs(n0)>(xx) = list_vt_cons(x0, xx)
 }
@@ -1177,12 +1174,12 @@ gseq_forall1
 //
 #impltmp
 {a:vt}
-gseq_foreach0
-<list_vt(a)><a> = list_vt_foreach0<a>
+gseq_foritm0
+<list_vt(a)><a> = list_vt_foritm0<a>
 #impltmp
 {a:vt}
-gseq_foreach1
-<list_vt(a)><a> = list_vt_foreach1<a>
+gseq_foritm1
+<list_vt(a)><a> = list_vt_foritm1<a>
 //
 (* ****** ****** *)
 //

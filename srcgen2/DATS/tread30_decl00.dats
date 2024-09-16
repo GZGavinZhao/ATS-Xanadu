@@ -119,6 +119,7 @@ d3ecl_make_node
 end (*let*) // end of [d3ecl_include_errck]
 //
 (* ****** ****** *)
+(* ****** ****** *)
 //
 fun
 d3ecl_valdclst_errck
@@ -153,6 +154,7 @@ d3ecl_errck
 end (*let*) // end of [d3ecl_vardclst_errck]
 //
 (* ****** ****** *)
+(* ****** ****** *)
 //
 fun
 d3ecl_fundclst_errck
@@ -175,6 +177,7 @@ d3ecl_errck
   (loc0,D3Cfundclst(tknd,tqas,d2cs,d3fs)))
 end (*let*) // end of [d3ecl_fundclst_errck]
 //
+(* ****** ****** *)
 (* ****** ****** *)
 //
 fun
@@ -239,6 +242,20 @@ f0_local0(d3cl, err))
 D3Cinclude _ => f0_include(d3cl, err)
 |
 D3Cstaload _ => f0_staload(d3cl, err)
+//
+(* ****** ****** *)
+//
+(*
+HX-2024-07-20:
+Sat 20 Jul 2024 07:28:23 PM EDT
+*)
+//
+|
+D3Cdyninit _ => f0_dyninit(d3cl, err)
+|
+D3Cextcode _ => f0_extcode(d3cl, err)
+//
+(* ****** ****** *)
 //
 |
 D3Cvaldclst _ => f0_valdclst(d3cl, err)
@@ -306,10 +323,10 @@ D3Cinclude
 //
 (*
 val () =
-prerrln
+prerrsln
 ("f0_include(30): loc = ", loc)
 val () =
-prerrln
+prerrsln
 ("f0_include(30): dopt = ", dopt)
 *)
 //
@@ -353,6 +370,34 @@ D3Cstaload
 , fopt, dopt) = dcl.node() in ( dcl )
 end (*let*) // end of [f0_staload(dcl,err)]
 //
+(* ****** ****** *)
+(* ****** ****** *)
+//
+(*
+HX-2024-07-20:
+Sat 20 Jul 2024 07:30:41 PM EDT
+*)
+fun
+f0_dyninit
+( dcl: d3ecl
+, err: &sint >> _): d3ecl =
+let
+val-
+D3Cdyninit
+( tknd, gexp) = dcl.node() in ( dcl )
+end (*let*) // end of [f0_dyninit(dcl,err)]
+//
+fun
+f0_extcode
+( dcl: d3ecl
+, err: &sint >> _): d3ecl =
+let
+val-
+D3Cextcode
+( tknd, gexp) = dcl.node() in ( dcl )
+end (*let*) // end of [f0_extcode(dcl,err)]
+//
+(* ****** ****** *)
 (* ****** ****** *)
 //
 fun
@@ -477,19 +522,19 @@ then (dcl) else
 d3ecl_implmnt0_errck
 (dcl.lctn(), tknd, stmp
 ,sqas, tqas, dqid, tias, fags, sres, dexp)
-end (*let*) // end of [f0_implmnt0(dcl,err)]
+end (*let*) // end-of-[f0_implmnt0(dcl,err)]
 //
 (* ****** ****** *)
 //
 (*
 val () =
 (
-  prerrln("tread30_d3ecl: d3cl = ", d3cl) )
+  prerrsln("tread30_d3ecl: d3cl = ", d3cl) )
 *)
 //
 (* ****** ****** *)
 //
-} (*where*) // end of [tread30_d3ecl(d3cl,err)]
+} (*where*) // end-of-[tread30_d3ecl(d3cl,err)]
 
 (* ****** ****** *)
 //
@@ -506,7 +551,7 @@ let
 val e00 = err
 (*
 val ( ) =
-prerrln
+prerrsln
 ("tread30_teqd3exp: d3e2 = ", d3e2)
 *)
 val d3e2 = tread30_d3exp(d3e2, err)

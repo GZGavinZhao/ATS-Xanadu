@@ -141,16 +141,16 @@ end(*let*) // end-of-[list_btwe_vt(s1,f2)]
 //
 #impltmp
 <a>(*tmp*)
-list_make_nval
+list_make_ncpy
   (n0, x0) =
 (
 list_vt2t
-(list_make_nval_vt<a>(n0, x0))
+(list_make_ncpy_vt<a>(n0, x0))
 )
 //
 #impltmp
 <a>(*tmp*)
-list_make_nval_vt
+list_make_ncpy_vt
   (n0, x0) =
 (
 loop(n0, list_vt_nil())
@@ -169,10 +169,10 @@ if
 (i0 > 0)
 then
 loop
-( pred(i0)
+( pre(i0)
 , list_vt_cons(x0, xs)) else xs
 )
-} (* end of [list_make_nval_vt] *)
+} (* end of [list_make_ncpy_vt] *)
 //
 (* ****** ****** *)
 //
@@ -263,6 +263,8 @@ val+
 list_cons
 (x0 , xs) = xs in xs end
 //
+(* ****** ****** *)
+//
 (*
 #impltmp
 <a:type>
@@ -281,7 +283,7 @@ list_tail_raw(xs) = (xs.1)
 //
 #impltmp
 <a:type>
-list_head_opt(xs) =
+list_head$opt(xs) =
 (
 case+ xs of
 |
@@ -290,11 +292,11 @@ list_nil
 |
 list_cons
 (x0 , xs) => optn_vt_cons(x0))
-(* end of [list_head_opt(xs)] *)
+(* end of [list_head$opt(xs)] *)
 //
 #impltmp
 <a:type>
-list_tail_opt(xs) =
+list_tail$opt(xs) =
 (
 case+ xs of
 |
@@ -303,7 +305,7 @@ list_nil
 |
 list_cons
 (x0 , xs) => optn_vt_cons(xs))
-(* end of [list_tail_opt(xs)] *)
+(* end of [list_tail$opt(xs)] *)
 //
 (* ****** ****** *)
 //
@@ -413,7 +415,7 @@ list_cons
 //
 #impltmp
 <a>(*tmp*)
-list_get_at
+list_get$at
   (xs, i0) =
 (
   loop(xs, i0)
@@ -433,16 +435,16 @@ list_cons(x0, xs) =>
 if
 (i0 > 0)
 then
-loop(xs, pred(i0)) else x0
+loop(xs, pre(i0)) else x0
 endif // end-of-(list_cons)
 )(*case+*)//end-(loop(xs,i0))
-}(*where*)//end-(list_get_at(xs,i0))
+}(*where*)//end-(list_get$at(xs,i0))
 //
 (* ****** ****** *)
 
 #impltmp
 <a>(*tmp*)
-list_fset_at
+list_fset$at
 (xs, i0, x0) =
 (
 auxmain
@@ -468,13 +470,13 @@ list_rappend0x<a>
 (ys, list_cons(x0, xs))
 else
 let
-val i0 = pred(i0)
+val i0 = pre(i0)
 val ys =
 list_vt_cons(x1,ys) in auxmain(xs,i0,ys)
 end // end of [else]
 //
 end // end of [auxmain(xs,i0,ys) ]
-}(*where*)//end-of-[list_fset_at(xs,i0,x0)]
+}(*where*)//end-of-[list_fset$at(xs,i0,x0)]
 
 (* ****** ****** *)
 //
@@ -721,7 +723,7 @@ case+ xs of
 //
 #impltmp
 <x0>(*tmp*)
-list_foreach(xs) =
+list_foritm(xs) =
   (loop(xs)) where
 {
 fnx
@@ -733,10 +735,10 @@ case+ xs of
 | list_cons(x0, xs) =>
   let
   val () =
-  foreach$work<x0>(x0) in loop(xs)
+  foritm$work<x0>(x0) in loop(xs)
   end
 )
-}(*where*)//end-of-[list_foreach(xs)]
+}(*where*)//end-of-[list_foritm(xs)]
 //
 (* ****** ****** *)
 //
@@ -938,7 +940,7 @@ Quite an informative example:
 //
 #impltmp
 <a>(*tmp*)
-list_tabulate_cfr
+list_tabulate_f1un
   {n}(n0, f0) =
 (
 list_tabulate<a><n>(n0)
@@ -948,7 +950,7 @@ list_tabulate<a><n>(n0)
 #impltmp
 tabulate$fopr<a><n>(i0) = f0(i0)
 //
-} (*where*) // end of [list_tabulate_cfr]
+} (*where*) // end of [list_tabulate_f1un]
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -1006,7 +1008,7 @@ strm_vt_map0(res2) where
 #sexpdef n0 = n
 #sexpdef n1 = n-1
 #impltmp
-map0$fopr
+map$fopr0
 <xs(n1)><xs(n0)>(xs) =
 (
   list_vt_cons(x0, xs))
@@ -1050,7 +1052,7 @@ val test = iforall$test<x0>(i0, x1)}
 //
 #impltmp
 <x0>(*tmp*)
-list_iforeach(xs) =
+list_iforitm(xs) =
 (
 loop(0(*i0*), xs)) where
 {
@@ -1067,9 +1069,9 @@ list_cons(x1, xs) =>
 (
   loop(i0+1, xs)) where
 {
-val () = iforeach$work<x0>(i0, x1)}
+val () = iforitm$work<x0>(i0, x1)}
 )
-}(*where*)//end-of-[list_iforeach<x0>(xs)]
+}(*where*)//end-of-[list_iforitm<x0>(xs)]
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -1083,22 +1085,22 @@ val () = iforeach$work<x0>(i0, x1)}
 //
 #impltmp
 <x0><y0>
-list_map_f1np
+list_map_f1un
 (    xs, f0    ) =
 (
 list_map<x0><y0>(xs)) where
 {
 #impltmp map$fopr<x0><y0>(x0) = f0(x0)
-} (*where*)//end-[list_map_f1np(xs,f0)]
+} (*where*)//end-[list_map_f1un(xs,f0)]
 #impltmp
 <x0><y0>
-list_map_f1np_vt
+list_map_f1un_vt
 (    xs, f0    ) =
 (
 list_map_vt<x0><y0>(xs)) where
 {
 #impltmp map$fopr<x0><y0>(x0) = f0(x0)
-} (*where*)//end-[list_map_f1np_vt(xs,f0)]
+} (*where*)//end-[list_map_f1un_vt(xs,f0)]
 //
 (* ****** ****** *)
 //
@@ -1204,28 +1206,6 @@ gseq_consq
 //
 #impltmp
 {a:t0}
-gseq_uncons_raw
-<list(a)><a>(xs) =
-let
-  val x0 = xs.0
-  val () = xs := xs.1 in x0
-end // end of [gseq_uncons_raw]
-//
-(* ****** ****** *)
-//
-#impltmp
-{a:type}
-gseq_head_raw
-<list(a)><a> = list_head_raw<a>
-#impltmp
-{a:type}
-gseq_tail_raw
-<list(a)><a> = list_tail_raw<a>
-//
-(* ****** ****** *)
-//
-#impltmp
-{a:t0}
 g_cmp<list(a)> =
 gseq_cmp<list(a)><a>
 #impltmp
@@ -1272,7 +1252,7 @@ gseq_length<list(a)><a> = list_length<a>
 gseq_forall<list(a)><a> = list_forall<a>
 #impltmp
 {a:t0}
-gseq_foreach<list(a)><a> = list_foreach<a>
+gseq_foritm<list(a)><a> = list_foritm<a>
 //
 (* ****** ****** *)
 //
@@ -1391,7 +1371,7 @@ For gmap-operations
 {k0:t0}
 {x0:t0}
 gmap_make_nil
-<list@(k0,x0)><k0,x0>
+<list@(k0,x0)><k0><x0>
   ((*void*)) =
 (
   list_nil((*void*)) )
@@ -1402,7 +1382,7 @@ gmap_make_nil
 {k0:t0}
 {x0:t0}
 gmap_keyq
-<list@(k0,x0)><k0,x0>
+<list@(k0,x0)><k0><x0>
   (kxs, key) =
 (
   loop(kxs)) where
@@ -1428,8 +1408,8 @@ g_equal<k0>
 #impltmp
 {k0:t0}
 {x0:t0}
-gmap_search_opt
-<list@(k0,x0)><k0,x0>
+gmap_search$opt
+<list@(k0,x0)><k0><x0>
 (kxs, key) =
 (
   loop(kxs)) where
@@ -1450,21 +1430,21 @@ g_equal<k0>
 (key, kx1.0)
 then optn_vt_cons(kx1.1) else loop(kxs)
 )
-} (*where*)//end-of-[gmap_search_opt(...)]
+} (*where*)//end-of-[gmap_search$opt(...)]
 //
 (* ****** ****** *)
 //
 #impltmp
 {k0:t0}
 {x0:t0}
-gmap_insert_opt
-<list@(k0,x0)><k0,x0>
+gmap_insert$opt
+<list@(k0,x0)><k0><x0>
 (kxs, key, itm) =
 optn_vt_nil(*void*) where
 {
 val () =
 ( kxs := list_cons((key, itm), kxs) )
-} (*where*)//end-of-[gmap_insert_opt(...)]
+} (*where*)//end-of-[gmap_insert$opt(...)]
 //
 (* ****** ****** *)
 //
@@ -1473,14 +1453,14 @@ val () =
 {x0:t0}
 gmap_strmize
 <
-list@(k0,x0)><k0,x0>(*0*) =
-list_strmize<(k0,x0)>(*0*)
+list@(k0,x0)><k0><x0>(*0*) =
+list_strmize<(k0, x0)>(*0*)
 //
 #impltmp
 {k0:t0}
 {x0:t0}
 gmap_strmize_key
-<list@(k0,x0)><k0,x0>(kxs) =
+<list@(k0,x0)><k0><x0>(kxs) =
 (
 gseq_map_lstrm<kxs><k0>(kxs)
 ) where
@@ -1492,7 +1472,7 @@ gseq_map_lstrm<kxs><k0>(kxs)
 {k0:t0}
 {x0:t0}
 gmap_strmize_itm
-<list@(k0,x0)><k0,x0>(kxs) =
+<list@(k0,x0)><k0><x0>(kxs) =
 (
 gseq_map_lstrm<kxs><x0>(kxs)
 ) where

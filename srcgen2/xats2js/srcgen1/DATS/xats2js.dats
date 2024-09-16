@@ -49,11 +49,17 @@ Authoremail: gmhwxiATgmailDOTcom
 "./../HATS/mytmplib00.hats"
 (* ****** ****** *)
 //
+#staload
+"./../../../SATS/xbasics.sats"
+//
 #staload // SYM =
 "./../../../SATS/xsymbol.sats"
 //
 #staload // LOC =
 "./../../../SATS/locinfo.sats"
+//
+#staload // LEX =
+"./../../../SATS/lexing0.sats"
 //
 #staload // D2E =
 "./../../../SATS/dynexp2.sats"
@@ -85,6 +91,29 @@ Authoremail: gmhwxiATgmailDOTcom
 (* ****** ****** *)
 //
 #implfun
+valtok_prvq
+(   tok   ) =
+(
+case-
+tok.node() of
+|T_VAL
+( vlk ) => valkind_prvq(vlk))
+(* end-of-[valtok_prvq(tok)] *)
+//
+#implfun
+funtok_prfq
+(   tok   ) =
+(
+case-
+tok.node() of
+|T_FUN
+( fnk ) => funkind_prfq(fnk))
+(* end-of-[funtok_prfq(tok)] *)
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+#implfun
 strnfpr
 (filr, strn) =
 (
@@ -112,7 +141,7 @@ nindfpr(filr, nind);strnfpr(filr, strn))
 i1tnmfpr
 ( filr,itnm ) =
 (
-print("tnm", stmp)) where
+prints("tnm", stmp)) where
 {
 //
 #impltmp g_print$out<>() = filr
@@ -122,6 +151,16 @@ val stmp = i1tnm_get_stmp(itnm)
 }(*where*)//end-of-[i1tnmfpr(filr,itnm)]
 //
 (* ****** ****** *)
+(* ****** ****** *)
+//
+#implfun
+tokenfpr
+( filr,tok0 ) =
+let
+(
+  token_fprint(filr, tok0))
+end(*let*)//end-of-[tokenfpr(env0,tok0)]
+//
 (* ****** ****** *)
 //
 #implfun
@@ -257,11 +296,11 @@ end(*let*)//end-of-[xats2js_i1parsed(filr,ipar)]
 list_xats2js_fnp
 ( e1, xs, fopr ) =
 (
-list_foreach_e1nv<x0><e1>(xs, e1)) where
+list_foritm_e1nv<x0><e1>(xs, e1)) where
 {
 #vwtpdef e1 = envx2js
 #impltmp
-foreach$work_e1nv<x0><e1>(x0, e1) = fopr(e1, x0)
+foritm$work_e1nv<x0><e1>(x0, e1) = fopr(e1, x0)
 } (*where*)//end of [list_xats2js_fnp(e1,xs,fopr)]
 //
 (* ****** ****** *)

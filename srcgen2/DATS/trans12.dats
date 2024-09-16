@@ -85,7 +85,7 @@ preferred over functional ones
 *)
 //
 #implfun
-s2cst_select_any
+s2cst_select$any
   (   s2cs   ) =
 (
 f0_test1(s2cs)) where
@@ -122,7 +122,7 @@ list_nil() => optn_vt_nil()
 list_cons(x1, xs) => optn_vt_cons(x1)
 )(*case+*)//end-of-[ f0_test2(  xs  ) ]
 //
-}(*where*)//end-of-[s2cst_select_any(...)]
+}(*where*)//end-of-[s2cst_select$any(...)]
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -203,13 +203,13 @@ s2cst_select_bin
 let
 (*
 val () =
-prerrln
+prerrsln
 ("s2cst_select_bin: s2cs = ", s2cs)
 val () =
-prerrln
+prerrsln
 ("s2cst_select_bin: s2t1 = ", s2t1)
 val () =
-prerrln
+prerrsln
 ("s2cst_select_bin: s2t2 = ", s2t2)
 *)
 in//let
@@ -242,13 +242,13 @@ let
 //
 (*
 val () =
-prerrln
+prerrsln
 ("s2cst_selects_bin: s2cs = ", s2cs)
 val () =
-prerrln
+prerrsln
 ("s2cst_selects_bin: s2t1 = ", s2t1)
 val () =
-prerrln
+prerrsln
 ("s2cst_selects_bin: s2t2 = ", s2t2)
 *)
 //
@@ -286,9 +286,9 @@ let
 //
 (*
 val () =
-prerrln("f0_test1: s2c0 = ", s2c0)
+prerrsln("f0_test1: s2c0 = ", s2c0)
 val () =
-prerrln("f0_test1: s2es = ", s2es)
+prerrsln("f0_test1: s2es = ", s2es)
 *)
 //
 in//let
@@ -341,7 +341,7 @@ in//local
 s2cst_select_list
   (s2cs, s2es) =
 (
-gseq_search_opt(s2cs)
+gseq_search$opt(s2cs)
 ) where
 {
 //
@@ -391,7 +391,7 @@ f2envlst_find_s2itm(envs, seid)
 //
 (*
 val (  ) =
-prerrln("f0_s1exp: sopt = ", sopt)
+prerrsln("f0_s1exp: sopt = ", sopt)
 *)
 //
 in//let
@@ -412,7 +412,7 @@ end(*let*) // end of [ S1Eid0(seid) ]
 {
 (*
 val
-( ) = prerrln("f0_s1exp: sexp = ", sexp)
+( ) = prerrsln("f0_s1exp: sexp = ", sexp)
 *)
 } (*where*) // end of [f0_s1exp(envs,sexp)]
 
@@ -435,10 +435,10 @@ tr12env_find_s2itm(env0, sid1)
 //
 (*
 val () =
-prerrln
+prerrsln
 ("s1exp_get_s2cstlst: s1e0 = ", s1e0)
 val () =
-prerrln
+prerrsln
 ("s1exp_get_s2cstlst: opt1 = ", opt1)
 *)
 //
@@ -478,7 +478,7 @@ tr12env_find_s2itm(env0, sym1)
 //
 (*
 val () =
-prerrln
+prerrsln
 ("s1exp_get_s2cstlst: opt1 = ", opt1)
 *)
 //
@@ -499,13 +499,15 @@ end (*let*) // end-of-[ T_IDQUA(...) ]
 _(*non-T_IDQUA*) => list_nil((*void*)))
 //
 |
-_(*non-S1Eid0(seid)*) => list_nil((*void*))
+_(*non-S1Eid0(seid)*) => list_nil((*0*))
 //
 ) where
 {
 (*
 val () =
-prerrln("s1exp_get_s2cstlst: s1e0 = ", s1e0)
+(
+  prerrsln
+  ("s1exp_get_s2cstlst: s1e0 = ", s1e0))
 *)
 }(*where*)//end of [s1exp_get_s2cstlst(...)]
 

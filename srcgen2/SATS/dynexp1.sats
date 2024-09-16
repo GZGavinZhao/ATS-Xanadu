@@ -597,10 +597,20 @@ D1Eexists of
 ( // HX-2021-01-14: $exists{..}..{..}(d1exp)
 token, d1explst(*D1Esarglst*), d1exp(*scope*))
 //
-| D1Enone0 of ((*void*)) | D1Enone1 of (d0exp)
+(* ****** ****** *)
 //
+| // HX-2024-07-19: [g1exp] evaluates
+D1Esynext of (token, g1exp)//to literal string
+//
+(* ****** ****** *)
+|
+D1Enone0 of ((*void*)) | D1Enone1 of ( d0exp )
+//
+(* ****** ****** *)
 |
 D1Eerrck of (sint(*lvl*), d1exp)//HX:tread01-error
+//
+(* ****** ****** *)
 //
 // end of [d1exp_node] // end of [ datatype(...) ]
 //
@@ -800,10 +810,12 @@ d1ecl_node =
   // updating fixity env
 *)
 //
+(* ****** ****** *)
 | D1Cstatic of
   (token, d1ecl) // locally
 | D1Cextern of
   (token, d1ecl) // globally
+(* ****** ****** *)
 //
 | D1Clocal0 of
   ( d1eclist(*local-head*)
@@ -871,6 +883,14 @@ D1Cstaload of
 |
 D1Cdyninit of
 (token(*DYNLOAD*), g1exp(*fpath*))
+//
+(*
+HX-2024-07-20:
+Sat 20 Jul 2024 01:33:24 PM EDT
+*)
+|
+D1Cextcode of
+(token(*EXTCODE*), g1exp(*xcode*))
 //
 |
 D1Cdatasort of

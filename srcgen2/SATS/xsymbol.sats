@@ -77,7 +77,8 @@ symbl_cmp(symbl, symbl): sint
 (* ****** ****** *)
 //
 fun//<>
-symbl_fprint(FILR, symbl): void
+symbl_fprint
+(out: FILR, sym: symbl): void
 //
 (* ****** ****** *)
 //
@@ -92,7 +93,8 @@ symbl_get_stmp(symbl): stamp
 (* ****** ****** *)
 //
 fun
-symbl_make_name(nam: strn): symbl
+symbl_make_name
+  (name: strn): symbl//end(fun)
 #symload symbl with symbl_make_name
 //
 (* ****** ****** *)
@@ -188,15 +190,17 @@ val DRAISE_symbl: symbl //=symbl("$raise")
 (* ****** ****** *)
 //
 fun
-symbl_search_opt
+symbl_search$opt
 (nam: strn): optn_vt(symbl)
 fun
-symbl_insert_any(sym: symbl): void
+symbl_insert$any(sym: symbl): void
 //
 (* ****** ****** *)
 //
 val
 DLR_EXTNAM_symbl: symbl //=symbl("$extnam")
+val
+DLR_EXTVAL_symbl: symbl //=symbl("$extval")
 //
 val
 DLR_EXTBOX_symbl: symbl //=symbl("$extbox")
@@ -219,16 +223,21 @@ P2TR_TBOX_symbl: symbl //=symbl("p2tr_tbox")
 (* ****** ****** *)
 
 val
-L0AZY_TBOX_symbl: symbl //=symbl("lazy_t0_x0")
+L0AZY_TBOX_symbl: symbl //=symbl("lazy_t0_tx")
 val
 L1AZY_VTBX_symbl: symbl //=symbl("lazy_vt_vx")
 
 (* ****** ****** *)
 //
 val
-CBV0_VT_VT_symbl: symbl //=symbl("cbv0_vt_vt")
+(*
+[V0] is not [VT]! *)
+CBV0_V0_VT_symbl: symbl //=symbl("cbv0_v0_vt")
 val
-CBV1_VT_VT_symbl: symbl //=symbl("cbv1_vt_vt")
+(*
+[V0] is not [VT]! *)
+CBV1_V0_VT_symbl: symbl //=symbl("cbv1_v0_vt")
+//
 val
 CBRF_VT_VT_symbl: symbl //=symbl("cbrf_vt_vt")
 //
@@ -238,5 +247,28 @@ val
 TOP1_VT_T0_symbl: symbl //=symbl("top1_vt_t0")
 //
 (* ****** ****** *)
+//
+(*
+HX-2024-07-19:
+For external syntax
+(usually of the target)
+Fri 19 Jul 2024 05:07:03 PM EDT
+*)
+val DLR_SYNEXT_symbl: symbl // =symbl("$synext")
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+(*
+HX-2024-08-08:
+Thu 08 Aug 2024 10:07:35 PM EDT
+*)
+//
+fun
+symbl_extend_stamp
+(sym0: symbl, stmp: stamp): symbl
+//
+(* ****** ****** *)(* ****** ****** *)
+(* ****** ****** *)(* ****** ****** *)
 
 (* end of [ATS3/XATSOPT_srcgen2_SATS_xsymbol.sats] *)

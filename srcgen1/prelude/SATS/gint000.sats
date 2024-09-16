@@ -55,7 +55,10 @@ gint_print(x: gint(k)): void
 (* ****** ****** *)
 //
 fun<>
+sint_print(sint): void
+fun<>
 gint_print_sint(sint): void
+//
 fun<>
 gint_print_uint(uint): void
 //
@@ -69,11 +72,33 @@ gint_parse_uint(strn): uint
 (* ****** ****** *)
 //
 fun<>
+sint_neg
+{i:int}(x: sint(i)): sint(-i)
+fun<>
 gint_neg_sint
 {i:int}(x: sint(i)): sint(-i)
 //
 (* ****** ****** *)
 //
+fun<>
+sint_suc
+{i:int}(x: sint(i)): sint(i+1)
+fun<>
+gint_suc_sint
+{i:int}(x: sint(i)): sint(i+1)
+//
+fun<>
+sint_pre
+{i:int}(x: sint(i)): sint(i-1)
+fun<>
+gint_pre_sint
+{i:int}(x: sint(i)): sint(i-1)
+//
+(* ****** ****** *)
+//
+fun<>
+sint_abs
+{i:int}(x: sint(i)): sint(abs(i))
 fun<>
 gint_abs_sint
 {i:int}(x: sint(i)): sint(abs(i))
@@ -81,19 +106,10 @@ gint_abs_sint
 (* ****** ****** *)
 //
 fun<>
-gint_succ_sint
-{i:int}(x: sint(i)): sint(i+1)
-fun<>
-gint_pred_sint
-{i:int}(x: sint(i)): sint(i-1)
-//
-(* ****** ****** *)
-//
-fun<>
-gint_succ_uint
+gint_suc_uint
 {i:int}(x: uint(i)): uint(i+1)
 fun<>
-gint_pred_uint
+gint_pre_uint
 {i:int|i>0}(x: uint(i)): uint(i-1)
 //
 (* ****** ****** *)
@@ -117,15 +133,32 @@ gint_lsrn_uint(x: uint, n: nint): uint
 (* ****** ****** *)
 //
 fun<>
+sint_lt_sint
+{i,j:int}
+( x: sint(i)
+, y: sint(j)): bool(i<j) // = $ext()
+fun<>
 gint_lt_sint_sint
 {i,j:int}
 ( x: sint(i)
 , y: sint(j)): bool(i<j) // = $ext()
+//
+fun<>
+sint_gt_sint
+{i,j:int}
+( x: sint(i)
+, y: sint(j)): bool(i>j) // = $ext()
 fun<>
 gint_gt_sint_sint
 {i,j:int}
 ( x: sint(i)
 , y: sint(j)): bool(i>j) // = $ext()
+//
+fun<>
+sint_eq_sint
+{i,j:int}
+( x: sint(i)
+, y: sint(j)): bool(i=j) // = $ext()
 fun<>
 gint_eq_sint_sint
 {i,j:int}
@@ -133,16 +166,32 @@ gint_eq_sint_sint
 , y: sint(j)): bool(i=j) // = $ext()
 //
 fun<>
+sint_lte_sint
+{i,j:int}
+( x: sint(i)
+, y: sint(j)): bool(i<=j) // = $ext()
+fun<>
 gint_lte_sint_sint
 {i,j:int}
 ( x: sint(i)
 , y: sint(j)): bool(i<=j) // = $ext()
+//
+fun<>
+sint_gte_sint
+{i,j:int}
+( x: sint(i)
+, y: sint(j)): bool(i>=j) // = $ext()
 fun<>
 gint_gte_sint_sint
 {i,j:int}
 ( x: sint(i)
 , y: sint(j)): bool(i>=j) // = $ext()
 //
+fun<>
+sint_neq_sint
+{i,j:int}
+( x: sint(i)
+, y: sint(j)): bool(i!=j) // = $ext()
 fun<>
 gint_neq_sint_sint
 {i,j:int}
@@ -177,7 +226,6 @@ gint_gte_uint_uint
 {i,j:int}
 ( x: uint(i)
 , y: uint(j)): bool(i>=j) // = $ext()
-//
 fun<>
 gint_neq_uint_uint
 {i,j:int}
@@ -187,10 +235,16 @@ gint_neq_uint_uint
 (* ****** ****** *)
 //
 fun<>
+sint_cmp_sint
+{i,j:int}
+( x: sint(i)
+, y: sint(j)): sint(sgn(i-j)) // = $ext()
+fun<>
 gint_cmp_sint_sint
 {i,j:int}
 ( x: sint(i)
 , y: sint(j)): sint(sgn(i-j)) // = $ext()
+//
 fun<>
 gint_cmp_uint_uint
 {i,j:int}
@@ -198,27 +252,56 @@ gint_cmp_uint_uint
 , y: uint(j)): sint(sgn(i-j)) // = $ext()
 //
 (* ****** ****** *)
-
+//
+fun<>
+sint_add_sint
+{i,j:int}
+( x: sint(i)
+, y: sint(j)): sint(i+j) // = $ext()
 fun<>
 gint_add_sint_sint
 {i,j:int}
 ( x: sint(i)
 , y: sint(j)): sint(i+j) // = $ext()
+//
+fun<>
+sint_sub_sint
+{i,j:int}
+( x: sint(i)
+, y: sint(j)): sint(i-j) // = $ext()
 fun<>
 gint_sub_sint_sint
 {i,j:int}
 ( x: sint(i)
 , y: sint(j)): sint(i-j) // = $ext()
+//
+fun<>
+sint_mul_sint
+{i,j:int}
+( x: sint(i)
+, y: sint(j)): sint(i*j) // = $ext()
 fun<>
 gint_mul_sint_sint
 {i,j:int}
 ( x: sint(i)
 , y: sint(j)): sint(i*j) // = $ext()
+//
+fun<>
+sint_div_sint
+{i,j:int | j != 0}
+( x: sint(i)
+, y: sint(j)): sint(i/j) // = $ext()
 fun<>
 gint_div_sint_sint
 {i,j:int | j != 0}
 ( x: sint(i)
 , y: sint(j)): sint(i/j) // = $ext()
+//
+fun<>
+sint_mod_sint
+{i,j:int | j >= 1}
+( x: sint(i)
+, y: sint(j)): sint(mod(i,j)) // = $ext()
 fun<>
 gint_mod_sint_sint
 {i,j:int | j >= 1}
@@ -226,7 +309,7 @@ gint_mod_sint_sint
 , y: sint(j)): sint(mod(i,j)) // = $ext()
 //
 (* ****** ****** *)
-
+//
 fun<>
 gint_add_uint_uint
 {i,j:int}
@@ -301,9 +384,9 @@ gint_forall_uint(ub: uint): bool
 (* ****** ****** *)
 //
 fun<>
-gint_foreach_sint(ub: sint): void
+gint_foritm_sint(ub: sint): void
 fun<>
-gint_foreach_uint(ub: uint): void
+gint_foritm_uint(ub: uint): void
 //
 (* ****** ****** *)
 //
@@ -351,17 +434,20 @@ gint_strmize_sint
 fun
 <a:t0>
 gint_map_list_nint
-{n:nat}( n0: sint(n) ): list(a,n)
+{n:nat}
+( n0: sint(n) ): list(a,n)
 fun
 <a:vt>
 gint_map_llist_nint
-{n:nat}( n0: sint(n) ): list_vt(a,n)
+{n:nat}
+( n0: sint(n) ): list_vt(a,n)
 //
 (* ****** ****** *)
 //
 fun<>
-gint_repeat_sint_c0fr
-(i0: sint, work: ()-<cfr>void): void
+gint_repeat_sint_f0un
+( i0: sint
+, work: ((*void*))->void): void
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -380,11 +466,11 @@ gint_repeat_sint_c0fr
 //
 (* ****** ****** *)
 //
-#symload succ with gint_succ_sint of 1002
-#symload pred with gint_pred_sint of 1002
+#symload suc with gint_suc_sint of 1002
+#symload pre with gint_pre_sint of 1002
 //
-#symload succ with gint_succ_uint of 1000
-#symload pred with gint_pred_uint of 1000
+#symload suc with gint_suc_uint of 1000
+#symload pre with gint_pre_uint of 1000
 //
 (* ****** ****** *)
 //
@@ -405,12 +491,17 @@ gint_repeat_sint_c0fr
 #symload
 cmp with gint_cmp_sint_sint of 1002
 //
+(* ****** ****** *)
+//
 #symload < with gint_lt_sint_sint of 1002
 #symload > with gint_gt_sint_sint of 1002
 #symload = with gint_eq_sint_sint of 1002
+//
 #symload <= with gint_lte_sint_sint of 1002
 #symload >= with gint_gte_sint_sint of 1002
 #symload != with gint_neq_sint_sint of 1002
+//
+(* ****** ****** *)
 //
 #symload + with gint_add_sint_sint of 1002
 #symload - with gint_sub_sint_sint of 1002
@@ -427,9 +518,12 @@ cmp with gint_cmp_uint_uint of 1000
 #symload < with gint_lt_uint_uint of 1000
 #symload > with gint_gt_uint_uint of 1000
 #symload = with gint_eq_uint_uint of 1000
+//
 #symload <= with gint_lte_uint_uint of 1000
 #symload >= with gint_gte_uint_uint of 1000
 #symload != with gint_neq_uint_uint of 1000
+//
+(* ****** ****** *)
 //
 #symload + with gint_add_uint_uint of 1000
 #symload - with gint_sub_uint_uint of 1000
@@ -480,8 +574,8 @@ cmp with gint_cmp_uint_uint of 1000
 //
 (* ****** ****** *)
 //
-#symload foreach with gint_foreach_sint of 1000
-#symload foreach with gint_foreach_uint of 1000
+#symload foritm with gint_foritm_sint of 1000
+#symload foritm with gint_foritm_uint of 1000
 //
 (* ****** ****** *)
 //
@@ -506,7 +600,7 @@ cmp with gint_cmp_uint_uint of 1000
 (*
 Tue Aug 15 08:19:43 EDT 2023
 *)
-#symload repeat_cfr with gint_repeat_sint_c0fr of 1000
+#symload repeat_fun with gint_repeat_sint_f0un of 1000
 (* ****** ****** *)
 (* ****** ****** *)
 

@@ -36,134 +36,354 @@ Authoremail: gmhwxiATgmailDOTcom
 *)
 //
 (* ****** ****** *)
+#typedef ni = nint
+(* ****** ****** *)
+//
+(*
+HX-2024-07-15
+*)
+fun
+<x0:vt>
+max$nil0((*nil*)): (x0)
+fun
+<x0:vt>
+max$nil1((*nil*)): (x0)
+//
+fun
+<x0:vt>
+min$nil0((*nil*)): (x0)
+fun
+<x0:vt>
+min$nil1((*nil*)): (x0)
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+(*
+HX-2024-07-15
+*)
+fun
+<xs:vt>
+<x0:vt>
+get$at$exn0
+(xs: ~xs, i0: ni): x0
+fun
+<xs:vt>
+<x0:vt>
+get$at$exn1
+(xs: !xs, i0: ni): x0
+//
+(*
+HX-2024-08-02:
+This makes no sense!
+fun
+<xs:vt>
+<x0:vt>
+set$at$exn0
+(xs: ~xs, x0, ni): void
+*)
+fun
+<xs:vt>
+<x0:vt>
+set$at$exn1
+(xs: !xs, x0, ni): void
+//
+fun
+<xs:vt>
+<x0:vt>
+fset$at$exn0
+(xs: ~xs, x0, ni): (xs)
+fun
+<xs:vt>
+<x0:vt>
+fset$at$exn1
+(xs: !xs, x0, ni): (xs)
+//
+(* ****** ****** *)
 (* ****** ****** *)
 //
 fun
 <x0:vt>
-forall0$test(x0: ~x0): bool
+forall$test0(x0: ~x0): bool
 fun
 <x0:vt>
-forall1$test(x0: !x0): bool
+forall$test1(x0: !x0): bool
 //
 fun
 <x0:vt>
-foreach0$work(x0: ~x0): void
+exists$test0(x0: ~x0): bool
 fun
 <x0:vt>
-foreach1$work(x0: ~x0): void
+exists$test1(x0: !x0): bool
+//
+fun
+<x0:vt>
+rforall$test0(x0: ~x0): bool
+fun
+<x0:vt>
+rforall$test1(x0: !x0): bool
+//
+fun
+<x0:vt>
+rexists$test0(x0: ~x0): bool
+fun
+<x0:vt>
+rexists$test1(x0: !x0): bool
+//
+(* ****** ****** *)
+//
+fun
+<x0:vt>
+iforall$test0(ni, ~x0): bool
+fun
+<x0:vt>
+iforall$test1(ni, !x0): bool
+//
+fun
+<x0:vt>
+iexists$test0(ni, ~x0): bool
+fun
+<x0:vt>
+iexists$test1(ni, !x0): bool
+//
+(* ****** ****** *)
+//
+fun
+<x0:vt>
+irforall$test0(ni, ~x0): bool
+fun
+<x0:vt>
+irforall$test1(ni, !x0): bool
+//
+fun
+<x0:vt>
+irexists$test0(ni, ~x0): bool
+fun
+<x0:vt>
+irexists$test1(ni, !x0): bool
+//
+(* ****** ****** *)
+//
+fun
+<x0:vt>
+foritm$work0(x0: ~x0): void
+fun
+<x0:vt>
+foritm$work1(x0: !x0): void
+//
+fun
+<x0:vt>
+rforitm$work0(x0: ~x0): void
+fun
+<x0:vt>
+rforitm$work1(x0: !x0): void
+//
+fun
+<x0:vt>
+iforitm$work0(ni, ~x0): void
+fun
+<x0:vt>
+iforitm$work1(ni, !x0): void
+//
+fun
+<x0:vt>
+irforitm$work0(ni, ~x0): void
+fun
+<x0:vt>
+irforitm$work1(ni, !x0): void
 //
 (* ****** ****** *)
 //
 fun
 <x0:vt>
 <r0:vt>
-foldlft0$fopr(r0, !x0): (r0)
+folditm$fopr0(r0, ~x0): (r0)
 fun
 <x0:vt>
 <r0:vt>
-foldlft1$fopr(r0, ~x0): (r0)
+folditm$fopr1(r0, !x0): (r0)
 //
 fun
 <x0:vt>
 <r0:vt>
-foldall0$fopr(r0, ~x0): (bool, r0)
+rfolditm$fopr0(~x0, r0): (r0)
 fun
 <x0:vt>
 <r0:vt>
-foldall1$fopr(r0, !x0): (bool, r0)
+rfolditm$fopr1(!x0, r0): (r0)
+//
+fun
+<x0:vt>
+<r0:vt>
+ifolditm$fopr0(r0, ni, ~x0): (r0)
+fun
+<x0:vt>
+<r0:vt>
+ifolditm$fopr1(r0, ni, !x0): (r0)
+//
+fun
+<x0:vt>
+<r0:vt>
+irfolditm$fopr0(ni, ~x0, r0): (r0)
+fun
+<x0:vt>
+<r0:vt>
+irfolditm$fopr1(ni, !x0, r0): (r0)
+//
+(* ****** ****** *)
+//
+fun
+<x0:vt>
+<r0:vt>
+foldall$fopr0(r0, ~x0): (bool, r0)
+fun
+<x0:vt>
+<r0:vt>
+foldall$fopr1(r0, !x0): (bool, r0)
+//
+fun
+<x0:vt>
+<r0:vt>
+rfoldall$fopr0(~x0, r0): (bool, r0)
+fun
+<x0:vt>
+<r0:vt>
+rfoldall$fopr1(!x0, r0): (bool, r0)
+//
+fun
+<x0:vt>
+<r0:vt>
+ifoldall$fopr0(r0, ni, ~x0): (bool, r0)
+fun
+<x0:vt>
+<r0:vt>
+ifoldall$fopr1(r0, ni, !x0): (bool, r0)
+//
+fun
+<x0:vt>
+<r0:vt>
+irfoldall$fopr0(ni, ~x0, r0): (bool, r0)
+fun
+<x0:vt>
+<r0:vt>
+irfoldall$fopr1(ni, !x0, r0): (bool, r0)
 //
 (* ****** ****** *)
 (* ****** ****** *)
 //
 fun
 <x0:vt>
-rforall0$test(x0: ~x0): bool
+<y0:vt>
+map$fopr0(x0: ~x0): ( y0 )
 fun
 <x0:vt>
-rforall1$test(x0: !x0): bool
+<y0:vt>
+map$fopr1(x0: !x0): ( y0 )
 //
 fun
 <x0:vt>
-rforeach0$work(x0: ~x0): void
+<y0:vt>
+rmap$fopr0(x0: ~x0): ( y0 )
 fun
 <x0:vt>
-rforeach1$work(x0: !x0): void
+<y0:vt>
+rmap$fopr1(x0: !x0): ( y0 )
 //
+fun
+<x0:vt>
+<y0:vt>
+imap$fopr0(ni, ~x0): ( y0 )
+fun
+<x0:vt>
+<y0:vt>
+imap$fopr1(ni, !x0): ( y0 )
+//
+fun
+<x0:vt>
+<y0:vt>
+irmap$fopr0(ni, ~x0): ( y0 )
+fun
+<x0:vt>
+<y0:vt>
+irmap$fopr1(ni, !x0): ( y0 )
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+(*
+HX-2024-07-24:
+[filter$test0] is removed!
+fun
+<x0:vt>
+<y0:vt>
+filter$test0(x0: ~x0): bool
+*)
+//
+fun
+<x0:vt>
+filter$test1(x0: !x0): bool
+fun
+<x0:vt>
+rfilter$test1(x0: !x0): bool
+fun
+<x0:vt>
+ifilter$test1(x0: !x0): bool
+fun
+<x0:vt>
+irfilter$test1(x0: !x0): bool
+//
+(* ****** ****** *)
 (* ****** ****** *)
 //
 fun
 <x0:vt>
-<r0:vt>
-rfoldlft0$fopr(~x0, r0): (r0)
+<y0:vt>
+mapoptn$fopr0(x0: ~x0): optn_vt(y0)
 fun
 <x0:vt>
-<r0:vt>
-rfoldlft1$fopr(!x0, r0): (r0)
+<y0:vt>
+maplist$fopr0(x0: ~x0): list_vt(y0)
+fun
+<x0:vt>
+<y0:vt>
+mapstrq$fopr0(x0: ~x0): strq_vt(y0)
 //
 fun
 <x0:vt>
-<r0:vt>
-rfoldall0$fopr(~x0, r0): (bool, r0)
+<y0:vt>
+mapoptn$fopr1(x0: !x0): optn_vt(y0)
 fun
 <x0:vt>
-<r0:vt>
-rfoldall1$fopr(!x0, r0): (bool, r0)
+<y0:vt>
+maplist$fopr1(x0: !x0): list_vt(y0)
+fun
+<x0:vt>
+<y0:vt>
+mapstrq$fopr1(x0: !x0): strq_vt(y0)
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+(*
+HX-2024-07-31:
+It is in [gbas001.sats]!
+fun
+<x0:vt> // HX: vt!
+fmake$fwork((*void*)): void
+*)
+fun
+<x0:vt>
+fmake$fwork$work0(x0: ~x0): void
 //
 (* ****** ****** *)
 (* ****** ****** *)
 //
 fun
 <x0:vt>
-<y0:vt>
-map0$fopr(x0: ~x0): ( y0 )
+c2hoose$forall$test0(~x0, ~x0): bool
 fun
 <x0:vt>
-<y0:vt>
-map1$fopr(x0: !x0): ( y0 )
-//
-fun
-<x0:vt>
-<y0:vt>
-map2$fopr(x0: &x0): ( y0 )
-//
-(* ****** ****** *)
-//
-fun
-<x0:vt>
-<y0:vt>
-filter0$test(x0: ~x0): bool
-fun
-<x0:vt>
-<y0:vt>
-filter1$test(x0: !x0): bool
-//
-(* ****** ****** *)
-//
-fun
-<x0:vt>
-<y0:vt>
-mapoptn0$fopr(x0: ~x0): optn_vt(y0)
-fun
-<x0:vt>
-<y0:vt>
-maplist0$fopr(x0: ~x0): list_vt(y0)
-fun
-<x0:vt>
-<y0:vt>
-mapstrq0$fopr(x0: ~x0): strq_vt(y0)
-//
-fun
-<x0:vt>
-<y0:vt>
-mapoptn1$fopr(x0: !x0): optn_vt(y0)
-fun
-<x0:vt>
-<y0:vt>
-maplist1$fopr(x0: !x0): list_vt(y0)
-fun
-<x0:vt>
-<y0:vt>
-mapstrq1$fopr(x0: !x0): strq_vt(y0)
+c3hoose$forall$test0(~x0, ~x0, ~x0): bool
 //
 (* ****** ****** *)
 (* ****** ****** *)

@@ -56,9 +56,9 @@ strn_vt_make0_llist<>
 (*
 #impltmp
 <>(*tmp*)
-strn_vt_set_at
+strn_vt_set$at
 ( cs, i0, c0 ) =
-strtmp_set_at<>(cs,i0,c0)
+strtmp_set$at<>(cs,i0,c0)
 *)
 (* ****** ****** *)
 //
@@ -76,11 +76,11 @@ strn_vt_print0(cs) =
 strn_vt_print1(cs) =
 let
 #impltmp
-gseq_print1$beg<>() = ()
+gseq_print$beg1<>() = ()
 #impltmp
-gseq_print1$sep<>() = ()
+gseq_print$sep1<>() = ()
 #impltmp
-gseq_print1$end<>() = ()
+gseq_print$end1<>() = ()
 in
 gseq_print1<strn_vt><cgtz>(cs)
 end // end of [strn_print1]
@@ -171,11 +171,11 @@ in
 if
 forall$test<cgtz>(x0)
 then
-loop(xs, len, succ(ind)) else false
+loop(xs, len, suc(ind)) else false
 // end of [if]
 end // end of [else]
 //
-} (* end of [strn_vt_forall1/get_at] *)
+} (* end of [strn_vt_forall1/get$at] *)
 
 (* ****** ****** *)
 //
@@ -355,11 +355,11 @@ if
 (i0 >= n0)
 then () else
 (
-loop(p0, succ(i0), cs)) where
+loop(p0, suc(i0), cs)) where
 {
   val c0 = cs[i0]
   val () =
-  strtmp_vt_set_at<>(p0,i0,c0) } )
+  strtmp_vt_set$at<>(p0,i0,c0) } )
 //
 }(*where*)//end-of-[strn_vt_make_strn]
 
@@ -400,10 +400,10 @@ list_nil() => ()
 |
 list_cons(c0, cs) =>
 (
-loop(p0, succ(i0), cs)) where
+loop(p0, suc(i0), cs)) where
 {
 val () =
-strtmp_vt_set_at<>(p0, i0, c0) } )
+strtmp_vt_set$at<>(p0, i0, c0) } )
 //
 }(*where*)//end-of-[strn_vt_make_list]
 
@@ -444,11 +444,11 @@ list_vt_nil() => ()
 | ~
 list_vt_cons(c0, cs) =>
 (
-  loop(p0, succ(i0), cs)
+  loop(p0, suc(i0), cs)
 ) where
 {
 val () =
-strtmp_vt_set_at<>(p0, i0, c0)
+strtmp_vt_set$at<>(p0, i0, c0)
 }
 )
 //
@@ -526,12 +526,12 @@ if
 (i0 < n0)
 then
 (
-loop(p0, succ(i0))) where
+loop(p0, suc(i0))) where
 {
 val c0 =
 tabulate$fopr<cgtz><n0>(i0)
 val () =
-strtmp_vt_set_at<>(p0, i0, c0)
+strtmp_vt_set$at<>(p0, i0, c0)
 }
 ) (* end-of-of[loop(p0, i0)] *)
 //
@@ -541,7 +541,7 @@ strtmp_vt_set_at<>(p0, i0, c0)
 //
 #impltmp
 <>(*tmp*)
-strn_vt_tabulate_cfr
+strn_vt_tabulate_f1un
 {n:i0}(n0, f0) =
 (
 strn_vt_tabulate<n>(n0)

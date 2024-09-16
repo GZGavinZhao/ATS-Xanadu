@@ -74,7 +74,7 @@ local
 fun
 auxmain
 ( out: FILR
-, dcl: d4ecl): void =
+, dcl0: d4ecl): void =
 let
 //
 #impltmp
@@ -83,22 +83,23 @@ g_print$out<>() = out
 in//let
 //
 case+
-dcl.node() of
+dcl0.node() of
 //
 |
 _(*otherwise*) =>
 let
 //
-  val
-  loc = dcl.lctn()
-  val () = prerrln
-  ("fperr40_d4ecl: auxmain: loc = ", loc)
-  val () = prerrln
-  ("fperr40_d4ecl: auxmain: dcl = ", dcl)
+(*
+val loc = dcl0.lctn()
+val ( ) = prerrsln
+("fperr40_d4ecl: auxmain: loc0 = ", loc0)
+val ( ) = prerrsln
+("fperr40_d4ecl: auxmain: dcl0 = ", dcl0)
+*)
 //
-end (*let*) // end-of-[ (* otherwise *) ]
+endlet
 //
-end (*let*) // end-of-[ auxmain(out, dcl) ]
+end (*let*) // end-of-[ auxmain(out, dcl0) ]
 
 (* ****** ****** *)
 in(* in-of-local *)
@@ -117,13 +118,13 @@ let
 val loc0 = dcl0.lctn()
 in//let
 (*
-prerrln
+prerrsln
 ("fperr40_d4pat: loc0 = ", loc0)
 *)
 end//let
 (*
 val () =
-prerrln
+prerrsln
 ("fperr40_d4ecl: dcl0 = ", dcl0)
 *)
 //
@@ -141,7 +142,7 @@ if
 >FPERR40_ERRVL) then () else
 let
 val loc0 = dcl0.lctn() in
-println
+printsln
 ("FPERR40-ERROR:",loc0,":",dcl0)
 end
 )

@@ -55,40 +55,41 @@ strn_make_list<>
 <>(*tmp*)
 strn_nilq(cs) =
 char_eqz
-(strn_head_opt<>(cs))
+(strn_head$opt<>(cs))
 #impltmp
 <>(*tmp*)
 strn_consq(cs) =
 char_neqz
-(strn_head_opt<>(cs))
+(strn_head$opt<>(cs))
 
 (* ****** ****** *)
 
 #impltmp
 <>(*tmp*)
 strn_head(cs) =
-(strn_head_raw<>(cs))
+$UN.strn_head$raw<>(cs)
 #impltmp
 <>(*tmp*)
 strn_tail(cs) =
-(strn_tail_raw<>(cs))
+$UN.strn_tail$raw<>(cs)
 
 (* ****** ****** *)
 //
 (*
 #impltmp<>
-strn_head_opt(cs) = ...
+strn_head$opt(cs) = ...
 *)
 //
 #impltmp
 <>(*tmp*)
-strn_tail_opt(cs) =
+strn_tail$opt(cs) =
 if
 strn_nilq(cs)
 then
 optn_vt_nil((*void*))
 else
-optn_vt_cons(strn_tail_raw(cs))
+optn_vt_cons
+($UN.strn_tail$raw(cs))
 //
 (* ****** ****** *)
 //
@@ -121,9 +122,9 @@ if
 strn_nilq(x2)
 then (1) else let
 val c1 =
-strn_head_raw(x1)
+$UN.strn_head$raw(x1)
 and c2 =
-strn_head_raw(x2)
+$UN.strn_head$raw(x2)
 val
 sgn = char_cmp(c1, c2)
 in//let
@@ -131,8 +132,8 @@ if
 (sgn != 0)
 then sgn else
 loop
-( strn_tail_raw(x1)
-, strn_tail_raw(x2)) end
+( $UN.strn_tail$raw(x1)
+, $UN.strn_tail$raw(x2)) end
 )
 //
 in
@@ -198,7 +199,7 @@ in
 if
 test
 then j0 else
-auxloop(strn_tail(xs), succ(j0))
+auxloop(strn_tail(xs), suc(j0))
 endlet // end of [auxloop(xs,j0)]
 // end of [if]
 }(*where*)//end-of[strn_length(xs)]
@@ -249,14 +250,14 @@ tabulate$fopr
 let
 val j0 = (n0-1)-i0
 in//let
-strn_get_at<>(cs, j0)
-endlet//tabulate$fopr
+  strn_get$at<>(cs, j0)
+endlet//tabulate$fopr(...)
 //
 in
-  strn_tabulate<n0>(n0)
-end (*let*)//tabulate$fopr
+  strn_tabulate<n0>( n0 )
+end (*let*)//tabulate$fopr(...)
 //
-end//end of [strn_reverse(cs)]
+end//let//end-of-[strn_reverse(cs)]
 
 (* ****** ****** *)
 
@@ -280,7 +281,7 @@ tabulate$fopr
 let
 val j0 = (n0-1)-i0
 in//let
-  strn_get_at<>(cs, j0)
+  strn_get$at<>(cs, j0)
 end(*let*)//tabulate$fopr
 //
 in
@@ -321,13 +322,14 @@ strn_nilq
 then true else
 let
 val x0 =
-strn_head_raw(xs)
+$UN.strn_head$raw(xs)
 in//let
 if
 forall$test<x0>(x0)
 then
 loop
-(strn_tail_raw(xs)) else false
+(
+$UN.strn_tail$raw(xs)) else false
 // end of [if]
 end // end of [else]
 } (* end of [strn_forall/uncons] *)
@@ -370,14 +372,24 @@ endlet//end-of-(else)//end-of-(if)
 (* ****** ****** *)
 //
 #impltmp
-strn_foreach<> =
-gseq_foreach<strn><cgtz>
+strn_foritm<> =
+gseq_foritm<strn><cgtz>
 //
 (* ****** ****** *)
 //
 #impltmp
-strn_rforeach<> =
-gseq_rforeach<strn><cgtz>
+strn_rforitm<> =
+gseq_rforitm<strn><cgtz>
+//
+(* ****** ****** *)
+//
+#impltmp
+strn_iforall<> =
+gseq_iforall<strn><cgtz>
+//
+#impltmp
+strn_iforitm<> =
+gseq_iforitm<strn><cgtz>
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -438,7 +450,7 @@ then
 else
 let
   val ci = cs[i0]
-  val i0 = succ(i0)
+  val i0 = suc(i0)
 in
   strmcon_vt_cons(ci, auxmain(i0))
 end // end of [else]
@@ -475,7 +487,7 @@ then (!auxtail())
 else
 let
   val ci = cs[i0]
-  val i0 = succ(i0)
+  val i0 = suc(i0)
 in
   strxcon_vt_cons(ci, auxmain(i0))
 end // end of [else]
@@ -618,7 +630,7 @@ strn_vt2t(strn_vt_tabulate<n0>(n0))
 //
 #impltmp
 <>(*tmp*)
-strn_tabulate_cfr
+strn_tabulate_f1un
 {n}
 (n0, f0) =
 (
@@ -630,7 +642,7 @@ tabulate$fopr<cgtz><n>(i0) = f0(i0)
 }
 #impltmp
 <>(*tmp*)
-strn_vt_tabulate_cfr
+strn_vt_tabulate_f1un
 {n}
 (n0, f0) =
 (
@@ -661,14 +673,14 @@ loop
 , s2: strn): bool =
 let
 val c1 =
-strn_head_opt(s1)
+strn_head$opt(s1)
 in//let
 if
 char_eqz(c1)
 then true else
 let
 val c2 =
-strn_head_opt(s2)
+strn_head$opt(s2)
 in//let
 if
 char_eqz(c2)
@@ -812,13 +824,6 @@ gseq_rlistize<xs><x0> = strn_rlistize<>
 gras_rstrmize<xs><x0> = strn_rstrmize<>
 #impltmp
 gseq_rstrmize<xs><x0> = strn_rstrmize<>
-//
-(* ****** ****** *)
-//
-#impltmp
-gseq_head_raw<xs><x0> = strn_head_raw<>
-#impltmp
-gseq_tail_raw<xs><x0> = strn_tail_raw<>
 //
 (* ****** ****** *)
 //

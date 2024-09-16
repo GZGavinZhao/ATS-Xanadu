@@ -66,6 +66,8 @@ _(*DATS*)="./../DATS/trxd3i0.dats"
 //
 (* ****** ****** *)
 (* ****** ****** *)
+#symload node with token_get_node
+(* ****** ****** *)
 #symload node with s2typ_get_node
 (* ****** ****** *)
 #symload lctn with d3pat_get_lctn
@@ -85,6 +87,21 @@ _(*DATS*)="./../DATS/trxd3i0.dats"
 #symload node with d3gua_get_node
 #symload node with d3gpt_get_node
 #symload node with d3cls_get_node
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun
+trcdtok_fltq
+(tknd: token): bool =
+(
+case-
+tknd.node() of
+| T_TRCD10(0) => true
+| T_TRCD20(0) => true
+| T_TRCD10(_) => false
+| T_TRCD20(_) => false)
+(* end-of-[trcdtok_fltq(tok)] *)
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -390,8 +407,12 @@ val i0ps =
 trxd3i0_d3patlst(env0, d3ps)
 //
 in//let
-(
-  i0pat(loc0, I0Ptup0(i0ps)))
+//
+if
+list_singq(i0ps)
+then list_head(i0ps)
+else i0pat(loc0, I0Ptup0(i0ps))
+//
 end(*let*)//end-of-[f0_tup0(...)]
 //
 (* ****** ****** *)
@@ -417,10 +438,20 @@ val i0ps =
 trxd3i0_d3patlst(env0, d3ps)
 //
 in//let
+//
+(*
+if
 (
-  i0pat_make_node
-  (loc0, I0Ptup1(tknd, i0ps)))
-end(*let*)//end-of-[f0_tup1(...)]
+if
+not(
+list_singq(i0ps))
+then (false) else
+trcdtok_fltq(tknd))
+then list_head(i0ps) else*)
+(
+  i0pat(loc0, I0Ptup1(tknd, i0ps)))
+// else // end-of-[if]
+end(*let*)//end-of-[f0_tup1(env0,...)]
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -448,7 +479,7 @@ D3Pannot
 (*
 val (  ) =
 (
-prerrln("trxd3i0_d3pat: d3p0 = ", d3p0))
+prerrsln("trxd3i0_d3pat: d3p0 = ", d3p0))
 *)
 //
 (* ****** ****** *)
@@ -505,6 +536,11 @@ i0exp
 (d3e0.lctn(), I0Estr(tok))
 //
 (* ****** ****** *)
+|D3Etop
+( sym ) =>
+i0exp
+(d3e0.lctn(), I0Etop(sym))
+(* ****** ****** *)
 //
 |D3Evar
 ( d2v ) =>
@@ -538,6 +574,7 @@ i0exp
 //
 (* ****** ****** *)
 //
+|D3Edap0 _ => f0_dap0(env0, d3e0)
 |D3Edapp _ => f0_dapp(env0, d3e0)
 //
 (* ****** ****** *)
@@ -596,10 +633,17 @@ i0exp
 |D3El1azy _ => f0_l1azy(env0, d3e0)
 //
 (* ****** ****** *)
+//
+|D3Eannot _ => f0_annot(env0, d3e0)
+//
+(* ****** ****** *)
 (* ****** ****** *)
 //
 |
 D3Eextnam _ => f0_extnam(env0, d3e0)
+//
+|
+D3Esynext _ => f0_synext(env0, d3e0)
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -714,14 +758,36 @@ val loc0 = d3e0.lctn()
 //
 val-
 D3Etapq
-( d3f0, t2ps) = d3e0.node()
+( d3f0, tjas) = d3e0.node()
 val i0f0 = 
 (
   trxd3i0_d3exp(env0, d3f0))
 in//let
 (
-  i0exp(loc0, I0Etapq(i0f0)) )
+i0exp(loc0, I0Etapq(i0f0, tjas)))
 end//let//end-of-[f0_tapq(env0,d3e0)]
+//
+(* ****** ****** *)
+//
+fun
+f0_dap0
+( env0:
+! envd3i0
+, d3e0: d3exp): i0exp =
+(
+i0exp
+(loc0, I0Edap0(i0f0)))
+where
+{
+//
+val loc0 = d3e0.lctn()
+//
+val-
+D3Edap0(d3f0) = d3e0.node()
+val
+i0f0 = trxd3i0_d3exp(env0, d3f0)
+//
+}(*where*)//endof[f0_dap0(env0,d3e0)]
 //
 (* ****** ****** *)
 //
@@ -1010,12 +1076,11 @@ val i0es =
   trxd3i0_d3explst(env0, d3es))
 //
 in//let
+(
 if
 list_singq(i0es)
 then list_head(i0es)
-else
-(
-  i0exp(loc0, I0Etup0(  i0es  )) )
+else i0exp(loc0, I0Etup0(i0es)))
 end(*let*)//end-of-[f0_tup0(env0,d3e0)]
 //
 (* ****** ****** *)
@@ -1043,6 +1108,16 @@ val i0es =
   trxd3i0_d3explst(env0, d3es))
 //
 in//let
+//
+(*
+if
+(
+if
+not(
+list_singq(i0es))
+then (false) else
+trcdtok_fltq(tknd))
+then list_head(i0es) else*)
 (
   i0exp(loc0, I0Etup1(tknd, i0es)))
 end(*let*)//end-of-[f0_tup1(env0,d3e0)]
@@ -1426,6 +1501,22 @@ end (*let*) // end of [f0_l1azy(env0,d3e0)]
 (* ****** ****** *)
 //
 fun
+f0_annot
+( env0:
+! envd3i0
+, d3e0: d3exp): i0exp =
+(
+trxd3i0_d3exp(env0, d3e1)
+) where
+{
+val-
+D3Eannot(d3e1,s1e2,s2e2) = d3e0.node()
+} (*where*) // end of [f0_annot(env0,d3e0)]
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun
 f0_extnam
 ( env0:
 ! envd3i0
@@ -1444,12 +1535,36 @@ in//let
 end (*let*) // end of [f0_extnam(env0,d3e0)]
 //
 (* ****** ****** *)
+//
+(*
+HX-2024-07-20:
+Sat 20 Jul 2024 12:03:51 PM EDT
+*)
+fun
+f0_synext
+( env0:
+! envd3i0
+, d3e0: d3exp): i0exp =
+let
+//
+val loc0 = d3e0.lctn()
+//
+val-
+D3Esynext
+(tknd, gexp) = d3e0.node()
+//
+in//let
+(
+  i0exp(loc0, I0Esynext(tknd, gexp)))
+end (*let*) // end of [f0_synext(env0,d3e0)]
+//
+(* ****** ****** *)
 (* ****** ****** *)
 //
 (*
 val (  ) =
 (
-prerrln("trxd3i0_d3exp: d3e0 = ", d3e0))
+prerrsln("trxd3i0_d3exp: d3e0 = ", d3e0))
 *)
 //
 (* ****** ****** *)
@@ -1502,11 +1617,11 @@ end//let//end-of-[D3GUAmat(...)]
 ) where
 {
 //
-  val loc0 = dgua.lctn((*void*))
+val loc0 = dgua.lctn((*void*))
 //
 (*
-  val (  ) =
-  prerrln("trxd3i0_d3gua: dgua = ", dgua)
+val (  ) =
+prerrsln("trxd3i0_d3gua: dgua = ", dgua)
 *)
 //
 }(*where*)//end-of-[trxd3i0_d3gua(env0,...)]
@@ -1522,7 +1637,7 @@ val loc0 = dgpt.lctn()
 (*
 val
 val () =
-prerrln
+prerrsln
 ("trxd3i0_d3gpt: dgpt = ", dgpt)
 *)
 //
@@ -1565,7 +1680,7 @@ val loc0 = d3c0.lctn()
 (*
 val
 val () =
-prerrln
+prerrsln
 ("trxd3i0_d3cls: d3c0 = ", d3c0)
 *)
 //
@@ -1731,5 +1846,5 @@ trxd3i0_d3clslst
 (* ****** ****** *)
 //
 (***********************************************************************)
-(* end of [ATS3/XANADU_srcgen2_xinterp_srcgen1_DATS_trxd3i0_dynexp.dats] *)
+(* end of [ATS3/XANADU_srcgen2_xats2js_srcgen1_DATS_trxd3i0_dynexp.dats] *)
 (***********************************************************************)

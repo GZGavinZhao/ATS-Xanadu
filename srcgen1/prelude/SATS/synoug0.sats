@@ -41,51 +41,51 @@ Authoremail: gmhwxiATgmailDOTcom
 //
 fun
 <a0:t0>
-gs_max_a01
+gs_max_n1
  (x1: a0): a0
 fun
 <a0:t0>
-gs_max_a02
+gs_max_n2
 (x1: a0, x2: a0): a0
 fun
 <a0:t0>
-gs_max_a03
+gs_max_n3
 ( x1: a0
 , x2: a0, x3: a0): a0
 fun
 <a0:t0>
-gs_max_a04
+gs_max_n4
 ( x1: a0, x2: a0
 , x3: a0, x4: a0): a0
 fun
 <a0:t0>
-gs_max_a05
+gs_max_n5
 ( x1: a0
 , x2: a0, x3: a0
 , x4: a0, x5: a0): a0
 fun
 <a0:t0>
-gs_max_a06
+gs_max_n6
 ( x1: a0, x2: a0
 , x3: a0, x4: a0
 , x5: a0, x6: a0): a0
 fun
 <a0:t0>
-gs_max_a07
+gs_max_n7
 ( x1: a0
 , x2: a0, x3: a0
 , x4: a0, x5: a0
 , x6: a0, x7: a0): a0
 fun
 <a0:t0>
-gs_max_a08
+gs_max_n8
 ( x1: a0, x2: a0
 , x3: a0, x4: a0
 , x5: a0, x6: a0
 , x7: a0, x8: a0): a0
 fun
 <a0:t0>
-gs_max_a09
+gs_max_n9
 ( x1: a0
 , x2: a0, x3: a0
 , x4: a0, x5: a0
@@ -94,7 +94,7 @@ gs_max_a09
 //
 fun
 <a0:t0>
-gs_max_a10
+gs_max_n10
 ( x01: a0, x02: a0
 , x03: a0, x04: a0
 , x05: a0, x06: a0
@@ -103,65 +103,65 @@ gs_max_a10
 //
 (* ****** ****** *)
 //
-#symload gmax with gs_max_a02
-#symload gmax with gs_max_a03
-#symload gmax with gs_max_a04
-#symload gmax with gs_max_a05
-#symload gmax with gs_max_a06
-#symload gmax with gs_max_a07
-#symload gmax with gs_max_a08
-#symload gmax with gs_max_a09
-#symload gmax with gs_max_a10
+#symload maxs with gs_max_n2
+#symload maxs with gs_max_n3
+#symload maxs with gs_max_n4
+#symload maxs with gs_max_n5
+#symload maxs with gs_max_n6
+#symload maxs with gs_max_n7
+#symload maxs with gs_max_n8
+#symload maxs with gs_max_n9
+#symload maxs with gs_max_n10
 //
 (* ****** ****** *)
 //
 fun
 <a0:t0>
-gs_min_a01
+gs_min_n1
  (x1: a0): a0
 fun
 <a0:t0>
-gs_min_a02
+gs_min_n2
 (x1: a0, x2: a0): a0
 fun
 <a0:t0>
-gs_min_a03
+gs_min_n3
 ( x1: a0
 , x2: a0, x3: a0): a0
 fun
 <a0:t0>
-gs_min_a04
+gs_min_n4
 ( x1: a0, x2: a0
 , x3: a0, x4: a0): a0
 fun
 <a0:t0>
-gs_min_a05
+gs_min_n5
 ( x1: a0
 , x2: a0, x3: a0
 , x4: a0, x5: a0): a0
 fun
 <a0:t0>
-gs_min_a06
+gs_min_n6
 ( x1: a0, x2: a0
 , x3: a0, x4: a0
 , x5: a0, x6: a0): a0
 fun
 <a0:t0>
-gs_min_a07
+gs_min_n7
 ( x1: a0
 , x2: a0, x3: a0
 , x4: a0, x5: a0
 , x6: a0, x7: a0): a0
 fun
 <a0:t0>
-gs_min_a08
+gs_min_n8
 ( x1: a0, x2: a0
 , x3: a0, x4: a0
 , x5: a0, x6: a0
 , x7: a0, x8: a0): a0
 fun
 <a0:t0>
-gs_min_a09
+gs_min_n9
 ( x1: a0
 , x2: a0, x3: a0
 , x4: a0, x5: a0
@@ -170,7 +170,7 @@ gs_min_a09
 //
 fun
 <a0:t0>
-gs_min_a10
+gs_min_n10
 ( x01: a0, x02: a0
 , x03: a0, x04: a0
 , x05: a0, x06: a0
@@ -179,32 +179,32 @@ gs_min_a10
 //
 (* ****** ****** *)
 //
-#symload gmin with gs_min_a02
-#symload gmin with gs_min_a03
-#symload gmin with gs_min_a04
-#symload gmin with gs_min_a05
-#symload gmin with gs_min_a06
-#symload gmin with gs_min_a07
-#symload gmin with gs_min_a08
-#symload gmin with gs_min_a09
-#symload gmin with gs_min_a10
+#symload mins with gs_min_n2
+#symload mins with gs_min_n3
+#symload mins with gs_min_n4
+#symload mins with gs_min_n5
+#symload mins with gs_min_n6
+#symload mins with gs_min_n7
+#symload mins with gs_min_n8
+#symload mins with gs_min_n9
+#symload mins with gs_min_n10
 //
 (* ****** ****** *)
 //
 fun
 <a1:vt>
-gs_free_a01
+gs_free_n1
 (x1: ~a1): void
 fun
 <a1:vt>
 <a2:vt>
-gs_free_a02
+gs_free_n2
 (x1: ~a1, x2: ~a2): void
 fun
 <a1:vt>
 <a2:vt>
 <a3:vt>
-gs_free_a03
+gs_free_n3
 ( x1: ~a1
 , x2: ~a2, x3: ~a3): void
 fun
@@ -212,7 +212,7 @@ fun
 <a2:vt>
 <a3:vt>
 <a4:vt>
-gs_free_a04
+gs_free_n4
 ( x1: ~a1, x2: ~a2
 , x3: ~a3, x4: ~a4 ): void
 fun
@@ -221,7 +221,7 @@ fun
 <a3:vt>
 <a4:vt>
 <a5:vt>
-gs_free_a05
+gs_free_n5
 ( x1: ~a1
 , x2: ~a2, x3: ~a3
 , x4: ~a4, x5: ~a5 ): void
@@ -232,7 +232,7 @@ fun
 <a4:vt>
 <a5:vt>
 <a6:vt>
-gs_free_a06
+gs_free_n6
 ( x1: ~a1, x2: ~a2
 , x3: ~a3, x4: ~a4
 , x5: ~a5, x6: ~a6 ): void
@@ -244,7 +244,7 @@ fun
 <a5:vt>
 <a6:vt>
 <a7:vt>
-gs_free_a07
+gs_free_n7
 ( x1: ~a1
 , x2: ~a2, x3: ~a3
 , x4: ~a4, x5: ~a5
@@ -258,7 +258,7 @@ fun
 <a6:vt>
 <a7:vt>
 <a8:vt>
-gs_free_a08
+gs_free_n8
 ( x1: ~a1, x2: ~a2
 , x3: ~a3, x4: ~a4
 , x5: ~a5, x6: ~a6
@@ -273,7 +273,7 @@ fun
 <a7:vt>
 <a8:vt>
 <a9:vt>
-gs_free_a09
+gs_free_n9
 ( x1: ~a1
 , x2: ~a2, x3: ~a3
 , x4: ~a4, x5: ~a5
@@ -291,7 +291,7 @@ fun
 <a08:vt>
 <a09:vt>
 <a10:vt>
-gs_free_a10
+gs_free_n10
 (x01: ~a01,x02: ~a02
 ,x03: ~a03,x04: ~a04
 ,x05: ~a05,x06: ~a06
@@ -300,64 +300,67 @@ gs_free_a10
 //
 (* ****** ****** *)
 //
-#symload free with gs_free_a01
-#symload free with gs_free_a02
-#symload free with gs_free_a03
-#symload free with gs_free_a04
-#symload free with gs_free_a05
-#symload free with gs_free_a06
-#symload free with gs_free_a07
-#symload free with gs_free_a08
-#symload free with gs_free_a09
-#symload free with gs_free_a10
+#symload free with gs_free_n1
+(*
+#symload frees with gs_free_n1
+*)
+#symload frees with gs_free_n2
+#symload frees with gs_free_n3
+#symload frees with gs_free_n4
+#symload frees with gs_free_n5
+#symload frees with gs_free_n6
+#symload frees with gs_free_n7
+#symload frees with gs_free_n8
+#symload frees with gs_free_n9
+#symload frees with gs_free_n10
 //
 (* ****** ****** *)
 //
 fun
 <a0:t0>
-optn_a00
+optn_n0
 (      ): optn(a0,ff)
 fun
 <a0:t0>
-optn_a01
+optn_n1
 (x1: a0): optn(a0,tt)
 //
 (* ****** ****** *)
 //
-#symload optn with optn_a00
-#symload optn with optn_a01
+#symload optn with optn_n0
+#symload optn with optn_n1
 //
 (* ****** ****** *)
 //
 fun
 <a0:t0>
-list_a00
+list_n0
 (      ): list(a0, 0)
 fun
 <a0:t0>
-list_a01
+list_n1
 (x1: a0): list(a0, 1)
 fun
 <a0:t0>
-list_a02
+list_n2
 (x1: a0
 ,x2: a0): list(a0, 2)
 fun
 <a0:t0>
-list_a03
+list_n3
 (x1: a0
 ,x2: a0
 ,x3: a0): list(a0, 3)
 fun
 <a0:t0>
-list_a04
+list_n4
 (x1: a0
 ,x2: a0
 ,x3: a0
 ,x4: a0): list(a0, 4)
 fun
 <a0:t0>
-list_a05
+list_n5
 (x1: a0
 ,x2: a0
 ,x3: a0
@@ -365,7 +368,7 @@ list_a05
 ,x5: a0): list(a0, 5)
 fun
 <a0:t0>
-list_a06
+list_n6
 (x1: a0
 ,x2: a0
 ,x3: a0
@@ -374,7 +377,7 @@ list_a06
 ,x6: a0): list(a0, 6)
 fun
 <a0:t0>
-list_a07
+list_n7
 (x1: a0
 ,x2: a0
 ,x3: a0
@@ -384,7 +387,7 @@ list_a07
 ,x7: a0): list(a0, 7)
 fun
 <a0:t0>
-list_a08
+list_n8
 (x1: a0
 ,x2: a0
 ,x3: a0
@@ -395,7 +398,7 @@ list_a08
 ,x8: a0): list(a0, 8)
 fun
 <a0:t0>
-list_a09
+list_n9
 (x1: a0
 ,x2: a0
 ,x3: a0
@@ -407,7 +410,7 @@ list_a09
 ,x9: a0): list(a0, 9)
 fun
 <a0:t0>
-list_a10
+list_n10
 (x01: a0
 ,x02: a0
 ,x03: a0
@@ -421,17 +424,17 @@ list_a10
 //
 (* ****** ****** *)
 //
-#symload list with list_a00
-#symload list with list_a01
-#symload list with list_a02
-#symload list with list_a03
-#symload list with list_a04
-#symload list with list_a05
-#symload list with list_a06
-#symload list with list_a07
-#symload list with list_a08
-#symload list with list_a09
-#symload list with list_a10
+#symload list with list_n0
+#symload list with list_n1
+#symload list with list_n2
+#symload list with list_n3
+#symload list with list_n4
+#symload list with list_n5
+#symload list with list_n6
+#symload list with list_n7
+#symload list with list_n8
+#symload list with list_n9
+#symload list with list_n10
 //
 (* ****** ****** *)
 //
@@ -448,24 +451,24 @@ g_fproc(x: a): void
 //
 (*
 fun<>
-gs_fproc_a00
+gs_fproc_n0
 ((*void*)) : void
 *)
 //
 fun
 <a1:t0>
-gs_fproc_a01
+gs_fproc_n1
 ( x1: a1 ) : void
 fun
 <a1:t0>
 <a2:t0>
-gs_fproc_a02
+gs_fproc_n2
 ( x1: a1, x2: a2 ) : void
 fun
 <a1:t0>
 <a2:t0>
 <a3:t0>
-gs_fproc_a03
+gs_fproc_n3
 ( x1: a1
 , x2: a2, x3: a3 ) : void
 fun
@@ -473,7 +476,7 @@ fun
 <a2:t0>
 <a3:t0>
 <a4:t0>
-gs_fproc_a04
+gs_fproc_n4
 ( x1: a1, x2: a2
 , x3: a3, x4: a4 ) : void
 fun
@@ -482,7 +485,7 @@ fun
 <a3:t0>
 <a4:t0>
 <a5:t0>
-gs_fproc_a05
+gs_fproc_n5
 ( x1: a1
 , x2: a2, x3: a3
 , x4: a4, x5: a5 ) : void
@@ -493,7 +496,7 @@ fun
 <a4:t0>
 <a5:t0>
 <a6:t0>
-gs_fproc_a06
+gs_fproc_n6
 ( x1: a1, x2: a2
 , x3: a3, x4: a4
 , x5: a5, x6: a6 ) : void
@@ -505,7 +508,7 @@ fun
 <a5:t0>
 <a6:t0>
 <a7:t0>
-gs_fproc_a07
+gs_fproc_n7
 ( x1: a1
 , x2: a2, x3: a3
 , x4: a4, x5: a5
@@ -519,7 +522,7 @@ fun
 <a6:t0>
 <a7:t0>
 <a8:t0>
-gs_fproc_a08
+gs_fproc_n8
 ( x1: a1, x2: a2
 , x3: a3, x4: a4
 , x5: a5, x6: a6
@@ -534,7 +537,7 @@ fun
 <a7:t0>
 <a8:t0>
 <a9:t0>
-gs_fproc_a09
+gs_fproc_n9
 ( x1: a1
 , x2: a2, x3: a3
 , x4: a4, x5: a5
@@ -551,7 +554,7 @@ fun
 <a08:t0>
 <a09:t0>
 <a10:t0>
-gs_fproc_a10
+gs_fproc_n10
 ( x01: a01, x02: a02
 , x03: a03, x04: a04
 , x05: a05, x06: a06
@@ -559,16 +562,16 @@ gs_fproc_a10
 , x09: a09, x10: a10 ) : void
 (* ****** ****** *)
 //
-#symload fproc with gs_fproc_a01
-#symload fproc with gs_fproc_a02
-#symload fproc with gs_fproc_a03
-#symload fproc with gs_fproc_a04
-#symload fproc with gs_fproc_a05
-#symload fproc with gs_fproc_a06
-#symload fproc with gs_fproc_a07
-#symload fproc with gs_fproc_a08
-#symload fproc with gs_fproc_a09
-#symload fproc with gs_fproc_a10
+#symload fprocs with gs_fproc_n1
+#symload fprocs with gs_fproc_n2
+#symload fprocs with gs_fproc_n3
+#symload fprocs with gs_fproc_n4
+#symload fprocs with gs_fproc_n5
+#symload fprocs with gs_fproc_n6
+#symload fprocs with gs_fproc_n7
+#symload fprocs with gs_fproc_n8
+#symload fprocs with gs_fproc_n9
+#symload fprocs with gs_fproc_n10
 //
 (* ****** ****** *)
 //
@@ -584,47 +587,47 @@ g_fred2(a0, a0): a0
 (* ****** ****** *)
 fun
 <a0:t0>
-gs_fred2l_a02
+gs_fred2l_n2
 (x1: a0, x2: a0): a0
 fun
 <a0:t0>
-gs_fred2l_a03
+gs_fred2l_n3
 ( x1: a0
 , x2: a0, x3: a0): a0
 fun
 <a0:t0>
-gs_fred2l_a04
+gs_fred2l_n4
 ( x1: a0, x2: a0
 , x3: a0, x4: a0): a0
 fun
 <a0:t0>
-gs_fred2l_a05
+gs_fred2l_n5
 ( x1: a0
 , x2: a0, x3: a0
 , x4: a0, x5: a0): a0
 fun
 <a0:t0>
-gs_fred2l_a06
+gs_fred2l_n6
 ( x1: a0, x2: a0
 , x3: a0, x4: a0
 , x5: a0, x6: a0): a0
 fun
 <a0:t0>
-gs_fred2l_a07
+gs_fred2l_n7
 ( x1: a0
 , x2: a0, x3: a0
 , x4: a0, x5: a0
 , x6: a0, x7: a0): a0
 fun
 <a0:t0>
-gs_fred2l_a08
+gs_fred2l_n8
 ( x1: a0, x2: a0
 , x3: a0, x4: a0
 , x5: a0, x6: a0
 , x7: a0, x8: a0): a0
 fun
 <a0:t0>
-gs_fred2l_a09
+gs_fred2l_n9
 ( x1: a0
 , x2: a0, x3: a0
 , x4: a0, x5: a0
@@ -633,7 +636,7 @@ gs_fred2l_a09
 //
 fun
 <a0:t0>
-gs_fred2l_a10
+gs_fred2l_n10
 ( x01: a0, x02: a0
 , x03: a0, x04: a0
 , x05: a0, x06: a0
@@ -643,47 +646,47 @@ gs_fred2l_a10
 (* ****** ****** *)
 fun
 <a0:t0>
-gs_fred2r_a02
+gs_fred2r_n2
 (x1: a0, x2: a0): a0
 fun
 <a0:t0>
-gs_fred2r_a03
+gs_fred2r_n3
 ( x1: a0
 , x2: a0, x3: a0): a0
 fun
 <a0:t0>
-gs_fred2r_a04
+gs_fred2r_n4
 ( x1: a0, x2: a0
 , x3: a0, x4: a0): a0
 fun
 <a0:t0>
-gs_fred2r_a05
+gs_fred2r_n5
 ( x1: a0
 , x2: a0, x3: a0
 , x4: a0, x5: a0): a0
 fun
 <a0:t0>
-gs_fred2r_a06
+gs_fred2r_n6
 ( x1: a0, x2: a0
 , x3: a0, x4: a0
 , x5: a0, x6: a0): a0
 fun
 <a0:t0>
-gs_fred2r_a07
+gs_fred2r_n7
 ( x1: a0
 , x2: a0, x3: a0
 , x4: a0, x5: a0
 , x6: a0, x7: a0): a0
 fun
 <a0:t0>
-gs_fred2r_a08
+gs_fred2r_n8
 ( x1: a0, x2: a0
 , x3: a0, x4: a0
 , x5: a0, x6: a0
 , x7: a0, x8: a0): a0
 fun
 <a0:t0>
-gs_fred2r_a09
+gs_fred2r_n9
 ( x1: a0
 , x2: a0, x3: a0
 , x4: a0, x5: a0
@@ -692,7 +695,7 @@ gs_fred2r_a09
 //
 fun
 <a0:t0>
-gs_fred2r_a10
+gs_fred2r_n10
 ( x01: a0, x02: a0
 , x03: a0, x04: a0
 , x05: a0, x06: a0
@@ -704,155 +707,157 @@ gs_fred2r_a10
 (*
 HX:
 for overloading
-print and println
+prints and printsln
 *)
 //
 (* ****** ****** *)
 //
+fun<>
+gs_print_n0
+((*void*)) : void
+fun
+<a1:t0>
+gs_print_n1
+( x1: a1 ) : void
+fun
+<a1:t0>
+<a2:t0>
+gs_print_n2
+( x1: a1, x2: a2 ) : void
+fun
+<a1:t0>
+<a2:t0>
+<a3:t0>
+gs_print_n3
+( x1: a1
+, x2: a2, x3: a3 ) : void
+fun
+<a1:t0>
+<a2:t0>
+<a3:t0>
+<a4:t0>
+gs_print_n4
+( x1: a1, x2: a2
+, x3: a3, x4: a4 ) : void
+fun
+<a1:t0>
+<a2:t0>
+<a3:t0>
+<a4:t0>
+<a5:t0>
+gs_print_n5
+( x1: a1
+, x2: a2, x3: a3
+, x4: a4, x5: a5 ) : void
+fun
+<a1:t0>
+<a2:t0>
+<a3:t0>
+<a4:t0>
+<a5:t0>
+<a6:t0>
+gs_print_n6
+( x1: a1, x2: a2
+, x3: a3, x4: a4
+, x5: a5, x6: a6 ) : void
+fun
+<a1:t0>
+<a2:t0>
+<a3:t0>
+<a4:t0>
+<a5:t0>
+<a6:t0>
+<a7:t0>
+gs_print_n7
+( x1: a1
+, x2: a2, x3: a3
+, x4: a4, x5: a5
+, x6: a6, x7: a7 ) : void
+fun
+<a1:t0>
+<a2:t0>
+<a3:t0>
+<a4:t0>
+<a5:t0>
+<a6:t0>
+<a7:t0>
+<a8:t0>
+gs_print_n8
+( x1: a1, x2: a2
+, x3: a3, x4: a4
+, x5: a5, x6: a6
+, x7: a7, x8: a8 ) : void
+fun
+<a1:t0>
+<a2:t0>
+<a3:t0>
+<a4:t0>
+<a5:t0>
+<a6:t0>
+<a7:t0>
+<a8:t0>
+<a9:t0>
+gs_print_n9
+( x1: a1
+, x2: a2, x3: a3
+, x4: a4, x5: a5
+, x6: a6, x7: a7
+, x8: a8, x9: a9 ) : void
+//
+fun
+<a01:t0>
+<a02:t0>
+<a03:t0>
+<a04:t0>
+<a05:t0>
+<a06:t0>
+<a07:t0>
+<a08:t0>
+<a09:t0>
+<a10:t0>
+gs_print_n10
+( x01: a01, x02: a02
+, x03: a03, x04: a04
+, x05: a05, x06: a06
+, x07: a07, x08: a08
+, x09: a09, x10: a10) : void
+//
+(* ****** ****** *)
+//
+#symload print with gs_print_n1
+#symload prints with gs_print_n0
 (*
-fun<>
-gs_print_a00
-((*void*)) : void
+#symload prints with gs_print_n1
 *)
-fun
-<a1:t0>
-gs_print_a01
-( x1: a1 ) : void
-fun
-<a1:t0>
-<a2:t0>
-gs_print_a02
-( x1: a1, x2: a2 ) : void
-fun
-<a1:t0>
-<a2:t0>
-<a3:t0>
-gs_print_a03
-( x1: a1
-, x2: a2, x3: a3 ) : void
-fun
-<a1:t0>
-<a2:t0>
-<a3:t0>
-<a4:t0>
-gs_print_a04
-( x1: a1, x2: a2
-, x3: a3, x4: a4 ) : void
-fun
-<a1:t0>
-<a2:t0>
-<a3:t0>
-<a4:t0>
-<a5:t0>
-gs_print_a05
-( x1: a1
-, x2: a2, x3: a3
-, x4: a4, x5: a5 ) : void
-fun
-<a1:t0>
-<a2:t0>
-<a3:t0>
-<a4:t0>
-<a5:t0>
-<a6:t0>
-gs_print_a06
-( x1: a1, x2: a2
-, x3: a3, x4: a4
-, x5: a5, x6: a6 ) : void
-fun
-<a1:t0>
-<a2:t0>
-<a3:t0>
-<a4:t0>
-<a5:t0>
-<a6:t0>
-<a7:t0>
-gs_print_a07
-( x1: a1
-, x2: a2, x3: a3
-, x4: a4, x5: a5
-, x6: a6, x7: a7 ) : void
-fun
-<a1:t0>
-<a2:t0>
-<a3:t0>
-<a4:t0>
-<a5:t0>
-<a6:t0>
-<a7:t0>
-<a8:t0>
-gs_print_a08
-( x1: a1, x2: a2
-, x3: a3, x4: a4
-, x5: a5, x6: a6
-, x7: a7, x8: a8 ) : void
-fun
-<a1:t0>
-<a2:t0>
-<a3:t0>
-<a4:t0>
-<a5:t0>
-<a6:t0>
-<a7:t0>
-<a8:t0>
-<a9:t0>
-gs_print_a09
-( x1: a1
-, x2: a2, x3: a3
-, x4: a4, x5: a5
-, x6: a6, x7: a7
-, x8: a8, x9: a9 ) : void
-//
-fun
-<a01:t0>
-<a02:t0>
-<a03:t0>
-<a04:t0>
-<a05:t0>
-<a06:t0>
-<a07:t0>
-<a08:t0>
-<a09:t0>
-<a10:t0>
-gs_print_a10
-( x01: a01, x02: a02
-, x03: a03, x04: a04
-, x05: a05, x06: a06
-, x07: a07, x08: a08
-, x09: a09, x10: a10) : void
-//
-(* ****** ****** *)
-//
-#symload print with gs_print_a01
-#symload print with gs_print_a02
-#symload print with gs_print_a03
-#symload print with gs_print_a04
-#symload print with gs_print_a05
-#symload print with gs_print_a06
-#symload print with gs_print_a07
-#symload print with gs_print_a08
-#symload print with gs_print_a09
-#symload print with gs_print_a10
+#symload prints with gs_print_n2
+#symload prints with gs_print_n3
+#symload prints with gs_print_n4
+#symload prints with gs_print_n5
+#symload prints with gs_print_n6
+#symload prints with gs_print_n7
+#symload prints with gs_print_n8
+#symload prints with gs_print_n9
+#symload prints with gs_print_n10
 //
 (* ****** ****** *)
 //
 fun<>
-gs_println_a00
+gs_println_n0
 ((*void*)) : void
 fun
 <a1:t0>
-gs_println_a01
+gs_println_n1
 ( x1: a1 ) : void
 fun
 <a1:t0>
 <a2:t0>
-gs_println_a02
+gs_println_n2
 ( x1: a1, x2: a2 ) : void
 fun
 <a1:t0>
 <a2:t0>
 <a3:t0>
-gs_println_a03
+gs_println_n3
 ( x1: a1
 , x2: a2, x3: a3 ) : void
 fun
@@ -860,7 +865,7 @@ fun
 <a2:t0>
 <a3:t0>
 <a4:t0>
-gs_println_a04
+gs_println_n4
 ( x1: a1, x2: a2
 , x3: a3, x4: a4 ) : void
 fun
@@ -869,7 +874,7 @@ fun
 <a3:t0>
 <a4:t0>
 <a5:t0>
-gs_println_a05
+gs_println_n5
 ( x1: a1
 , x2: a2, x3: a3
 , x4: a4, x5: a5 ) : void
@@ -880,7 +885,7 @@ fun
 <a4:t0>
 <a5:t0>
 <a6:t0>
-gs_println_a06
+gs_println_n6
 ( x1: a1, x2: a2
 , x3: a3, x4: a4
 , x5: a5, x6: a6 ) : void
@@ -892,7 +897,7 @@ fun
 <a5:t0>
 <a6:t0>
 <a7:t0>
-gs_println_a07
+gs_println_n7
 ( x1: a1
 , x2: a2, x3: a3
 , x4: a4, x5: a5
@@ -906,7 +911,7 @@ fun
 <a6:t0>
 <a7:t0>
 <a8:t0>
-gs_println_a08
+gs_println_n8
 ( x1: a1, x2: a2
 , x3: a3, x4: a4
 , x5: a5, x6: a6
@@ -921,7 +926,7 @@ fun
 <a7:t0>
 <a8:t0>
 <a9:t0>
-gs_println_a09
+gs_println_n9
 ( x1: a1
 , x2: a2, x3: a3
 , x4: a4, x5: a5
@@ -939,7 +944,7 @@ fun
 <a08:t0>
 <a09:t0>
 <a10:t0>
-gs_println_a10
+gs_println_n10
 ( x01: a01, x02: a02
 , x03: a03, x04: a04
 , x05: a05, x06: a06
@@ -948,17 +953,20 @@ gs_println_a10
 //
 (* ****** ****** *)
 //
-#symload println with gs_println_a00
-#symload println with gs_println_a01
-#symload println with gs_println_a02
-#symload println with gs_println_a03
-#symload println with gs_println_a04
-#symload println with gs_println_a05
-#symload println with gs_println_a06
-#symload println with gs_println_a07
-#symload println with gs_println_a08
-#symload println with gs_println_a09
-#symload println with gs_println_a10
+#symload println with gs_println_n1
+#symload printsln with gs_println_n0
+(*
+#symload printsln with gs_println_n1
+*)
+#symload printsln with gs_println_n2
+#symload printsln with gs_println_n3
+#symload printsln with gs_println_n4
+#symload printsln with gs_println_n5
+#symload printsln with gs_println_n6
+#symload printsln with gs_println_n7
+#symload printsln with gs_println_n8
+#symload printsln with gs_println_n9
+#symload printsln with gs_println_n10
 //
 (* ****** ****** *)
 (*
@@ -1133,58 +1141,62 @@ a1ref_print1_begendsep
 , xbeg: strn, xend: strn, xsep: strn): void
 //
 (* ****** ****** *)
+(* ****** ****** *)
 //
 (*
 HX-2022-07-05:
 Tue Jul  5 13:22:11 EDT 2022
 *)
 //
+(*
 fun<>
-strn_append_a02
+strn_append_n2
 (strn, strn): strn
 fun<>
-strn_append_a03
+strn_append_n3
 (strn, strn, strn): strn
 fun<>
-strn_append_a04
+strn_append_n4
 ( strn
 , strn, strn, strn): strn
 fun<>
-strn_append_a05
+strn_append_n5
 ( strn, strn
 , strn, strn, strn): strn
 fun<>
-strn_append_a06
+strn_append_n6
 ( strn, strn, strn
 , strn, strn, strn): strn
 fun<>
-strn_append_a07
+strn_append_n7
 ( strn, strn, strn
 , strn, strn, strn, strn): strn
 fun<>
-strn_append_a08
+strn_append_n8
 ( strn, strn, strn, strn
 , strn, strn, strn, strn): strn
 fun<>
-strn_append_a09
+strn_append_n9
 ( strn
 , strn, strn, strn, strn
 , strn, strn, strn, strn): strn
 fun<>
-strn_append_a10
+strn_append_n10
 ( strn, strn
 , strn, strn, strn, strn
 , strn, strn, strn, strn): strn
 //
-#symload append with strn_append_a02
-#symload append with strn_append_a03
-#symload append with strn_append_a04
-#symload append with strn_append_a05
-#symload append with strn_append_a06
-#symload append with strn_append_a07
-#symload append with strn_append_a08
-#symload append with strn_append_a09
-#symload append with strn_append_a10
+#symload appends with strn_append_n2
+#symload appends with strn_append_n3
+#symload appends with strn_append_n4
+#symload appends with strn_append_n5
+#symload appends with strn_append_n6
+#symload appends with strn_append_n7
+#symload appends with strn_append_n8
+#symload appends with strn_append_n9
+#symload appends with strn_append_n10
+//
+*)
 //
 (* ****** ****** *)
 //
@@ -1193,49 +1205,50 @@ HX-2022-07-05:
 Tue Jul  5 13:47:16 EDT 2022
 *)
 //
+(*
 fun
 <a0:t0>
-list_append_a02
+list_append_n2
 (list(a0), list(a0)): list(a0)
 fun
 <a0:t0>
-list_append_a03
+list_append_n3
 ( list(a0)
 , list(a0), list(a0)): list(a0)
 fun
 <a0:t0>
-list_append_a04
+list_append_n4
 ( list(a0), list(a0)
 , list(a0), list(a0)): list(a0)
 fun
 <a0:t0>
-list_append_a05
+list_append_n5
 ( list(a0)
 , list(a0), list(a0)
 , list(a0), list(a0)): list(a0)
 fun
 <a0:t0>
-list_append_a06
+list_append_n6
 ( list(a0), list(a0)
 , list(a0), list(a0)
 , list(a0), list(a0)): list(a0)
 fun
 <a0:t0>
-list_append_a07
+list_append_n7
 ( list(a0)
 , list(a0), list(a0)
 , list(a0), list(a0)
 , list(a0), list(a0)): list(a0)
 fun
 <a0:t0>
-list_append_a08
+list_append_n8
 ( list(a0), list(a0)
 , list(a0), list(a0)
 , list(a0), list(a0)
 , list(a0), list(a0)): list(a0)
 fun
 <a0:t0>
-list_append_a09
+list_append_n9
 ( list(a0)
 , list(a0), list(a0)
 , list(a0), list(a0)
@@ -1243,23 +1256,29 @@ list_append_a09
 , list(a0), list(a0)): list(a0)
 fun
 <a0:t0>
-list_append_a10
+list_append_n10
 ( list(a0), list(a0)
 , list(a0), list(a0)
 , list(a0), list(a0)
 , list(a0), list(a0)
 , list(a0), list(a0)): list(a0)
 //
-#symload append with list_append_a02
-#symload append with list_append_a03
-#symload append with list_append_a04
-#symload append with list_append_a05
-#symload append with list_append_a06
-#symload append with list_append_a07
-#symload append with list_append_a08
-#symload append with list_append_a09
-#symload append with list_append_a10
+#symload appends with list_append_n2
+#symload appends with list_append_n3
+#symload appends with list_append_n4
+#symload appends with list_append_n5
+#symload appends with list_append_n6
+#symload appends with list_append_n7
+#symload appends with list_append_n8
+#symload appends with list_append_n9
+#symload appends with list_append_n10
+//
+*)
 //
 (* ****** ****** *)
+(* ****** ****** *)
+//
+(* ****** ****** *)(* ****** ****** *)(* ****** ****** *)
+(* ****** ****** *)(* ****** ****** *)(* ****** ****** *)
 
 (* end of [ATS3/XANADU_srcgen1_prelude_SATS_synoug0.sats] *)

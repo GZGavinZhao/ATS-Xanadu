@@ -315,14 +315,13 @@ g_print for flat/boxed tuples
 #impltmp
 {a0:vt}
 g_print1
-<
-t1up1
-( a0 )>(tup) =
+<t1up_vt
+(  a0  )>(tup) =
 let
 val () = t1up_print$beg()
 val () = g_print1<a0>(tup.0)
 val () = t1up_print$end((*nil*))
-end // end of [g_print1<t1up1>(tup)]
+end // end of [g_print1<t1up>(tup)]
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -332,30 +331,30 @@ end // end of [g_print1<t1up1>(tup)]
 ,a1:vt}
 g_print1
 <
-t0up2
-(a0,a1)>(tup) =
+t0up_vt
+( a0,a1 )>(tup) =
 let
 val () = t0up_print$beg()
 val () = g_print1<a0>(tup.0)
 val () = t0up_print$sep()
 val () = g_print1<a1>(tup.1)
 val () = t0up_print$end((*nil*))
-end // end of [g_print1<t0up2>(tup)]
+end // end of [g_print1<t0up2_vt>(tup)]
 //
 #impltmp
 {a0:vt
 ,a1:vt}
 g_print1
 <
-t1up2
-(a0,a1)>(tup) =
+t1up_vt
+( a0,a1 )>(tup) =
 let
 val () = t1up_print$beg()
 val () = g_print1<a0>(tup.0)
 val () = t1up_print$sep()
 val () = g_print1<a1>(tup.1)
 val () = t1up_print$end((*nil*))
-end // end of [g_print1<t1up2>(tup)]
+end // end of [g_print1<t1up2_vt>(tup)]
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -366,9 +365,8 @@ end // end of [g_print1<t1up2>(tup)]
 ,a2:vt}
 g_print1
 <
-t0up3
-(a0
-,a1,a2)>(tup) =
+t0up_vt
+(a0,a1,a2)>(tup) =
 let
 val () = t0up_print$beg(   )
 val () = g_print1<a0>(tup.0)
@@ -377,7 +375,7 @@ val () = g_print1<a1>(tup.1)
 val () = t0up_print$sep(   )
 val () = g_print1<a2>(tup.2)
 val () = t0up_print$end((*nil*))
-end // end of [g_print1<t0up3>(tup)]
+end // end of [g_print1<t0up3_vt>(tup)]
 //
 #impltmp
 {a0:vt
@@ -385,9 +383,8 @@ end // end of [g_print1<t0up3>(tup)]
 ,a2:vt}
 g_print1
 <
-t1up3
-(a0
-,a1,a2)>(tup) =
+t1up_vt
+(a0,a1,a2)>(tup) =
 let
 val () = t1up_print$beg()
 val () = g_print1<a0>(tup.0)
@@ -396,7 +393,7 @@ val () = g_print1<a1>(tup.1)
 val () = t1up_print$sep()
 val () = g_print1<a2>(tup.2)
 val () = t1up_print$end((*nil*))
-end // end of [g_print1<t1up3>(tup)]
+end // end of [g_print1<t1up3_vt>(tup)]
 //
 (* ****** ****** *)
 (* ****** ****** *)
@@ -408,9 +405,8 @@ end // end of [g_print1<t1up3>(tup)]
 ,a3:vt}
 g_print1
 <
-t0up4
-(a0,a1
-,a2,a3)>(tup) =
+t0up_vt
+(a0,a1,a2,a3)>(tup) =
 let
 val () = t0up_print$beg()
 val () = g_print1<a0>(tup.0)
@@ -430,9 +426,8 @@ end // end of [g_print1<t0up4>(tup)]
 ,a3:vt}
 g_print1
 <
-t1up4
-(a0,a1
-,a2,a3)>(tup) =
+t1up_vt
+(a0,a1,a2,a3)>(tup) =
 let
 val () = t1up_print$beg()
 val () = g_print1<a0>(tup.0)
@@ -455,11 +450,9 @@ end // end of [g_print1<t1up4>(tup)]
 ,a3:vt
 ,a4:vt}
 g_print1
-<
-t0up5
-(a0
-,a1,a2
-,a3,a4)>(tup) =
+<t0up_vt
+(a0,a1
+,a2,a3,a4)>(tup) =
 let
 val () = t0up_print$beg()
 val () = g_print1<a0>(tup.0)
@@ -481,11 +474,9 @@ end // end of [g_print1<t0up5>(tup)]
 ,a3:vt
 ,a4:vt}
 g_print1
-<
-t1up5
-(a0
-,a1,a2
-,a3,a4)>(tup) =
+<t1up5_vt
+(a0,a1
+,a2,a3,a4)>(tup) =
 let
 val () = t1up_print$beg()
 val () = g_print1<a0>(tup.0)
@@ -510,11 +501,9 @@ end // end of [g_print1<t1up5>(tup)]
 ,a4:vt
 ,a5:vt}
 g_print1
-<
-t0up6
-(a0,a1
-,a2,a3
-,a4,a5)>(tup) =
+<t0up6_vt
+(a0,a1,a2
+,a3,a4,a5)>(tup) =
 let
 val () = t0up_print$beg()
 val () = g_print1<a0>(tup.0)
@@ -539,11 +528,9 @@ end // end of [g_print1<t0up6>(tup)]
 ,a4:vt
 ,a5:vt}
 g_print1
-<
-t1up6
-(a0,a1
-,a2,a3
-,a4,a5)>(tup) =
+<t1up6_vt
+(a0,a1,a2
+,a3,a4,a5)>(tup) =
 let
 val () = t1up_print$beg()
 val () = g_print1<a0>(tup.0)
@@ -561,6 +548,7 @@ val () = t1up_print$end((*nil*))
 end // end of [g_print1<t1up6>(tup)]
 //
 (* ****** ****** *)
+(* ****** ****** *)
 //
 #impltmp
 {a0:vt
@@ -571,8 +559,7 @@ end // end of [g_print1<t1up6>(tup)]
 ,a5:vt
 ,a6:vt}
 g_print1
-<
-t0up7
+<t0up7
 (a0
 ,a1,a2
 ,a3,a4
@@ -604,8 +591,7 @@ end // end of [g_print1<t0up7>(tup)]
 ,a5:vt
 ,a6:vt}
 g_print1
-<
-t1up7
+<t1up7
 (a0
 ,a1,a2
 ,a3,a4
@@ -640,8 +626,7 @@ end // end of [g_print1<t1up7>(tup)]
 ,a6:vt
 ,a7:vt}
 g_print1
-<
-t0up8
+<t0up8
 (a0,a1
 ,a2,a3
 ,a4,a5
@@ -676,8 +661,7 @@ end // end of [g_print1<t0up8>(tup)]
 ,a6:vt
 ,a7:vt}
 g_print1
-<
-t1up8
+<t1up8
 (a0,a1
 ,a2,a3
 ,a4,a5
@@ -715,8 +699,7 @@ end // end of [g_print1<t1up8>(tup)]
 ,a7:vt
 ,a8:vt}
 g_print1
-<
-t0up9
+<t0up9
 (a0
 ,a1,a2
 ,a3,a4
@@ -755,8 +738,7 @@ end // end of [g_print1<t0up9>(tup)]
 ,a7:vt
 ,a8:vt}
 g_print1
-<
-t1up9
+<t1up9
 (a0
 ,a1,a2
 ,a3,a4
@@ -873,10 +855,12 @@ val () = t1up_print$end((*nil*))
 end // end of [g_print1<t1up10>(tup)]
 //
 (* ****** ****** *)
+(* ****** ****** *)
 (*
 HX-2023-08-13:
 tuples as sequences
 *)
+(* ****** ****** *)
 (* ****** ****** *)
 //
 #impltmp
@@ -892,6 +876,8 @@ then false else
 (
   forall$test<a1>(tup.1)) )
 // end of [gseq_forall<t2up>(tup)]
+//
+(* ****** ****** *)
 //
 #impltmp
 {a0:t0
@@ -913,6 +899,8 @@ then false else
 (
   forall$test<a2>(tup.2)) )
 // end of [gseq_forall<t3up>(tup)]
+//
+(* ****** ****** *)
 //
 #impltmp
 {a0:t0
@@ -939,6 +927,8 @@ then false else
 (
   forall$test<a3>(tup.3)) )
 // end of [gseq_forall<t4up>(tup)]
+//
+(* ****** ****** *)
 //
 #impltmp
 {a0:t0
@@ -971,6 +961,8 @@ then false else
 (
   forall$test<a4>(tup.4)) )
 // end of [gseq_forall<t5up>(tup)]
+//
+(* ****** ****** *)
 //
 #impltmp
 {a0:t0
@@ -1010,43 +1002,44 @@ then false else
 // end of [gseq_forall<t6up>(tup)]
 //
 (* ****** ****** *)
+(* ****** ****** *)
 //
 #impltmp
 {a0:t0
 ,a1:t0}
-gseq_foreach
+gseq_foritm
 <(a0,a1)>(tup) =
-( foreach$work<a0>(tup.0)
-; foreach$work<a1>(tup.1) )
-// end of [gseq_foreach<t2up>(tup)]
+( foritm$work<a0>(tup.0)
+; foritm$work<a1>(tup.1) )
+// end of [gseq_foritm<t2up>(tup)]
 //
 #impltmp
 {a0:t0
 ,a1:t0
 ,a2:t0}
-gseq_foreach
+gseq_foritm
 <
 (a0
 ,a1,a2)>(tup) =
-( foreach$work<a0>(tup.0)
-; foreach$work<a1>(tup.1)
-; foreach$work<a2>(tup.2) )
-// end of [gseq_foreach<t3up>(tup)]
+( foritm$work<a0>(tup.0)
+; foritm$work<a1>(tup.1)
+; foritm$work<a2>(tup.2) )
+// end of [gseq_foritm<t3up>(tup)]
 //
 #impltmp
 {a0:t0
 ,a1:t0
 ,a2:t0
 ,a3:t0}
-gseq_foreach
+gseq_foritm
 <
 (a0,a1
 ,a2,a3)>(tup) =
-( foreach$work<a0>(tup.0)
-; foreach$work<a1>(tup.1)
-; foreach$work<a2>(tup.2)
-; foreach$work<a3>(tup.3) )
-// end of [gseq_foreach<t4up>(tup)]
+( foritm$work<a0>(tup.0)
+; foritm$work<a1>(tup.1)
+; foritm$work<a2>(tup.2)
+; foritm$work<a3>(tup.3) )
+// end of [gseq_foritm<t4up>(tup)]
 //
 #impltmp
 {a0:t0
@@ -1054,17 +1047,17 @@ gseq_foreach
 ,a2:t0
 ,a3:t0
 ,a4:t0}
-gseq_foreach
+gseq_foritm
 <
 (a0
 ,a1,a2
 ,a3,a4)>(tup) =
-( foreach$work<a0>(tup.0)
-; foreach$work<a1>(tup.1)
-; foreach$work<a2>(tup.2)
-; foreach$work<a3>(tup.3)
-; foreach$work<a4>(tup.4) )
-// end of [gseq_foreach<t5up>(tup)]
+( foritm$work<a0>(tup.0)
+; foritm$work<a1>(tup.1)
+; foritm$work<a2>(tup.2)
+; foritm$work<a3>(tup.3)
+; foritm$work<a4>(tup.4) )
+// end of [gseq_foritm<t5up>(tup)]
 //
 #impltmp
 {a0:t0
@@ -1073,27 +1066,27 @@ gseq_foreach
 ,a3:t0
 ,a4:t0
 ,a5:t0}
-gseq_foreach
+gseq_foritm
 <
 (a0,a1
 ,a2,a3
 ,a4,a5)>(tup) =
-( foreach$work<a0>(tup.0)
-; foreach$work<a1>(tup.1)
-; foreach$work<a2>(tup.2)
-; foreach$work<a3>(tup.3)
-; foreach$work<a4>(tup.4)
-; foreach$work<a5>(tup.5) )
-// end of [gseq_foreach<t6up>(tup)]
+( foritm$work<a0>(tup.0)
+; foritm$work<a1>(tup.1)
+; foritm$work<a2>(tup.2)
+; foritm$work<a3>(tup.3)
+; foritm$work<a4>(tup.4)
+; foritm$work<a5>(tup.5) )
+// end of [gseq_foritm<t6up>(tup)]
 //
 (* ****** ****** *)
-
+//
 #impltmp
-{xs:t0}
-{ys:t0}
-{x0:t0}
-{y0:t0}
-gseq_foreach_c1fr
+{xs:t0
+,x0:t0
+,ys:t0
+,y0:t0}
+gseq_foritm_f1un
 <
 z2tup
 (xs,ys)>
@@ -1104,17 +1097,17 @@ let
 val
 (xs, ys) =
 put2z(ztup) in//in
-gseq_z2foreach_c2fr<xs,ys><x0,y0>
+gseq_z2foritm_f2un<xs><x0><ys><y0>
 (xs, ys, lam(x0, y0) => work@(x0, y0)) end
-
+//
 (* ****** ****** *)
-
+//
 #impltmp
-{xs:t0}
-{ys:t0}
-{x0:t0}
-{y0:t0}
-gseq_foreach_c1fr
+{xs:t0
+,x0:t0
+,ys:t0
+,y0:t0}
+gseq_foritm_f1un
 <
 x2tup
 (xs,ys)>
@@ -1125,9 +1118,13 @@ let
 val
 (xs, ys) =
 put2x(xtup) in//in
-gseq_x2foreach_c2fr<xs,ys><x0,y0>
+gseq_x2foritm_f2un<xs><x0><ys><y0>
 (xs, ys, lam(x0, y0) => work@(x0, y0)) end
-
+//
 (* ****** ****** *)
+(* ****** ****** *)
+//
+(* ****** ****** *)(* ****** ****** *)(* ****** ****** *)
+(* ****** ****** *)(* ****** ****** *)(* ****** ****** *)
 
 (* end of [ATS3/XANADU_srcgen1_prelude_DATS_tupl000.dats] *)

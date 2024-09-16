@@ -141,11 +141,33 @@ list_vt_length1
 //
 (* ****** ****** *)
 //
+//
 fun
 <a:vt>
-list_vt_make_nval
+list_vt_make_1val
+(x1: a): list_vt(a,1)
+fun
+<a:vt>
+list_vt_make_2val
+(x1: a, x2: a): list_vt(a,2)
+fun
+<a:vt>
+list_vt_make_3val
+(x1: a
+,x2: a, x3: a): list_vt(a,3)
+//
+fun
+<a:vt>
+list_vt_make_ncpy
 {n:nat}
 (n0:sint(n), x0:a): list_vt(a,n)
+//
+fun
+<a:vt>
+list_vt_make_nfun
+{n:nat}
+(n0: sint(n)
+,f0: nintlt(n)->(a)): list_vt(a, n)
 //
 (* ****** ****** *)
 //
@@ -181,6 +203,31 @@ list_vt_append1
 ( !list_vt(a, m)
 , !list_vt(a, n)): list_vt(a, m+n)
 //
+fun
+<a:vt>
+list_vt_append00
+{m,n:int}
+( ~list_vt(a, m)
+, ~list_vt(a, n)): list_vt(a, m+n)
+fun
+<a:vt>
+list_vt_append01
+{m,n:int}
+( ~list_vt(a, m)
+, !list_vt(a, n)): list_vt(a, m+n)
+fun
+<a:vt>
+list_vt_append10
+{m,n:int}
+( !list_vt(a, m)
+, ~list_vt(a, n)): list_vt(a, m+n)
+fun
+<a:vt>
+list_vt_append11
+{m,n:int}
+( !list_vt(a, m)
+, !list_vt(a, n)): list_vt(a, m+n)
+//
 (* ****** ****** *)
 //
 fun
@@ -195,12 +242,23 @@ fun
 <a:vt>
 list_vt_reverse0
 {n:int}
-(xs: list_vt(a, n)): list_vt(a, n)
+(xs: ~list_vt(a, n)): list_vt(a, n)
+fun
+<a:vt>
+list_vt_reverse1
+{n:int}
+(xs: !list_vt(a, n)): list_vt(a, n)
 //
 (* ****** ****** *)
 fun
 <a:vt>
 list_vt_rappend0
+{m,n:int}
+( xs: ~list_vt(a, m)
+, ys: ~list_vt(a, n)): list_vt(a, m+n)
+fun
+<a:vt>
+list_vt_rappend00
 {m,n:int}
 ( xs: ~list_vt(a, m)
 , ys: ~list_vt(a, n)): list_vt(a, m+n)
@@ -239,11 +297,11 @@ list_vt_tabulate
 (n0: sint(n)): list_vt(a, n)
 fun
 <a:vt>
-list_vt_tabulate_cfr
+list_vt_tabulate_f1un
 {n:nat}
-( n0: sint(n)
-, f0
-: nintlt(n) -<cfr> a): list_vt(a, n)
+(
+n0: sint(n),
+f0: nintlt(n) -> a): list_vt(a, n)
 //
 (* ****** ****** *)
 //
@@ -261,13 +319,13 @@ list_vt_forall2(!list_vt(x0)): bool
 //
 fun
 <x0:vt>
-list_vt_foreach0(~list_vt(x0)): void
+list_vt_foritm0(~list_vt(x0)): void
 fun
 <x0:vt>
-list_vt_foreach1(!list_vt(x0)): void
+list_vt_foritm1(!list_vt(x0)): void
 fun
 <x0:vt>
-list_vt_foreach2(!list_vt(x0)): void
+list_vt_foritm2(!list_vt(x0)): void
 //
 (* ****** ****** *)
 //
@@ -307,11 +365,18 @@ list_vt_rstrqize0
 (xs: ~list_vt(x0, n)): strq_vt(x0, n)
 //
 (* ****** ****** *)
+(* ****** ****** *)
 //
 fun
 <x0:vt>
 <y0:vt>
 list_vt_map0
+{n:int}
+(xs: ~list_vt(x0, n)): list_vt(y0, n)
+fun
+<x0:vt>
+<y0:vt>
+list_vt_imap0
 {n:int}
 (xs: ~list_vt(x0, n)): list_vt(y0, n)
 fun
@@ -323,7 +388,6 @@ list_vt_maprev0
 //
 (* ****** ****** *)
 //
-//
 fun
 <x0:vt>
 <y0:vt>
@@ -333,10 +397,52 @@ list_vt_map1
 fun
 <x0:vt>
 <y0:vt>
+list_vt_imap1
+{n:int}
+(xs: !list_vt(x0, n)): list_vt(y0, n)
+fun
+<x0:vt>
+<y0:vt>
 list_vt_maprev1
 {n:int}
 (xs: !list_vt(x0, n)): list_vt(y0, n)
 //
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun
+<x0:vt>
+<y0:vt>
+list_vt_map0_f1un
+{ln:nat}
+(xs:
+~list_vt(x0, ln), (~x0)->y0): list_vt(y0, ln)
+fun
+<x0:vt>
+<y0:vt>
+list_vt_maprev0_f1un
+{ln:nat}
+(xs:
+~list_vt(x0, ln), (~x0)->y0): list_vt(y0, ln)
+//
+(* ****** ****** *)
+//
+fun
+<x0:vt>
+<y0:vt>
+list_vt_map1_f1un
+{ln:nat}
+(xs:
+!list_vt(x0, ln), (!x0)->y0): list_vt(y0, ln)
+fun
+<x0:vt>
+<y0:vt>
+list_vt_maprev1_f1un
+{ln:nat}
+(xs:
+!list_vt(x0, ln), (!x0)->y0): list_vt(y0, ln)
+//
+(* ****** ****** *)
 (* ****** ****** *)
 //
 fun
@@ -494,10 +600,10 @@ rstrmize0 with list_vt_rstrmize0 of 1000
 (* ****** ****** *)
 
 (*
-#symload foreach with list_vt_foreach0 of 1000
+#symload foritm with list_vt_foritm0 of 1000
 *)
-#symload foreach0 with list_vt_foreach0 of 1000
-#symload foreach1 with list_vt_foreach1 of 1000
+#symload foritm0 with list_vt_foritm0 of 1000
+#symload foritm1 with list_vt_foritm1 of 1000
 
 (* ****** ****** *)
 //

@@ -71,10 +71,10 @@ let
 val
 loc0 = d3e0.lctn()
 val () =
-prerrln
+prerrsln
 ("trtmp3b_d3exp: loc0 = ", loc0)
 val () =
-prerrln
+prerrsln
 ("trtmp3b_d3exp: d3e0 = ", d3e0)
 *)
 //
@@ -166,6 +166,9 @@ d3e0.node() of
 //
 |
 D3Eextnam _ => f0_extnam(env0, d3e0)
+//
+|
+D3Esynext _ => f0_synext(env0, d3e0)
 //
 (* ****** ****** *)
 |D3Enone0() => d3e0 |D3Enone1(d2e1) => d3e0
@@ -260,7 +263,7 @@ end where // end-of-[f0_tapp(env0,d3e0)]
 {
 //
 (*
-val () = prerrln
+val () = prerrsln
 ("trtmp3b_d3exp: f0_tapp: d3e0 = ", d3e0)
 *)
 //
@@ -304,7 +307,7 @@ end where // end-of-[f0_tapq(env0,d3e0)]
 {
 //
 (*
-val () = prerrln
+val () = prerrsln
 ("trtmp3b_d3exp: f0_tapq: d3e0 = ", d3e0)
 *)
 //
@@ -1058,8 +1061,23 @@ let
 //
 val-
 D3Eextnam
-( tknd, gnm1) = d3e0.node() in (d3e0) end
+( tknd, gnam) = d3e0.node() in (d3e0) end
 //
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun
+f0_synext
+( env0:
+! tr3benv
+, d3e0: d3exp): d3exp =
+let
+//
+val-
+D3Esynext
+( tknd, gexp) = d3e0.node() in (d3e0) end
+//
+(* ****** ****** *)
 (* ****** ****** *)
 //
 } (*where*)//end-of-[trtmp3b_d3exp(env0,d3e0)]
@@ -1089,7 +1107,7 @@ trtmp3b_d3gpt
 val loc0 = dgpt.lctn()
 val
 val () =
-prerrln
+prerrsln
 ("trtmp3b_d3gpt: dgpt = ", dgpt)
 *)
 //
@@ -1115,7 +1133,7 @@ val loc0 = dcls.lctn()
 //
 (*
 val () =
-prerrln
+prerrsln
 ("trtmp3b_d3cls: dcls = ", dcls)
 *)
 //

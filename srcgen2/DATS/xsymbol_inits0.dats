@@ -137,9 +137,16 @@ HX-2022-10-01: Various symbols
 (* ****** ****** *)
 //
 #implval DLR_EXTNAM_symbl = symbl("$extnam")
+#implval DLR_EXTVAL_symbl = symbl("$extval")
+//
+(* ****** ****** *)
 //
 #implval DLR_EXTBOX_symbl = symbl("$extbox")
 #implval DLR_EXTYPE_symbl = symbl("$extype")
+//
+(* ****** ****** *)
+//
+#implval DLR_SYNEXT_symbl = symbl("$synext")
 //
 (* ****** ****** *)
 //
@@ -148,18 +155,20 @@ HX-2022-10-01: Various symbols
 //
 (* ****** ****** *)
 //
-#implval L0AZY_TBOX_symbl = symbl("lazy_t0_x0")
+#implval L0AZY_TBOX_symbl = symbl("lazy_t0_tx")
 #implval L1AZY_VTBX_symbl = symbl("lazy_vt_vx")
 //
 (* ****** ****** *)
 //
-#implval CBV0_VT_VT_symbl = symbl("cbv0_vt_vt")
-#implval CBV1_VT_VT_symbl = symbl("cbv1_vt_vt")
+#implval CBV0_V0_VT_symbl = symbl("cbv0_v0_vt")
+#implval CBV1_V0_VT_symbl = symbl("cbv1_v0_vt")
+//
 #implval CBRF_VT_VT_symbl = symbl("cbrf_vt_vt")
 //
 #implval TOP0_VT_T0_symbl = symbl("top0_vt_t0")
 #implval TOP1_VT_T0_symbl = symbl("top1_vt_t0")
 //
+(* ****** ****** *)
 (* ****** ****** *)
 
 (* end of [ATS3/XATSOPT_srcgen2_DATS_xsymbol_inits0.dats] *)

@@ -127,7 +127,7 @@ val ln =
 strn_length(src0)
 *)
 in//let
-strn_tabulate_cfr
+strn_tabulate_f1un
 ( ln-2
 , lam i0 => src0[i0+1]
 ) end//let//[xstrunqtize(src0,ln)]
@@ -429,11 +429,11 @@ end // end of [ val(knd1) ]
 //
 (*
 val (  ) =
-prerrln(
+prerrsln(
 "s1taload_from_fpath:\
  knd1 = ", knd1 (*stadyn*)  )
 val (  ) =
-prerrln(
+prerrsln(
 "s1taload_from_fpath:\
  fnm1 = ", fnm1 (*fname1*)  )
 *)
@@ -462,9 +462,10 @@ end where
 {
 //
 (*
-  val () =
-  prerrln
-  ("s1taload_from_fpath: fpth = ", fpth)
+val () =
+(
+  prerrsln
+  ("s1taload_from_fpath: fpth = ", fpth))
 *)
 //
 }(*where*)//end-of-[s1taload_from_fpath(fpth)]
@@ -479,7 +480,7 @@ trans01_d0ecl
 val
 loc0 = d0cl.lctn()
 val () =
-prerrln
+prerrsln
 ("trans01_decl: d0cl = ", d0cl)
 *)
 //
@@ -570,6 +571,14 @@ f0_staload(tenv, d0cl)
 D0Cdyninit _ =>
 f0_dyninit(tenv, d0cl)
 //
+(* ****** ****** *)
+//
+|
+D0Cextcode _ =>
+f0_extcode(tenv, d0cl)
+//
+(* ****** ****** *)
+//
 |
 D0Cdatasort _ =>
 f0_datasort(tenv, d0cl)
@@ -638,7 +647,7 @@ prcdv_encode
 //
 (*
 val () =
-prerrln
+prerrsln
 ("f0_fixity: pval = ", pval)
 *)
 //
@@ -703,7 +712,7 @@ in//let
 loop(tenv, id0s) where
 {
 val () =
-tr01env_insmix_any(tenv, sym, fxty)
+tr01env_insmix$any(tenv, sym, fxty)
 }
 endlet//end-of-[list_cons(id0,ids)]
 ) (*case+*) // end of [loop(tenv,ids)]
@@ -739,8 +748,9 @@ T_IDSYM("-") => 0-token2sint(tint)
 ) where
 {
 (*
-  val () =
-  prerrln("h1signint: pint = ", pint)
+val () =
+(
+ prerrsln("h1signint: pint = ", pint))
 *)
 } (*where*) // end of [h1signint(pint)]
 //
@@ -783,7 +793,7 @@ T_IDSYM(nam) => symbl(nam)
 //
 val
 fopt =
-tr01env_search_opt(tenv, sym)
+tr01env_search$opt(tenv, sym)
 //
 val pval =
 (
@@ -797,9 +807,9 @@ val () =
 let
 val nam = sym.name()
 in//let
-prerr
+prerrs
 ("TRANS01-WARN1:", tok.lctn());
-prerrln
+prerrsln
 (":[",nam,"] is a non-operator!")
 end (*let*)//end-of-[ val (...) ]
 } (*where*)//end-of-(optn_vt_nil())
@@ -857,7 +867,7 @@ in
 loop(tenv, id0s) where
 {
 val () =
-tr01env_insert_any(tenv,sym,FIXTYnon)
+tr01env_insert$any(tenv,sym,FIXTYnon)
 }
 endlet//end-of-[list_cons(id0,ids)]
 ) (*case+*) // end of [loop(tenv,ids)]
@@ -1106,9 +1116,9 @@ endlet // end of [S0TDFtsub]
 //
 (*
 val () =
-prerrln("f0_sortdef: tid0 = ", tid0)
+prerrsln("f0_sortdef: tid0 = ", tid0)
 val () =
-prerrln("f0_sortdef: stdf = ", stdf)
+prerrsln("f0_sortdef: stdf = ", stdf)
 *)
 //
 in
@@ -1129,7 +1139,7 @@ val loc0 = d0cl.lctn()
 //
 (*
 val () =
-prerrln
+prerrsln
 ("trans01_d0ecl: d0cl = ", d0cl)
 *)
 //
@@ -1156,13 +1166,13 @@ s1e2 = trans01_s0exp(tenv, s0e2)
 //
 (*
 val () =
-prerrln("f0_sexpdef: seid = ", seid)
+prerrsln("f0_sexpdef: seid = ", seid)
 val () =
-prerrln("f0_sexpdef: smas = ", smas)
+prerrsln("f0_sexpdef: smas = ", smas)
 val () =
-prerrln("f0_sexpdef: tres = ", tres)
+prerrsln("f0_sexpdef: tres = ", tres)
 val () =
-prerrln("f0_sexpdef: s1e2 = ", s1e2)
+prerrsln("f0_sexpdef: s1e2 = ", s1e2)
 *)
 //
 in
@@ -1183,7 +1193,7 @@ val loc0 = d0cl.lctn()
 //
 (*
 val () =
-prerrln
+prerrsln
 ("trans01_d0ecl: d0cl = ", d0cl)
 *)
 //
@@ -1231,7 +1241,7 @@ val loc0 = d0cl.lctn()
 //
 (*
 val () =
-prerrln
+prerrsln
 ("trans01_d0ecl: d0cl = ", d0cl)
 *)
 //
@@ -1258,7 +1268,7 @@ val loc0 = d0cl.lctn()
 //
 (*
 val () =
-prerrln
+prerrsln
 ("trans01_d0ecl: d0cl = ", d0cl)
 *)
 //
@@ -1296,7 +1306,7 @@ val loc0 = d0cl.lctn()
 //
 (*
 val () =
-prerrln
+prerrsln
 ("trans01_d0ecl: d0cl = ", d0cl)
 *)
 //
@@ -1359,7 +1369,7 @@ f0_g1e1
 let
 (*
 val () =
-prerrln
+prerrsln
 ("f0_g1e1: g1e1 = ", g1e1)
 *)
 in
@@ -1397,7 +1407,7 @@ T_STRN1_clsd(base, ln) =>
 |
 _(*otherwise*) => optn_nil((*void*))
 )
-
+//
 in(*in-of-local*)
 
 fun
@@ -1416,6 +1426,7 @@ val g1e1 =
   trans01_g0exp(tenv, g0e1)
 //
 in//let
+//
 let
 //
 val opt0 =
@@ -1430,13 +1441,13 @@ case+ opt0 of
 //
 (*
 val (  ) =
-prerrln
+prerrsln
 ("f0_include(01): g1e1 = ", g1e1)
 val (  ) =
-prerrln
+prerrsln
 ("f0_include(01): opt0 = ", opt0)
 val (  ) =
-prerrln
+prerrsln
 ("f0_include(01): opt1 = ", opt1)
 *)
 //
@@ -1495,6 +1506,7 @@ d1ecl_make_node
 (loc0,
  D1Cinclude(knd0, tknd, g1e1, opt1, dopt))
 end//let
+//
 end where
 {
 //
@@ -1502,7 +1514,7 @@ val loc0 = d0cl.lctn()
 //
 (*
 val () =
-prerrln
+prerrsln
 ("trans01_d0ecl: f0_include: d0cl = ", d0cl)
 *)
 //
@@ -1529,15 +1541,17 @@ f0_g1e1
 let
 (*
 val () =
-prerrln
+prerrsln
 ("f0_g1e1: g1e1 = ", g1e1)
 *)
-in
+in//let
+//
 case+
 g1e1.node() of
 |G1Estr _ => f1_gstr(g1e1)
 |G1Ea2pp _ => f1_a2pp(g1e1)
 |_(*otherwise*) => optn_nil()
+//
 endlet // end of [f0_g1e1(g1e1)]
 //
 and
@@ -1566,6 +1580,7 @@ T_STRN1_clsd(base, ln) =>
 |
 _(*otherwise*) => optn_nil((*void*))
 )
+//
 and
 f1_a2pp
 (gapp: g1exp): fnameopt =
@@ -1574,7 +1589,8 @@ case-
 gapp.node() of
 |
 G1Ea2pp
-(g1f0,g1e1,g1e2) =>
+(g1f0
+,g1e1,g1e2) =>
 (
 case+
 g1f0.node() of
@@ -1588,11 +1604,12 @@ case+
 g1e2.node() of
 |
 G1Estr _ =>
-f1_gstr(g1e2) | _ => optn_nil())
+f1_gstr(g1e2) | _ => optn_nil()
+)(*end-of-[G1Eid0]*)
 |
 _(* non-G1Eid0 *) => optn_nil())
 ) (*case-*) // end of [f1_a2pp(gapp)] 
-
+//
 in(*in-of-local*)
 
 fun
@@ -1627,13 +1644,13 @@ case+ opt0 of
 //
 (*
 val (  ) =
-prerrln
+prerrsln
 ("f0_staload(01): g1e1 = ", g1e1)
 val (  ) =
-prerrln
+prerrsln
 ("f0_staload(01): opt0 = ", opt0)
 val (  ) =
-prerrln
+prerrsln
 ("f0_staload(01): opt1 = ", opt1)
 *)
 //
@@ -1670,7 +1687,7 @@ val loc0 = d0cl.lctn()
 //
 (*
 val () =
-prerrln
+prerrsln
 ("trans01_d0ecl: f0_staload: d0cl = ", d0cl)
 *)
 } (*where*) // end of [f0_staload(tenv,d0cl)]
@@ -1678,7 +1695,8 @@ prerrln
 end (*local*) // end of [f0_staload(tenv,d0cl)]
 
 (* ****** ****** *)
-
+(* ****** ****** *)
+//
 fun
 f0_dyninit
 ( tenv:
@@ -1700,12 +1718,45 @@ end where
 val loc0 = d0cl.lctn()
 //
 (*
-val () = prerrln
+val () = prerrsln
 ("trans01_d0ecl: f0_dyninit: d0cl = ", d0cl)
 *)
 //
 } (*where*) // end of [f0_dyninit(tenv,d0cl)]
-
+//
+(* ****** ****** *)
+//
+(*
+HX-2024-07-20:
+Sat 20 Jul 2024 01:44:09 PM EDT
+*)
+fun
+f0_extcode
+( tenv:
+! tr01env
+, d0cl: d0ecl): d1ecl =
+let
+//
+val-
+D0Cextcode
+(tknd, g0e1) = d0cl.node()
+//
+val g1e1 = trans01_g0exp(tenv, g0e1)
+//
+in//let
+  d1ecl(loc0, D1Cextcode(tknd, g1e1))
+end where
+{
+//
+val loc0 = d0cl.lctn()
+//
+(*
+val () = prerrsln
+("trans01_d0ecl: f0_extcode: d0cl = ", d0cl)
+*)
+//
+} (*where*) // end of [f0_extcode(tenv,d0cl)]
+//
 (* ****** ****** *)
 
 fun
@@ -1719,7 +1770,7 @@ val loc0 = d0cl.lctn()
 //
 (*
 val () =
-prerrln
+prerrsln
 ("trans01_d0ecl: d0cl = ", d0cl)
 *)
 //
@@ -1747,7 +1798,7 @@ val loc0 = d0cl.lctn()
 //
 (*
 val () =
-prerrln
+prerrsln
 ("trans01_d0ecl: d0cl = ", d0cl)
 *)
 //
@@ -1775,7 +1826,7 @@ val loc0 = d0cl.lctn()
 //
 (*
 val () =
-prerrln
+prerrsln
 ("trans01_d0ecl: d0cl = ", d0cl)
 *)
 //
@@ -1803,7 +1854,7 @@ val loc0 = d0cl.lctn()
 //
 (*
 val () =
-prerrln
+prerrsln
 ("trans01_d0ecl: d0cl = ", d0cl)
 *)
 //
@@ -1870,7 +1921,7 @@ end where // end-of-let
 (*
   val () =
   (
-    prerrln("f0_implmnt0: d0cl = ", d0cl))
+    prerrsln("f0_implmnt0: d0cl = ", d0cl))
 *)
 //
 } (*where*) // end of [f0_implmnt0(tenv,d0cl)]
@@ -1888,7 +1939,7 @@ val loc0 = d0cl.lctn()
 //
 (*
 val () =
-prerrln
+prerrsln
 ("trans01_d0ecl: d0cl = ", d0cl)
 *)
 //
@@ -1916,7 +1967,7 @@ val loc0 = d0cl.lctn()
 //
 (*
 val () =
-prerrln
+prerrsln
 ("trans01_d0ecl: d0cl = ", d0cl)
 *)
 //
@@ -1945,7 +1996,7 @@ val loc0 = d0cl.lctn()
 //
 (*
 val () =
-prerrln
+prerrsln
 ("trans01_d0ecl: d0cl = ", d0cl)
 *)
 //
@@ -2148,8 +2199,9 @@ WD0CSnone() => WD1CSnone()
 |
 WD0CSsome
 (twhr,topt,dcls,tend) =>
-WD1CSsome(trans01_d0eclist(tenv, dcls))
-) (*case+*)//end-of[trans01_wd0eclseq(tenv,wdcs)]
+(
+  WD1CSsome(trans01_d0eclist(tenv, dcls)))
+)(*case+*)//end-[trans01_wd0eclseq(tenv,wdcs)]
 //
 (* ****** ****** *)
 //
@@ -2157,22 +2209,22 @@ WD1CSsome(trans01_d0eclist(tenv, dcls))
 trans01_d0valdclist
   (  tenv,dcls  ) =
 (
-  list_trans01_fnp(tenv, dcls, trans01_d0valdcl))
+list_trans01_fnp(tenv, dcls, trans01_d0valdcl))
 #implfun
 trans01_d0vardclist
   (  tenv,dcls  ) =
 (
-  list_trans01_fnp(tenv, dcls, trans01_d0vardcl))
+list_trans01_fnp(tenv, dcls, trans01_d0vardcl))
 #implfun
 trans01_d0fundclist
   (  tenv,dcls  ) =
 (
-  list_trans01_fnp(tenv, dcls, trans01_d0fundcl))
+list_trans01_fnp(tenv, dcls, trans01_d0fundcl))
 #implfun
 trans01_d0cstdclist
   (  tenv,dcls  ) =
 (
-  list_trans01_fnp(tenv, dcls, trans01_d0cstdcl))
+list_trans01_fnp(tenv, dcls, trans01_d0cstdcl))
 //
 (* ****** ****** *)
 //
@@ -2180,8 +2232,12 @@ trans01_d0cstdclist
 trans01_d0eclistopt
   (  tenv,dopt  ) =
 (
-  optn_trans01_fnp(tenv, dopt, trans01_d0eclist))
+optn_trans01_fnp(tenv, dopt, trans01_d0eclist))
 //
 (* ****** ****** *)
+(* ****** ****** *)
+//
+(* ****** ****** *)(* ****** ****** *)
+(* ****** ****** *)(* ****** ****** *)
 
 (* end of [ATS3/XATSOPT_srcgen2_DATS_trans01_decl00.dats] *)
